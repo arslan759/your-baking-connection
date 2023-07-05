@@ -3,27 +3,28 @@ import './globals.css'
 
 import { PropsWithChildren } from 'react'
 import { lightTheme } from './theme/themes'
-import ContextProvider from './context-provider';
+import ContextProvider from './context-provider'
 
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import Header from '@/components/Header'
 import { usePathname } from 'next/navigation'
+import Footer from '@/components/Footer/Footer'
 
 export default function RootLayout({ children }: PropsWithChildren<{}>) {
   const router = usePathname()
 
-  const showHeader =
-    router === '/signin' ||
-    router === '/signup' ||
-    router === '/email' ||
-    router === '/password' ||
-    router === '/editprofile' ||
-    router === '/profile' ||
-    router === '/addmember' ||
-    router === '/allmember' ||
-    router === '/pricingplan'
-      ? false
-      : true
+  // const showHeader =
+  //   router === '/signin' ||
+  //   router === '/signup' ||
+  //   router === '/email' ||
+  //   router === '/password' ||
+  //   router === '/editprofile' ||
+  //   router === '/profile' ||
+  //   router === '/addmember' ||
+  //   router === '/allmember' ||
+  //   router === '/pricingplan'
+  //     ? false
+  //     : true
   return (
     <html lang='en'>
       <head>
@@ -33,12 +34,13 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
       </head>
       <ThemeProvider theme={lightTheme}>
         <ContextProvider>
-        <body>
-          <CssBaseline />
-          {showHeader && <Header />}
-          {/* {<Header/>} */}
-          {children}
-        </body>
+          <body>
+            <CssBaseline />
+            {/* {showHeader && <Header />} */}
+            {<Header />}
+            {children}
+            {<Footer />}
+          </body>
         </ContextProvider>
       </ThemeProvider>
     </html>

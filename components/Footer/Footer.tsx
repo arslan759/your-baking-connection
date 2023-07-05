@@ -1,8 +1,10 @@
 import { Button, Grid, Stack } from '@mui/material'
 export default function Footer() {
   return (
-    <Grid container height='100vh' alignItems='center' justifyContent='center' direction='column'>
-      <h3>Footer Component</h3>
+    <Grid container alignItems='center' justifyContent='center' direction='column'>
+      <div className='m-[200px]'>
+        <h3>Footer Component</h3>
+      </div>
     </Grid>
   )
 }

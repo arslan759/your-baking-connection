@@ -14,7 +14,9 @@ module.exports = {
         poppins: ['Poppins'],
         open_sans: ['Open_Sans'],
       },
-
+      colors: {
+        primary: '#F8B4CB',
+      },
       screens: {
         xlm: '1440px',
         xll: '1536px',

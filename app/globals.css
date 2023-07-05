@@ -28,8 +28,8 @@
     url(../public/fonts/Hind_Guntur/HindGuntur-Medium.ttf) format('truetype');
 }
 
-/* @font-face {
-  font-family: 'Open_Sans';
-  src: local('Open_Sans'),
-    url(../public/fonts/Open_Sans/OpenSans-VariableFont_wdth\wght.ttf) format('truetype');
-} */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
