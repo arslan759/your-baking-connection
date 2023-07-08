@@ -13,8 +13,9 @@ import { useState } from 'react'
 import { Formik, Form, FormikProps } from 'formik'
 import * as Yup from 'yup'
 import Link from 'next/link'
-import getAccountsHandler from "lib/accountsServer";
-import hashPassword from "lib/utils/hashPassword";
+import getAccountsHandler from 'lib/accountsServer'
+import hashPassword from 'lib/utils/hashPassword'
+import Navbar from '../NavBar/NavBar'
 
 interface ISignInForm {
   email: string
@@ -47,7 +48,7 @@ const formStatusProps: IFormStatusProps = {
 
 export default function Signin() {
   const router = useRouter()
-  const { passwordClient } = getAccountsHandler();
+  const { passwordClient } = getAccountsHandler()
 
   const [displayFormStatus, setDisplayFormStatus] = useState(false)
   const [formStatus, setFormStatus] = useState<IFormStatus>({
@@ -69,8 +70,8 @@ export default function Signin() {
     try {
       console.log(data)
 
-      // GRAPHQL Login 
-      
+      // GRAPHQL Login
+
       // await passwordClient.login({
       //   user: {
       //     email
@@ -97,6 +98,7 @@ export default function Signin() {
 
   return (
     <div>
+      <Navbar />
       <Box
         sx={{
           display: 'flex',

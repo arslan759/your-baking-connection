@@ -13,6 +13,12 @@
 }
 
 @font-face {
+  font-family: 'Open Sans';
+  src: local('Open_Sans'),
+    url(../public/fonts/Open_Sans/static/OpenSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
   font-family: 'Roboto';
   src: local('Roboto'), url(../public/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
 }
@@ -26,6 +32,12 @@
   font-family: 'Hind_Guntur';
   src: local('Hind_Guntur'),
     url(../public/fonts/Hind_Guntur/HindGuntur-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Josefin Sans';
+  src: local('Josefin_Sans'),
+    url(../public/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf) format('truetype');
 }
 
 * {
