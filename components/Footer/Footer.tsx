@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div>
       <div className='bg-primary flex flex-col md:flex-row items-center md:items-start'>
-        <div className='px-0 mt-[36px] md:px-8 w-[100%] md:w-[45%] lg:w-[30%] flex flex-col items-center md:items-start'>
+        <div className='px-0 mt-[36px] md:px-8 w-[100%] md:w-[30%] flex flex-col items-center md:items-start'>
           <div className='relative w-[117px] md:w-[165px] h-[108px] md:h-[152px]'>
             <Image
               // layout='fill'
@@ -18,7 +18,7 @@ export default function Footer() {
           </div>
           <Typography
             variant='body1'
-            className='w-[80%] md:w-[80%] mt-[14px] text-center md:text-start'
+            className='w-[80%] md:w-full mt-[14px] text-center md:text-start'
           >
             The bakers of Your Baking Connection are passionate business owners who operate
             home-based bakeries in compliance with their individual state laws. All{' '}
