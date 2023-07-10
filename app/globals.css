@@ -45,3 +45,19 @@
   margin: 0;
   padding: 0;
 }
+
+/* MUI Typography */
+
+.css-1wn6apb-MuiTypography-root {
+  line-height: normal;
+}
+
+@media (max-width: 950px) {
+  .css-1qq5s3h-MuiPaper-root-MuiAppBar-root {
+    padding-left: 1px !important;
+  }
+
+  .css-134hlw3-MuiToolbar-root {
+    height: 0px !important;
+  }
+}

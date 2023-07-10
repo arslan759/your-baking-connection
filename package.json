@@ -38,6 +38,7 @@
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.4",
     "formik": "^2.2.9",
+    "framer-motion": "^10.12.18",
     "graphql": "^16.6.0",
     "isomorphic-unfetch": "^4.0.2",
     "js-cookie": "^3.0.1",
