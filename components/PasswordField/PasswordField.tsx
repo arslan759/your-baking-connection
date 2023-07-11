@@ -1,9 +1,10 @@
-import { TextField, Typography } from '@mui/material'
-import { InputFieldProps } from 'types'
+import { IconButton, InputAdornment, TextField, Typography } from '@mui/material'
+import { PasswordFieldProps } from 'types'
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
 import { useState } from 'react'
 
-const InputField = ({
-  type,
+const PasswordField = ({
   name,
   label,
   inputColor,
@@ -13,7 +14,7 @@ const InputField = ({
   required,
   error,
   errorText,
-}: InputFieldProps) => {
+}: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
@@ -31,9 +32,7 @@ const InputField = ({
         }}
       >
         <Typography
-          className={`text-[12px] ${
-            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-          }`}
+          className={`${required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''}`}
           variant='body1'
         >
           {label}
@@ -59,19 +58,34 @@ const InputField = ({
             },
           },
         }}
-        inputProps={{
-          autoComplete: 'off',
+        InputProps={{
+          endAdornment: (
+            <InputAdornment
+              position='end'
+              sx={{
+                color: 'white',
+              }}
+            >
+              <IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>
+                {showPassword ? (
+                  <VisibilityOffOutlinedIcon sx={{ color: '#fff' }} />
+                ) : (
+                  <VisibilityOutlinedIcon sx={{ color: '#fff' }} />
+                )}
+              </IconButton>
+            </InputAdornment>
+          ),
         }}
-        type={type}
-        name={name}
+        name='password'
+        type={showPassword ? 'text' : 'password'}
         error={error}
+        onChange={handleChange}
         id='outlined-error-helper-text'
         defaultValue={value}
-        onChange={handleChange}
         helperText={errorText}
       />
     </div>
   )
 }
 
-export default InputField
+export default PasswordField

@@ -29,9 +29,10 @@ export interface SecondaryBtnProps {
   handleClick: MouseEventHandler<HTMLButtonElement>
 }
 
-export interface InputProps {
+export interface InputFieldProps {
   type: string
   name: string
+  inputColor?: string
   error?: boolean
   errorText?: string
   label: string
@@ -39,4 +40,25 @@ export interface InputProps {
   placeholder?: string
   value: string
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export interface PasswordFieldProps {
+  name: string
+  error?: boolean
+  errorText?: string
+  inputColor?: string
+  label: string
+  required: boolean
+  placeholder?: string
+  value: string
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export interface DropdownProps {
+  name: string
+  label: string
+  required: boolean
+  inputColor?: string
+  value: string | null
+  handleChange: (argument: any) => void
 }
