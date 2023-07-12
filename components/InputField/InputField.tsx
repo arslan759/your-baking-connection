@@ -1,6 +1,6 @@
 import { TextField, Typography } from '@mui/material'
 import { InputFieldProps } from 'types'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const InputField = ({
   type,
@@ -9,18 +9,25 @@ const InputField = ({
   inputColor,
   placeholder,
   value,
-  handleChange,
-  required,
   error,
+  onChange,
+  required,
   errorText,
 }: InputFieldProps) => {
-  const [showPassword, setShowPassword] = useState(false)
+  const [errorState, setErrorState] = useState(errorText ? true : false)
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show)
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+    onChange(name, value)
+
+    if (value === '') setErrorState(true)
+    else setErrorState(false)
   }
+
+  useEffect(() => {
+    setErrorState(errorText ? true : false)
+  }, [errorText, errorState])
 
   return (
     <div className='flex flex-col capitalize mt-[8px]'>
@@ -47,6 +54,7 @@ const InputField = ({
             height: '35px',
             padding: '5px',
             borderRadius: '5px',
+            fontSize: '12px',
 
             '& fieldset': {
               borderColor: inputColor,
@@ -59,16 +67,14 @@ const InputField = ({
             },
           },
         }}
-        inputProps={{
-          autoComplete: 'off',
-        }}
+        placeholder={placeholder}
         type={type}
         name={name}
-        error={error}
+        error={errorState}
         id='outlined-error-helper-text'
         defaultValue={value}
         onChange={handleChange}
-        helperText={errorText}
+        helperText={errorState ? errorText : ''}
       />
     </div>
   )

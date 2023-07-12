@@ -57,6 +57,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
                 cursor: 'pointer',
               }}
               variant='body2'
+              className='hover:scale-110 ease-in-out transition-all duration-300'
             >
               <Link
                 style={
@@ -88,10 +89,14 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
               className={styles.navbar}
             >
               <div className='w-[146px] h-[50px]'>
-                <PrimaryBtn handleClick={() => {}} text='register' />
+                <a href='/signup'>
+                  <PrimaryBtn handleClick={() => {}} text='register' />
+                </a>
               </div>
               <div className='w-[146px] h-[50px]'>
-                <SecondaryBtn handleClick={() => {}} text='sign in' color={`${itemsColor}`} />
+                <a href='/signin'>
+                  <SecondaryBtn handleClick={() => {}} text='sign in' color={`${itemsColor}`} />
+                </a>
               </div>
             </Box>
           </Grid>

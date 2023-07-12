@@ -1,11 +1,12 @@
-import { Typography } from '@mui/material'
+import { Button, FormControl, FormHelperText, Typography } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox'
 import Image from 'next/image'
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
-import { validateEmail } from 'helpers/validations'
+import { checkPassword, validateEmail } from 'helpers/validations'
 import DropdownField from '../DropdownField/DropdownField'
+import { cities, states } from 'Constants/constants'
 
 const SignupForm = () => {
   const [firstName, setFirstName] = useState('')
@@ -18,52 +19,145 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [checked, setChecked] = useState(false)
 
-  const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
-  }
+  // Error states
+  const [firstNameError, setFirstNameError] = useState('')
+  const [lastNameError, setLastNameError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+  const [stateError, setStateError] = useState('')
+  const [cityError, setCityError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [confirmPasswordError, setConfirmPasswordError] = useState('')
+  const [checkedError, setCheckedError] = useState('')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-
-    console.log('name is ', name)
-    console.log('value is ', value)
-
+  // handleChange function for input fields
+  const handleChange = (name: string, value: string) => {
     if (name === 'firstname') {
       setFirstName(value)
-      console.log('firstname is ', value)
+      setFirstNameError(value ? '' : 'Firstname is required')
     } else if (name === 'lastname') {
       setLastName(value)
-      console.log('lastname is ', value)
+      setLastNameError(value ? '' : 'Lastname is required')
     } else if (name === 'email') {
       setEmail(value)
-      console.log('email is ', value)
+      setEmailError(value ? '' : 'Email is required')
     } else if (name === 'phone') {
       setPhone(value)
-      console.log('phone is ', value)
+      setPhoneError(value ? '' : 'Phone is required')
     } else if (name === 'password') {
       setPassword(value)
-      console.log('password is ', value)
+      setPasswordError(value ? '' : 'Password is required')
     } else {
       setConfirmPassword(value)
-      console.log('confirm password is ', value)
+      setConfirmPasswordError(value ? '' : 'Confirm password is required')
     }
   }
 
-  const handleStateChange = (argument: any) => {
-    console.log('argument is ', argument)
-    setState(argument)
+  // handleCheckBox function for Terms and Conditions
+  const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target
+
+    setChecked(checked)
+    setCheckedError(checked ? '' : 'Please accept the terms and conditions')
   }
 
-  const handleCityChange = (argument: any) => {
-    console.log('argument is ', argument)
-    setCity(argument)
+  // handleStateChange function for state dropdown
+  const handleStateChange = (state: string) => {
+    setState(state)
+    setStateError(state ? '' : 'State is required')
   }
 
+  // handleCityChange function for city dropdown
+  const handleCityChange = (state: string) => {
+    setCity(state)
+    setCityError(state ? '' : 'City is required')
+  }
+
+  // handleSubmit function for form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    // Checks if email is valid
     const isEmailValid = validateEmail(email)
 
+    // Checks if password and confirm password match
+    const isPasswordMatched = checkPassword(password, confirmPassword)
+
+    // Checks if all fields are filled
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phone ||
+      !state ||
+      !city ||
+      !password ||
+      !confirmPassword ||
+      !checked
+    ) {
+      if (!firstName) {
+        setFirstNameError('Firstname is required')
+      }
+
+      if (!lastName) {
+        setLastNameError('Lastname is required')
+      }
+
+      if (!email) {
+        setEmailError('Email is required')
+      } else {
+        if (!isEmailValid) {
+          setEmailError('Email is not valid')
+        }
+      }
+
+      if (!phone) {
+        setPhoneError('Phone is required')
+      }
+
+      if (!state) {
+        setStateError('State is required')
+      }
+
+      if (!city) {
+        setCityError('City is required')
+      }
+
+      if (!password) {
+        setPasswordError('Password is required')
+      }
+
+      if (!confirmPassword) {
+        setConfirmPasswordError('Confirm password is required')
+      }
+
+      // Checks if password and confirm password match
+      if (!isPasswordMatched) {
+        setConfirmPasswordError('Passwords do not match')
+      }
+
+      if (!checked) {
+        setCheckedError('Please accept the terms and conditions')
+      }
+
+      // Stops the execution of the function
+      return
+    }
+
+    // Checks if password and confirm password match
+    if (!isPasswordMatched) {
+      setConfirmPasswordError('Passwords do not match')
+      return
+    }
+
+    // Checks if email is valid
+    if (!isEmailValid) {
+      setEmailError('Email is not valid')
+      return
+    }
+
+    // Logs the form data
+    console.log('form submitted')
     console.log('firstname is ', firstName)
     console.log('lastname is ', lastName)
     console.log('email is ', email)
@@ -72,6 +166,28 @@ const SignupForm = () => {
     console.log('city is ', city)
     console.log('password is ', password)
     console.log('confirm password is ', confirmPassword)
+    console.log('checked is ', checked)
+
+    // Resets the form fields
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setPhone('')
+    setState('')
+    setCity('')
+    setPassword('')
+    setConfirmPassword('')
+    setChecked(false)
+
+    // Resets the error states
+    setFirstNameError('')
+    setLastNameError('')
+    setEmailError('')
+    setPhoneError('')
+    setStateError('')
+    setCityError('')
+    setPasswordError('')
+    setConfirmPasswordError('')
   }
 
   return (
@@ -117,10 +233,9 @@ const SignupForm = () => {
                   inputColor='white'
                   name='firstname'
                   value={firstName}
-                  // error={true}
-                  // errorText='Email is required'
+                  errorText={firstNameError}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -131,10 +246,9 @@ const SignupForm = () => {
                   inputColor='white'
                   name='lastname'
                   value={lastName}
-                  // error={true}
-                  // errorText='Email is required'
+                  errorText={lastNameError}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -143,12 +257,11 @@ const SignupForm = () => {
                   label='email'
                   type='text'
                   inputColor='white'
-                  name='lastname'
-                  value={lastName}
-                  // error={true}
-                  // errorText='Email is required'
+                  name='email'
+                  value={email}
+                  errorText={emailError}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -159,54 +272,35 @@ const SignupForm = () => {
                   inputColor='white'
                   name='phone'
                   value={phone}
-                  // error={true}
-                  // errorText='Email is required'
+                  errorText={phoneError}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
 
               <div className='w-full md:w-[45%]'>
-                {/* <InputField
-                  label='state'
-                  type='text'
-                  inputColor='white'
-                  name='state'
-                  value={state}
-                  // error={true}
-                  // errorText='Email is required'
-                  required
-                  handleChange={handleChange}
-                /> */}
                 <DropdownField
                   label='state'
                   required
-                  value={state}
-                  handleChange={handleStateChange}
                   name='state'
+                  errorText={stateError}
+                  value={state}
+                  options={states}
                   inputColor='white'
+                  onChange={handleStateChange}
                 />
               </div>
 
               <div className='w-full md:w-[45%]'>
-                {/* <InputField
-                  label='city'
-                  type='text'
-                  inputColor='white'
-                  name='city'
-                  value={city}
-                  // error={true}
-                  // errorText='Email is required'
-                  required
-                  handleChange={handleChange}
-                /> */}
                 <DropdownField
                   label='city'
-                  value={city}
-                  handleChange={handleCityChange}
                   required
                   name='city'
+                  errorText={cityError}
+                  value={city}
+                  options={cities}
                   inputColor='white'
+                  onChange={handleCityChange}
                 />
               </div>
 
@@ -217,10 +311,9 @@ const SignupForm = () => {
                   inputColor='white'
                   name='password'
                   value={password}
-                  // error={true}
-                  // errorText='Email is required'
+                  errorText={passwordError}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -231,37 +324,39 @@ const SignupForm = () => {
                   inputColor='white'
                   name='confirmpassword'
                   value={confirmPassword}
-                  // error={true}
-                  // errorText='Email is required'
+                  errorText={confirmPasswordError}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
             </div>
 
             <div className='mt-[20px]'>
-              <div className='flex justify-start items-center text-[white]'>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleChecked}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                  sx={{
-                    '& .MuiSvgIcon-root': {
-                      width: 20,
-                      height: 20,
-                      color: '#fff',
-                      borderRadius: '2px',
-                      padding: '0px',
-                    },
-                  }}
-                />
-                <Typography
-                  variant='body1'
-                  className='text-[12px] flex justify-start items-center text-[white]'
-                >
-                  I agree to all the Term of conditions & Privacy Policy
-                </Typography>
-              </div>
+              <FormControl error={checked ? false : true}>
+                <div className='flex justify-start items-center text-[white]'>
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleCheckBox}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                    sx={{
+                      '& .MuiSvgIcon-root': {
+                        width: 20,
+                        height: 20,
+                        color: '#fff',
+                        borderRadius: '2px',
+                        padding: '0px',
+                      },
+                    }}
+                  />
+                  <Typography
+                    variant='body1'
+                    className='text-[12px] flex justify-start items-center text-[white]'
+                  >
+                    I agree to all the Term of conditions & Privacy Policy
+                  </Typography>
+                </div>
+                {checkedError ? <FormHelperText> {checkedError} </FormHelperText> : ''}
+              </FormControl>
             </div>
 
             <div className='mt-[24px] md:mt-[23px]'>
@@ -292,21 +387,23 @@ const SignupForm = () => {
             </div>
 
             <div className='w-full flex justify-center mt-[8px] md:mt-[20px]'>
-              <button
+              <Button
                 style={{
                   width: '100%',
                   height: '45px',
-                  background: 'transparent',
+                  // background: 'transparent',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   gap: '16px',
-                  color: '#fff',
+                  // color: '#fff',
                   border: '0.5px solid #7DDEC1',
+                  cursor: 'pointer',
                 }}
+                className='bg-transparent hover:bg-green text-white hover:text-[#000] normal-case'
               >
                 Sign up with <img src='/Images/google.svg' alt='google-icon' />
-              </button>
+              </Button>
             </div>
           </form>
         </div>

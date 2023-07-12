@@ -1,62 +1,103 @@
-import * as React from 'react'
-import TextField from '@mui/material/TextField'
-import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete'
+import MenuItem from '@mui/material/MenuItem'
+import FormHelperText from '@mui/material/FormHelperText'
+import FormControl from '@mui/material/FormControl'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { Typography } from '@mui/material'
 import { DropdownProps } from 'types'
+import { useEffect, useState } from 'react'
 
-const options = ['Option 1', 'Option 2']
+const ITEM_HEIGHT = 48
+const ITEM_PADDING_TOP = 8
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+}
 
-function DropdownField({ name, required, inputColor }: DropdownProps) {
-  const [value, setValue] = React.useState<string | null>(options[0])
-  const [inputValue, setInputValue] = React.useState('')
+const DropdownField = ({
+  options,
+  required,
+  name,
+  label,
+  error,
+  errorText,
+  inputColor,
+  value,
+  onChange,
+}: DropdownProps) => {
+  const [errorState, setErrorState] = useState(errorText ? true : false)
+
+  const handleChange = (event: SelectChangeEvent) => {
+    onChange(event.target.value)
+
+    if (event.target.value === '') setErrorState(true)
+    else setErrorState(false)
+  }
+
+  useEffect(() => {
+    setErrorState(errorText ? true : false)
+  }, [errorText, errorState])
 
   return (
     <div className='flex flex-col capitalize mt-[8px]'>
-      <label htmlFor={name} className='text-white'>
+      <label
+        htmlFor={name}
+        style={{
+          color: inputColor,
+        }}
+      >
         <Typography
-          className={`${required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''}`}
+          className={`text-[12px] ${
+            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
+          }`}
           variant='body1'
         >
-          {name}
+          {label}
         </Typography>
       </label>
-      <Autocomplete
-        popupIcon={<img src='/Images/dropdown.svg' alt='arrow-down' />}
-        value={value}
-        onChange={(event: any, newValue: string | null) => {
-          setValue(newValue)
-        }}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue)
-        }}
-        id='controllable-states-demo'
-        options={options}
-        sx={{ width: 300 }}
-        renderInput={(params) => (
-          <TextField
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                color: inputColor,
-                height: '35px',
-                padding: '5px',
-                borderRadius: '5px',
+      <FormControl
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            color: inputColor,
+            height: '35px',
+            padding: '5px',
+            borderRadius: '5px',
+            fontSize: '12px',
 
-                '& fieldset': {
-                  borderColor: inputColor,
-                },
-                '&:hover fieldset': {
-                  borderColor: inputColor,
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: inputColor,
-                },
-              },
-            }}
-            {...params}
-          />
-        )}
-      />
+            '& fieldset': {
+              borderColor: inputColor,
+            },
+            '&:hover fieldset': {
+              borderColor: inputColor,
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: inputColor,
+            },
+          },
+        }}
+        error={errorState}
+      >
+        <Select
+          className='mt-[5px]'
+          labelId='demo-multiple-name-label'
+          id='demo-multiple-name'
+          value={value}
+          onChange={handleChange}
+          // input={<OutlinedInput label='Name' />}
+          MenuProps={MenuProps}
+          sx={{}}
+        >
+          {options.map((option, index) => (
+            <MenuItem key={index} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </Select>
+        {errorState ? <FormHelperText>{errorText}</FormHelperText> : ''}
+      </FormControl>
     </div>
   )
 }

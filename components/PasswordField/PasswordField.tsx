@@ -2,7 +2,7 @@ import { IconButton, InputAdornment, TextField, Typography } from '@mui/material
 import { PasswordFieldProps } from 'types'
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined'
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const PasswordField = ({
   name,
@@ -10,18 +10,32 @@ const PasswordField = ({
   inputColor,
   placeholder,
   value,
-  handleChange,
+  onChange,
   required,
   error,
   errorText,
 }: PasswordFieldProps) => {
+  const [errorState, setErrorState] = useState(errorText ? true : false)
   const [showPassword, setShowPassword] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    onChange(name, value)
+
+    if (value === '') setErrorState(true)
+    else setErrorState(false)
+  }
 
   const handleClickShowPassword = () => setShowPassword((show) => !show)
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
   }
+
+  useEffect(() => {
+    setErrorState(errorText ? true : false)
+  }, [errorText, errorState])
 
   return (
     <div className='flex flex-col capitalize mt-[8px]'>
@@ -46,6 +60,7 @@ const PasswordField = ({
             height: '35px',
             padding: '5px',
             borderRadius: '5px',
+            fontSize: '12px',
 
             '& fieldset': {
               borderColor: inputColor,
@@ -78,11 +93,11 @@ const PasswordField = ({
         }}
         name='password'
         type={showPassword ? 'text' : 'password'}
-        error={error}
+        error={errorState}
         onChange={handleChange}
         id='outlined-error-helper-text'
         defaultValue={value}
-        helperText={errorText}
+        helperText={errorState ? errorText : ''}
       />
     </div>
   )

@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import Checkbox from '@mui/material/Checkbox'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
@@ -12,37 +12,69 @@ const SigninForm = () => {
   const [password, setPassword] = useState('')
   const [checked, setChecked] = React.useState(false)
 
-  const handleChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked)
+  // Error states
+  const [emailErr, setEmailErr] = useState('')
+  const [passwordErr, setPasswordErr] = useState('')
+
+  // handle checkbox change for remember me
+  const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target
+
+    setChecked(checked)
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-
-    console.log('name is ', name)
-    console.log('value is ', value)
-
+  // handleChange function for input fields
+  const handleChange = (name: string, value: string) => {
     if (name === 'email') {
       setEmail(value)
-      console.log('email is ', value)
+      setEmailErr(value ? '' : 'Email is required')
     } else {
       setPassword(value)
-      console.log('password is ', value)
+      setPasswordErr(value ? '' : 'Password is required')
     }
   }
 
+  // handle submit function for form
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    // Checks if email is valid
     const isEmailValid = validateEmail(email)
 
-    if (!isEmailValid) {
-      console.log('email is not valid')
+    // Checks if email or password is empty
+    if (!email || !password) {
+      if (!email) {
+        setEmailErr('Email is required')
+      } else if (!isEmailValid) {
+        setEmailErr('Email is not valid')
+      }
+
+      if (!password) {
+        setPasswordErr('Password is required')
+      }
+
       return
     }
 
+    // Checks if email is valid
+    if (!isEmailValid) {
+      setEmailErr('Email is not valid')
+      return
+    }
+
+    // Logs form data
     console.log('email is ', email)
     console.log('password is ', password)
+    console.log('remember me is ', checked)
+
+    // Reset form fields
+    setEmail('')
+    setPassword('')
+    setChecked(false)
+
+    // Reset error states
+    setEmailErr('')
+    setPasswordErr('')
   }
 
   return (
@@ -85,10 +117,10 @@ const SigninForm = () => {
                   inputColor='white'
                   name='email'
                   value={email}
-                  // error={true}
-                  // errorText='Email is required'
+                  // error={isError}
+                  errorText={emailErr}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
               <div className='w-full'>
@@ -97,10 +129,10 @@ const SigninForm = () => {
                   name='password'
                   value={password}
                   inputColor='white'
-                  // error={true}
-                  // errorText='Password is required'
+                  // error={isError}
+                  errorText={passwordErr}
                   required
-                  handleChange={handleChange}
+                  onChange={handleChange}
                 />
               </div>
             </div>
@@ -110,7 +142,7 @@ const SigninForm = () => {
                 <div className='flex justify-start items-center text-[white]'>
                   <Checkbox
                     checked={checked}
-                    onChange={handleChecked}
+                    onChange={handleCheckBox}
                     inputProps={{ 'aria-label': 'controlled' }}
                     sx={{
                       '& .MuiSvgIcon-root': {

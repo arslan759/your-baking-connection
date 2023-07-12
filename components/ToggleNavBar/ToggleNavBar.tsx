@@ -48,6 +48,7 @@ function ToggleNavBar({ navbarIconColor }: ToggleNavBarProps) {
             </div>
             <motion.a
               href='/'
+              className='font-Josefin'
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 }}
@@ -63,6 +64,7 @@ function ToggleNavBar({ navbarIconColor }: ToggleNavBarProps) {
               HOME
             </motion.a>
             <motion.a
+              className='font-Josefin'
               href='/about-bakers'
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -79,6 +81,7 @@ function ToggleNavBar({ navbarIconColor }: ToggleNavBarProps) {
               ABOUT BAKERS
             </motion.a>
             <motion.a
+              className='font-Josefin'
               href='/membership'
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -95,6 +98,7 @@ function ToggleNavBar({ navbarIconColor }: ToggleNavBarProps) {
               MEMBERSHIP
             </motion.a>
             <motion.a
+              className='font-Josefin'
               href='/gallery'
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -111,6 +115,7 @@ function ToggleNavBar({ navbarIconColor }: ToggleNavBarProps) {
               GALLERY
             </motion.a>
             <motion.a
+              className='font-Josefin'
               href='/search'
               initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}

@@ -39,7 +39,7 @@ export interface InputFieldProps {
   required: boolean
   placeholder?: string
   value: string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (name: string, value: string) => void
 }
 
 export interface PasswordFieldProps {
@@ -51,14 +51,17 @@ export interface PasswordFieldProps {
   required: boolean
   placeholder?: string
   value: string
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange: (name: string, value: string) => void
 }
 
 export interface DropdownProps {
   name: string
   label: string
   required: boolean
+  error?: boolean
+  options: string[]
+  errorText?: string
   inputColor?: string
-  value: string | null
-  handleChange: (argument: any) => void
+  value: any
+  onChange: (text: string) => void
 }

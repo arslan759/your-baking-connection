@@ -9,13 +9,6 @@ export function validateEmail(email: string): boolean {
   return !!match
 }
 
-export function validatePassword(password: string): boolean {
-  // Regular expression pattern for password validation
-  const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
-
-  // Match the password pattern against the input password
-  const match = password.match(pattern)
-
-  // Return true if the password is valid, false otherwise
-  return !!match
+export function checkPassword(password: string, confirmPassword: string): boolean {
+  return password === confirmPassword
 }
