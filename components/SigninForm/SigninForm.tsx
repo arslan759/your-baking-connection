@@ -201,7 +201,7 @@ const SigninForm = () => {
                 </a>
               </Typography>
               <Typography variant='body1' className='text-[12px] text-[white]'>
-                Are you a baker?
+                Are you a baker? &nbsp;
                 <a
                   href='/signin'
                   style={{
