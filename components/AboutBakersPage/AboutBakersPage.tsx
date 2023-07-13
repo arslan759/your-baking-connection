@@ -5,7 +5,7 @@ const AboutBakersPage = () => {
   return (
     <div>
       <Navbar />
-      AboutBakers
+      AboutBakers page
     </div>
   )
 }
