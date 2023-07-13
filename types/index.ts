@@ -65,3 +65,11 @@ export interface DropdownProps {
   value: any
   onChange: (text: string) => void
 }
+
+export interface ForgetPasswordFormProps {
+  openOtp: () => void
+}
+
+export interface OTPFormProps {
+  closeOtp: () => void
+}

@@ -3,20 +3,24 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
-import { validateEmail } from 'helpers/validations'
-import { ForgetPasswordFormProps } from 'types'
+import { checkPassword } from 'helpers/validations'
 
-const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
-  const [email, setEmail] = useState('')
+const ResetPasswordForm = () => {
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
   // Error states
-  const [emailErr, setEmailErr] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [confirmPasswordError, setConfirmPasswordError] = useState('')
 
   // handleChange function for input fields
   const handleChange = (name: string, value: string) => {
-    if (name === 'email') {
-      setEmail(value)
-      setEmailErr(value ? '' : 'Email is required')
+    if (name === 'password') {
+      setPassword(value)
+      setPasswordError(value ? '' : 'Password is required')
+    } else {
+      setConfirmPassword(value)
+      setConfirmPasswordError(value ? '' : 'Confirm password is required')
     }
   }
 
@@ -24,34 +28,40 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Checks if email is valid
-    const isEmailValid = validateEmail(email)
+    // Checks if password and confirm password match
+    const isPasswordMatched = checkPassword(password, confirmPassword)
 
     // Checks if email is empty
-    if (!email) {
-      if (!email) {
-        setEmailErr('Email is required')
+    if (!password || !confirmPassword) {
+      if (!password) {
+        setPasswordError('Password is required')
       }
+
+      if (!confirmPassword) {
+        setConfirmPasswordError('Confirm password is required')
+      }
+
+      // Stops the execution of the function
       return
     }
 
-    // Checks if email is valid
-    if (!isEmailValid) {
-      setEmailErr('Email is not valid')
+    // Checks if password and confirm password match
+    if (!isPasswordMatched) {
+      setConfirmPasswordError('Passwords do not match')
       return
     }
 
     // Logs form data
-    console.log('email is ', email)
+    console.log('passowrd is ', password)
+    console.log('confirm password is ', confirmPassword)
 
     // Reset form fields
-    setEmail('')
+    setPassword('')
+    setConfirmPassword('')
 
     // Reset error states
-    setEmailErr('')
-
-    // Open otp modal
-    openOtp()
+    setPasswordError('')
+    setConfirmPasswordError('')
   }
 
   return (
@@ -73,7 +83,7 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
 
             <Typography variant='h5' className='text-green   mt-[10px] p-0'>
               {' '}
-              <span className='font-[800]'>Forgot Password</span>
+              <span className='font-[800]'>New Password</span>
             </Typography>
           </div>
           <Image
@@ -87,7 +97,7 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
         <div>
           <Typography variant='body2' className='text-white normal-case  mt-[10px] p-0'>
             {' '}
-            Please enter your email address and we will send you a code for password reset.
+            Enter your new password
           </Typography>
         </div>
         <div className='mt-[24px] md:mt-[36px]'>
@@ -95,13 +105,25 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
             <div className='flex flex-wrap gap-y-[8px] md:gap-y-[24px]'>
               <div className='w-full'>
                 <InputField
-                  label='email'
-                  type='text'
+                  label='password'
+                  type='password'
                   inputColor='white'
-                  name='email'
-                  value={email}
-                  // error={isError}
-                  errorText={emailErr}
+                  name='password'
+                  value={password}
+                  errorText={passwordError}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full'>
+                <InputField
+                  label='confirm password'
+                  type='password'
+                  inputColor='white'
+                  name='confirmpassword'
+                  value={confirmPassword}
+                  errorText={confirmPasswordError}
                   required
                   onChange={handleChange}
                 />
@@ -122,4 +144,4 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
   )
 }
 
-export default ForgotPasswordForm
+export default ResetPasswordForm

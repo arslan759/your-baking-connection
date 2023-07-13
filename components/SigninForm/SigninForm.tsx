@@ -164,7 +164,7 @@ const SigninForm = () => {
               </div>
               <div className='flex justify-end'>
                 <a
-                  href='/forgetpassword'
+                  href='/forget-password'
                   style={{
                     textDecoration: 'none',
                   }}

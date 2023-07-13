@@ -1,13 +1,12 @@
 'use client'
 
-import MembershipPage from '@/components/MembershipPage/MembershipPage'
-import Navbar from '@/components/NavBar/NavBar'
+import Membership from '@/components/Membership'
 
-export default function Membership() {
+export default function MembershipPage() {
   return (
     <>
       <div className=''>
-        <MembershipPage />
+        <Membership />
       </div>
     </>
   )
