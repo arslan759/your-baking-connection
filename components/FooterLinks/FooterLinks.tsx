@@ -12,21 +12,21 @@ const FooterLinks = ({ header, link1, link2, link3 }: FooterLinksProps) => {
         </Typography>
 
         <div className='flex gap-[12px] items-center justify-start shrink-0 relative'>
-          <a href='https://www.twitter.com' target='_blank'>
+          <a rel='noreferrer' href='https://www.twitter.com' target='_blank'>
             <img
               src='/Images/twitter.svg'
               alt='mail-icon'
               className=' w-[18px] md:w-[24px] h-[18px] md:h-[24px] cursor-pointer'
             />
           </a>
-          <a href='https://www.facebook.com' target='_blank'>
+          <a rel='noreferrer' href='https://www.facebook.com' target='_blank'>
             <img
               src='/Images/facebook.svg'
               alt='mail-icon'
               className=' w-[18px] md:w-[24px] h-[18px] md:h-[24px] cursor-pointer'
             />
           </a>
-          <a href='https://www.instagram.com' target='_blank'>
+          <a rel='noreferrer' href='https://www.instagram.com' target='_blank'>
             <img
               src='/Images/instagram.svg'
               alt='mail-icon'

@@ -46,7 +46,9 @@ const PasswordField = ({
         }}
       >
         <Typography
-          className={`${required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''}`}
+          className={`text-[12px] ${
+            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
+          }`}
           variant='body1'
         >
           {label}
