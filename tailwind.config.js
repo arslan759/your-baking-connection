@@ -13,8 +13,13 @@ module.exports = {
         roboto: ['Roboto'],
         poppins: ['Poppins'],
         open_sans: ['Open_Sans'],
+        open_sans_bold: ['Open_Sans_Bold'],
+        Josefin: ['Josefin Sans'],
       },
-
+      colors: {
+        primary: '#F8B4CB',
+        green: '#7DDEC1',
+      },
       screens: {
         xlm: '1440px',
         xll: '1536px',
