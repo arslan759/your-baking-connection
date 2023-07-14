@@ -1,13 +1,12 @@
 'use client'
 
-import Navbar from '@/components/NavBar/NavBar'
-import SearchPage from '@/components/SearchPage/SearchPage'
+import Search from '@/components/Search/Search'
 
-export default function Search() {
+export default function SearchPage() {
   return (
     <>
       <div className=''>
-        <SearchPage />
+        <Search />
       </div>
     </>
   )

@@ -1,6 +1,6 @@
 import Navbar from '../NavBar/NavBar'
 
-const SearchPage = () => {
+const Search = () => {
   return (
     <div>
       <Navbar />
@@ -9,4 +9,4 @@ const SearchPage = () => {
   )
 }
 
-export default SearchPage
+export default Search
