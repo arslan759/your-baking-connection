@@ -139,12 +139,16 @@ const SigninForm = () => {
 
             <div className='w-full flex flex-col-reverse md:flex-row md:justify-between md:items-center mt-[24px]'>
               <div className=''>
-                <div className='flex justify-start items-center text-[white]'>
+                <div className='flex justify-start items-center gap-x-[15px] text-[white]'>
                   <Checkbox
                     checked={checked}
                     onChange={handleCheckBox}
                     inputProps={{ 'aria-label': 'controlled' }}
                     sx={{
+                      padding: '0px',
+                      width: '20px',
+                      height: '20px',
+
                       '& .MuiSvgIcon-root': {
                         width: 20,
                         height: 20,
