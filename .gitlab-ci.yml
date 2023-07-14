@@ -16,23 +16,21 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
-stages:          # List of stages for jobs, and their order of execution
+stages: # List of stages for jobs, and their order of execution
   - build
 #  - test
 #  - deploy
 
-build:       # This job runs in the build stage, which runs first.
+build: # This job runs in the build stage, which runs first.
   stage: build
-  image: node:16.8.0
   script:
-      - npm install
-      - mkdir -p /publish
-      - npm run build
-      - cp -R /build /publish
- 
+    - npm install
+    - mkdir -p /publish
+    - npm run build
+    - cp -R /build /publish
 #deploy-job:      # This job runs in the deploy stage.
 #  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
 #  environment: production
- # script:
- #   - echo "Deploying application..."
- #   - echo "Application successfully deployed."
+# script:
+#   - echo "Deploying application..."
+#   - echo "Application successfully deployed."
