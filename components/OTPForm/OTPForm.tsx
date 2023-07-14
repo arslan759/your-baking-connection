@@ -16,10 +16,7 @@ const OTPForm = ({ closeOtp }: OTPFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Checks if password and confirm password match
-    // const isPasswordMatched = checkPassword(password, confirmPassword)
-
-    // Checks if email is empty
+    // Checks if email is empty or Less than 4 characters
     if (!otp || otp.length !== 4) {
       setOtpError('Otp is required')
 
@@ -44,11 +41,14 @@ const OTPForm = ({ closeOtp }: OTPFormProps) => {
           background: 'rgba(0, 0, 0, 0.60)',
           backdropFilter: 'blur(12.5px)',
         }}
-        className='w-[95vw] h-[auto] md:w-[491px] p-[20px] md:pl-[44px] md:pb-[44px] relative'
+        className='w-[95vw] h-[auto] md:w-[608px] p-[20px] md:pl-[44px] md:pb-[44px] relative'
       >
         <div className=''>
           <div className='md:mt-[24px]'>
-            <Typography variant='h5' className='text-green capitalize mt-[10px] p-0'>
+            <Typography
+              variant='h5'
+              className='text-green font-open_sans_bold capitalize mt-[10px] p-0'
+            >
               {' '}
               Enter verification code
             </Typography>
@@ -108,8 +108,8 @@ const OTPForm = ({ closeOtp }: OTPFormProps) => {
 
             <div className='w-full flex justify-center mt-[12px] md:mt-[24px]'>
               <Typography variant='body1' className='text-[12px] normal-case text-[white]'>
-                Did'nt receive the CODE? &nbsp;
-                <span className='text-green'>RESEND CODE</span>
+                {`Didn't receive the CODE?`} &nbsp;
+                <span className='text-green cursor-pointer'>RESEND CODE</span>
               </Typography>
             </div>
 

@@ -71,7 +71,7 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
               joining is quick and easy
             </Typography>
 
-            <Typography variant='h5' className='text-green   mt-[10px] p-0'>
+            <Typography variant='h5' className='text-green font-open_sans_bold mt-[10px] p-0'>
               {' '}
               <span className='font-[800]'>Forgot Password</span>
             </Typography>
@@ -85,7 +85,7 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
           />
         </div>
         <div>
-          <Typography variant='body2' className='text-white normal-case  mt-[10px] p-0'>
+          <Typography variant='body2' className='text-white normal-case  mt-[24px] p-0'>
             {' '}
             Please enter your email address and we will send you a code for password reset.
           </Typography>

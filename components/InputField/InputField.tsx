@@ -30,7 +30,7 @@ const InputField = ({
   }, [errorText, errorState])
 
   return (
-    <div className='flex flex-col capitalize mt-[8px]'>
+    <div className='flex flex-col capitalize'>
       <label
         htmlFor={name}
         style={{
