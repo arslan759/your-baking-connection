@@ -1,12 +1,12 @@
 'use client'
 
-import AboutBakersPage from '@/components/AboutBakersPage/AboutBakersPage'
+import AboutBakers from '@/components/AboutBakers'
 
-export default function AboutBakers() {
+export default function AboutBakersPage() {
   return (
     <>
       <div className=''>
-        <AboutBakersPage />
+        <AboutBakers />
       </div>
     </>
   )

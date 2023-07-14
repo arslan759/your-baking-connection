@@ -26,7 +26,7 @@ const SecondaryBtn = ({ handleClick, text, color }: SecondaryBtnProps) => {
           '::after': {
             content: '""',
             position: 'absolute',
-            bottom: '3px',
+            bottom: '2px',
             left: '0',
             width: '100%',
             height: '1px',

@@ -94,7 +94,7 @@ const SigninForm = () => {
               WELCOME Back!
             </Typography>
 
-            <Typography variant='h5' className='text-green  mt-[10px] p-0'>
+            <Typography variant='h5' className='text-green font-open_sans_bold  mt-[10px] p-0'>
               {' '}
               Sign in
             </Typography>
@@ -164,7 +164,7 @@ const SigninForm = () => {
               </div>
               <div className='flex justify-end'>
                 <a
-                  href='/forgetpassword'
+                  href='/forget-password'
                   style={{
                     textDecoration: 'none',
                   }}

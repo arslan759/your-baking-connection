@@ -4,10 +4,18 @@ import { PrimaryBtnProps } from 'types'
 const PrimaryBtn = ({ handleClick, type = 'button', text }: PrimaryBtnProps) => {
   return (
     <Button
-      className={`bg-green hover:bg-[#39d4a5] rounded-[5px] p-[10px] flex items-center justify-center w-full h-full group`}
+      className={`flex items-center justify-center w-full h-full group`}
       disableElevation
       type={type}
-      sx={{ textTransform: 'capitalize' }}
+      sx={{
+        textTransform: 'capitalize',
+        backgroundColor: '#7DDEC1',
+        borderRadius: '5px',
+        padding: '10px',
+        '&:hover': {
+          backgroundColor: '#39d4a5',
+        },
+      }}
       onClick={handleClick}
     >
       <Typography className='text-black group-hover:text-white'>{text}</Typography>
