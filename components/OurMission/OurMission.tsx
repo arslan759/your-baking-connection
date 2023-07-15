@@ -14,7 +14,7 @@ const OurMission = () => {
         <img
           src='/Images/our-mission.png'
           alt='our-mission'
-          className='w-[100vw] md:w-[45%] object-center object-cover'
+          className='w-[100vw] md:w-[45%] h-auto object-center object-cover 2xl:max-h-[380px]'
         />
         <div className='w-[90vw] md:w-[55%] pt-[12px] pl-[0px] md:pl-[27px]'>
           <div className='w-full flex justify-center'>
