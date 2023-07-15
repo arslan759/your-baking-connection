@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Sectionheading from '../SectionHeading/Sectionheading'
 import SectionSubHeading from '../SectionSubHeading/SectionSubHeading'
 import { galleryImages } from 'Constants/constants'
+import { PrimaryBtn } from '../Buttons'
 
 const OurGallery = () => {
   const [windowSize, setWindowSize] = useState({
@@ -68,6 +69,9 @@ const OurGallery = () => {
           })}
         </div>
       )}
+      <div className='mt-[24px] md:mt-[60px] w-[160px] h-[45px] md:h-[50px] rounded-full overflow-hidden'>
+        <PrimaryBtn text='see More' />
+      </div>
     </section>
   )
 }
