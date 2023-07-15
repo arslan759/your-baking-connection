@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material'
 import React from 'react'
+import styles from './styles.module.css'
 
 const HowItWorks = () => {
   return (
@@ -27,6 +28,8 @@ const HowItWorks = () => {
           </Typography>
         </div>
       </div>
+
+      {/* <div className={styles.imageOverlay}></div> */}
     </section>
   )
 }
