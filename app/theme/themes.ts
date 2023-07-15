@@ -46,6 +46,18 @@ export const lightTheme = createTheme({
         fontSize: '18px',
       },
     },
+
+    h4: {
+      fontFamily: 'Josefin Sans',
+      fontSize: '24px',
+      ['@media (min-width:768px)']: {
+        fontSize: '48px',
+      },
+      fontWeight: '800',
+      lineHeight: '70px',
+      textTransform: 'capitalize',
+    },
+
     h5: {
       fontFamily: 'Open Sans',
       fontSize: '24px',
