@@ -73,3 +73,11 @@ export interface ForgetPasswordFormProps {
 export interface OTPFormProps {
   closeOtp: () => void
 }
+
+export interface SectionheadingProps {
+  title: string
+}
+
+export interface SectionSubHeadingProps {
+  subHeading: string
+}
