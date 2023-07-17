@@ -48,8 +48,8 @@ deploy:
     - pwd
     - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137
     - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu && mkdir pipeline-dev"
-    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu/pipeline-dev && git clone https://ahmed_rohan:r~uQ?M9ks,ZP@gitlab.com/Codistan/yourbakingconnection/user-panel.git"
-#    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 pipeline
+    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu/pipeline-dev && git clone https://gitlab.com/Codistan/yourbakingconnection/user-panel.git"
+    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu/pipeline-dev && npm start"
      
 #    scp -o StrictHostKeyChecking=no -r /home/ubuntu/baking-connection-dev/user-panel ubuntu@35.84.52.137:/home/ubuntu/development
 
