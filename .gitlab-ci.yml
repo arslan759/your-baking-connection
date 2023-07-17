@@ -18,6 +18,7 @@
 
 stages: # List of stages for jobs, and their order of execution
   - build
+  - deploy
 
 build: # This job runs in the build stage, which runs first.
   stage: build
@@ -32,4 +33,12 @@ build: # This job runs in the build stage, which runs first.
 
     - npm install --legacy-peer-deps
     - npm run build
+
+deploy:
+  stage: deploy
+  before_script:
+    - mkdir development
+
+  script:
+    scp -o StrictHostKeyChecking=no user-panel ubuntu@35.84.52.137:/home/ubuntu/development
 
