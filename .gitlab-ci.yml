@@ -18,13 +18,16 @@
 
 stages: # List of stages for jobs, and their order of execution
   - build
-#  - test
-#  - deploy
 
 build: # This job runs in the build stage, which runs first.
   stage: build
-  image: node:16.8.0
+
+  before_script:
+    - touch .env
+    - cp ${ENV_FILE} .env
   script:
+#    - touch .env
+#    - echo ""
     - npm install
     - npm run build
 
