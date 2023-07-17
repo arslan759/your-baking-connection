@@ -40,6 +40,7 @@ deploy:
     - mkdir development
     - mkdir ~/.ssh
     - echo $PRIVATE_KEY > ~/.ssh/id_rsa
+    - chmod 700 /root/.ssh
     - chmod 600 ~/.ssh/id_rsa
 
   script:
