@@ -23,7 +23,7 @@ build: # This job runs in the build stage, which runs first.
   stage: build
 
   before_script:
-    - sudo apt install nodejs
+    - apt install nodejs
     - touch .env
     - cp ${ENV_FILE} .env
   script:
