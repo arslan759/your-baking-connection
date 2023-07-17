@@ -44,6 +44,9 @@ deploy:
     - echo $PRIVATE_KEY > ~/.ssh/id_rsa
     - chmod 700 /root/.ssh
     - chmod 600 ~/.ssh/id_rsa
+    - cd /home/ubuntu
+    - chmod 777 baking-connection-dev
+    - chmod 777 user-panel
 
   script:
     scp -o StrictHostKeyChecking=no -r /home/ubuntu/baking-connection-dev/user-panel ubuntu@35.84.52.137:/home/ubuntu/development
