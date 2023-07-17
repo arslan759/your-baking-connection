@@ -1,5 +1,9 @@
 import { MouseEventHandler } from 'react'
 
+export interface ClientReviewCardProps {
+  color: string
+}
+
 export interface FooterLinksProps {
   header?: string
   link1?: string
@@ -35,7 +39,7 @@ export interface InputFieldProps {
   inputColor?: string
   error?: boolean
   errorText?: string
-  label: string
+  label?: string
   required: boolean
   placeholder?: string
   value: string
