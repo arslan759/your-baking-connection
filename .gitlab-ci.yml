@@ -46,5 +46,5 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
 
   script:
-    scp -o StrictHostKeyChecking=no -r user-panel ubuntu@35.84.52.137:/home/ubuntu/development
+    scp -r User Panel ubuntu@35.84.52.137:/home/ubuntu/development
 
