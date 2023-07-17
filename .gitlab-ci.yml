@@ -37,7 +37,7 @@ build: # This job runs in the build stage, which runs first.
 deploy:
   stage: deploy
   before_script:
-#    - apt-get install openssh
+    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu && mkdir pipeline-dev"
     - mkdir ~/.ssh
     - eval $(ssh-agent -s)
     - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
@@ -45,9 +45,8 @@ deploy:
     - ssh-keyscan -H "35.84.52.137" >> ~/.ssh/known_hosts
 
   script:
-    - pwd
+#    - pwd
     - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137
-    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu && mkdir pipeline-dev"
     - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu/pipeline-dev && git clone https://gitlab.com/Codistan/yourbakingconnection/user-panel.git"
     - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu/pipeline-dev && npm start"
      
