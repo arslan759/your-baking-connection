@@ -37,6 +37,7 @@ build: # This job runs in the build stage, which runs first.
 deploy:
   stage: deploy
   before_script:
+    - sudo apt-get install openssh-server
     - mkdir development
     - mkdir ~/.ssh
     - eval $(ssh-agent -s)
@@ -44,10 +45,10 @@ deploy:
     - echo $PRIVATE_KEY > ~/.ssh/id_rsa
     - chmod 700 /root/.ssh
     - chmod 600 ~/.ssh/id_rsa
-    - cd /home/ubuntu
-    - chmod 777 baking-connection-dev
-    - chmod 777 user-panel
+    - ssh-keyscan -H "35.84.52.137" >> ~/.ssh/known_hosts
 
   script:
-    scp -o StrictHostKeyChecking=no -r /home/ubuntu/baking-connection-dev/user-panel ubuntu@35.84.52.137:/home/ubuntu/development
+    - pwd
+    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137
+#    scp -o StrictHostKeyChecking=no -r /home/ubuntu/baking-connection-dev/user-panel ubuntu@35.84.52.137:/home/ubuntu/development
 
