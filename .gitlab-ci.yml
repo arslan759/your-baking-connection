@@ -37,7 +37,7 @@ build: # This job runs in the build stage, which runs first.
 deploy:
   stage: deploy
   before_script:
-    - sudo apt-get install openssh-server
+    - apt-get install openssh-server
     - mkdir development
     - mkdir ~/.ssh
     - eval $(ssh-agent -s)
