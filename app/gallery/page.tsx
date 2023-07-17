@@ -1,11 +1,11 @@
 'use client'
-import GalleryPage from '@/components/GalleryPage/GalleryPage'
+import Gallery from '@/components/Gallery'
 
-export default function Gallery() {
+export default function GalleryPage() {
   return (
     <>
       <div className=''>
-        <GalleryPage />
+        <Gallery />
       </div>
     </>
   )

@@ -4,8 +4,9 @@ import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
+import { ForgetPasswordFormProps } from 'types'
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
   const [email, setEmail] = useState('')
 
   // Error states
@@ -48,6 +49,9 @@ const ForgotPasswordForm = () => {
 
     // Reset error states
     setEmailErr('')
+
+    // Open otp modal
+    openOtp()
   }
 
   return (
@@ -58,7 +62,7 @@ const ForgotPasswordForm = () => {
           background: 'rgba(0, 0, 0, 0.60)',
           backdropFilter: 'blur(12.5px)',
         }}
-        className='w-[80vw] h-[auto] md:h-[421px] md:w-[491px] p-[20px] md:pl-[44px] md:pb-[44px] relative'
+        className='w-[80vw] h-[auto] md:w-[491px] p-[20px] md:pl-[44px] md:pb-[44px] relative'
       >
         <div className=''>
           <div className='md:mt-[24px]'>
@@ -67,7 +71,7 @@ const ForgotPasswordForm = () => {
               joining is quick and easy
             </Typography>
 
-            <Typography variant='h5' className='text-green   mt-[10px] p-0'>
+            <Typography variant='h5' className='text-green font-open_sans_bold mt-[10px] p-0'>
               {' '}
               <span className='font-[800]'>Forgot Password</span>
             </Typography>
@@ -81,7 +85,7 @@ const ForgotPasswordForm = () => {
           />
         </div>
         <div>
-          <Typography variant='body2' className='text-white normal-case  mt-[10px] p-0'>
+          <Typography variant='body2' className='text-white normal-case  mt-[24px] p-0'>
             {' '}
             Please enter your email address and we will send you a code for password reset.
           </Typography>

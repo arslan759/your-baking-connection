@@ -210,7 +210,10 @@ const SignupForm = () => {
               joining is quick and easy
             </Typography>
 
-            <Typography variant='h5' className='text-green capitalise mt-[10px] p-0'>
+            <Typography
+              variant='h5'
+              className='text-green font-open_sans_bold capitalise mt-[10px] p-0'
+            >
               {' '}
               Sign up
             </Typography>
@@ -333,15 +336,19 @@ const SignupForm = () => {
 
             <div className='mt-[20px]'>
               <FormControl error={checked ? false : true}>
-                <div className='flex justify-start items-center text-[white]'>
+                <div className='flex justify-start items-center gap-x-[15px] text-[white]'>
                   <Checkbox
                     checked={checked}
                     onChange={handleCheckBox}
                     inputProps={{ 'aria-label': 'controlled' }}
                     sx={{
+                      padding: '0px',
+                      width: '20px',
+                      height: '20px',
+
                       '& .MuiSvgIcon-root': {
-                        width: 20,
-                        height: 20,
+                        width: '20px',
+                        height: '20px',
                         color: '#fff',
                         borderRadius: '2px',
                         padding: '0px',

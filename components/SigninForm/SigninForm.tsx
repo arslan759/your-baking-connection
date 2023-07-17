@@ -94,7 +94,7 @@ const SigninForm = () => {
               WELCOME Back!
             </Typography>
 
-            <Typography variant='h5' className='text-green  mt-[10px] p-0'>
+            <Typography variant='h5' className='text-green font-open_sans_bold  mt-[10px] p-0'>
               {' '}
               Sign in
             </Typography>
@@ -139,12 +139,16 @@ const SigninForm = () => {
 
             <div className='w-full flex flex-col-reverse md:flex-row md:justify-between md:items-center mt-[24px]'>
               <div className=''>
-                <div className='flex justify-start items-center text-[white]'>
+                <div className='flex justify-start items-center gap-x-[15px] text-[white]'>
                   <Checkbox
                     checked={checked}
                     onChange={handleCheckBox}
                     inputProps={{ 'aria-label': 'controlled' }}
                     sx={{
+                      padding: '0px',
+                      width: '20px',
+                      height: '20px',
+
                       '& .MuiSvgIcon-root': {
                         width: 20,
                         height: 20,
@@ -164,7 +168,7 @@ const SigninForm = () => {
               </div>
               <div className='flex justify-end'>
                 <a
-                  href='/forgetpassword'
+                  href='/forget-password'
                   style={{
                     textDecoration: 'none',
                   }}
