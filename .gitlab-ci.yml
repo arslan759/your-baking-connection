@@ -38,6 +38,9 @@ deploy:
   stage: deploy
   before_script:
     - mkdir development
+    - mkdir ~/.ssh
+    - echo $PRIVATE_KEY > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
 
   script:
     scp -o StrictHostKeyChecking=no user-panel ubuntu@35.84.52.137:/home/ubuntu/development
