@@ -37,7 +37,7 @@ build: # This job runs in the build stage, which runs first.
 deploy:
   stage: deploy
   before_script:
-    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu && mkdir pipeline-dev"
+#    - ssh -o StrictHostKeyChecking=no ubuntu@35.84.52.137 "cd /home/ubuntu && mkdir pipeline-dev"
     - mkdir ~/.ssh
     - eval $(ssh-agent -s)
     - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
