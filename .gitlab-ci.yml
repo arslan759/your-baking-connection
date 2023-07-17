@@ -40,7 +40,7 @@ deploy:
     - mkdir development
     - mkdir ~/.ssh
     - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - echo $PRIVATE_KEY > ~/.ssh/id_rsa
     - chmod 700 /root/.ssh
     - chmod 600 ~/.ssh/id_rsa
