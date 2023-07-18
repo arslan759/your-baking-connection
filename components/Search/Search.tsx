@@ -4,16 +4,20 @@ import { InputAdornment, TextField, Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import InputField from '../InputField/InputField'
 import MapPinFindBaker from '../../assets/icons/mapPinFindBaker'
-import DividerLineFindBaker from '../../assets/icons/DividerLineFindBaker'
 import SearchFindBaker from '../../assets/icons/searchFindBaker'
 import SelecterFindBaker from '../../assets/icons/selecterFindBaker'
+
+import styles from './styles.module.css'
 
 const Search = () => {
   return (
     <>
       <Navbar />
-      <div className='flex flex-col justify-center items-center w-full'>
-        <div className='flex flex-col justify-center items-center text-center w-[242px] h-[80px] md:w-[525px] md:h-[97px] mt-[48px] mb:mt-[100px]'>
+      <div className='relative flex flex-col justify-center items-center w-full'>
+        <div
+          className={`absolute top-[3%] md:top-[-5.2%] overflow-visible w-[472.06px] h-[432.26px] md:w-[932.14px] md:h-[853.55px] flex-shrink-0 ${styles.findYourBakerBackground}`}
+        />
+        <div className='flex flex-col justify-center items-center text-center w-[242px] h-[80px] md:w-[525px] md:h-[97px] mt-[35px] mb:mt-[100px]'>
           <Typography variant='h4' sx={{ color: '#7DDEC1' }}>
             Find Your Baker
           </Typography>
