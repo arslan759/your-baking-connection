@@ -5,6 +5,7 @@ import OurGallery from '../OurGallery/OurGallery'
 import OurMission from '../OurMission/OurMission'
 import ClientsSay from '../ClientsSay/ClientsSay'
 import FAQs from '../FAQs/FAQs'
+import StayInTouchForm from '../StayInTouch'
 
 const HomePage = () => {
   return (
@@ -27,6 +28,8 @@ const HomePage = () => {
 
       {/* FAQ's Section */}
       <FAQs />
+
+      <StayInTouchForm />
     </div>
   )
 }
