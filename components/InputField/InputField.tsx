@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 const InputField = ({
   type,
   name,
-  label,
+  label = '',
   inputColor,
   placeholder,
   value,
@@ -31,23 +31,28 @@ const InputField = ({
 
   return (
     <div className='flex flex-col capitalize'>
-      <label
-        htmlFor={name}
-        style={{
-          color: inputColor,
-        }}
-      >
-        <Typography
-          className={`text-[12px] ${
-            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-          }`}
-          variant='body1'
+      {label ? (
+        <label
+          htmlFor={name}
+          style={{
+            color: inputColor,
+          }}
         >
-          {label}
-        </Typography>
-      </label>
+          <Typography
+            className={`text-[12px] ${
+              required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
+            }`}
+            variant='body1'
+          >
+            {label}
+          </Typography>
+        </label>
+      ) : (
+        ''
+      )}
+
       <TextField
-        className='mt-[5px]'
+        className={`${label ? 'mt-[5px]' : 'mt-[0px]'}`}
         sx={{
           '& .MuiOutlinedInput-root': {
             color: inputColor,

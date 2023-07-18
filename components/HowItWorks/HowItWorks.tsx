@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material'
 import React from 'react'
 import styles from './styles.module.css'
+import HowItWorksPcView from '../HowItWorksPcView/HowItWorksPcView'
+import HowItWorksMobileView from '../HowItWorksMobileView/HowItWorksMobileView'
 
 const HowItWorks = () => {
   return (
@@ -29,7 +31,11 @@ const HowItWorks = () => {
         </div>
       </div>
 
-      {/* <div className={styles.imageOverlay}></div> */}
+      {/* MobileView */}
+      <HowItWorksMobileView />
+
+      {/* Laptop View */}
+      <HowItWorksPcView />
     </section>
   )
 }

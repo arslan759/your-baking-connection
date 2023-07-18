@@ -1,7 +1,5 @@
-import React, { useState, ChangeEvent } from 'react'
-import { Button, TextField, Typography } from '@mui/material'
-
-import StayInTouchButton from './StayInTouchButton'
+import React, { useState } from 'react'
+import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import styles from './styles.module.css'
 import { stylesModuleMui } from './styles.module'
@@ -52,8 +50,8 @@ const StayInTouchForm = (): JSX.Element => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.rectangle}>
+    <div className={`${styles.container} mt-[170px] md:mt-[240px]`}>
+      <div className={`${styles.rectangle} w-[90vw] md:w-[70vw] pb-[16px] md:pb-[74px]`}>
         <div className='flex justify-center items-center flex-col w-full text-white'>
           <Typography variant='h5' sx={stylesModuleMui.heading}>
             Let's Stay In Touch
@@ -63,34 +61,12 @@ const StayInTouchForm = (): JSX.Element => {
             conveniently in your inbox!
           </Typography>
         </div>
-        <div
-          className='border w-full'
-          style={{
-            border: '2px solid red',
-          }}
-        >
-          {/* <TextField
-            id='outlined-basic'
-            label='Enter your email address'
-            variant='outlined'
-            sx={stylesModuleMui.textField}
-            InputLabelProps={{
-              style: {
-                color: 'white',
-                fontSize: '12px',
-              },
-            }}
-            value={email}
-            onChange={handleChange}
-          /> */}
+        <div className='border w-full'>
           <form
             onSubmit={handleSubmit}
-            className='flex flex-row gap-x-[16px] justify-center items-center'
-            style={{
-              border: '2px solid yellow',
-            }}
+            className='flex flex-row gap-x-[16px] justify-center items-center  mt-[8px] md:mt-[32px]'
           >
-            <div className='mt-2.5 w-[193px] md:w-[551px] text-white'>
+            <div className='w-[193px] md:w-[551px] text-white'>
               <InputField
                 // label='email'
                 type='text'
@@ -106,7 +82,6 @@ const StayInTouchForm = (): JSX.Element => {
             </div>
             <div className='rounded-[12px] overflow-hidden w-[4.56rem] md:w-[10rem]'>
               <PrimaryBtn type='submit' text='Submit' />
-              {/* <StayInTouchButton handleSubmit={handleSubmit} /> */}
             </div>
           </form>
         </div>

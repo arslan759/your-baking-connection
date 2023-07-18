@@ -36,8 +36,8 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
     <AppBar
       sx={{
         background: 'transparent',
-        paddingLeft: { xs: '1px', sm: '55px' },
-        paddingRight: { xs: '1px', md: '30px' },
+        paddingLeft: { xs: '1px', sm: '25px' },
+        // paddingRight: { xs: '1px', md: '30px' },
       }}
       position={'static'}
       elevation={0}
@@ -103,68 +103,8 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
           <div className={styles.navbarMenu}>
             <ToggleNavBar navbarIconColor={itemsColor} />
           </div>
-
-          {/* <MenuIcon
-            sx={{
-              color: 'white',
-            }}
-            className={styles.navbarMenu}
-            onClick={() => SetOpen(!open)}
-          /> */}
         </SearchBox>
       </StyledToolbar>
-      {/* <Menu
-        id='demo-positioned-menu'
-        aria-labelledby='demo-positioned-button'
-        open={open}
-        onClose={() => SetOpen(!open)}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <Box sx={{ width: 350, height: '90vh' }}>
-          {MenuItems.map((item, i) => (
-            <MenuItem
-              key={i}
-              sx={{
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: '500',
-                textTransform: 'uppercase',
-                fontFamily: 'Rubik',
-                lineHeight: '18px',
-                fontStyle: 'normal',
-                textAlign: 'center',
-              }}
-            >
-              <Link
-                style={
-                  router === `${item.path}`
-                    ? {
-                        color: 'white',
-                        textAlign: 'center',
-                        textDecoration: 'none',
-                        borderRadius: '25px',
-                        padding: '7px',
-                        paddingLeft: '20px',
-                        paddingRight: '20px',
-                        border: '2px solid #FF6744',
-                      }
-                    : { color: 'white', textDecoration: 'none' }
-                }
-                href={item.path}
-              >
-                {item.name}
-              </Link>
-            </MenuItem>
-          ))}
-        </Box>
-      </Menu> */}
     </AppBar>
   )
 }

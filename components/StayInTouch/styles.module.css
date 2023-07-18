@@ -6,19 +6,14 @@
 }
 
 .container {
-  margin-top: 12%;
-  margin-bottom: 7.5%;
   background: url('../../assets/images/stayInTouch-background.png') center / cover no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25rem;
 }
 
 .rectangle {
   transform: translateY(-50%);
-  height: 20rem;
-  width: 55rem;
   display: flex;
   justify-content: center;
   align-items: center;

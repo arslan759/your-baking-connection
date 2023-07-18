@@ -67,6 +67,34 @@
   background-color: transparent !important;
 }
 
+/* Swiper Pagination */
+
+.swiper-pagination-bullet {
+  background: transparent !important;
+  position: relative !important;
+  outline: 0.5px solid #000 !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.swiper-pagination-bullet-active {
+  position: relative !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.swiper-pagination-bullet-active::after {
+  position: absolute !important;
+  content: '' !important;
+  width: 15px !important;
+  height: 15px !important;
+  background: black !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  border-radius: 50% !important;
+}
+
 @media (max-width: 950px) {
   .css-1qq5s3h-MuiPaper-root-MuiAppBar-root {
     padding-left: 1px !important;
