@@ -6,6 +6,7 @@ import OurMission from '../OurMission/OurMission'
 import ClientsSay from '../ClientsSay/ClientsSay'
 import SwiperJS from '../SwiperJS'
 import FAQs from '../FAQs/FAQs'
+import StayInTouchForm from '../StayInTouch'
 
 const HomePage = () => {
   return (
@@ -37,7 +38,7 @@ const HomePage = () => {
       <FAQs />
 
       {/* Lets Stay in Touch Section */}
-      {/* <LetsStayInTouch /> */}
+      <StayInTouchForm />
     </div>
   )
 }
