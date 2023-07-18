@@ -38,9 +38,6 @@ const HomePage = () => {
       <FAQs />
 
       <StayInTouchForm />
-
-      {/* Lets Stay in Touch Section */}
-      <StayInTouchForm />
     </div>
   )
 }
