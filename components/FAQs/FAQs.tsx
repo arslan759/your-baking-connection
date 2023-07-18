@@ -1,6 +1,7 @@
 import React from 'react'
 import Sectionheading from '../SectionHeading/Sectionheading'
 import SectionSubHeading from '../SectionSubHeading/SectionSubHeading'
+import styles from './styles.module.css'
 
 const FAQs = () => {
   return (
@@ -10,6 +11,8 @@ const FAQs = () => {
 
         <SectionSubHeading subHeading={`Frequently asked questions`} />
       </div>
+
+      <div className={`${styles.background} `}></div>
     </section>
   )
 }

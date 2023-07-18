@@ -35,6 +35,9 @@ const HomePage = () => {
 
       {/* FAQ's Section */}
       <FAQs />
+
+      {/* Lets Stay in Touch Section */}
+      {/* <LetsStayInTouch /> */}
     </div>
   )
 }
