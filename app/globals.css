@@ -53,6 +53,10 @@
   text-decoration: none;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 /* MUI Typography */
 
 .css-1wn6apb-MuiTypography-root {
