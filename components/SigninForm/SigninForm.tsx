@@ -79,6 +79,11 @@ const SigninForm = () => {
       return
     }
 
+    // Logs form data
+    console.log('email is ', email)
+    console.log('password is ', password)
+    console.log('remember me is ', checked)
+
     try {
       const res = await loginUser({
         variables: {
@@ -94,10 +99,10 @@ const SigninForm = () => {
       if (accessToken) {
         localStorage.setItem('accounts:accessToken', accessToken)
         localStorage.setItem('accounts:refreshToken', refreshToken)
-        router.push('/')
       }
     } catch (err) {
       console.log(err)
+    }
 
       setGenError(err?.message)
     }
