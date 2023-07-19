@@ -30,13 +30,15 @@ const CustomAccordion = () => {
                 boxShadow: 'none',
                 borderRadius: '0px',
                 marginTop: '24px',
+                paddingBottom: '32px',
                 '@media (max-width: 768px)': {
                   marginTop: '4.5px',
+                  paddingBottom: '4.5px',
                 },
                 '&.Mui-expanded': {
-                  marginTop: '24px',
+                  // marginTop: '24px',
                   '@media (max-width: 768px)': {
-                    marginTop: '4.5px',
+                    // marginTop: '4.5px',
                   },
 
                   // padding: '0px',
@@ -115,9 +117,8 @@ const CustomAccordion = () => {
                 fontWeight: '400',
                 lineHeight: '24px',
                 fontStyle: 'normal',
-                marginBottom: '32px',
+
                 '@media (max-width: 768px)': {
-                  marginBottom: '4.5px',
                   lineHeight: 'normal',
                   fontSize: '8px',
                 },

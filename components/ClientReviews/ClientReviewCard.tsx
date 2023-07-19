@@ -1,12 +1,11 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 import { Avatar, Card, CardContent, Typography } from '@mui/material'
-
 import { ClientReviewCardProps } from 'types'
 import QuotesReview from '../../assets/icons/quotesReview'
 
 // const ClientReviewCard = () => {
-const ClientReviewCard = ({ color }: ClientReviewCardProps) => {
+const ClientReviewCard = ({ color, name, review, image }: ClientReviewCardProps) => {
   const quotesDivRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -23,7 +22,12 @@ const ClientReviewCard = ({ color }: ClientReviewCardProps) => {
     <React.Fragment>
       <CardContent>
         {/* <div className='flex'> */}
-        <div className='flex w-full'>
+        <div
+          className='flex w-full'
+          // style={{
+          //   border: '1px solid black',
+          // }}
+        >
           {/* <div className='relative flex my-14 w-[390px] h-[206px] md:w-[560px] md:h-[300px]'> */}
           {/* <div
             ref={quotesDivRef}
@@ -38,9 +42,9 @@ const ClientReviewCard = ({ color }: ClientReviewCardProps) => {
             ref={quotesDivRef}
             // className='inline-flex items-center'
             className='absolute top-[20px] left-[20px]'
-            style={{
-              border: '1px solid yellow',
-            }}
+            // style={{
+            //   border: '1px solid yellow',
+            // }}
           >
             <QuotesReview color={color} />
           </div>
@@ -49,7 +53,7 @@ const ClientReviewCard = ({ color }: ClientReviewCardProps) => {
             // className='flex flex-col w-[87%] md:w-[91.5%] items-center justify-center shrink-0 relative'
             className='flex flex-col w-full md:w-full items-center justify-center shrink-0 relative'
             // style={{ border: '1px solid green', paddingRight: 'var(--padding-right)' }}
-            style={{ border: '1px solid green' }}
+            // style={{ border: '1px solid green' }}
           >
             <div>
               <Typography
@@ -58,12 +62,12 @@ const ClientReviewCard = ({ color }: ClientReviewCardProps) => {
                 // className='mx-auto mt-[38px] mb-[12px] md:mt-[47px] md:mb-[14px]'
                 className='mx-auto mt-[42px] mb-[12px] md:mt-[55px] md:mb-[14px]'
               >
-                MARIA JOHN
+                {name}
               </Typography>
             </div>
             <div
               className='flex flex-row items-center justify-center gap-[12px] md:gap-[10px]'
-              style={{ border: '1px solid blue' }}
+              // style={{ border: '1px solid blue' }}
             >
               <a href='https://www.instagram.com' target='_blank'>
                 <img
@@ -91,9 +95,7 @@ const ClientReviewCard = ({ color }: ClientReviewCardProps) => {
         </div>
         <div className='mt-[16px] mb-[24px] ml-[43px] mr-[29px] md:mt-[28px] md:mb-[44px] md:mx-[59px]'>
           <Typography variant='body1' component='div' align='center'>
-            Indulge in pure bliss with the delectable creations of your baking connection. From
-            heavenly pastries to impeccable bread, their bakery items are a testament to dedication
-            and passion that will elevate your taste buds to new heights.
+            {review}
           </Typography>
         </div>
       </CardContent>
@@ -109,13 +111,13 @@ const ClientReviewCard = ({ color }: ClientReviewCardProps) => {
     // >
     <div
       className='relative w-[407px] h-[256px] md:w-[585px] md:h-[369px]'
-      style={{
-        border: '1px solid orange',
-      }}
+      // style={{
+      //   border: '1px solid orange',
+      // }}
     >
       <Avatar
-        alt='Maria Jhon'
-        src='/Images/avatarReview.png'
+        alt={name}
+        src={image}
         sx={{
           position: 'absolute',
           // top: '19%',

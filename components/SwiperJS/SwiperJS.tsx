@@ -13,6 +13,7 @@ const SwiperJS = () => {
   return (
     <Swiper
       modules={[Pagination]}
+      rewind={true}
       pagination={{ clickable: true }}
       slidesPerView={1}
       onSlideChange={() => console.log('slide change')}

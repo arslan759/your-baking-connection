@@ -140,3 +140,34 @@ export const accordionData = [
     content: `This is easy, you just need to add a bank account to your profile and specify the amount you intend to withdraw. We will send you a notification to verify by email or text message before wiring the proceeds to your account. The whole process takes about two(2) days.`,
   },
 ]
+
+export const ReviewCardsData = [
+  {
+    id: 1,
+    name: 'John Doe',
+    image: 'https://picsum.photos/id/1/300/300',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
+  },
+  {
+    id: 2,
+    name: 'Sara Austin',
+    image: 'https://picsum.photos/id/2/300/300',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
+  },
+  {
+    id: 3,
+    name: 'robert kent',
+    image: 'https://picsum.photos/id/3/300/300',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
+  },
+  {
+    id: 4,
+    name: 'Suzy Clark',
+    image: 'https://picsum.photos/id/4/300/300',
+    content:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
+  },
+]
