@@ -7,7 +7,13 @@ import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
 import PasswordField from '../PasswordField/PasswordField'
 
+import useLoginUser from '../../hooks/Authentication/Login/useLoginUser'
+import { withApollo } from 'lib/apollo/withApollo'
+
 const SigninForm = () => {
+  //login mutation
+  const [loginUser, loadingLoginUser] = useLoginUser()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [checked, setChecked] = React.useState(false)
@@ -35,7 +41,7 @@ const SigninForm = () => {
   }
 
   // handle submit function for form
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // Checks if email is valid
@@ -66,6 +72,26 @@ const SigninForm = () => {
     console.log('email is ', email)
     console.log('password is ', password)
     console.log('remember me is ', checked)
+
+    try {
+      const res = await loginUser({
+        variables: {
+          user: {
+            email,
+            password,
+          },
+        },
+      })
+      const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
+      const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
+
+      if (accessToken) {
+        localStorage.setItem('accounts:accessToken', accessToken)
+        localStorage.setItem('accounts:refreshToken', refreshToken)
+      }
+    } catch (err) {
+      console.log(err)
+    }
 
     // Reset form fields
     setEmail('')
@@ -223,4 +249,4 @@ const SigninForm = () => {
   )
 }
 
-export default SigninForm
+export default withApollo()(SigninForm)

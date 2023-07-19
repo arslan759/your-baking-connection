@@ -32,6 +32,6 @@
     ".next/types/**/*.ts",
     "lib/apollo/withApollo.tsx",
     "svgs/*.js"
-  ],
+, "hooks/Authentication/SignUp/useCreateUserOtp.js"  ],
   "exclude": ["node_modules"]
 }
