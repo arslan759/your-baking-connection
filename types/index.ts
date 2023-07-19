@@ -90,6 +90,10 @@ export interface SignUpFormProps {
   openOtp: () => void
 }
 
+export interface SignUpFormProps {
+  openOtp: () => void
+}
+
 export interface OTPFormProps {
   closeOtp: () => void
   type: string
