@@ -13,7 +13,7 @@ const HomePage = () => {
     <div>
       <div className='relative'>
         <div className='absolute top-0 z-10'>
-          <div className='w-[99vw] relative'>
+          <div className='w-[100vw] relative'>
             <Navbar />
           </div>
         </div>
@@ -32,7 +32,9 @@ const HomePage = () => {
       <OurMission />
 
       {/* Clients Say Section */}
+      {/* <div className={`w-full ${styles.ClientsSaySection}`}> */}
       <ClientsSay />
+      {/* </div> */}
 
       {/* FAQ's Section */}
       <FAQs />

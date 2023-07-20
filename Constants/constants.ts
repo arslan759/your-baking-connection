@@ -154,14 +154,14 @@ export const ReviewCardsData = [
     name: 'Sara Austin',
     image: 'https://picsum.photos/id/2/300/300',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod,',
   },
   {
     id: 3,
     name: 'robert kent',
     image: 'https://picsum.photos/id/3/300/300',
     content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
   {
     id: 4,

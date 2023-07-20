@@ -5,6 +5,7 @@ export interface ClientReviewCardProps {
   name: string
   review: string
   image: string
+  index: number
 }
 
 export interface FooterLinksProps {

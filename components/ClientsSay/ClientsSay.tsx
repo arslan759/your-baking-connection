@@ -1,8 +1,7 @@
 import React from 'react'
 import Sectionheading from '../SectionHeading/Sectionheading'
 import SectionSubHeading from '../SectionSubHeading/SectionSubHeading'
-import ClientReviewCard from '../ClientReviews/ClientReviewCard'
-import ReviewsCarousel from '../ReviewsCarousel/ReviewsCarousel'
+import ClientReviewSwiper from '../ClientReviewSwiper/ClientReviewSwiper'
 
 const ClientsSay = () => {
   return (
@@ -14,14 +13,8 @@ const ClientsSay = () => {
           subHeading={`"Discover what our valued customers have to say about their delightful experiences “with your baking connection”. Read their heartfelt testimonials and let their words of satisfaction and joy inspire your own indulgence in our heavenly baked treats. Join the chorus of happy customers and experience the magic of our bakery today!"`}
         />
       </div>
-
-      <div
-        className='w-[90vw] flex justify-center mt-[129px]'
-        // style={{
-        //   border: '1px solid red',
-        // }}
-      >
-        <ReviewsCarousel />
+      <div className='review-swiper w-[95%] mt-[20px] lg:mt-[68px]'>
+        <ClientReviewSwiper />
       </div>
     </section>
   )

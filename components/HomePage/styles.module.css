@@ -2,3 +2,21 @@
   background: url('/Images/sprinkles.png') center / cover no-repeat;
   /* border: 2px solid red; */
 }
+
+.ClientsSaySection {
+  /* background: url('/Images/sprinkles.png') center / cover no-repeat; */
+  position: relative;
+}
+
+.ClientsSaySection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  background: url('/Images/sprinkles.png');
+  background-size: fill;
+  background-repeat: no-repeat;
+  background-position: center;
+}
