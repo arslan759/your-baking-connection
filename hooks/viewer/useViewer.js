@@ -2,6 +2,10 @@ import { useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import useStores from 'hooks/useStores'
 import viewerQuery from './viewer.gql'
+import { useEffect } from 'react'
+import { useQuery } from '@apollo/client'
+import useStores from 'hooks/useStores'
+import viewerQuery from './viewer.gql'
 
 /**
  * Gets current viewer's data
@@ -13,9 +17,15 @@ export default function useViewer() {
   const { account, setAccount } = authStore
   const authToken =
     typeof window !== 'undefined' ? window.localStorage.getItem('accounts:accessToken') : ''
+  const { authStore } = useStores()
+  const { account, setAccount } = authStore
+  const authToken =
+    typeof window !== 'undefined' ? window.localStorage.getItem('accounts:accessToken') : ''
 
   const { loading, data, refetch } = useQuery(viewerQuery)
+  const { loading, data, refetch } = useQuery(viewerQuery)
 
+  const viewer = data?.viewer
   const viewer = data?.viewer
   useEffect(() => {
     refetch()
@@ -24,9 +34,13 @@ export default function useViewer() {
   useEffect(() => {
     if (loading) {
       return
+      return
     }
     setAccount(viewer)
   }, [viewer])
+    setAccount(viewer)
+  }, [viewer])
 
+  return [account, loading, refetch]
   return [account, loading, refetch]
 }

@@ -1,5 +1,6 @@
 import { Button, FormControl, FormHelperText, Typography } from '@mui/material'
 import { withApollo } from 'lib/apollo/withApollo'
+import { withApollo } from 'lib/apollo/withApollo'
 import Checkbox from '@mui/material/Checkbox'
 import Image from 'next/image'
 import React, { useState } from 'react'
@@ -8,6 +9,15 @@ import { PrimaryBtn } from '../Buttons'
 import { checkPassword, validateEmail } from 'helpers/validations'
 import DropdownField from '../DropdownField/DropdownField'
 import { cities, states } from 'Constants/constants'
+import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
+import { useRouter } from 'next/navigation'
+import { SignUpFormProps } from 'types'
+
+const SignupForm = ({ openOtp }: SignUpFormProps) => {
+  //sign up mutation hook
+  const [signUp, loadingSignUp] = useCreateUserWithOtp()
+
+  const router = useRouter()
 import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
 import { useRouter } from 'next/navigation'
 import { SignUpFormProps } from 'types'
