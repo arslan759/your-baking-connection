@@ -5,15 +5,22 @@ import { PrimaryBtn } from '../Buttons'
 import OtpInput from 'react-otp-input'
 import styles from './styles.module.css'
 import { OTPFormProps } from 'types'
+import useOtpUser from '../../hooks/Authentication/Otp/useOtpUser'
+import { withApollo } from 'lib/apollo/withApollo'
+import { useRouter } from 'next/navigation'
 
 const OTPForm = ({ closeOtp }: OTPFormProps) => {
   const [otp, setOtp] = useState('')
 
+  const [verifyOtp, lodaingVerifyOtp] = useOtpUser()
+
+  const router = useRouter()
   // Error states
   const [otpError, setOtpError] = useState('')
 
   // handle submit function for form
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const userId = localStorage.getItem('userId')
     e.preventDefault()
 
     // Checks if email is empty or Less than 4 characters
@@ -23,8 +30,21 @@ const OTPForm = ({ closeOtp }: OTPFormProps) => {
       // Stops the execution of the function
       return
     }
-    // Logs form data
-    console.log('otp is ', otp)
+    try {
+      const res = await verifyOtp({
+        variables: {
+          user: {
+            userId,
+            otp: +otp,
+          },
+        },
+      })
+      if (res?.data?.verifyOTPSignUp) {
+        router.push('/signin')
+      }
+    } catch (err) {
+      return err
+    }
 
     // Reset form fields
     setOtp('')
@@ -125,4 +145,4 @@ const OTPForm = ({ closeOtp }: OTPFormProps) => {
   )
 }
 
-export default OTPForm
+export default withApollo()(OTPForm)
