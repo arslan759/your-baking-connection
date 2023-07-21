@@ -3,27 +3,7 @@ import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
 import PasswordField from '../PasswordField/PasswordField'
-import { Typography } from '@mui/material'
-import Checkbox from '@mui/material/Checkbox'
-import Image from 'next/image'
-import useLoginUser from '../../hooks/Authentication/Login/useLoginUser'
-import { withApollo } from 'lib/apollo/withApollo'
-import { useRouter } from 'next/navigation'
-import withAuth from '../../hocs/withAuth'
 
-import useViewer from 'hooks/viewer/useViewer'
-import ErrorMessage from '../ErrorMessage/ErrorMessage'
-
-import useLoginUser from '../../hooks/Authentication/Login/useLoginUser'
-import { withApollo } from 'lib/apollo/withApollo'
-import { useRouter } from 'next/navigation'
-import withAuth from '../../hocs/withAuth'
-
-import useViewer from 'hooks/viewer/useViewer'
-import ErrorMessage from '../ErrorMessage/ErrorMessage'
-import { Typography } from '@mui/material'
-import Checkbox from '@mui/material/Checkbox'
-import Image from 'next/image'
 import useLoginUser from '../../hooks/Authentication/Login/useLoginUser'
 import { withApollo } from 'lib/apollo/withApollo'
 import { useRouter } from 'next/navigation'
@@ -116,7 +96,7 @@ const SigninForm = () => {
         localStorage.setItem('accounts:refreshToken', refreshToken)
         router.push('/')
       }
-    } catch (err: any) {
+    } catch (err) {
       console.log(err)
 
       setGenError(err?.message)
