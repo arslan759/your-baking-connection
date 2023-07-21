@@ -36,8 +36,9 @@ build: # This job runs in the build stage, which runs first.
     - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
   script:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
-    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev && git clone https://ahmed_rohan:r~uQ?M9ks,ZP@gitlab.com/Codistan/yourbakingconnection/user-panel.git"
-    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev && npm install --legacy-peer-deps"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev && git clone https://gitlab+deploy-token-2272113:2xea47Mx1Brp3Tz-eaw_@gitlab.com/Codistan/yourbakingconnection/user-panel.git"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev/user-panel && git checkout developement"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev/user-panel && npm install --legacy-peer-deps"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev && npm run build"
 
 deploy:
@@ -52,6 +53,6 @@ deploy:
   script:
     #    - pwd
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
-    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev && npm start"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-dev/user-panel && npm start"
 #    scp -o StrictHostKeyChecking=no -r /home/ubuntu/baking-connection-dev/user-panel ubuntu@35.84.52.137:/home/ubuntu/development
 
