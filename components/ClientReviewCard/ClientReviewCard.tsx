@@ -71,7 +71,7 @@ const ClientReviewCard = ({ color, name, image, index, review }: ClientReviewCar
             sx={{
               textAlign: 'center',
               fontSize: '18px',
-              '@media (max-width: 768px)': {
+              '@media (max-width: 767px)': {
                 fontSize: '12px',
               },
               fontWeight: '400',

@@ -29,15 +29,19 @@ const HomePage = () => {
       <OurGallery />
 
       {/* Our Mission Section */}
-      <OurMission />
+      <div className={`w-full ${styles.ourMissionSection}`}>
+        <OurMission />
+      </div>
 
       {/* Clients Say Section */}
-      {/* <div className={`w-full ${styles.ClientsSaySection}`}> */}
-      <ClientsSay />
-      {/* </div> */}
+      <div className={`w-full ${styles.ClientsSaySection}`}>
+        <ClientsSay />
+      </div>
 
       {/* FAQ's Section */}
-      <FAQs />
+      <div className={`w-full ${styles.FAQsSection}`}>
+        <FAQs />
+      </div>
 
       <StayInTouchForm />
     </div>
