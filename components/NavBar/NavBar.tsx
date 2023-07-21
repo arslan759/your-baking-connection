@@ -40,8 +40,8 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
   ]
 
   const handleLogOut = () => {
-    router.replace('/signin')
     localStorage.clear()
+    router.push('/signin')
   }
   useEffect(() => {
     console.log('viewre in navbar', viewer)
@@ -127,7 +127,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
                 >
                   <p style={{ color: 'black', fontWeight: 700, marginRight: '10px' }}>
                     {`${viewer?.firstName} ${viewer?.lastName}`}
-                  </p>{' '}
+                  </p>
                   <PrimaryBtn text={'Logout'} handleClick={handleLogOut} />
                 </Box>
               )}
