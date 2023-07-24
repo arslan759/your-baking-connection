@@ -2,6 +2,7 @@ import React from 'react'
 import Sectionheading from '../SectionHeading/Sectionheading'
 import SectionSubHeading from '../SectionSubHeading/SectionSubHeading'
 import styles from './styles.module.css'
+import CustomAccordion from '../CustomAccordion/CustomAccordion'
 
 const FAQs = () => {
   return (
@@ -12,7 +13,11 @@ const FAQs = () => {
         <SectionSubHeading subHeading={`Frequently asked questions`} />
       </div>
 
-      <div className={`${styles.background} `}></div>
+      <div className={`${styles.maskedDiv} flex items-start justify-end  `}>
+        <div className='w-[58%]  h-[auto] md:h-[auto] flex items-start justify-center'>
+          <CustomAccordion />
+        </div>
+      </div>
     </section>
   )
 }

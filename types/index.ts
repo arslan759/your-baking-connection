@@ -2,6 +2,10 @@ import { MouseEventHandler } from 'react'
 
 export interface ClientReviewCardProps {
   color: string
+  name: string
+  review: string
+  image: string
+  index: number
 }
 
 export interface FooterLinksProps {

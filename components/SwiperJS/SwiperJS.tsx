@@ -13,10 +13,12 @@ const SwiperJS = () => {
   return (
     <Swiper
       modules={[Pagination]}
+      rewind={true}
       pagination={{ clickable: true }}
       slidesPerView={1}
       onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
+      className='background-swiper'
     >
       {HomePageBackgrounds.map((background, index) => {
         return (
@@ -28,9 +30,9 @@ const SwiperJS = () => {
                 backgroundPositionX: 'center',
                 backgroundRepeat: 'no-repeat',
               }}
-              className={`w-full h-[70vh] md:h-[80vh] flex justify-center md:justify-start pb-[83px] md:pb-[112px]`}
+              className={`w-full h-[630px] md:h-[730px] flex justify-center md:justify-start pb-[83px] md:pb-[112px]`}
             >
-              <div className='w-[90%] md:w-[55%] mt-[90px] md:mt-[108px] md:ml-[60px] flex flex-col justify-start items-center md:items-start'>
+              <div className='w-[90%] md:w-[55%] h-[autox] md:mt-[108px] md:ml-[60px] flex flex-col justify-center items-center md:items-start'>
                 <Typography
                   sx={{
                     fontSize: '96px',
