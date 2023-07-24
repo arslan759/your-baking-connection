@@ -72,10 +72,20 @@ export interface DropdownProps {
 
 export interface ForgetPasswordFormProps {
   openOtp: () => void
+  email: string
+  setEmail: (email: string) => void
+  userId: string
+  setUserId: (userId: string) => void
+}
+
+export interface SignUpFormProps {
+  openOtp: () => void
 }
 
 export interface OTPFormProps {
   closeOtp: () => void
+  type: string
+  email: string
 }
 
 export interface SectionheadingProps {

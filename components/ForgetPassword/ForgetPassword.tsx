@@ -7,8 +7,14 @@ import OTPForm from '../OTPForm/OTPForm'
 export default function ForgetPassword() {
   const [isOtp, setIsOtp] = useState(false)
 
+  const [email, setEmail] = useState<string>('')
+
   const handleOtpOpen = () => {
     setIsOtp(true)
+  }
+
+  const handleChangeEmail = (email: string) => {
+    setEmail(email)
   }
 
   const handleOtpClose = () => {
@@ -20,9 +26,9 @@ export default function ForgetPassword() {
     <div className={`${styles.forgetpassword} pb-[180px] md:h-[1072px] md:bg-cover md:bg-center`}>
       <Navbar itemsColor='white' />
       {isOtp ? (
-        <OTPForm closeOtp={handleOtpClose} />
+        <OTPForm closeOtp={handleOtpClose} type={'forgotPassword'} email={email} />
       ) : (
-        <ForgotPasswordForm openOtp={handleOtpOpen} />
+        <ForgotPasswordForm openOtp={handleOtpOpen} setEmail={handleChangeEmail} email={email} />
       )}
     </div>
   )

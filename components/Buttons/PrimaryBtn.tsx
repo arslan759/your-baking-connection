@@ -18,7 +18,7 @@ const PrimaryBtn = ({ handleClick, type = 'button', text }: PrimaryBtnProps) => 
       }}
       onClick={handleClick}
     >
-      <Typography className='text-black group-hover:text-white'>{text}</Typography>
+      {<Typography className='text-black group-hover:text-white'>{text}</Typography>}
     </Button>
   )
 }

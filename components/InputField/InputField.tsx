@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react'
 import { TextField, Typography } from '@mui/material'
 import { InputFieldProps } from 'types'
-import { useEffect, useState } from 'react'
 
 const InputField = ({
   type,
