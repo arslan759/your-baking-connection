@@ -447,4 +447,4 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   )
 }
 
-export default withApollo()(SignupForm)
+export default withApollo()(withAuth(SignupForm))
