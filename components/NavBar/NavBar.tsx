@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Box, Menu, MenuItem, styled, Grid, Toolbar, Typography } from '@mui/material'
-import { usePathname, useRouter, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import styles from './styles.module.css'
