@@ -20,6 +20,8 @@ export default function useViewer() {
   useEffect(() => {
     refetch()
   }, [authToken])
+    refetch()
+  }, [authToken])
 
   useEffect(() => {
     if (loading) {

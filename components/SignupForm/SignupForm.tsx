@@ -11,7 +11,15 @@ import { cities, states } from 'Constants/constants'
 import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
 import { useRouter } from 'next/navigation'
 import { SignUpFormProps } from 'types'
-import withAuth from 'hocs/withAuth'
+
+const SignupForm = ({ openOtp }: SignUpFormProps) => {
+  //sign up mutation hook
+  const [signUp, loadingSignUp] = useCreateUserWithOtp()
+
+  const router = useRouter()
+import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
+import { useRouter } from 'next/navigation'
+import { SignUpFormProps } from 'types'
 
 const SignupForm = ({ openOtp }: SignUpFormProps) => {
   //sign up mutation hook
