@@ -6,6 +6,7 @@ import Link from 'next/link'
 import useViewer from 'hooks/viewer/useViewer'
 import { useEffect } from 'react'
 import HomePage from '@/components/HomePage'
+import withAuth from 'hocs/withAuth'
 
 const Home = () => {
   const [account, loading, refetch] = useViewer()
@@ -24,4 +25,4 @@ const Home = () => {
   )
 }
 
-export default withApollo()(Home)
+export default withApollo()(withAuth(Home))
