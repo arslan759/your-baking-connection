@@ -8,12 +8,12 @@ import styles from './styles.module.css'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import { NavBarProps } from 'types'
 
-const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarProps) => {
+const ProfileNavbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarProps) => {
   const [open, SetOpen] = useState(false)
   const router = usePathname()
   const StyledToolbar = styled(Toolbar)({
-    // display: "flex",
-    justifyContent: 'space-between',
+    // display: 'flex',
+    // justifyContent: 'space-between',
     height: '88px',
   })
   const SocialBox = styled(Box)({
@@ -36,8 +36,9 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
     <AppBar
       sx={{
         background: 'transparent',
-        // paddingLeft: { xs: '1px', sm: '25px' },
-        // paddingRight: { xs: '1px', md: '30px' },
+        display: 'flex',
+        justifyContent: 'center',
+        width: 'fit-content',
       }}
       position={'static'}
       elevation={0}
@@ -82,7 +83,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
 
         <SearchBox sx={{ display: 'flex', alignItems: 'center' }}>
           <Grid>
-            <Box
+            {/* <Box
               sx={{
                 alignItems: 'center',
               }}
@@ -98,7 +99,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
                   <SecondaryBtn handleClick={() => {}} text='sign in' color={`${itemsColor}`} />
                 </a>
               </div>
-            </Box>
+            </Box> */}
           </Grid>
           <div className={styles.navbarMenu}>
             <ToggleNavBar navbarIconColor={itemsColor} />
@@ -109,4 +110,4 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
   )
 }
 
-export default Navbar
+export default ProfileNavbar

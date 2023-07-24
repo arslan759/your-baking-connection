@@ -89,3 +89,12 @@ export interface SectionheadingProps {
 export interface SectionSubHeadingProps {
   subHeading: string
 }
+
+export interface SidebarProps {
+  activeTab: number
+  setActiveTab: (number: number) => void
+}
+
+export interface TabsPanelProps {
+  activeTab: number
+}

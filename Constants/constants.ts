@@ -171,3 +171,36 @@ export const ReviewCardsData = [
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
 ]
+
+export const SidebarTabs = [
+  {
+    id: 1,
+    title: 'My Profile',
+    icon: '/Images/user.svg',
+  },
+  {
+    id: 2,
+    title: 'Payment details',
+    icon: '/Images/payment-details.svg',
+  },
+  {
+    id: 3,
+    title: 'purchase history',
+    icon: '/Images/history.svg',
+  },
+  {
+    id: 4,
+    title: 'settings',
+    icon: '/Images/setting.svg',
+  },
+  {
+    id: 5,
+    title: 'help',
+    icon: '/Images/help.svg',
+  },
+  {
+    id: 6,
+    title: 'logout',
+    icon: '/Images/logout.svg',
+  },
+]
