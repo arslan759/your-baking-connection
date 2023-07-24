@@ -206,11 +206,13 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       const result = await signUp({
         variables: {
           user: { username: `u${userRand.toString()}`, email, password, type: 'email' },
+          profile: { firstName, lastName, state, city },
         },
       })
       let userId = result?.data?.createUserWithOtp?.userId
       if (userId) {
         localStorage.setItem('userId', userId)
+
         openOtp()
       }
     } catch (err) {
@@ -447,4 +449,4 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   )
 }
 
-export default withApollo()(SignupForm)
+export default withApollo()(withAuth(SignupForm))

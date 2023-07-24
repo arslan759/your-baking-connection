@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Box, Menu, MenuItem, styled, Grid, Toolbar, Typography } from '@mui/material'
 import { usePathname, useRouter } from 'next/navigation'
@@ -40,8 +41,8 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
   ]
 
   const handleLogOut = () => {
+    router.replace('/signin')
     localStorage.clear()
-    router.push('/signin')
   }
   useEffect(() => {
     console.log('viewre in navbar', viewer)
