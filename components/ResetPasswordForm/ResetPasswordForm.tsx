@@ -5,9 +5,20 @@ import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { checkPassword } from 'helpers/validations'
 
-const ResetPasswordForm = () => {
+import useResetPasswordOtpVerify from '../../hooks/Authentication/ResetPassword/useResetPasswordOtpVerify'
+import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
+import { useRouter } from 'next/navigation'
+
+interface ResetPasswordProps {
+  otp: number // Change `any` to the appropriate type for `otp`
+}
+
+const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
+  const router = useRouter()
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [resetPassword, loadingResetPassword] = useResetPasswordOtpVerify()
 
   // Error states
   const [passwordError, setPasswordError] = useState('')
@@ -25,7 +36,7 @@ const ResetPasswordForm = () => {
   }
 
   // handle submit function for form
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // Checks if password and confirm password match
@@ -51,8 +62,27 @@ const ResetPasswordForm = () => {
       return
     }
 
+    try {
+      const res = await resetPassword({
+        variables: {
+          user: {
+            userId: localStorage.getItem('userId'),
+            otp: otp,
+            password: password,
+          },
+        },
+      })
+      if (res?.data?.resetPasswordOtpVerify) {
+        router.push('/signin')
+      }
+
+      console.log('reset pass response is ', res)
+    } catch (err) {
+      console.log('err', err)
+    }
+
     // Logs form data
-    console.log('passowrd is ', password)
+    console.log('password is ', password)
     console.log('confirm password is ', confirmPassword)
 
     // Reset form fields
@@ -144,4 +174,4 @@ const ResetPasswordForm = () => {
   )
 }
 
-export default ResetPasswordForm
+export default withApollo()(withAuth(ResetPasswordForm))
