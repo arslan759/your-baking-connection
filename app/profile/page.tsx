@@ -11,11 +11,6 @@ import { useState } from 'react'
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState(1)
 
-  //   Define a function to handle tab change
-  //   const handleTabChange = (event:, newValue:) => {
-  //     setActiveTab(newValue)
-  //   }
-
   return (
     <>
       {/* Mobile View Navigation*/}

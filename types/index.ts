@@ -44,6 +44,8 @@ export interface InputFieldProps {
   error?: boolean
   errorText?: string
   label?: string
+  multiline?: boolean
+  rows?: number
   required: boolean
   placeholder?: string
   value: string

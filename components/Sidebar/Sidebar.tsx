@@ -5,7 +5,7 @@ import { SidebarProps } from 'types'
 
 const Sidebar = ({ setActiveTab, activeTab }: SidebarProps) => {
   return (
-    <div className='w-[300px] h-[100vh] bg-[#FCFCFC] flex flex-col'>
+    <div className='w-[300px] h-[860px] bg-[#FCFCFC] flex flex-col'>
       <div
         className='h-[89px] flex justify-center items-center'
         style={{
