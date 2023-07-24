@@ -127,7 +127,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
                 >
                   <p style={{ color: 'black', fontWeight: 700, marginRight: '10px' }}>
                     {`${viewer?.firstName} ${viewer?.lastName}`}
-                  </p>
+                  </p>{' '}
                   <PrimaryBtn text={'Logout'} handleClick={handleLogOut} />
                 </Box>
               )}

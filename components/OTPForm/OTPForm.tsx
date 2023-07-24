@@ -13,7 +13,7 @@ import useForgotPasswordUser from '../../hooks/Authentication/ForgotPassword/use
 const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
   const [otp, setOtp] = useState('')
 
-  const [verifyOtp, lodaingVerifyOtp] = useOtpUser()
+  const [verifyOtp, loadingVerifyOtp] = useOtpUser()
 
   const router = useRouter()
   // Error states
