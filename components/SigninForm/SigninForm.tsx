@@ -81,10 +81,17 @@ const SigninForm = () => {
       return
     }
 
-    // Logs form data
-    console.log('email is ', email)
-    console.log('password is ', password)
-    console.log('remember me is ', checked)
+    try {
+      const res = await loginUser({
+        variables: {
+          user: {
+            email,
+            password,
+          },
+        },
+      })
+      const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
+      const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
 
     try {
       const res = await loginUser({
