@@ -36,7 +36,7 @@ const ProfileNavigationMobile = ({ activeTab, handleChange }: ProfileNavigationM
         },
 
         '& .Mui-selected': {
-          color: '#7DDEC1',
+          color: '#7DDEC1 !important',
           fontSize: '14px',
           fontWeight: '600',
           lineHeight: 'normal',
