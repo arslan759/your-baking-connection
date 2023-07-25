@@ -51,7 +51,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
     <AppBar
       sx={{
         background: 'transparent',
-        paddingLeft: { xs: '1px', sm: '25px' },
+        // paddingLeft: { xs: '1px', sm: '25px' },
         // paddingRight: { xs: '1px', md: '30px' },
       }}
       position={'static'}

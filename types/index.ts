@@ -44,6 +44,8 @@ export interface InputFieldProps {
   error?: boolean
   errorText?: string
   label?: string
+  multiline?: boolean
+  rows?: number
   required: boolean
   placeholder?: string
   value: string
@@ -102,4 +104,18 @@ export interface SectionheadingProps {
 
 export interface SectionSubHeadingProps {
   subHeading: string
+}
+
+export interface SidebarProps {
+  activeTab: number
+  setActiveTab: (number: number) => void
+}
+
+export interface TabsPanelProps {
+  activeTab: number
+}
+
+export interface ProfileNavigationMobileProps {
+  activeTab: number
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void
 }

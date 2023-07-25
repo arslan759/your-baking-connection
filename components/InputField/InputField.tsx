@@ -10,6 +10,8 @@ const InputField = ({
   placeholder,
   value,
   error,
+  multiline,
+  rows,
   onChange,
   required,
   errorText,
@@ -56,7 +58,7 @@ const InputField = ({
         sx={{
           '& .MuiOutlinedInput-root': {
             color: inputColor,
-            height: '35px',
+            height: multiline ? 'auto' : '35px',
             padding: '5px',
             borderRadius: '5px',
             fontSize: '12px',
@@ -75,6 +77,8 @@ const InputField = ({
         placeholder={placeholder}
         type={type}
         name={name}
+        multiline={multiline}
+        rows={rows}
         error={errorState}
         id='outlined-error-helper-text'
         defaultValue={value}

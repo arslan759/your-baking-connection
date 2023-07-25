@@ -93,16 +93,27 @@ const SigninForm = () => {
       const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
       const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
 
+    try {
+      const res = await loginUser({
+        variables: {
+          user: {
+            email,
+            password,
+          },
+        },
+      })
+      const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
+      const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
+
       if (accessToken) {
         localStorage.setItem('accounts:accessToken', accessToken)
         localStorage.setItem('accounts:refreshToken', refreshToken)
-        router.push('/')
       }
     } catch (err: any) {
       console.log(err)
-
-      setGenError(err?.message)
     }
+
+    setGenError(err?.message)
   }
 
   const handleChangeGenError = (value: String) => {
