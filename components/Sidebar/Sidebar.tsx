@@ -1,11 +1,11 @@
 import { Typography } from '@mui/material'
-import { SidebarTabs } from 'Constants/constants'
+import { profileNavigation } from 'Constants/constants'
 import React from 'react'
 import { SidebarProps } from 'types'
 
 const Sidebar = ({ setActiveTab, activeTab }: SidebarProps) => {
   return (
-    <div className='w-[300px] h-[860px] bg-[#FCFCFC] flex flex-col'>
+    <div className='w-[330px] min-h-[860px] bg-[#FCFCFC] flex flex-col'>
       <div
         className='h-[89px] flex justify-center items-center'
         style={{
@@ -27,14 +27,14 @@ const Sidebar = ({ setActiveTab, activeTab }: SidebarProps) => {
       </div>
 
       <div className=''>
-        {SidebarTabs.map((item, index) => (
+        {profileNavigation.map((item, index) => (
           <div
             key={index}
             className='w-[100%] h-[60px] flex justify-center items-center py-[18px]  cursor-pointer'
             style={{
-              backgroundColor: activeTab === item.id ? '#7DDEC1' : '',
+              backgroundColor: activeTab === index ? '#7DDEC1' : '',
             }}
-            onClick={() => setActiveTab(item.id)}
+            onClick={() => setActiveTab(index)}
           >
             <div className='w-[80%] flex gap-[24px]'>
               <div className=''>

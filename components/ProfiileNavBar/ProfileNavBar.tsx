@@ -46,7 +46,7 @@ const ProfileNavbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: Na
       <StyledToolbar>
         <Box
           sx={{
-            gap: { md: '16px', lg: '36px' },
+            gap: '36px',
             alignItems: 'center',
           }}
           className={styles.navbar}

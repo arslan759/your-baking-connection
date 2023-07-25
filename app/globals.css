@@ -15,12 +15,7 @@
 @font-face {
   font-family: 'Open Sans';
   src: local('Open_Sans'),
-    url(../public/fonts/Open_Sans/static/OpenSans-Regular.ttf) format('truetype');
-}
-
-@font-face {
-  font-family: 'Open_Sans_Bold';
-  src: local('Open_Sans'),
+    url(../public/fonts/Open_Sans/static/OpenSans-Regular.ttf) format('truetype'),
     url(../public/fonts/Open_Sans/static/OpenSans-ExtraBold.ttf) format('truetype');
 }
 
@@ -43,7 +38,17 @@
 @font-face {
   font-family: 'Josefin Sans';
   src: local('Josefin_Sans'),
-    url(../public/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf) format('truetype');
+    url(../public/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf) format('truetype'),
+    url(../public/fonts/Josefin_Sans/static/JosefinSans-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url(../public/fonts/Orbitron/Orbitron-VariableFont_wght.ttf) format('truetype'),
+    url(../public/fonts/Orbitron/static/Orbitron-Medium.ttf) format('truetype');
+  /* Add other font formats if necessary, like .ttf or .otf */
+  /* font-weight: normal;
+  font-style: normal; */
 }
 
 * {

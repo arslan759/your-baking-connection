@@ -5,12 +5,12 @@ import MyProfile from '../MyProfile/MyProfile'
 const TabsPanel = ({ activeTab }: TabsPanelProps) => {
   return (
     <div>
-      {activeTab == 1 && <MyProfile />}
-      {activeTab == 2 && <div>Payment Details</div>}
-      {activeTab == 3 && <div>Purchase History</div>}
-      {activeTab == 4 && <div>Settings</div>}
-      {activeTab == 5 && <div>Help</div>}
-      {activeTab == 6 && <div>Logout</div>}
+      {activeTab == 0 && <MyProfile />}
+      {activeTab == 1 && <div>Payment Details</div>}
+      {activeTab == 2 && <div>Purchase History</div>}
+      {activeTab == 3 && <div>Settings</div>}
+      {activeTab == 4 && <div>Help</div>}
+      {activeTab == 5 && <div>Logout</div>}
     </div>
   )
 }

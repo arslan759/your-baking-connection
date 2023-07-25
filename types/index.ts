@@ -100,3 +100,8 @@ export interface SidebarProps {
 export interface TabsPanelProps {
   activeTab: number
 }
+
+export interface ProfileNavigationMobileProps {
+  activeTab: number
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void
+}

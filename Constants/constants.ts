@@ -172,7 +172,7 @@ export const ReviewCardsData = [
   },
 ]
 
-export const SidebarTabs = [
+export const profileNavigation = [
   {
     id: 1,
     title: 'My Profile',

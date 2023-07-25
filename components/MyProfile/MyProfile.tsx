@@ -1,14 +1,15 @@
-import { Button, FormControl, FormHelperText, Typography } from '@mui/material'
-import Checkbox from '@mui/material/Checkbox'
-import Image from 'next/image'
-import React, { useState } from 'react'
+import { Typography } from '@mui/material'
+
+import React, { useRef, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
-import { checkPassword, validateEmail } from 'helpers/validations'
+import { validateEmail } from 'helpers/validations'
 import DropdownField from '../DropdownField/DropdownField'
 import { cities, states } from 'Constants/constants'
 
 const MyProfile = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -16,6 +17,7 @@ const MyProfile = () => {
   const [state, setState] = useState<string | null>('')
   const [city, setCity] = useState<string | null>('')
   const [address, setAddress] = useState('')
+  const [picture, setPicture] = useState('')
 
   // Error states
   const [firstNameError, setFirstNameError] = useState('')
@@ -25,6 +27,7 @@ const MyProfile = () => {
   const [stateError, setStateError] = useState('')
   const [cityError, setCityError] = useState('')
   const [addressError, setAddressError] = useState('')
+  const [pictureError, setPictureError] = useState('')
 
   // handleChange function for input fields
   const handleChange = (name: string, value: string) => {
@@ -56,6 +59,36 @@ const MyProfile = () => {
   const handleCityChange = (state: string) => {
     setCity(state)
     // setCityError(state ? '' : 'City is required')
+  }
+
+  // handleClick function for file upload
+
+  const handleClick = () => {
+    // Trigger the click event of the file input
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
+    }
+  }
+
+  // handlePictureChange function for picture upload
+  const handlePictureChange = (e: any) => {
+    const file = e.target.files[0]
+
+    console.log('files are ', e.target.files)
+    console.log('picture is ', file?.name)
+
+    if (file.size > 1024 * 1024 * 5) {
+      setPictureError('Picture size should be less than 5mb')
+      return
+    }
+
+    if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+      setPictureError('Invalid file type')
+      return
+    }
+
+    setPictureError('')
+    setPicture(file.name)
   }
 
   // handleSubmit function for form submission
@@ -100,7 +133,7 @@ const MyProfile = () => {
   }
 
   return (
-    <div className='w-full flex flex-col justify-center items-center h-[100%] mt-[48px] md:mt-[62px]'>
+    <div className='w-full flex flex-col justify-center items-center h-[100%] mt-[100px] md:mt-[62px] pb-[48px] md:pb-[150px]'>
       <div
         className='w-[90vw] md:w-[686px] mt-[24px] md:mt-[42px] bg-[#fff] p-[36px] relative'
         style={{
@@ -113,8 +146,12 @@ const MyProfile = () => {
           className='w-[24px] h-[24px] absolute right-[36px] top-[24px] cursor-pointer'
         />
 
-        <div className='w-full flex justify-center mt-[-100px]'>
-          <img src='/Images/avatarReview.png' alt='' className='w-[129px] h-[129px] rounded-full' />
+        <div className='w-full flex justify-center mt-[-100px] rounded-full overflow-hidden relative'>
+          <img
+            src={picture ? picture : '/Images/avatarReview.png'}
+            alt=''
+            className='w-[129px] h-[129px]'
+          />
         </div>
         <div className='w-full flex gap-[12px] justify-center items-center mt-[8px]'>
           <Typography
@@ -123,7 +160,7 @@ const MyProfile = () => {
               fontSize: '18px',
               fontWeight: '500',
               lineHeight: 'normal',
-              fontFamily: 'Josefin Sans',
+              fontFamily: 'Orbitron',
               textTransform: 'capitalize',
               textAlign: 'center',
             }}
@@ -131,6 +168,7 @@ const MyProfile = () => {
             John
           </Typography>
           <img
+            onClick={handleClick}
             src='/Images/edit.svg'
             alt='edit-icon'
             className='w-[24px] h-[24px] cursor-pointer'
@@ -229,6 +267,13 @@ const MyProfile = () => {
                 onChange={handleChange}
               />
             </div>
+
+            <input
+              type='file'
+              ref={fileInputRef}
+              onChange={handlePictureChange}
+              style={{ display: 'none' }} // Hide the file input
+            />
           </div>
 
           <div className='mt-[24px] md:mt-[23px]'>
