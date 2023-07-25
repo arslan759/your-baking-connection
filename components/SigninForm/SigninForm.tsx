@@ -102,12 +102,11 @@ const SigninForm = () => {
         localStorage.setItem('accounts:accessToken', accessToken)
         localStorage.setItem('accounts:refreshToken', refreshToken)
       }
-    } catch (err) {
+    } catch (err: any) {
       console.log(err)
     }
 
-      setGenError(err?.message)
-    }
+    setGenError(err?.message)
   }
 
   const handleChangeGenError = (value: String) => {
