@@ -3,7 +3,7 @@ stages: # List of stages for jobs, and their order of execution
   - deploy
 
 # THIS IS THE PIPELINE FOR TEST BRANCH
-build-test: # This job runs in the build stage, which runs first.
+build-staging: # This job runs in the build stage, which runs first.
   stage: build
   only:
     - staging
@@ -18,8 +18,8 @@ build-test: # This job runs in the build stage, which runs first.
   script:
     - pwd
     - echo "$ENV_FILE_STAGING" > .env
-    - ls
-    - cat .env
+#    - ls
+#    - cat .env
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-staging"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && mkdir pipeline-staging"
@@ -30,9 +30,9 @@ build-test: # This job runs in the build stage, which runs first.
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm install --legacy-peer-deps"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm run build"
 
-deploy-test:
+deploy-staging:
   only:
-    - test
+    - staging
   stage: deploy
 
   script:
