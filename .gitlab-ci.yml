@@ -20,7 +20,7 @@ build-staging: # This job runs in the build stage, which runs first.
     - pwd
 #    - echo "$ENV_FILE_STAGING" > .env
 #    - ls
-#    - cat .env
+    - cat .env
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-staging"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && mkdir pipeline-staging"
