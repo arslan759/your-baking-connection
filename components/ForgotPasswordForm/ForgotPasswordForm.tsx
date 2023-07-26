@@ -6,12 +6,17 @@ import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
 import { ForgetPasswordFormProps } from 'types'
 
-const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
-  const [email, setEmail] = useState('')
+import useForgotPasswordUser from 'hooks/Authentication/ForgotPassword/useForgotPasswordUser'
+import { withApollo } from 'lib/apollo/withApollo'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import withAuth from 'hocs/withAuth'
 
+const ForgotPasswordForm = ({ openOtp, setEmail, email }: ForgetPasswordFormProps) => {
+  // const [email, setEmail] = useState('')
+  const [forgotPasswordFunction, loadingForgotPassword] = useForgotPasswordUser()
   // Error states
   const [emailErr, setEmailErr] = useState('')
-
+  const [error, setError] = useState<string>('')
   // handleChange function for input fields
   const handleChange = (name: string, value: string) => {
     if (name === 'email') {
@@ -20,8 +25,12 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
     }
   }
 
+  const handleChangeGenError = (value: string) => {
+    setError(value)
+  }
+
   // handle submit function for form
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // Checks if email is valid
@@ -50,8 +59,25 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
     // Reset error states
     setEmailErr('')
 
+    try {
+      const res = await forgotPasswordFunction({
+        variables: {
+          user: {
+            type: 'email',
+            emailPhone: email,
+          },
+        },
+      })
+      const userId = res?.data?.resetPasswordOtp?.userId
+      if (userId) {
+        localStorage.setItem('userId', userId)
+        openOtp()
+      }
+    } catch (err: any) {
+      setError(err?.message)
+    }
+
     // Open otp modal
-    openOtp()
   }
 
   return (
@@ -107,6 +133,10 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
                 />
               </div>
             </div>
+            <div>
+              <ErrorMessage error={error} setError={handleChangeGenError} />
+            </div>
+
             <div className='mt-[36px] md:mt-[24px]'>
               <PrimaryBtn text='Send' type='submit' />
             </div>
@@ -122,4 +152,4 @@ const ForgotPasswordForm = ({ openOtp }: ForgetPasswordFormProps) => {
   )
 }
 
-export default ForgotPasswordForm
+export default withApollo()(withAuth(ForgotPasswordForm))

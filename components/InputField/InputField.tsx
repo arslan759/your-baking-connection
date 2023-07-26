@@ -1,15 +1,17 @@
+import { useEffect, useState } from 'react'
 import { TextField, Typography } from '@mui/material'
 import { InputFieldProps } from 'types'
-import { useEffect, useState } from 'react'
 
 const InputField = ({
   type,
   name,
-  label,
+  label = '',
   inputColor,
   placeholder,
   value,
   error,
+  multiline,
+  rows,
   onChange,
   required,
   errorText,
@@ -31,27 +33,32 @@ const InputField = ({
 
   return (
     <div className='flex flex-col capitalize'>
-      <label
-        htmlFor={name}
-        style={{
-          color: inputColor,
-        }}
-      >
-        <Typography
-          className={`text-[12px] ${
-            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-          }`}
-          variant='body1'
+      {label ? (
+        <label
+          htmlFor={name}
+          style={{
+            color: inputColor,
+          }}
         >
-          {label}
-        </Typography>
-      </label>
+          <Typography
+            className={`text-[12px] ${
+              required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
+            }`}
+            variant='body1'
+          >
+            {label}
+          </Typography>
+        </label>
+      ) : (
+        ''
+      )}
+
       <TextField
-        className='mt-[5px]'
+        className={`${label ? 'mt-[5px]' : 'mt-[0px]'}`}
         sx={{
           '& .MuiOutlinedInput-root': {
             color: inputColor,
-            height: '35px',
+            height: multiline ? 'auto' : '35px',
             padding: '5px',
             borderRadius: '5px',
             fontSize: '12px',
@@ -70,6 +77,8 @@ const InputField = ({
         placeholder={placeholder}
         type={type}
         name={name}
+        multiline={multiline}
+        rows={rows}
         error={errorState}
         id='outlined-error-helper-text'
         defaultValue={value}

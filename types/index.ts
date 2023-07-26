@@ -1,5 +1,13 @@
 import { MouseEventHandler } from 'react'
 
+export interface ClientReviewCardProps {
+  color: string
+  name: string
+  review: string
+  image: string
+  index: number
+}
+
 export interface FooterLinksProps {
   header?: string
   link1?: string
@@ -35,7 +43,9 @@ export interface InputFieldProps {
   inputColor?: string
   error?: boolean
   errorText?: string
-  label: string
+  label?: string
+  multiline?: boolean
+  rows?: number
   required: boolean
   placeholder?: string
   value: string
@@ -68,10 +78,24 @@ export interface DropdownProps {
 
 export interface ForgetPasswordFormProps {
   openOtp: () => void
+  email: string
+  setEmail: (email: string) => void
+  userId: string
+  setUserId: (userId: string) => void
+}
+
+export interface SignUpFormProps {
+  openOtp: () => void
+}
+
+export interface SignUpFormProps {
+  openOtp: () => void
 }
 
 export interface OTPFormProps {
   closeOtp: () => void
+  type: string
+  email: string
 }
 
 export interface SectionheadingProps {
@@ -80,4 +104,18 @@ export interface SectionheadingProps {
 
 export interface SectionSubHeadingProps {
   subHeading: string
+}
+
+export interface SidebarProps {
+  activeTab: number
+  setActiveTab: (number: number) => void
+}
+
+export interface TabsPanelProps {
+  activeTab: number
+}
+
+export interface ProfileNavigationMobileProps {
+  activeTab: number
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void
 }
