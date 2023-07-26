@@ -15,9 +15,10 @@ build-staging: # This job runs in the build stage, which runs first.
     - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - chmod 700 /root/.ssh
     - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
+    - echo "$ENV_FILE_STAGING" > .env
   script:
     - pwd
-    - echo "$ENV_FILE_STAGING" > .env
+#    - echo "$ENV_FILE_STAGING" > .env
 #    - ls
 #    - cat .env
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
