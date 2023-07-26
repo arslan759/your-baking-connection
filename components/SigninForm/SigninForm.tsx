@@ -1,13 +1,24 @@
-import { Typography } from '@mui/material'
-import Checkbox from '@mui/material/Checkbox'
-import Image from 'next/image'
-import React, { use, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
 import PasswordField from '../PasswordField/PasswordField'
+import { Typography } from '@mui/material'
+import Checkbox from '@mui/material/Checkbox'
+import Image from 'next/image'
+import useLoginUser from '../../hooks/Authentication/Login/useLoginUser'
+import { withApollo } from 'lib/apollo/withApollo'
+import { useRouter } from 'next/navigation'
+import withAuth from '../../hocs/withAuth'
+
+import useViewer from 'hooks/viewer/useViewer'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 const SigninForm = () => {
+  //login mutation
+  const [loginUser, loadingLoginUser] = useLoginUser()
+  const [viewer, loading, refetch] = useViewer()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [checked, setChecked] = React.useState(false)
@@ -15,6 +26,10 @@ const SigninForm = () => {
   // Error states
   const [emailErr, setEmailErr] = useState('')
   const [passwordErr, setPasswordErr] = useState('')
+
+  const [genError, setGenError] = useState<String | any>('')
+
+  const router = useRouter()
 
   // handle checkbox change for remember me
   const handleCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,8 +50,12 @@ const SigninForm = () => {
   }
 
   // handle submit function for form
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    // Reset error states
+    setEmailErr('')
+    setPasswordErr('')
 
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
@@ -62,19 +81,30 @@ const SigninForm = () => {
       return
     }
 
-    // Logs form data
-    console.log('email is ', email)
-    console.log('password is ', password)
-    console.log('remember me is ', checked)
+    try {
+      const res = await loginUser({
+        variables: {
+          user: {
+            email,
+            password,
+          },
+        },
+      })
+      const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
+      const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
 
-    // Reset form fields
-    setEmail('')
-    setPassword('')
-    setChecked(false)
+      if (accessToken) {
+        localStorage.setItem('accounts:accessToken', accessToken)
+        localStorage.setItem('accounts:refreshToken', refreshToken)
+      }
+    } catch (err: any) {
+      console.log(err)
+      setGenError(err?.message)
+    }
+  }
 
-    // Reset error states
-    setEmailErr('')
-    setPasswordErr('')
+  const handleChangeGenError = (value: String) => {
+    setGenError(value)
   }
 
   return (
@@ -179,6 +209,11 @@ const SigninForm = () => {
                 </a>
               </div>
             </div>
+
+            <div>
+              <ErrorMessage error={genError} setError={handleChangeGenError} />
+            </div>
+
             <div className='mt-[27px] md:mt-[20px]'>
               <PrimaryBtn text='Sign In' type='submit' />
             </div>
@@ -223,4 +258,4 @@ const SigninForm = () => {
   )
 }
 
-export default SigninForm
+export default withApollo()(withAuth(SigninForm))

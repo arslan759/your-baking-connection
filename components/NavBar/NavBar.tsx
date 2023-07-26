@@ -1,16 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Box, Menu, MenuItem, styled, Grid, Toolbar, Typography } from '@mui/material'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import styles from './styles.module.css'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import { NavBarProps } from 'types'
+import useViewer from 'hooks/viewer/useViewer'
+import { withApollo } from 'lib/apollo/withApollo'
 
 const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarProps) => {
+  const [viewer, loading, refetch] = useViewer()
+
+  console.log('viewer is ', viewer)
+
   const [open, SetOpen] = useState(false)
-  const router = usePathname()
+  const pathName = usePathname()
+  const router = useRouter()
   const StyledToolbar = styled(Toolbar)({
     // display: "flex",
     justifyContent: 'space-between',
@@ -32,12 +39,20 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
     { name: 'SEARCH', path: '/search' },
   ]
 
+  const handleLogOut = () => {
+    localStorage.clear()
+    router.push('/signin')
+  }
+  useEffect(() => {
+    console.log('viewre in navbar', viewer)
+  }, [viewer])
+
   return (
     <AppBar
       sx={{
         background: 'transparent',
-        paddingLeft: { xs: '1px', sm: '55px' },
-        paddingRight: { xs: '1px', md: '30px' },
+        // paddingLeft: { xs: '1px', sm: '25px' },
+        // paddingRight: { xs: '1px', md: '30px' },
       }}
       position={'static'}
       elevation={0}
@@ -61,7 +76,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
             >
               <Link
                 style={
-                  router === `${item.path}`
+                  pathName === `${item.path}`
                     ? {
                         color: `${activeItemColor}`,
                         fontWeight: '700',
@@ -81,36 +96,46 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
         </Box>
 
         <SearchBox sx={{ display: 'flex', alignItems: 'center' }}>
-          <Grid>
-            <Box
-              sx={{
-                alignItems: 'center',
-              }}
-              className={styles.navbar}
-            >
-              <div className='w-[146px] h-[50px]'>
-                <a href='/signup'>
-                  <PrimaryBtn handleClick={() => {}} text='register' />
-                </a>
-              </div>
-              <div className='w-[146px] h-[50px]'>
-                <a href='/signin'>
-                  <SecondaryBtn handleClick={() => {}} text='sign in' color={`${itemsColor}`} />
-                </a>
-              </div>
-            </Box>
-          </Grid>
+          {loading ? (
+            <p style={{ color: 'black' }}>loading...</p>
+          ) : (
+            <Grid>
+              {!viewer || Object.keys(viewer).length === 0 ? (
+                <Box
+                  sx={{
+                    alignItems: 'center',
+                  }}
+                  className={styles.navbar}
+                >
+                  <div className='w-[146px] h-[50px]'>
+                    <a href='/signup'>
+                      <PrimaryBtn handleClick={() => {}} text='register' />
+                    </a>
+                  </div>
+                  <div className='w-[146px] h-[50px]'>
+                    <a href='/signin'>
+                      <SecondaryBtn handleClick={() => {}} text='sign in' color={`${itemsColor}`} />
+                    </a>
+                  </div>
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    alignItems: 'center',
+                  }}
+                  className={styles.navbar}
+                >
+                  <p style={{ color: 'black', fontWeight: 700, marginRight: '10px' }}>
+                    {`${viewer?.firstName} ${viewer?.lastName}`}
+                  </p>{' '}
+                  <PrimaryBtn text={'Logout'} handleClick={handleLogOut} />
+                </Box>
+              )}
+            </Grid>
+          )}
           <div className={styles.navbarMenu}>
             <ToggleNavBar navbarIconColor={itemsColor} />
           </div>
-
-          {/* <MenuIcon
-            sx={{
-              color: 'white',
-            }}
-            className={styles.navbarMenu}
-            onClick={() => SetOpen(!open)}
-          /> */}
         </SearchBox>
       </StyledToolbar>
       {/* <Menu
@@ -144,7 +169,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
             >
               <Link
                 style={
-                  router === `${item.path}`
+                  pathName === `${item.path}`
                     ? {
                         color: 'white',
                         textAlign: 'center',
@@ -169,4 +194,4 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
   )
 }
 
-export default Navbar
+export default withApollo()(Navbar)

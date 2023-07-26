@@ -19,7 +19,7 @@ export const lightTheme = createTheme({
     values: {
       xs: 0,
       sm: 640,
-      smm: 767,
+      smm: 768,
       md: 768,
       lg: 1200,
       xl: 1536,

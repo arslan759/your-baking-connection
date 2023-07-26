@@ -5,15 +5,23 @@ import { PrimaryBtn } from '../Buttons'
 import OtpInput from 'react-otp-input'
 import styles from './styles.module.css'
 import { OTPFormProps } from 'types'
+import useOtpUser from '../../hooks/Authentication/Otp/useOtpUser'
+import { withApollo } from 'lib/apollo/withApollo'
+import { useRouter } from 'next/navigation'
+import useForgotPasswordUser from '../../hooks/Authentication/ForgotPassword/useForgotPasswordUser'
 
-const OTPForm = ({ closeOtp }: OTPFormProps) => {
+const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
   const [otp, setOtp] = useState('')
 
+  const [verifyOtp, loadingVerifyOtp] = useOtpUser()
+
+  const router = useRouter()
   // Error states
   const [otpError, setOtpError] = useState('')
 
   // handle submit function for form
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const userId = localStorage.getItem('userId')
     e.preventDefault()
 
     // Checks if email is empty or Less than 4 characters
@@ -23,14 +31,43 @@ const OTPForm = ({ closeOtp }: OTPFormProps) => {
       // Stops the execution of the function
       return
     }
-    // Logs form data
-    console.log('otp is ', otp)
+    if (type === 'registration') {
+      try {
+        const res = await verifyOtp({
+          variables: {
+            user: {
+              userId,
+              otp: parseInt(otp),
+            },
+          },
+        })
+        if (res?.data?.verifyOTPSignUp) {
+          router.replace('/signin')
+        }
+      } catch (err) {
+        return err
+      }
+    } else if (type === 'forgotPassword') {
+      console.log('firing otp function', email)
 
-    // Reset form fields
-    setOtp('')
+      const res = await verifyOtp({
+        variables: {
+          user: {
+            userId,
+            otp: parseInt(otp),
+          },
+        },
+      })
+      if (res?.data?.verifyOTPSignUp) {
+        router.push(`reset-password/${parseInt(otp)}`)
+      }
 
-    // Reset error states
-    setOtpError('')
+      // Reset form fields
+      setOtp('')
+
+      // Reset error states
+      setOtpError('')
+    }
   }
 
   return (
@@ -125,4 +162,4 @@ const OTPForm = ({ closeOtp }: OTPFormProps) => {
   )
 }
 
-export default OTPForm
+export default withApollo()(OTPForm)
