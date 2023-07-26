@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Russo One';
+  src: local('Russo_One'), url(../public//fonts/Russo_One/RussoOne-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), url(../public/fonts/Poppins/Poppins-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local('Open_Sans'),
+    url(../public/fonts/Open_Sans/static/OpenSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Open_Sans_Bold';
+  src: local('Open_Sans'),
+    url(../public/fonts/Open_Sans/static/OpenSans-ExtraBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: local('Roboto'), url(../public/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Rubik';
+  src: local('Rubik'), url(../public/fonts/Rubik/Rubik-VariableFont_wght.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Hind_Guntur';
+  src: local('Hind_Guntur'),
+    url(../public/fonts/Hind_Guntur/HindGuntur-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Josefin Sans';
+  src: local('Josefin_Sans'),
+    url(../public/fonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf) format('truetype');
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+/* MUI Typography */
+
+.css-1wn6apb-MuiTypography-root {
+  line-height: normal;
+}
+
+/* MUI TEXTFIELD AUTOCOMPLETE */
+
+.MuiTextField-root > div input {
+  padding: 0px 5px 0px 5px !important;
+  height: 100% !important;
+  background-color: transparent !important;
+}
+
+@media (max-width: 950px) {
+  .css-1qq5s3h-MuiPaper-root-MuiAppBar-root {
+    padding-left: 1px !important;
+  }
+
+  .css-134hlw3-MuiToolbar-root {
+    height: 0px !important;
+  }
+}

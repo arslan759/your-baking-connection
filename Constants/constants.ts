@@ -1,0 +1,78 @@
+export const states = [
+  'Alabama',
+  'Alaska',
+  'Arizona',
+  'Arkansas',
+  'California',
+  'Colorado',
+  'Connecticut',
+  'Delaware',
+  'Florida',
+  'Georgia',
+  'Hawaii',
+  'Idaho',
+  'Illinois',
+  'Indiana',
+  'Iowa',
+  'Kansas',
+  'Kentucky',
+  'Louisiana',
+  'Maine',
+  'Maryland',
+]
+
+export const cities = [
+  'Tokyo',
+  'New York City',
+  'London',
+  'Paris',
+  'Sydney',
+  'Rio de Janeiro',
+  'Moscow',
+  'Toronto',
+  'Dubai',
+  'Mumbai',
+  'Berlin',
+  'Cape Town',
+  'Singapore',
+  'Mexico City',
+  'Tokyo',
+  'Seoul',
+  'Amsterdam',
+  'Rome',
+  'Istanbul',
+  'Bangkok',
+]
+
+export const galleryImages = [
+  {
+    id: 1,
+    title: 'Image 1',
+    url: 'https://picsum.photos/id/1/300/300',
+  },
+  {
+    id: 2,
+    title: 'Image 2',
+    url: 'https://picsum.photos/id/2/300/300',
+  },
+  {
+    id: 3,
+    title: 'Image 3',
+    url: 'https://picsum.photos/id/3/300/300',
+  },
+  {
+    id: 4,
+    title: 'Image 4',
+    url: 'https://picsum.photos/id/4/300/300',
+  },
+  {
+    id: 5,
+    title: 'Image 5',
+    url: 'https://picsum.photos/id/5/300/300',
+  },
+  {
+    id: 6,
+    title: 'Image 6',
+    url: 'https://picsum.photos/id/6/300/300',
+  },
+]
