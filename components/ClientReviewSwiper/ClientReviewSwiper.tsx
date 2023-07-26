@@ -42,28 +42,28 @@ const ClientReviewSwiper = () => {
 
       {/* Reviews Swiper */}
       <Swiper
-        modules={[FreeMode, Navigation]}
-        freeMode={true}
-        rewind={true}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-        slidesPerView={2}
-        spaceBetween={1}
-        autoHeight={true}
-        breakpoints={{
-          0: {
-            slidesPerView: 2,
-            spaceBetween: 1,
-            direction: 'vertical',
-          },
+        // modules={[FreeMode, Navigation]}
+        // freeMode={true}
+        // rewind={true}
+        // navigation={{
+        //   nextEl: '.swiper-button-next',
+        //   prevEl: '.swiper-button-prev',
+        // }}
+        // slidesPerView={2}
+        // spaceBetween={1}
+        // autoHeight={true}
+        // breakpoints={{
+        //   0: {
+        //     slidesPerView: 2,
+        //     spaceBetween: 1,
+        //     direction: 'vertical',
+        //   },
 
-          1024: {
-            slidesPerView: 2,
-            direction: 'horizontal',
-          },
-        }}
+        //   1024: {
+        //     slidesPerView: 2,
+        //     direction: 'horizontal',
+        //   },
+        // }}
       >
         {ReviewCardsData.map((review, index) => {
           const { name, content, image } = review

@@ -11,7 +11,7 @@ const ForgetPassword: React.FC<ForgetPasswordProps> = ({ otp }) => {
   return (
     <div className={`${styles.forgetpassword} pb-[180px] md:h-[1072px] md:bg-cover md:bg-center`}>
       <Navbar itemsColor='white' />
-      <ResetPasswordForm otp={parseInt(otp)} />
+      <ResetPasswordForm otp={otp} />
     </div>
   )
 }
