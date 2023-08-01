@@ -70,6 +70,7 @@ const CustomAccordion = () => {
             onChange={handleChange(`panel${index}`)}
           >
             <AccordionSummary
+              key={index}
               sx={{
                 marginBottom: '8px',
                 '@media (max-width: 768px)': {
@@ -111,6 +112,7 @@ const CustomAccordion = () => {
               </Typography>
             </AccordionSummary>
             <AccordionDetails
+              key={index}
               sx={{
                 width: '95%',
                 fontFamily: 'Open Sans',

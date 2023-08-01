@@ -61,11 +61,11 @@ const ClientReviewSwiper = () => {
             direction: 'vertical',
           },
 
-          1024: {
-            slidesPerView: 2,
-            direction: 'horizontal',
-          },
-        }}
+      //   1024: {
+      //     slidesPerView: 2,
+      //     direction: 'horizontal',
+      //   },
+      // }}
       >
         {ReviewCardsData.map((review, index) => {
           const { name, content, image } = review
@@ -77,6 +77,7 @@ const ClientReviewSwiper = () => {
                 review={content}
                 image={image}
                 index={index}
+                key={index}
               />
             </SwiperSlide>
           )
