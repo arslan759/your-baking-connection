@@ -1,6 +1,7 @@
 // Import Swiper React components
+// @ts-ignore
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
+import { Pagination, Navigation } from 'swiper/modules'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -12,6 +13,7 @@ import { PrimaryBtn } from '../Buttons'
 const SwiperJS = () => {
   return (
     <Swiper
+      // @ts-ignore
       modules={[Pagination]}
       rewind={true}
       pagination={{ clickable: true }}

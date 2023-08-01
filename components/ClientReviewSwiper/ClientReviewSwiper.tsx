@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react'
 import ClientReviewCard from '../ClientReviewCard/ClientReviewCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -42,22 +43,23 @@ const ClientReviewSwiper = () => {
 
       {/* Reviews Swiper */}
       <Swiper
-      // modules={[FreeMode, Navigation]}
-      // freeMode={true}
-      // rewind={true}
-      // navigation={{
-      //   nextEl: '.swiper-button-next',
-      //   prevEl: '.swiper-button-prev',
-      // }}
-      // slidesPerView={2}
-      // spaceBetween={1}
-      // autoHeight={true}
-      // breakpoints={{
-      //   0: {
-      //     slidesPerView: 2,
-      //     spaceBetween: 1,
-      //     direction: 'vertical',
-      //   },
+        // @ts-ignore
+        modules={[FreeMode, Navigation]}
+        freeMode={true}
+        rewind={true}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }}
+        slidesPerView={2}
+        // spaceBetween={1}
+        // autoHeight={true}
+        breakpoints={{
+          0: {
+            slidesPerView: 2,
+            spaceBetween: 1,
+            direction: 'vertical',
+          },
 
       //   1024: {
       //     slidesPerView: 2,
@@ -68,7 +70,7 @@ const ClientReviewSwiper = () => {
         {ReviewCardsData.map((review, index) => {
           const { name, content, image } = review
           return (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={review?.name}>
               <ClientReviewCard
                 color={index % 2 === 0 ? '#FFD9E4' : '#7DDEC1'}
                 name={name}

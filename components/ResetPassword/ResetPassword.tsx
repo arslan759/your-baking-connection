@@ -4,7 +4,7 @@ import Navbar from '../NavBar/NavBar'
 import styles from './styles.module.css'
 
 interface ForgetPasswordProps {
-  otp: number // Change `any` to the appropriate type for `otp`
+  otp: string // Change `any` to the appropriate type for `otp`
 }
 
 const ForgetPassword: React.FC<ForgetPasswordProps> = ({ otp }) => {

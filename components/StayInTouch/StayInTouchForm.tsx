@@ -54,11 +54,11 @@ const StayInTouchForm = (): JSX.Element => {
       <div className={`${styles.rectangle} w-[90vw] md:w-[70vw] pb-[16px] md:pb-[74px]`}>
         <div className='flex justify-center items-center flex-col w-full text-white'>
           <Typography variant='h5' sx={stylesModuleMui.heading}>
-            Let&sbquo;s Stay In Touch
+            {`Let's Stay In Touch`}
           </Typography>
           <Typography variant='body1' sx={stylesModuleMui.text}>
-            Get the latest news, find out about new bakers in your area and exclusive promotions
-            conveniently in your inbox!
+            {`Get the latest news, find out about new bakers in your area and exclusive promotions
+            conveniently in your inbox!`}
           </Typography>
         </div>
         <div className='border w-full'>
