@@ -18,7 +18,6 @@ build-staging: # This job runs in the build stage, which runs first.
     - echo "$ENV_FILE_STAGING" > .env
   script:
     - pwd
-#    - echo "$ENV_FILE_STAGING" > .env
 #    - ls
     - cat .env
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
