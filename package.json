@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --port 4001",
     "build": "next build",
-    "start": "next start",
+    "start": "PORT=4002 next start",
     "lint": "next lint",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx,json}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config .prettierrc",
