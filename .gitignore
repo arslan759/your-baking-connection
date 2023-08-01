@@ -3,6 +3,7 @@
 .idea
 .vscode
 .env
+.gitlab-ci.yml
 package-lock.json
 # dependencies
 /node_modules
