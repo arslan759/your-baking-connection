@@ -48,8 +48,8 @@ deploy-staging:
   script:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && git checkout staging"
-    #- ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 stop app-staging"
-    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 start "npm start" --name app-staging"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 stop app-staging"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 start 'npm start' --name app-staging"
     #- ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm start"
 
 #build-main: # This job runs in the build stage, which runs first.
