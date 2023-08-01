@@ -11,7 +11,7 @@ export default function ResetPasswordPage({ params }: { params: { otp: string } 
     <>
       <div className=''>
         <div className='w-full'>
-          <ResetPassword otp={parseInt(otp)} />
+          <ResetPassword otp={otp} />
         </div>
       </div>
     </>

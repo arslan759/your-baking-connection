@@ -11,7 +11,7 @@ import withAuth from 'hocs/withAuth'
 import { useRouter } from 'next/navigation'
 
 interface ResetPasswordProps {
-  otp: number // Change `any` to the appropriate type for `otp`
+  otp: string // Change `any` to the appropriate type for `otp`
 }
 
 const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
@@ -67,7 +67,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
         variables: {
           user: {
             userId: localStorage.getItem('userId'),
-            otp: otp,
+            otp: parseInt(otp),
             password: password,
           },
         },

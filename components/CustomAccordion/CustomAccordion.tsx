@@ -16,6 +16,7 @@ const CustomAccordion = () => {
       {accordionData.map((item, index) => {
         return (
           <Accordion
+            key={index}
             sx={{
               '&.MuiAccordion-root:before': {
                 display: 'none',

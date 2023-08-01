@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react'
 import ClientReviewCard from '../ClientReviewCard/ClientReviewCard'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -42,6 +43,7 @@ const ClientReviewSwiper = () => {
 
       {/* Reviews Swiper */}
       <Swiper
+        // @ts-ignore
         modules={[FreeMode, Navigation]}
         freeMode={true}
         rewind={true}
@@ -50,8 +52,8 @@ const ClientReviewSwiper = () => {
           prevEl: '.swiper-button-prev',
         }}
         slidesPerView={2}
-        spaceBetween={1}
-        autoHeight={true}
+        // spaceBetween={1}
+        // autoHeight={true}
         breakpoints={{
           0: {
             slidesPerView: 2,
@@ -68,7 +70,7 @@ const ClientReviewSwiper = () => {
         {ReviewCardsData.map((review, index) => {
           const { name, content, image } = review
           return (
-            <SwiperSlide>
+            <SwiperSlide key={review?.name}>
               <ClientReviewCard
                 color={index % 2 === 0 ? '#FFD9E4' : '#7DDEC1'}
                 name={name}

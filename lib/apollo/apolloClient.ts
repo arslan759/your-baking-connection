@@ -16,7 +16,7 @@ const STATUS_BAD_REQUEST = 400
 export default function createApolloClient() {
   // Config
   // @ts-ignore: Unreachable code error
-  let graphqlUrl
+  let graphqlUrl: string | undefined
 
   /* eslint-disable prefer-destructuring */
   if (process.browser) {
