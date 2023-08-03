@@ -41,7 +41,7 @@ export default function Signup() {
     <div className={`${styles.signup}`}>
       <Navbar itemsColor='white' />
       <button onClick={() => setIsSuccess(true)}>success</button>
-      <div className='w-[100vw] flex flex-col md:flex-row max-md:items-center justify-center pb-[10px]'>
+      <div className='w-[100vw] flex flex-col md:flex-row max-md:items-center justify-center mt-[-10px] md:mt-[30px] pb-[10px]'>
         <div className='w-[80%] flex md:hidden items-center justify-center my-[54px]'>
           <SignupStepper
             activeStep={activeStep}
