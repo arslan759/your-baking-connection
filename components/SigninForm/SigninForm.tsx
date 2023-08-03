@@ -239,7 +239,7 @@ const SigninForm = () => {
 
             <div className='w-full flex flex-col items-center gap-[8px] md:gap-[24px] mt-[32px]'>
               <Typography variant='body1' className='text-[12px] text-[white]'>
-                Don’t have an account? &nbsp;
+                {`Don’t have an account? `}&nbsp;
                 <a
                   href='/signup'
                   style={{
