@@ -97,7 +97,17 @@ const ForgotPasswordForm = ({ openOtp, setEmail, email }: ForgetPasswordFormProp
               joining is quick and easy
             </Typography>
 
-            <Typography variant='h5' className='text-green font-open_sans_bold mt-[10px] p-0'>
+            <Typography
+              variant='h5'
+              sx={{
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '800',
+                textTransform: 'capitalize',
+                color: '#7DDEC1',
+              }}
+              className='mt-[10px] p-0'
+            >
               {' '}
               <span className='font-[800]'>Forgot Password</span>
             </Typography>

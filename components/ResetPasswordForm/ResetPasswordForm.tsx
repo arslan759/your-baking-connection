@@ -111,7 +111,17 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
               joining is quick and easy
             </Typography>
 
-            <Typography variant='h5' className='text-green   mt-[10px] p-0'>
+            <Typography
+              variant='h5'
+              sx={{
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '800',
+                textTransform: 'capitalize',
+                color: '#7DDEC1',
+              }}
+              className='mt-[10px] p-0'
+            >
               {' '}
               <span className='font-[800]'>New Password</span>
             </Typography>

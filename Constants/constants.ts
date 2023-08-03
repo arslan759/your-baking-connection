@@ -204,3 +204,18 @@ export const profileNavigation = [
     icon: '/Images/logout.svg',
   },
 ]
+
+export const steps = [
+  {
+    label: 'Sign Up',
+    description: `Sign up with just a click! No fuss, no worries, it’s that easy!`,
+  },
+  {
+    label: 'Enter Shop Details',
+    description: 'Sign in now: Quick and effortless entry to all your favorite features.',
+  },
+  {
+    label: 'Create Shop',
+    description: `Our advanced search filters make it easy to find what you’re looking for. Start your search now!`,
+  },
+]

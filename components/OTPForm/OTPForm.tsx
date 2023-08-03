@@ -84,7 +84,14 @@ const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
           <div className='md:mt-[24px]'>
             <Typography
               variant='h5'
-              className='text-green font-open_sans_bold capitalize mt-[10px] p-0'
+              sx={{
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '800',
+                textTransform: 'capitalize',
+                color: '#7DDEC1',
+              }}
+              className='mt-[10px] p-0'
             >
               {' '}
               Enter verification code

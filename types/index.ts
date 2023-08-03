@@ -44,8 +44,20 @@ export interface InputFieldProps {
   error?: boolean
   errorText?: string
   label?: string
-  multiline?: boolean
   rows?: number
+  required: boolean
+  placeholder?: string
+  value: string
+  onChange: (name: string, value: string) => void
+  handleKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+}
+
+export interface UploadInputFieldProps {
+  name: string
+  inputColor?: string
+  error?: boolean
+  errorText?: string
+  label?: string
   required: boolean
   placeholder?: string
   value: string
@@ -118,4 +130,15 @@ export interface TabsPanelProps {
 export interface ProfileNavigationMobileProps {
   activeTab: number
   handleChange: (event: React.SyntheticEvent, newValue: number) => void
+}
+
+export interface SignupStepperProps {
+  activeStep: number
+  handleBack?: () => void
+  handleNext?: () => void
+  handleReset?: () => void
+}
+
+export interface SignupSuccessProps {
+  setIsSuccess: (value: boolean) => void
 }

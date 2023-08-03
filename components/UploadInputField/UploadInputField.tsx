@@ -1,39 +1,17 @@
-import { TextField, Typography } from '@mui/material'
-import { InputFieldProps } from 'types'
+import { IconButton, InputAdornment, TextField, Typography } from '@mui/material'
+import { UploadInputFieldProps } from 'types'
 import { useEffect, useState } from 'react'
 
-const InputField = ({
-  type,
+const UploadInputField = ({
+  label,
   name,
-  label = '',
   inputColor,
-  placeholder,
-  value,
-  handleKeyPress,
-  error,
-  rows,
-  onChange,
   required,
+  placeholder,
   errorText,
-}: InputFieldProps) => {
+  value,
+}: UploadInputFieldProps) => {
   const [errorState, setErrorState] = useState(errorText ? true : false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-
-    onChange(name, value)
-
-    if (value === '') setErrorState(true)
-    else setErrorState(false)
-  }
-
-  useEffect(() => {
-    setErrorState(errorText ? true : false)
-  }, [errorText, errorState])
-
-  // useEffect(() => {
-  //   // setErrorState(errorText ? true : false)
-  // }, [handleKeyPress])
 
   return (
     <div className='flex flex-col capitalize'>
@@ -62,8 +40,9 @@ const InputField = ({
         sx={{
           '& .MuiOutlinedInput-root': {
             color: inputColor,
-            height: type === 'textarea' ? 'auto' : '35px',
+            height: '35px',
             padding: '5px',
+            paddingRight: '10px',
             borderRadius: '5px',
             fontSize: '12px',
 
@@ -78,20 +57,23 @@ const InputField = ({
             },
           },
         }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position='end'>
+              <img src='/Images/upload.svg' alt='upload' className='w-[16px] h-[16px]' />
+            </InputAdornment>
+          ),
+        }}
         placeholder={placeholder}
-        type={type}
+        type='text'
         name={name}
-        onKeyPress={handleKeyPress ? handleKeyPress : () => {}}
-        multiline={type === 'textarea' ? true : false}
-        rows={type === 'textarea' ? rows : 1}
         error={errorState}
         id='outlined-error-helper-text'
         value={value}
-        onChange={handleChange}
         helperText={errorState ? errorText : ''}
       />
     </div>
   )
 }
 
-export default InputField
+export default UploadInputField

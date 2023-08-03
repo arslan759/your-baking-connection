@@ -1,9 +1,8 @@
 .signup {
   background: url('/Images/sign-in-background.webp') center / cover no-repeat;
-  min-height: 115vh;
-  background-size: 100% 100%;
+  min-height: 100vh;
   height: auto;
-  padding-bottom: 148px;
+  padding-bottom: 30px;
 }
 
 @media screen and (max-width: 767px) {
