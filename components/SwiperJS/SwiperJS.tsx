@@ -1,3 +1,4 @@
+// @ts-ignore
 // Import Swiper React components
 // @ts-ignore
 import { Swiper, SwiperSlide } from 'swiper/react'
