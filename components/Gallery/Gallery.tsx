@@ -5,6 +5,7 @@ import { Typography } from '@mui/material'
 import GalleryLocation from '../GalleryLocation/GalleryLocation'
 import GalleryMainContent from '../GalleryMainContent/GalleryMainContent'
 import GalleryWeOffer from '../GalleryWeOffer/GalleryWeOffer'
+import InspirationGallery from '../InspirationGallery/InspirationGallery'
 
 const Gallery = () => {
   return (
@@ -25,7 +26,7 @@ const Gallery = () => {
           <GalleryMainContent />
 
           {/* We Offer section for Desktop View */}
-          <div className='hidden lg:block'>
+          <div className='mt-[60px] hidden lg:block'>
             <GalleryWeOffer />
           </div>
         </div>
@@ -34,8 +35,14 @@ const Gallery = () => {
           <GalleryLocation />
 
           {/* We Offer Section for Mobile View */}
-          <GalleryWeOffer />
+          <div className='-mt-[80px]'>
+            <GalleryWeOffer />
+          </div>
         </div>
+      </div>
+
+      <div className='mt-[48px] lg:mt-[148px]'>
+        <InspirationGallery />
       </div>
     </div>
   )

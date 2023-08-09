@@ -256,9 +256,9 @@ const MyProfile = () => {
             <div className='w-full md:w-[100%]'>
               <InputField
                 label='current address'
-                type='text'
+                type='textarea'
                 inputColor='#090909'
-                multiline
+                // multiline
                 rows={5}
                 name='address'
                 value={address}

@@ -1,8 +1,8 @@
 import React from 'react'
-import { TabsPanelProps } from 'types'
+import { ProfileTabsPanelProps } from 'types'
 import MyProfile from '../MyProfile/MyProfile'
 
-const TabsPanel = ({ activeTab }: TabsPanelProps) => {
+const ProfileTabsPanel = ({ activeTab }: ProfileTabsPanelProps) => {
   return (
     <div>
       {activeTab == 0 && <MyProfile />}
@@ -15,4 +15,4 @@ const TabsPanel = ({ activeTab }: TabsPanelProps) => {
   )
 }
 
-export default TabsPanel
+export default ProfileTabsPanel

@@ -4,8 +4,8 @@ import Navbar from '@/components/NavBar/NavBar'
 import ProfileNavbar from '@/components/ProfiileNavBar/ProfileNavBar'
 import ProfileNavigationMobile from '@/components/ProfileNavigationMobile/ProfileNavigationMobile'
 import Sidebar from '@/components/Sidebar/Sidebar'
-import TabsPanel from '@/components/TabsPanel/TabsPanel'
 import { useState } from 'react'
+import ProfileTabsPanel from '../ProfileTabsPanel/ProfileTabsPanel'
 
 export default function Profile() {
   const [activeTab, setActiveTab] = useState(0)
@@ -22,7 +22,7 @@ export default function Profile() {
         <div>
           <ProfileNavigationMobile activeTab={activeTab} handleChange={handleChange} />
           <div>
-            <TabsPanel activeTab={activeTab} />
+            <ProfileTabsPanel activeTab={activeTab} />
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@ export default function Profile() {
             <ProfileNavbar />
           </div>
           <div>
-            <TabsPanel activeTab={activeTab} />
+            <ProfileTabsPanel activeTab={activeTab} />
           </div>
         </div>
       </div>

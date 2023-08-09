@@ -6,7 +6,7 @@ const GalleryMainContent = () => {
   return (
     <div className='mt-[48px] lg:mt-[100px] pb-[12px] lg:pb-[0px] bg-[#fff]'>
       <div className='w-full flex'>
-        <div className='w-[90%] flex flex-row md:flex-col gap-y-[20px]'>
+        <div className='w-[90%]  flex max-[276px]:flex-col flex-row md:flex-col gap-y-[20px]'>
           <div className='flex flex-col lg:flex-row gap-[12px] lg:gap-[24px]'>
             <img src='/Images/star.svg' alt='logo' className='h-[44px] w-[35px]' />
 

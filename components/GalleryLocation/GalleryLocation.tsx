@@ -4,8 +4,13 @@ import styles from './styles.module.css'
 
 const GalleryLocation = () => {
   return (
-    <div className={` ${styles.background}`}>
-      <div className=''>
+    <div
+      className={` ${styles.background}`}
+      style={{
+        border: '1px solid transparent',
+      }}
+    >
+      <div className='mt-[50px] md:mt-[60px] ml-[20px] md:ml-[40px]'>
         <Typography
           sx={{
             fontFamily: 'Josefin Sans',
@@ -14,15 +19,15 @@ const GalleryLocation = () => {
             lineHeight: 'normal',
             textTransform: 'uppercase',
             color: '#090909',
-            '@media (max-width: 1023px)': {
+            '@media (max-width: 767px)': {
               fontSize: '18px',
             },
           }}
         >
           {`OUR LOCATION`}
         </Typography>
-        <div className='mt-[28px] lg:mt-[24px] flex flex-col gap-y-[12px]'>
-          <div className='flex gap-x-[17px] lg:gap-x-[12px] items-center'>
+        <div className='mt-[28px] lg:mt-[24px] flex flex-col gap-y-[12px] w-[82%] lg:w-full'>
+          <div className='flex gap-x-[12px] items-center'>
             <img src='/Images/location-icon.svg' alt='location' className='h-[24px] w-[24px]' />
             <Typography
               sx={{
@@ -32,7 +37,7 @@ const GalleryLocation = () => {
                 lineHeight: 'normal',
                 textTransform: 'capitalize',
                 color: '#090909',
-                '@media (max-width: 1023px)': {
+                '@media (max-width: 767px)': {
                   fontSize: '12px',
                 },
               }}
@@ -50,7 +55,7 @@ const GalleryLocation = () => {
                 lineHeight: 'normal',
                 textTransform: 'capitalize',
                 color: '#090909',
-                '@media (max-width: 1023px)': {
+                '@media (max-width: 767px)': {
                   fontSize: '12px',
                 },
               }}
@@ -68,7 +73,7 @@ const GalleryLocation = () => {
                 lineHeight: 'normal',
                 textTransform: 'lowercase',
                 color: '#090909',
-                '@media (max-width: 1023px)': {
+                '@media (max-width: 767px)': {
                   fontSize: '12px',
                 },
               }}

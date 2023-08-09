@@ -1,4 +1,4 @@
-import { TextField, Typography } from '@mui/material'
+import { InputAdornment, TextField, Typography } from '@mui/material'
 import { InputFieldProps } from 'types'
 import { useEffect, useState } from 'react'
 
@@ -11,6 +11,7 @@ const InputField = ({
   value,
   handleKeyPress,
   error,
+  startIcon,
   rows,
   onChange,
   required,
@@ -38,17 +39,17 @@ const InputField = ({
   return (
     <div className='flex flex-col capitalize'>
       {label ? (
-        <label
-          htmlFor={name}
-          style={{
-            color: inputColor,
-          }}
-        >
+        <label htmlFor={name}>
           <Typography
-            className={`text-[12px] ${
-              required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-            }`}
+            className={`${required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''}`}
             variant='body1'
+            sx={{
+              color: inputColor,
+              fontSize: '12px !important',
+              '@media (max-width: 767px)': {
+                fontSize: '12px !important',
+              },
+            }}
           >
             {label}
           </Typography>
@@ -81,6 +82,11 @@ const InputField = ({
         placeholder={placeholder}
         type={type}
         name={name}
+        InputProps={{
+          startAdornment: startIcon ? (
+            <InputAdornment position='start'>{startIcon}</InputAdornment>
+          ) : null,
+        }}
         onKeyPress={handleKeyPress ? handleKeyPress : () => {}}
         multiline={type === 'textarea' ? true : false}
         rows={type === 'textarea' ? rows : 1}

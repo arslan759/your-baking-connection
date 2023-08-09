@@ -219,3 +219,157 @@ export const steps = [
     description: `Our advanced search filters make it easy to find what you’re looking for. Start your search now!`,
   },
 ]
+
+export const weOfferData = [
+  {
+    id: 1,
+    title: 'cake',
+    image: '/Images/we-offer-1.svg',
+  },
+  {
+    id: 2,
+    title: 'bread',
+    image: '/Images/we-offer-2.svg',
+  },
+  {
+    id: 3,
+    title: 'decorated cookies',
+    image: '/Images/we-offer-3.svg',
+  },
+  {
+    id: 4,
+    title: 'decorated cakes',
+    image: '/Images/we-offer-4.svg',
+  },
+  {
+    id: 5,
+    title: 'decorated cupcakes',
+    image: '/Images/we-offer-4.svg',
+  },
+  {
+    id: 6,
+    title: 'chocolate',
+    image: '/Images/we-offer-4.svg',
+  },
+  {
+    id: 7,
+    title: 'sandwich',
+    image: '/Images/we-offer-4.svg',
+  },
+]
+
+export const ProductsCatagory = [
+  'All',
+  'Cakes',
+  'Bread',
+  'Decorated Cookies',
+  'Decorated Cakes',
+  'Decorated Cupcakes',
+  'Chocolate',
+  'Sandwich',
+  'Pizza',
+  'Burger',
+  'Doughnut',
+  'Ice Cream',
+  'Cupcakes',
+  'Biscuits',
+  'Pies',
+  'Pastries',
+  'Puddings',
+  'Muffins',
+  'Brownies',
+  'Tarts',
+  'Pancakes',
+  'Waffles',
+  'Crepes',
+  'Pretzels',
+  'Bagels',
+  'Scones',
+  'Croissants',
+]
+
+export const GalleryNavigation = [
+  {
+    id: 1,
+    title: 'Available Products',
+  },
+  {
+    id: 2,
+    title: 'Gallery of work',
+  },
+  {
+    id: 3,
+    title: 'Terms & Conditions',
+  },
+  {
+    id: 4,
+    title: 'Allergen Information',
+  },
+  {
+    id: 5,
+    title: 'reviews',
+  },
+]
+
+export const GalleryProductsData = [
+  {
+    id: 1,
+    title: 'ring pizza',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'pizza',
+  },
+  {
+    id: 2,
+    title: 'tasty burger',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'burger',
+  },
+  {
+    id: 3,
+    title: 'nutella doughnut',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    oldPrice: '15.00',
+    newPrice: '12.00',
+    category: 'doughnut',
+  },
+  {
+    id: 4,
+    title: 'ice cream',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'ice cream',
+  },
+  {
+    id: 5,
+    title: 'cupcake',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'cupcake',
+  },
+  {
+    id: 6,
+    title: 'biscuit',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'biscuit',
+  },
+]

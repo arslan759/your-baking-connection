@@ -44,6 +44,7 @@ export interface InputFieldProps {
   error?: boolean
   errorText?: string
   label?: string
+  startIcon?: React.ReactNode
   rows?: number
   required: boolean
   placeholder?: string
@@ -78,7 +79,8 @@ export interface PasswordFieldProps {
 
 export interface DropdownProps {
   name: string
-  label: string
+  label?: string
+  placeholder?: string
   required: boolean
   error?: boolean
   options: string[]
@@ -123,7 +125,7 @@ export interface SidebarProps {
   setActiveTab: (number: number) => void
 }
 
-export interface TabsPanelProps {
+export interface ProfileTabsPanelProps {
   activeTab: number
 }
 
@@ -141,4 +143,27 @@ export interface SignupStepperProps {
 
 export interface SignupSuccessProps {
   setIsSuccess: (value: boolean) => void
+}
+
+export interface GalleryWeOfferItemProps {
+  title: string
+  image: string
+}
+
+export interface InspirationGalleryNavigationProps {
+  activeTab: number
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void
+}
+
+export interface InspirationGalleryTabsPanelProps {
+  activeTab: number
+}
+
+export interface GalleryProductCardProps {
+  image: string
+  title: string
+  description: string
+  category: string
+  oldPrice: string
+  newPrice: string
 }
