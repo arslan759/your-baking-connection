@@ -53,6 +53,7 @@ const GalleryProductCard = ({
         width: '32%',
         border: '0.5px solid #888',
         borderRadius: '5px',
+        paddingBottom: '6px',
 
         '@media (max-width:767px)': {
           width: '49%',
