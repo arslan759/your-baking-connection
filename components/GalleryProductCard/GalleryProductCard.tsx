@@ -1,7 +1,8 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GalleryProductCardProps } from 'types'
 import GalleryProductCardMenu from '../GalleryProductCardMenu/GalleryProductCardMenu'
+import { PrimaryBtn } from '../Buttons'
 
 const GalleryProductCard = ({
   image,
@@ -11,6 +12,40 @@ const GalleryProductCard = ({
   oldPrice,
   newPrice,
 }: GalleryProductCardProps) => {
+  const [isHovering, setIsHovering] = useState(false) // handle mouse enter and leave for more details on desktop view
+  const [isDetailsVisible, setIsDetailsVisible] = useState(false) // Toggle More Details for mobile view
+
+  // handle mouse enter and leave
+  const handleMouseEnter = () => {
+    setIsHovering(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovering(false)
+  }
+
+  // More Details for mobile
+  const handleToggleDetails = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    setIsDetailsVisible(!isDetailsVisible)
+    setIsHovering(false)
+    // console.log('toggle details', isDetailsVisible)
+  }
+
+  // handle favourite click
+  const handleFavouriteClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    e.stopPropagation()
+    console.log('favourite clicked')
+  }
+
+  // handle more details click
+  const handleMoreDetailsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation()
+    console.log('more details clicked')
+  }
+
+  // console.log('isDetailsVisible', isDetailsVisible)
+  // console.log('isHovering', isHovering)
+
   return (
     <Card
       elevation={0}
@@ -24,6 +59,7 @@ const GalleryProductCard = ({
         },
         height: 'auto',
       }}
+      onClick={handleToggleDetails}
     >
       <div className='relative'>
         <CardMedia
@@ -32,17 +68,40 @@ const GalleryProductCard = ({
             background: `linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${image}), lightgray 50% / cover no-repeat`,
             height: '365px',
             width: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
             '@media (max-width:767px)': {
               height: '195px',
             },
           }}
-          component='img'
-          image={image}
-          alt={title}
+          component='div'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+
+          // image={image}
+          // alt={title}
         />
-        <img src='/Images/favourite.svg' alt='heart' className='absolute top-4 right-4' />
+        <img
+          onClick={handleFavouriteClick}
+          src='/Images/favourite.svg'
+          alt='heart'
+          className='absolute top-4 right-4 cursor-pointer'
+        />
+        {(isHovering || isDetailsVisible) && (
+          <div
+            onMouseEnter={handleMouseEnter}
+            className={`w-[55%] md:w-[35%] ${isHovering ? 'none' : 'block'}`}
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <PrimaryBtn text='More details' handleClick={handleMoreDetailsClick} />
+          </div>
+        )}
+
         <GalleryProductCardMenu />
       </div>
       <CardContent

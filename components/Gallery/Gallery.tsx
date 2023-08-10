@@ -41,7 +41,7 @@ const Gallery = () => {
         </div>
       </div>
 
-      <div className='mt-[48px] lg:mt-[148px]'>
+      <div className='mt-[48px]'>
         <InspirationGallery />
       </div>
     </div>

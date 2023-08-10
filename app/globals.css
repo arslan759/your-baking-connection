@@ -103,12 +103,13 @@
   align-items: center !important;
   /* justify-content: center !important; */
   left: 52px !important;
-  bottom: 30px !important;
+  bottom: 90px !important;
   gap: 10px !important;
   width: fit-content !important;
 }
 
-.gallery-swiper .swiper-pagination-bullet {
+.gallery-swiper .swiper-pagination-bullet,
+.gallery-swiper .swiper-pagination-bullet-horizontal {
   background: transparent !important;
   position: relative !important;
   width: 15px !important;
@@ -134,11 +135,14 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .gallery-swiper .swiper-pagination {
-    left: 50% !important;
+  .gallery-swiper .swiper-pagination,
+  .gallery-swiper .swiper-pagination-horizontal {
+    left: 70% !important;
     bottom: 20px !important;
+    height: 50px !important;
     flex-direction: row !important;
-    transform: translate(-50%, 0%) !important;
+    white-space: nowrap !important;
+    /* transform: translate(-50%, 0%) !important; */
   }
 }
 

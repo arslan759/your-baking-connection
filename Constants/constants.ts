@@ -48,32 +48,32 @@ export const galleryImages = [
   {
     id: 1,
     title: 'Image 1',
-    url: 'https://picsum.photos/id/1/300/300',
+    url: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
   },
   {
     id: 2,
     title: 'Image 2',
-    url: 'https://picsum.photos/id/2/300/300',
+    url: 'https://www.noracooks.com/wp-content/uploads/2023/04/veggie-burgers-1-2.jpg',
   },
   {
     id: 3,
     title: 'Image 3',
-    url: 'https://picsum.photos/id/3/300/300',
+    url: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg',
   },
   {
     id: 4,
     title: 'Image 4',
-    url: 'https://picsum.photos/id/4/300/300',
+    url: 'https://img.freepik.com/free-photo/grilled-sandwich-with-bacon-fried-egg-tomato-lettuce-served-wooden-cutting-board_1150-42571.jpg?w=2000',
   },
   {
     id: 5,
     title: 'Image 5',
-    url: 'https://picsum.photos/id/5/300/300',
+    url: 'https://cafedelites.com/wp-content/uploads/2018/01/Mamas-Best-Lasagna-IMAGE-43.jpg',
   },
   {
     id: 6,
     title: 'Image 6',
-    url: 'https://picsum.photos/id/6/300/300',
+    url: 'https://liliebakery.fr/wp-content/uploads/2021/03/Recette-donuts-Lilie-Bakery.jpg',
   },
 ]
 
@@ -145,28 +145,32 @@ export const ReviewCardsData = [
   {
     id: 1,
     name: 'John Doe',
-    image: 'https://picsum.photos/id/1/300/300',
+    image:
+      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
   {
     id: 2,
     name: 'Sara Austin',
-    image: 'https://picsum.photos/id/2/300/300',
+    image:
+      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod,',
   },
   {
     id: 3,
     name: 'robert kent',
-    image: 'https://picsum.photos/id/3/300/300',
+    image:
+      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
   {
     id: 4,
     name: 'Suzy Clark',
-    image: 'https://picsum.photos/id/4/300/300',
+    image:
+      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
@@ -327,7 +331,8 @@ export const GalleryProductsData = [
     title: 'tasty burger',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
-    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    image:
+      'https://www.chilitochoc.com/wp-content/uploads/2020/05/crispy-chicken-burger-e1615289026561.jpg',
     oldPrice: '10.00',
     newPrice: '8.00',
     category: 'burger',
@@ -337,7 +342,7 @@ export const GalleryProductsData = [
     title: 'nutella doughnut',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
-    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    image: 'https://liliebakery.fr/wp-content/uploads/2021/03/Recette-donuts-Lilie-Bakery.jpg',
     oldPrice: '15.00',
     newPrice: '12.00',
     category: 'doughnut',
@@ -347,7 +352,8 @@ export const GalleryProductsData = [
     title: 'ice cream',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
-    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    image:
+      'https://bromabakery.com/wp-content/uploads/2020/05/chocolate-oreo-ice-cream-3-1067x1600.webp',
     oldPrice: '10.00',
     newPrice: '8.00',
     category: 'ice cream',
@@ -357,7 +363,8 @@ export const GalleryProductsData = [
     title: 'cupcake',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
-    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    image:
+      'https://img.sndimg.com/food/image/upload/f_auto,c_thumb,q_55,w_744,ar_5:4/v1/img/recipes/13/37/67/pic5UBrag.jpg',
     oldPrice: '10.00',
     newPrice: '8.00',
     category: 'cupcake',
@@ -367,9 +374,97 @@ export const GalleryProductsData = [
     title: 'biscuit',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
-    image: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+    image: 'https://5.imimg.com/data5/WJ/RT/XR/ANDROID-59043477/product-jpeg-500x500.jpg',
     oldPrice: '10.00',
     newPrice: '8.00',
     category: 'biscuit',
   },
+]
+
+export const GalleryShopImages = [
+  {
+    id: 1,
+    title: 'pizza',
+    url: 'https://static.toiimg.com/thumb/53110049.cms?width=1200&height=900',
+  },
+  {
+    id: 2,
+    title: 'donuts',
+    url: 'https://liliebakery.fr/wp-content/uploads/2021/03/Recette-donuts-Lilie-Bakery.jpg',
+  },
+  {
+    id: 3,
+    title: 'burger',
+    url: 'https://www.chilitochoc.com/wp-content/uploads/2020/05/crispy-chicken-burger-e1615289026561.jpg',
+  },
+  {
+    id: 4,
+    title: 'xyz',
+    url: 'https://img.sndimg.com/food/image/upload/f_auto,c_thumb,q_55,w_744,ar_5:4/v1/img/recipes/13/37/67/pic5UBrag.jpg',
+  },
+  {
+    id: 5,
+    title: 'veggie-burger',
+    url: 'https://www.noracooks.com/wp-content/uploads/2023/04/veggie-burgers-1-2.jpg',
+  },
+  {
+    id: 6,
+    title: 'pasta',
+    url: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg',
+  },
+  {
+    id: 7,
+    title: 'sandwich',
+    url: 'https://img.freepik.com/free-photo/grilled-sandwich-with-bacon-fried-egg-tomato-lettuce-served-wooden-cutting-board_1150-42571.jpg?w=2000',
+  },
+  {
+    id: 8,
+    title: 'lasagna',
+    url: 'https://cafedelites.com/wp-content/uploads/2018/01/Mamas-Best-Lasagna-IMAGE-43.jpg',
+  },
+  {
+    id: 9,
+    title: 'cookies',
+    url: 'https://5.imimg.com/data5/WJ/RT/XR/ANDROID-59043477/product-jpeg-500x500.jpg',
+  },
+  {
+    id: 10,
+    title: 'veggie-burger-7',
+    url: 'https://www.noracooks.com/wp-content/uploads/2023/04/veggie-burgers-1-2.jpg',
+  },
+  {
+    id: 11,
+    title: 'pasta-7',
+    url: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg',
+  },
+  {
+    id: 12,
+    title: 'sandwich-7',
+    url: 'https://img.freepik.com/free-photo/grilled-sandwich-with-bacon-fried-egg-tomato-lettuce-served-wooden-cutting-board_1150-42571.jpg?w=2000',
+  },
+  // {
+  //   id: 13,
+  //   title: 'lasagna-7',
+  //   url: 'https://cafedelites.com/wp-content/uploads/2018/01/Mamas-Best-Lasagna-IMAGE-43.jpg',
+  // },
+  // {
+  //   id: 14,
+  //   title: 'veggie-burger-3',
+  //   url: 'https://www.noracooks.com/wp-content/uploads/2023/04/veggie-burgers-1-2.jpg',
+  // },
+  // {
+  //   id: 15,
+  //   title: 'pasta-3',
+  //   url: 'https://food.fnr.sndimg.com/content/dam/images/food/fullset/2021/02/05/Baked-Feta-Pasta-4_s4x3.jpg.rend.hgtvcom.616.493.suffix/1615916524567.jpeg',
+  // },
+  // {
+  //   id: 16,
+  //   title: 'sandwich-3',
+  //   url: 'https://img.freepik.com/free-photo/grilled-sandwich-with-bacon-fried-egg-tomato-lettuce-served-wooden-cutting-board_1150-42571.jpg?w=2000',
+  // },
+  // {
+  //   id: 17,
+  //   title: 'lasagna-3',
+  //   url: 'https://cafedelites.com/wp-content/uploads/2018/01/Mamas-Best-Lasagna-IMAGE-43.jpg',
+  // },
 ]
