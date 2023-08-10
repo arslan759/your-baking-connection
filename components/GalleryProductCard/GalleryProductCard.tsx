@@ -59,13 +59,15 @@ const GalleryProductCard = ({
         },
         height: 'auto',
       }}
-      onClick={handleToggleDetails}
     >
       <div className='relative'>
         <CardMedia
           sx={{
             bordeRadius: '5px 5px 0px 0px',
-            background: `linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${image}), lightgray 50% / cover no-repeat`,
+            background:
+              isHovering || isDetailsVisible
+                ? `linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${image}), lightgray 50% / cover no-repeat`
+                : `url(${image}), lightgray 50% / cover no-repeat`,
             height: '365px',
             width: '100%',
             backgroundPosition: 'center',
@@ -77,7 +79,7 @@ const GalleryProductCard = ({
           component='div'
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-
+          onClick={handleToggleDetails}
           // image={image}
           // alt={title}
         />
