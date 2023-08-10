@@ -46,12 +46,15 @@ const GallerySwiper = () => {
         {GalleryShopImages.map((background, index) => {
           return (
             <SwiperSlide key={index}>
-              <div className=''>
-                <img
-                  src={background?.url}
-                  alt={background?.title}
-                  className='w-full h-[375px] md:h-[471px] object-cover'
-                />
+              <div
+                className='w-full h-[375px] md:h-[471px]'
+                style={{
+                  background: `url(${background.url}), lightgray 50% / cover no-repeat`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                {/* <img src={background?.url} alt={background?.title} className=' object-cover' /> */}
                 <div className='hidden lg:block absolute left-[52px] bottom-[34px]'>
                   <Typography
                     sx={{
