@@ -4,7 +4,7 @@ import GalleryNoAvailableProducts from '../GalleryNoAvailableProducts/GalleryNoA
 import GalleryAvailableProducts from '../GalleryAvailableProducts/GalleryAvailableProducts'
 
 const InspirationGalleryTabsPanel = ({ activeTab }: InspirationGalleryTabsPanelProps) => {
-  const [products, setProducts] = useState(2)
+  const [products, setProducts] = useState(1)
 
   console.log('active tab is', activeTab)
 

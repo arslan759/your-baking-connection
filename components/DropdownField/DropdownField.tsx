@@ -112,7 +112,7 @@ const DropdownField = ({
         >
           {placeholder ? (
             <MenuItem disabled value=''>
-              {`Choose Product Category`}
+              {placeholder}
             </MenuItem>
           ) : null}
 

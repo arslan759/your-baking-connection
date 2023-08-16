@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '../NavBar/NavBar'
 import GallerySwiper from '../GallerySwiper/GallerySwiper'
-import { Typography } from '@mui/material'
 import GalleryLocation from '../GalleryLocation/GalleryLocation'
 import GalleryMainContent from '../GalleryMainContent/GalleryMainContent'
 import GalleryWeOffer from '../GalleryWeOffer/GalleryWeOffer'

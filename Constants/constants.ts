@@ -209,21 +209,6 @@ export const profileNavigation = [
   },
 ]
 
-export const steps = [
-  {
-    label: 'Sign Up',
-    description: `Sign up with just a click! No fuss, no worries, it’s that easy!`,
-  },
-  {
-    label: 'Enter Shop Details',
-    description: 'Sign in now: Quick and effortless entry to all your favorite features.',
-  },
-  {
-    label: 'Create Shop',
-    description: `Our advanced search filters make it easy to find what you’re looking for. Start your search now!`,
-  },
-]
-
 export const weOfferData = [
   {
     id: 1,
@@ -263,6 +248,36 @@ export const weOfferData = [
 ]
 
 export const ProductsCatagory = [
+  'All',
+  'Cakes',
+  'Bread',
+  'Decorated Cookies',
+  'Decorated Cakes',
+  'Decorated Cupcakes',
+  'Chocolate',
+  'Sandwich',
+  'Pizza',
+  'Burger',
+  'Doughnut',
+  'Ice Cream',
+  'Cupcakes',
+  'Biscuits',
+  'Pies',
+  'Pastries',
+  'Puddings',
+  'Muffins',
+  'Brownies',
+  'Tarts',
+  'Pancakes',
+  'Waffles',
+  'Crepes',
+  'Pretzels',
+  'Bagels',
+  'Scones',
+  'Croissants',
+]
+
+export const ProductTypes = [
   'All',
   'Cakes',
   'Bread',

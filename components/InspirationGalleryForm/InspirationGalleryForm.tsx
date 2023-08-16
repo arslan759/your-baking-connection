@@ -6,25 +6,25 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 
 const InspirationGalleryForm = () => {
   const [catagory, setCatagory] = useState('')
-  const [search, setSearch] = useState('')
+  // const [search, setSearch] = useState('')
 
   const [catagoryError, setCatagoryError] = useState('')
-  const [searchErr, setSearchErr] = useState('')
+  // const [searchErr, setSearchErr] = useState('')
 
   // handle change function for input fields
-  const handleChange = (name: string, value: string) => {
-    if (name === 'search') {
-      setSearch(value)
-      // setSearchErr(value ? '' : 'Search is required')
-    }
-  }
+  // const handleChange = (name: string, value: string) => {
+  //   if (name === 'search') {
+  //     setSearch(value)
+  //     // setSearchErr(value ? '' : 'Search is required')
+  //   }
+  // }
 
   // handle Reset function for form reset
-  const handleReset = () => {
-    console.log('reset')
-    setCatagory('')
-    setSearch('')
-  }
+  // const handleReset = () => {
+  //   console.log('reset')
+  //   setCatagory('')
+  //   setSearch('')
+  // }
 
   // handle Catagory Change function for catagory dropdown
   const handleCatagoryChange = (catagory: string) => {
@@ -38,7 +38,7 @@ const InspirationGalleryForm = () => {
 
     // Logs the form data
     console.log('catagory is ', catagory)
-    console.log('search is ', search)
+    // console.log('search is ', search)
 
     // Resets the form fields
     // setCatagory('')
@@ -52,10 +52,10 @@ const InspirationGalleryForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className='w-full flex flex-col md:flex-row justify-between md: items-center gap-y-[12px]'
+      className='w-full md:w-[50%] flex flex-col md:flex-row justify-between md: items-center  gap-[12px]'
     >
       <div className='w-full md:w-[70%]  flex flex-col md:flex-row gap-x-[24px] gap-y-[12px]'>
-        <div className='w-full md:w-[45%]'>
+        <div className='w-full'>
           <DropdownField
             // label='state'
             required={false}
@@ -69,7 +69,7 @@ const InspirationGalleryForm = () => {
           />
         </div>
 
-        <div className='w-full md:w-[45%]'>
+        {/* <div className='w-full md:w-[45%]'>
           <InputField
             // label='search'
             type='text'
@@ -83,13 +83,13 @@ const InspirationGalleryForm = () => {
             required
             onChange={handleChange}
           />
-        </div>
+        </div> */}
       </div>
       <div className='w-full md:w-[30%]  flex justify-center gap-[20px] md:justify-between'>
-        <div className='flex items-center'>
+        {/* <div className='flex items-center'>
           <SecondaryBtn text='reset' color='#090909' handleClick={handleReset} />
-        </div>
-        <div className='w-[45%] md:w-[60%]'>
+        </div> */}
+        <div className='w-[100%] md:w-[140px] h-[35px]'>
           <PrimaryBtn text='search' type='submit' />
         </div>
       </div>

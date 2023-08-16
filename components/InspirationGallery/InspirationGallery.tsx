@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import InspirationGalleryForm from '../InspirationGalleryForm/InspirationGalleryForm'
 import InspirationGalleryNavigation from '../InspirationGalleryNavigation/InspirationGalleryNavigation'
 import InspirationGalleryTabsPanel from '../InspirationGalleryTabsPanel/InspirationGalleryTabsPanel'
+import CustomOrders from '../CustomOrders/CustomOrders'
 
 const InspirationGallery = () => {
   const [activeTab, setActiveTab] = useState(0)
@@ -15,41 +16,26 @@ const InspirationGallery = () => {
   return (
     <div className='w-full flex flex-col items-center'>
       <div className='w-[90vw] md:w-[70vw] flex flex-col items-center'>
-        <div className='w-[75%]'>
+        <div className='w-[100%] md:w-[60%]'>
           <Typography
             variant='h1'
             sx={{
               textAlign: 'center',
               color: '#7DDEC1',
-              fontSize: '48px',
+              fontSize: '18px !important',
               fontWeight: '700',
               lineHeight: 'normal',
-              fontFamily: 'Josefin Sans',
-              textTransform: 'capitalize',
-              '@media (max-width:767px)': {
-                fontSize: '24px',
-              },
-            }}
-          >{`Inspiration Gallery`}</Typography>
-          <Typography
-            variant='h1'
-            sx={{
-              textAlign: 'center',
-              marginTop: '24px',
-              color: '#090909',
-              fontSize: '18px',
-              fontWeight: '500',
-              lineHeight: 'normal',
               fontFamily: 'Open Sans',
+              letterSpacing: '1px',
               textTransform: 'capitalize',
               '@media (max-width:767px)': {
-                fontSize: '12px',
+                fontSize: '14px',
               },
             }}
-          >{`browse our gallery for inspiration and ideas! save your favorite ideas to your profile!`}</Typography>
+          >{`Looking for a specific type of treat? Filter our available products here!`}</Typography>
         </div>
 
-        <div className='w-[60%] md:w-full mt-[42px]'>
+        <div className='w-[70%] md:w-full mt-[42px]  flex justify-center'>
           <InspirationGalleryForm />
         </div>
       </div>
@@ -60,6 +46,10 @@ const InspirationGallery = () => {
 
       <div className='w-full mt-[24px] md:mt-[50px]'>
         <InspirationGalleryTabsPanel activeTab={activeTab} />
+      </div>
+
+      <div className='w-[90vw] mt-[48px] md:mt-[100px]'>
+        <CustomOrders />
       </div>
     </div>
   )

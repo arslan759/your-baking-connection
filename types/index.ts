@@ -36,7 +36,6 @@ export interface SecondaryBtnProps {
   color: string
   handleClick: MouseEventHandler<HTMLButtonElement>
 }
-
 export interface InputFieldProps {
   type: string
   name: string
