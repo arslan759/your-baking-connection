@@ -166,3 +166,9 @@ export interface GalleryProductCardProps {
   oldPrice: string
   newPrice: string
 }
+
+export interface YourProfileCardItemProps {
+  image: string
+  title: string
+  description: string
+}

@@ -190,225 +190,236 @@ const SignupForm = () => {
   }
 
   return (
-    <div className=''>
-      <div className=''>
-        <div className='md:mt-[24px]'>
-          <Typography
-            variant='body2'
-            className='text-white text-[12px] md:text-[14px] uppercase tracking-[1px] p-0'
-          >
-            {' '}
-            joining is quick and easy
-          </Typography>
+    <div className='flex justify-center md:justify-end md:mr-[50px] mt-[-10px] md:mt-[30px] pb-[10px]'>
+      <div
+        style={{
+          borderRadius: '5px',
+          background: 'rgba(0, 0, 0, 0.60)',
+          backdropFilter: 'blur(12.5px)',
+        }}
+        className='w-[80vw] h-[auto] md:w-[50vw] p-[20px] md:pl-[44px] md:pb-[44px] relative'
+      >
+        <div className=''>
+          <div className='md:mt-[24px]'>
+            <Typography
+              variant='body2'
+              className='text-white text-[12px] md:text-[14px] uppercase tracking-[1px] p-0'
+            >
+              {' '}
+              joining is quick and easy
+            </Typography>
 
-          <Typography
-            variant='h5'
-            sx={{
-              fontFamily: 'Open Sans',
-              lineHeight: 'normal',
-              fontWeight: '800',
-            }}
-            className='text-green capitalise mt-[10px] p-0'
-          >
-            {' '}
-            Sign up
-          </Typography>
-        </div>
-        <Image
-          src='/Images/x-square.svg'
-          alt='x-square'
-          width={24}
-          height={24}
-          className='absolute top-[20px] right-[20px] cursor-pointer'
-        />
-      </div>
-      <div className='mt-[24px] md:mt-[42px]'>
-        <form onSubmit={handleSubmit}>
-          <div className='w-full flex flex-wrap gap-y-[8px] md:gap-y-[24px] justify-between'>
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='first name'
-                type='text'
-                inputColor='white'
-                name='firstname'
-                value={firstName}
-                errorText={firstNameError}
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='last name'
-                type='text'
-                inputColor='white'
-                name='lastname'
-                value={lastName}
-                errorText={lastNameError}
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='email'
-                type='text'
-                inputColor='white'
-                name='email'
-                value={email}
-                errorText={emailError}
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='phone'
-                type='text'
-                inputColor='white'
-                name='phone'
-                value={phone}
-                errorText={phoneError}
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <DropdownField
-                label='state'
-                required
-                name='state'
-                errorText={stateError}
-                value={state}
-                options={states}
-                inputColor='white'
-                onChange={handleStateChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <DropdownField
-                label='city'
-                required
-                name='city'
-                errorText={cityError}
-                value={city}
-                options={cities}
-                inputColor='white'
-                onChange={handleCityChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='password'
-                type='password'
-                inputColor='white'
-                name='password'
-                value={password}
-                errorText={passwordError}
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='confirm password'
-                type='password'
-                inputColor='white'
-                name='confirmpassword'
-                value={confirmPassword}
-                errorText={confirmPasswordError}
-                required
-                onChange={handleChange}
-              />
-            </div>
+            <Typography
+              variant='h5'
+              sx={{
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '800',
+                textTransform: 'capitalize',
+                color: '#7DDEC1',
+              }}
+              className='mt-[10px] p-0'
+            >
+              {' '}
+              Sign up
+            </Typography>
           </div>
+          <Image
+            src='/Images/x-square.svg'
+            alt='x-square'
+            width={24}
+            height={24}
+            className='absolute top-[20px] right-[20px] cursor-pointer'
+          />
+        </div>
+        <div className='mt-[24px] md:mt-[42px]'>
+          <form onSubmit={handleSubmit}>
+            <div className='w-full flex flex-wrap gap-y-[8px] md:gap-y-[24px] justify-between'>
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='first name'
+                  type='text'
+                  inputColor='white'
+                  name='firstname'
+                  value={firstName}
+                  errorText={firstNameError}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
 
-          <div className='mt-[20px]'>
-            <FormControl error={checked ? false : true}>
-              <div className='flex justify-start items-center gap-x-[15px] text-[white]'>
-                <Checkbox
-                  checked={checked}
-                  onChange={handleCheckBox}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                  sx={{
-                    padding: '0px',
-                    width: '20px',
-                    height: '20px',
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='last name'
+                  type='text'
+                  inputColor='white'
+                  name='lastname'
+                  value={lastName}
+                  errorText={lastNameError}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
 
-                    '& .MuiSvgIcon-root': {
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='email'
+                  type='text'
+                  inputColor='white'
+                  name='email'
+                  value={email}
+                  errorText={emailError}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='phone'
+                  type='text'
+                  inputColor='white'
+                  name='phone'
+                  value={phone}
+                  errorText={phoneError}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <DropdownField
+                  label='state'
+                  required
+                  name='state'
+                  errorText={stateError}
+                  value={state}
+                  options={states}
+                  inputColor='white'
+                  onChange={handleStateChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <DropdownField
+                  label='city'
+                  required
+                  name='city'
+                  errorText={cityError}
+                  value={city}
+                  options={cities}
+                  inputColor='white'
+                  onChange={handleCityChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='password'
+                  type='password'
+                  inputColor='white'
+                  name='password'
+                  value={password}
+                  errorText={passwordError}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='confirm password'
+                  type='password'
+                  inputColor='white'
+                  name='confirmpassword'
+                  value={confirmPassword}
+                  errorText={confirmPasswordError}
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className='mt-[20px]'>
+              <FormControl error={checked ? false : true}>
+                <div className='flex justify-start items-center gap-x-[15px] text-[white]'>
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleCheckBox}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                    sx={{
+                      padding: '0px',
                       width: '20px',
                       height: '20px',
-                      color: '#fff',
-                      borderRadius: '2px',
-                      padding: '0px',
-                    },
+
+                      '& .MuiSvgIcon-root': {
+                        width: '20px',
+                        height: '20px',
+                        color: '#fff',
+                        borderRadius: '2px',
+                        padding: '0px',
+                      },
+                    }}
+                  />
+                  <Typography
+                    variant='body1'
+                    className='text-[12px] flex justify-start items-center text-[white]'
+                  >
+                    I agree to all the Term of conditions & Privacy Policy
+                  </Typography>
+                </div>
+                {checkedError ? <FormHelperText> {checkedError} </FormHelperText> : ''}
+              </FormControl>
+            </div>
+
+            <div className='mt-[24px] md:mt-[23px]'>
+              <PrimaryBtn text='Register' type='submit' />
+            </div>
+
+            <div className='w-full flex justify-center mt-[8px] md:mt-[12px]'>
+              <Typography variant='body1' className='text-[12px] text-[white]'>
+                Already have an account? &nbsp;
+                <a
+                  href='/signin'
+                  style={{
+                    textDecoration: 'none',
                   }}
-                />
-                <Typography
-                  variant='body1'
-                  className='text-[12px] flex justify-start items-center text-[white]'
                 >
-                  I agree to all the Term of conditions & Privacy Policy
-                </Typography>
-              </div>
-              {checkedError ? <FormHelperText> {checkedError} </FormHelperText> : ''}
-            </FormControl>
-          </div>
+                  <span className='text-green'>Login</span>
+                </a>
+              </Typography>
+            </div>
 
-          <div className='mt-[24px] md:mt-[23px]'>
-            <PrimaryBtn text='Register' type='submit' />
-          </div>
+            <div className='flex justify-center items-center  mt-[8px] md:mt-[20px]'>
+              <div className='w-[97px] h-[0.5px] bg-[#fff]' />
+              <Typography variant='body1' className={`text-[12px] z-10 text-[white] mx-[10px]`}>
+                OR
+              </Typography>
 
-          <div className='w-full flex justify-center mt-[8px] md:mt-[12px]'>
-            <Typography variant='body1' className='text-[12px] text-[white]'>
-              Already have an account? &nbsp;
-              <a
-                href='/signin'
+              <div className='w-[97px] h-[0.5px] bg-[#fff]' />
+            </div>
+
+            <div className='w-full flex justify-center mt-[8px] md:mt-[20px]'>
+              <Button
                 style={{
-                  textDecoration: 'none',
+                  width: '100%',
+                  height: '45px',
+                  // background: 'transparent',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '16px',
+                  // color: '#fff',
+                  border: '0.5px solid #7DDEC1',
+                  cursor: 'pointer',
                 }}
+                className='bg-transparent hover:bg-green text-white hover:text-[#000] normal-case'
               >
-                <span className='text-green'>Login</span>
-              </a>
-            </Typography>
-          </div>
-
-          <div className='flex justify-center items-center  mt-[8px] md:mt-[20px]'>
-            <div className='w-[97px] h-[0.5px] bg-[#fff]' />
-            <Typography variant='body1' className={`text-[12px] z-10 text-[white] mx-[10px]`}>
-              OR
-            </Typography>
-
-            <div className='w-[97px] h-[0.5px] bg-[#fff]' />
-          </div>
-
-          <div className='w-full flex justify-center mt-[8px] md:mt-[20px]'>
-            <Button
-              style={{
-                width: '100%',
-                height: '45px',
-                // background: 'transparent',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '16px',
-                // color: '#fff',
-                border: '0.5px solid #7DDEC1',
-                cursor: 'pointer',
-              }}
-              className='bg-transparent hover:bg-green text-white hover:text-[#000] normal-case'
-            >
-              Sign up with <img src='/Images/google.svg' alt='google-icon' />
-            </Button>
-          </div>
-        </form>
+                Sign up with <img src='/Images/google.svg' alt='google-icon' />
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )

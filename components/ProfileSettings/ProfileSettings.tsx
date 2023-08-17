@@ -7,7 +7,7 @@ import Sidebar from '@/components/Sidebar/Sidebar'
 import { useState } from 'react'
 import ProfileTabsPanel from '../ProfileTabsPanel/ProfileTabsPanel'
 
-export default function Profile() {
+export default function ProfileSettings() {
   const [activeTab, setActiveTab] = useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

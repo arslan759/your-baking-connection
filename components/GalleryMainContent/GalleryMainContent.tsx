@@ -46,7 +46,7 @@ const GalleryMainContent = () => {
             >{`4.8`}</Typography>
           </div>
         </div>
-        <div className='w-[10%] flex justify-end'>
+        {/* <div className='w-[10%] flex justify-end'>
           <div className='flex flex-col items-center justify-end lg:justify-start gap-y-[4px] md:gap-y-[12px]'>
             <img
               src='/Images/edit.svg'
@@ -70,7 +70,7 @@ const GalleryMainContent = () => {
               edit
             </Typography>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className='hidden lg:block mt-[24px] bg-[#6C6C6C] h-[0.5px] w-full' />

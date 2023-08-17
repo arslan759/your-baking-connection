@@ -1,11 +1,12 @@
 import React from 'react'
 import { ProfileTabsPanelProps } from 'types'
-import MyProfile from '../MyProfile/MyProfile'
+import UserProfile from '../UserProfile/UserProfile'
+import EditProfile from '../EditProfile/EditProfile'
 
 const ProfileTabsPanel = ({ activeTab }: ProfileTabsPanelProps) => {
   return (
     <div>
-      {activeTab == 0 && <MyProfile />}
+      {activeTab == 0 && <EditProfile />}
       {activeTab == 1 && <div>Payment Details</div>}
       {activeTab == 2 && <div>Purchase History</div>}
       {activeTab == 3 && <div>Settings</div>}

@@ -277,6 +277,21 @@ export const ProductsCatagory = [
   'Croissants',
 ]
 
+export const steps = [
+  {
+    label: 'Sign Up',
+    description: `Sign up with just a click! No fuss, no worries, it’s that easy!`,
+  },
+  {
+    label: 'Enter Shop Details',
+    description: 'Sign in now: Quick and effortless entry to all your favorite features.',
+  },
+  {
+    label: 'Create Shop',
+    description: `Our advanced search filters make it easy to find what you’re looking for. Start your search now!`,
+  },
+]
+
 export const ProductTypes = [
   'All',
   'Cakes',
@@ -482,4 +497,31 @@ export const GalleryShopImages = [
   //   title: 'lasagna-3',
   //   url: 'https://cafedelites.com/wp-content/uploads/2018/01/Mamas-Best-Lasagna-IMAGE-43.jpg',
   // },
+]
+
+export const YourProfileCardItemData = [
+  {
+    id: 1,
+    title: 'Purchase History',
+    description: 'Recording and tracking transactions and monitoring cash flow',
+    image: '/Images/profile-purchase-history.svg',
+  },
+  {
+    id: 2,
+    title: 'Ratings and Reviews',
+    description: 'Customer management, financial and inventory management',
+    image: '/Images/profile-rating-and-reviews.svg',
+  },
+  {
+    id: 3,
+    title: 'Preferences',
+    description: 'Order confirmation, payment reminder, account balance update',
+    image: '/Images/profile-preferences.svg',
+  },
+  {
+    id: 4,
+    title: 'Privacy Setting',
+    description: 'Track, return, cancel an order, download invoice or buy again ',
+    image: '/Images/profile-privacy-settings.svg',
+  },
 ]

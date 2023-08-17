@@ -7,7 +7,7 @@ import { validateEmail } from 'helpers/validations'
 import DropdownField from '../DropdownField/DropdownField'
 import { cities, states } from 'Constants/constants'
 
-const MyProfile = () => {
+const EditProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const [firstName, setFirstName] = useState('')
@@ -148,9 +148,13 @@ const MyProfile = () => {
 
         <div className='w-full flex justify-center mt-[-100px] rounded-full overflow-hidden relative'>
           <img
-            src={picture ? picture : '/Images/avatarReview.png'}
+            src={
+              picture
+                ? picture
+                : `https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp`
+            }
             alt=''
-            className='w-[129px] h-[129px]'
+            className='w-[129px] h-[129px] rounded-full object-cover'
           />
         </div>
         <div className='w-full flex gap-[12px] justify-center items-center mt-[8px]'>
@@ -285,4 +289,4 @@ const MyProfile = () => {
   )
 }
 
-export default MyProfile
+export default EditProfile
