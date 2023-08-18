@@ -69,6 +69,7 @@ const DropdownField = ({
             padding: '5px',
             borderRadius: '5px',
             fontSize: '12px',
+            marginTop: '5px',
 
             '& fieldset': {
               borderColor: inputColor,

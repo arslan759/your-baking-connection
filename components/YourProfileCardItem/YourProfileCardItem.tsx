@@ -1,11 +1,16 @@
 import React from 'react'
-import styles from './styles.module.css'
+import { useRouter } from 'next/navigation'
 import { Typography } from '@mui/material'
+import styles from './styles.module.css'
 import { YourProfileCardItemProps } from 'types'
 
 const YourProfileCardItem = ({ image, title, description }: YourProfileCardItemProps) => {
+  const router = useRouter()
+
+  // function to handle card item click for redirecting
   const handleCardItemClick = (text: string) => {
-    console.log(text, 'clicked')
+    const slug = text.toLowerCase().replace(/\s+/g, '-')
+    router.push(`/profile/${slug}`)
   }
 
   return (

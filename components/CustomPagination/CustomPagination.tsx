@@ -26,6 +26,15 @@ const CustomPagination = () => {
             },
           },
 
+          '& .MuiPagination-ul li': {
+            width: '48px',
+            height: '48px',
+            '@media (max-width:767px)': {
+              width: '30px',
+              height: '30px',
+            },
+          },
+
           '& .MuiPaginationItem-root': {
             color: '#090909',
             fontSize: '16px',

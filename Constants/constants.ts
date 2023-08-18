@@ -518,10 +518,57 @@ export const YourProfileCardItemData = [
     description: 'Order confirmation, payment reminder, account balance update',
     image: '/Images/profile-preferences.svg',
   },
+  // {
+  //   id: 4,
+  //   title: 'Privacy Setting',
+  //   description: 'Track, return, cancel an order, download invoice or buy again',
+  //   image: '/Images/profile-privacy-settings.svg',
+  // },
   {
-    id: 4,
-    title: 'Privacy Setting',
+    id: 5,
+    title: 'Payment Details',
+    description: 'Customer management, financial and inventory management',
+    image: '/Images/profile-payment-details.svg',
+  },
+  {
+    id: 6,
+    title: 'Settings',
+    description: 'Order confirmation, payment reminder, account balance update',
+    image: '/Images/profile-settings.svg',
+  },
+  {
+    id: 7,
+    title: 'Help',
     description: 'Track, return, cancel an order, download invoice or buy again ',
-    image: '/Images/profile-privacy-settings.svg',
+    image: '/Images/profile-help.svg',
   },
 ]
+
+export const DurationOptions = [
+  'past 24 hours',
+  'past 1 week',
+  'past 1 month',
+  'past 3 months',
+  'past 6 months',
+  'past 1 year',
+]
+
+export const BakeryNameOptions = [
+  'Bakery 1',
+  'Bakery 2',
+  'Bakery 3',
+  'Bakery 4',
+  'Bakery 5',
+  'Bakery 6',
+  'Bakery 7',
+  'Bakery 8',
+  'Bakery 9',
+  'Bakery 10',
+  'Bakery 11',
+  'Bakery 12',
+  'Bakery 13',
+  'Bakery 14',
+  'Bakery 15',
+]
+
+export const RatingOptions = ['1 star', '2 star', '3 star', '4 star', '5 star']

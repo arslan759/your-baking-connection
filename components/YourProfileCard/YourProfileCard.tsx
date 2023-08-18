@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './styles.module.css'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import YourProfileCardItem from '../YourProfileCardItem/YourProfileCardItem'
 import { YourProfileCardItemData } from 'Constants/constants'
+import EditProfile from '../EditProfile/EditProfile'
 
 const YourProfileCard = () => {
+  const [isEdited, setIsEdited] = useState(false)
+
   const handleEditUserProfile = () => {
-    console.log('handleEdit Clicked')
+    setIsEdited(!isEdited)
   }
 
   return (
@@ -74,18 +77,7 @@ const YourProfileCard = () => {
               </Typography>
             </div>
 
-            {/* desktop View  Edit Button*/}
-            <div className='hidden md:block rounded-[8px] overflow-hidden w-[117px] h-[41px]'>
-              <PrimaryBtn text='Edit profile' handleClick={handleEditUserProfile} />
-            </div>
-
-            {/* Mobile View  Edit Button*/}
-            <img
-              src='/Images/edit.svg'
-              alt='edit-icon'
-              className='block md:hidden cursor-pointer self-start mt-[7px]'
-              onClick={() => handleEditUserProfile()}
-            />
+            <EditProfile />
           </div>
 
           {/* Desktop View Details*/}

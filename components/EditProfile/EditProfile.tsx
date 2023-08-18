@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material'
+import { Modal, Typography } from '@mui/material'
 
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
@@ -19,6 +19,9 @@ const EditProfile = () => {
   const [address, setAddress] = useState('')
   const [picture, setPicture] = useState('')
 
+  // Edit Button Modal State
+  const [isEdited, setIsEdited] = useState(false)
+
   // Error states
   const [firstNameError, setFirstNameError] = useState('')
   const [lastNameError, setLastNameError] = useState('')
@@ -28,6 +31,12 @@ const EditProfile = () => {
   const [cityError, setCityError] = useState('')
   const [addressError, setAddressError] = useState('')
   const [pictureError, setPictureError] = useState('')
+
+  // handleEditUserProfile function for edit button
+  const handleEditUserProfile = () => {
+    console.log('edit button clicked')
+    setIsEdited(!isEdited)
+  }
 
   // handleChange function for input fields
   const handleChange = (name: string, value: string) => {
@@ -96,11 +105,14 @@ const EditProfile = () => {
     e.preventDefault()
 
     // Checks if email is valid
-    const isEmailValid = validateEmail(email)
 
-    if (!isEmailValid) {
-      setEmailError('Email is not valid')
-      return
+    if (email) {
+      const isEmailValid = validateEmail(email)
+
+      if (!isEmailValid) {
+        setEmailError('Email is not valid')
+        return
+      }
     }
 
     // Logs the form data
@@ -133,159 +145,195 @@ const EditProfile = () => {
   }
 
   return (
-    <div className='w-full flex flex-col justify-center items-center h-[100%] mt-[100px] md:mt-[62px] pb-[48px] md:pb-[150px]'>
-      <div
-        className='w-[90vw] md:w-[686px] mt-[24px] md:mt-[42px] bg-[#fff] p-[36px] relative'
-        style={{
-          boxShadow: '0px 0px 25px 0px rgba(0, 0, 0, 0.15)',
+    <>
+      {/* desktop View  Edit Button*/}
+      <div className='hidden md:block rounded-[8px] overflow-hidden w-[117px] h-[41px]'>
+        <PrimaryBtn text='Edit profile' handleClick={handleEditUserProfile} />
+      </div>
+
+      {/* Mobile View  Edit Button*/}
+      <img
+        src='/Images/edit.svg'
+        alt='edit-icon'
+        className='block md:hidden cursor-pointer self-start mt-[7px]'
+        onClick={() => handleEditUserProfile()}
+      />
+
+      <Modal
+        sx={{
+          // position: 'absolute',
+          // top: '50%',
+          // left: '50%',
+          // transform: 'translate(-50%, -50%)',
+          // width: '100%',
+          // height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
+        open={isEdited}
+        onClose={handleEditUserProfile}
       >
-        <img
-          src='/Images/x-circle.svg'
-          alt='close-btn'
-          className='w-[24px] h-[24px] absolute right-[36px] top-[24px] cursor-pointer'
-        />
-
-        <div className='w-full flex justify-center mt-[-100px] rounded-full overflow-hidden relative'>
+        <div
+          className='w-[90vw] max-h-[90vh] overflow-y-scroll md:overflow-visible md:w-[686px] md:h-fit bg-[#fff] p-[16px] md:p-[36px] relative'
+          style={{
+            border: 'none !important',
+            boxShadow: '0px 0px 25px 0px rgba(0, 0, 0, 0.15)',
+            borderRadius: '8px',
+          }}
+        >
           <img
-            src={
-              picture
-                ? picture
-                : `https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp`
-            }
-            alt=''
-            className='w-[129px] h-[129px] rounded-full object-cover'
+            src='/Images/x-circle-black.svg'
+            alt='close-btn'
+            className='w-[24px] h-[24px] absolute left-[91%] top-[24px] cursor-pointer z-[1]'
+            onClick={handleEditUserProfile}
           />
-        </div>
-        <div className='w-full flex gap-[12px] justify-center items-center mt-[8px]'>
-          <Typography
-            sx={{
-              color: '#090909',
-              fontSize: '18px',
-              fontWeight: '500',
-              lineHeight: 'normal',
-              fontFamily: 'Orbitron',
-              textTransform: 'capitalize',
-              textAlign: 'center',
-            }}
-          >
-            John
-          </Typography>
-          <img
-            onClick={handleClick}
-            src='/Images/edit.svg'
-            alt='edit-icon'
-            className='w-[24px] h-[24px] cursor-pointer'
-          />
-        </div>
-        <form onSubmit={handleSubmit} className='mt-[36px]'>
-          <div className='w-full flex flex-wrap gap-y-[8px] md:gap-y-[24px] justify-between'>
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='first name'
-                type='text'
-                inputColor='#090909'
-                name='firstname'
-                value={firstName}
-                errorText={firstNameError}
-                required={false}
-                onChange={handleChange}
-              />
-            </div>
 
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='last name'
-                type='text'
-                inputColor='#090909'
-                name='lastname'
-                value={lastName}
-                errorText={lastNameError}
-                required={false}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='email'
-                type='text'
-                inputColor='#090909'
-                name='email'
-                value={email}
-                errorText={emailError}
-                required={false}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                label='phone'
-                type='text'
-                inputColor='#090909'
-                name='phone'
-                value={phone}
-                errorText={phoneError}
-                required={false}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <DropdownField
-                label='state'
-                required={false}
-                name='state'
-                errorText={stateError}
-                value={state}
-                options={states}
-                inputColor='#090909'
-                onChange={handleStateChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <DropdownField
-                label='city'
-                required={false}
-                name='city'
-                errorText={cityError}
-                value={city}
-                options={cities}
-                inputColor='#090909'
-                onChange={handleCityChange}
-              />
-            </div>
-            <div className='w-full md:w-[100%]'>
-              <InputField
-                label='current address'
-                type='textarea'
-                inputColor='#090909'
-                // multiline
-                rows={5}
-                name='address'
-                value={address}
-                errorText={addressError}
-                required={false}
-                onChange={handleChange}
-              />
-            </div>
-
-            <input
-              type='file'
-              ref={fileInputRef}
-              onChange={handlePictureChange}
-              style={{ display: 'none' }} // Hide the file input
+          <div className='w-full flex justify-center mt-[0px] md:mt-[-100px] rounded-full overflow-hidden relative'>
+            <img
+              src={
+                picture
+                  ? picture
+                  : `https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp`
+              }
+              alt=''
+              className='w-[129px] h-[129px] rounded-full object-cover'
             />
           </div>
-
-          <div className='mt-[24px] md:mt-[23px]'>
-            <PrimaryBtn text='save' type='submit' />
+          <div className='w-full flex gap-[12px] justify-center items-center mt-[8px]'>
+            <Typography
+              sx={{
+                color: '#090909',
+                fontSize: '24px !important',
+                fontWeight: '500 !important',
+                lineHeight: '32px',
+                fontFamily: 'Josefin Sans',
+                textTransform: 'capitalize',
+                textAlign: 'center',
+                '@media (max-width: 767px)': {
+                  fontSize: '18px !important',
+                  lineHeight: '24px !important',
+                },
+              }}
+            >
+              John
+            </Typography>
+            <img
+              onClick={handleClick}
+              src='/Images/edit.svg'
+              alt='edit-icon'
+              className='w-[24px] h-[24px] cursor-pointer'
+            />
           </div>
-        </form>
-      </div>
-    </div>
+          <form onSubmit={handleSubmit} className='mt-[36px]'>
+            <div className='w-full flex flex-wrap gap-y-[8px] md:gap-y-[24px] justify-between'>
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='first name'
+                  type='text'
+                  inputColor='#090909'
+                  name='firstname'
+                  value={firstName}
+                  errorText={firstNameError}
+                  required={false}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='last name'
+                  type='text'
+                  inputColor='#090909'
+                  name='lastname'
+                  value={lastName}
+                  errorText={lastNameError}
+                  required={false}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='email'
+                  type='text'
+                  inputColor='#090909'
+                  name='email'
+                  value={email}
+                  errorText={emailError}
+                  required={false}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <InputField
+                  label='phone'
+                  type='text'
+                  inputColor='#090909'
+                  name='phone'
+                  value={phone}
+                  errorText={phoneError}
+                  required={false}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <DropdownField
+                  label='state'
+                  required={false}
+                  name='state'
+                  errorText={stateError}
+                  value={state}
+                  options={states}
+                  inputColor='#090909'
+                  onChange={handleStateChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[45%]'>
+                <DropdownField
+                  label='city'
+                  required={false}
+                  name='city'
+                  errorText={cityError}
+                  value={city}
+                  options={cities}
+                  inputColor='#090909'
+                  onChange={handleCityChange}
+                />
+              </div>
+              <div className='w-full md:w-[100%]'>
+                <InputField
+                  label='current address'
+                  type='textarea'
+                  inputColor='#090909'
+                  // multiline
+                  rows={5}
+                  name='address'
+                  value={address}
+                  errorText={addressError}
+                  required={false}
+                  onChange={handleChange}
+                />
+              </div>
+
+              <input
+                type='file'
+                ref={fileInputRef}
+                onChange={handlePictureChange}
+                style={{ display: 'none' }} // Hide the file input
+              />
+            </div>
+
+            <div className='mt-[24px] md:mt-[23px]'>
+              <PrimaryBtn text='save' type='submit' />
+            </div>
+          </form>
+        </div>
+      </Modal>
+    </>
   )
 }
 
