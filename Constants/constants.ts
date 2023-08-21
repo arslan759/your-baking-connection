@@ -572,3 +572,31 @@ export const BakeryNameOptions = [
 ]
 
 export const RatingOptions = ['1 star', '2 star', '3 star', '4 star', '5 star']
+
+export const dietaryRestrictionOptions = [
+  'Gluten Free',
+  'Dairy Free',
+  'Nut Free',
+  'Egg Free',
+  'Soy Free',
+  'Sugar Free',
+  'Vegan',
+  'Vegetarian',
+  'Keto',
+  'Paleo',
+  'Halal',
+  'Kosher',
+]
+
+export const bakingStyleOptions = [
+  'Baking',
+  'Cake Decorating',
+  'Cupcake Decorating',
+  'Cookie Decorating',
+  'Bread Making',
+  'Pastry Making',
+  'Chocolate Making',
+  'Sugar Craft',
+  'Cake Pops',
+  'Cake Balls',
+]

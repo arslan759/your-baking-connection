@@ -172,3 +172,8 @@ export interface YourProfileCardItemProps {
   title: string
   description: string
 }
+
+export interface CustomSwitchProps {
+  value: boolean
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}

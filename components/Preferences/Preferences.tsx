@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
-// import PurchaseHistoryCard from '../PurchaseHistoryCard/PurchaseHistoryCard'
+import PreferencesCard from '../PreferencesCard/PreferencesCard'
 
 const Preferences = () => {
   return (
@@ -8,8 +8,7 @@ const Preferences = () => {
       <NavBar />
 
       <div className='mt-[24px] md:mt-[100px] flex justify-center'>
-        {/* <PurchaseHistoryCard /> */}
-        Preferences
+        <PreferencesCard />
       </div>
     </div>
   )
