@@ -1,6 +1,7 @@
 stages: # List of stages for jobs, and their order of execution
   - build
   - deploy
+
 # THIS IS THE PIPELINE FOR STAGING BRANCH
 build-staging: # This job runs in the build stage, which runs first.
   stage: build
@@ -48,40 +49,99 @@ deploy-staging:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && git checkout staging"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 stop app-staging"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 start 'npm start' --name app-staging"
-    #- ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm start"
 
-#build-main: # This job runs in the build stage, which runs first.
-#  stage: build
-#  only:
-#    - main
-#  before_script:
-#    - apt update
-#    - touch .env
-#    - mkdir ~/.ssh
-#    - eval $(ssh-agent -s)
-#    - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
-#    - chmod 700 /root/.ssh
-#    - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
-#  script:
-#    - pwd
-#    - echo "$ENV_FILE_STAGING" > .env
+
+# THIS IS THE PIPELINE FOR MAIN BRANCH
+build-main: # This job runs in the build stage, which runs first.
+  stage: build
+  only:
+    - main
+  before_script:
+    - apt update
+    - touch .env
+    - mkdir ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - chmod 700 /root/.ssh
+    - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
+    - echo "$ENV_FILE_MAIN" > .env
+  script:
+    - pwd
 #    - ls
-#    - cat .env
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-main"
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && mkdir pipeline-main"
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main && git clone https://gitlab+deploy-token-2272113:2xea47Mx1Brp3Tz-eaw_@gitlab.com/Codistan/yourbakingconnection/user-panel.git"
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && git checkout main"
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && rm -rf .env"
-#    - scp -r /builds/Codistan/yourbakingconnection/user-panel/.env $HOSTNAME@$PUBLIC_KEY:/home/ubuntu/pipeline-main/user-panel
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && npm install --legacy-peer-deps"
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && npm run build"
+    - cat .env
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-main"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && mkdir pipeline-main"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main && git clone https://gitlab+deploy-token-2272113:2xea47Mx1Brp3Tz-eaw_@gitlab.com/Codistan/yourbakingconnection/user-panel.git"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && git checkout main"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && rm -rf .env"
+    - scp -r /builds/Codistan/yourbakingconnection/user-panel/.env $HOSTNAME@$PUBLIC_KEY:/home/ubuntu/pipeline-main/user-panel
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && npm install --legacy-peer-deps"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && npm run build"
 
-#deploy-main:
-#  only:
-#    - main
-#  stage: deploy
+deploy-main:
+  only:
+    - main
+  stage: deploy
+  before_script:
+    - apt update
+    - touch .env
+    - mkdir ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - chmod 700 /root/.ssh
+    - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
+#    - echo "$ENV_FILE_STAGING" > .env
+  script:
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && git checkout main"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && pm2 stop app-main"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && pm2 start 'npm start' --name app-main"
 
-#  script:
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
-#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && pm2 start "npm start" --name app-main"
+# THIS IS THE PIPELINE FOR STAGING BRANCH
+build-test: # This job runs in the build stage, which runs first.
+  stage: build
+  only:
+    - test
+  before_script:
+    - apt update
+    - touch .env
+    - mkdir ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - chmod 700 /root/.ssh
+    - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
+    - echo "$ENV_FILE_TEST" > .env
+  script:
+    - pwd
+#    - ls
+    - cat .env
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-test"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && mkdir pipeline-test"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test && git clone https://gitlab+deploy-token-2272113:2xea47Mx1Brp3Tz-eaw_@gitlab.com/Codistan/yourbakingconnection/user-panel.git"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && git checkout test"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && rm -rf .env"
+    - scp -r /builds/Codistan/yourbakingconnection/user-panel/.env $HOSTNAME@$PUBLIC_KEY:/home/ubuntu/pipeline-test/user-panel
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && npm install --legacy-peer-deps"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && npm run build"
+
+
+deploy-test:
+  only:
+    - test
+  stage: deploy
+  before_script:
+    - apt update
+    - touch .env
+    - mkdir ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - chmod 700 /root/.ssh
+    - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
+#    - echo "$ENV_FILE_STAGING" > .env
+  script:
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && git checkout test"
+#    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && pm2 stop app-test"
+    - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && pm2 start 'npm start' --name app-test"
