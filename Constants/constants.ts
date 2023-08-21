@@ -600,3 +600,63 @@ export const bakingStyleOptions = [
   'Cake Pops',
   'Cake Balls',
 ]
+
+export const orderItemsData = [
+  {
+    id: 1,
+    title: 'ring pizza',
+    price: '10',
+    quantity: '1',
+  },
+  {
+    id: 2,
+    title: 'tasty burger',
+    price: '10',
+    quantity: '1',
+  },
+  {
+    id: 3,
+    title: 'nutella doughnut',
+    price: '15',
+    quantity: '1',
+  },
+  {
+    id: 4,
+    title: 'ice cream',
+    price: '10',
+    quantity: '1',
+  },
+]
+
+export const paymentMethods = [
+  {
+    id: 1,
+    title: 'Google-Pay-icon',
+    img: '/Images/google-pay-icon.svg',
+  },
+  {
+    id: 2,
+    title: 'Paypal-icon',
+    img: '/Images/paypal-icon.svg',
+  },
+  {
+    id: 3,
+    title: 'Apple-Pay-icon',
+    img: '/Images/apple-pay-icon.svg',
+  },
+  {
+    id: 4,
+    title: 'Visa-icon',
+    img: '/Images/visa-icon.svg',
+  },
+  {
+    id: 5,
+    title: 'Master-Card-icon',
+    img: '/Images/master-card-icon.svg',
+  },
+  {
+    id: 6,
+    title: 'Stripe-icon',
+    img: '/Images/stripe-icon.svg',
+  },
+]
