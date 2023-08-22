@@ -36,7 +36,6 @@ export interface SecondaryBtnProps {
   color: string
   handleClick: MouseEventHandler<HTMLButtonElement>
 }
-
 export interface InputFieldProps {
   type: string
   name: string
@@ -44,8 +43,21 @@ export interface InputFieldProps {
   error?: boolean
   errorText?: string
   label?: string
-  multiline?: boolean
+  startIcon?: React.ReactNode
   rows?: number
+  required: boolean
+  placeholder?: string
+  value: string
+  onChange: (name: string, value: string) => void
+  handleKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
+}
+
+export interface UploadInputFieldProps {
+  name: string
+  inputColor?: string
+  error?: boolean
+  errorText?: string
+  label?: string
   required: boolean
   placeholder?: string
   value: string
@@ -66,7 +78,8 @@ export interface PasswordFieldProps {
 
 export interface DropdownProps {
   name: string
-  label: string
+  label?: string
+  placeholder?: string
   required: boolean
   error?: boolean
   options: string[]
@@ -111,11 +124,56 @@ export interface SidebarProps {
   setActiveTab: (number: number) => void
 }
 
-export interface TabsPanelProps {
+export interface ProfileTabsPanelProps {
   activeTab: number
 }
 
 export interface ProfileNavigationMobileProps {
   activeTab: number
   handleChange: (event: React.SyntheticEvent, newValue: number) => void
+}
+
+export interface SignupStepperProps {
+  activeStep: number
+  handleBack?: () => void
+  handleNext?: () => void
+  handleReset?: () => void
+}
+
+export interface SignupSuccessProps {
+  setIsSuccess: (value: boolean) => void
+}
+
+export interface GalleryWeOfferItemProps {
+  title: string
+  image: string
+}
+
+export interface InspirationGalleryNavigationProps {
+  activeTab: number
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void
+}
+
+export interface InspirationGalleryTabsPanelProps {
+  activeTab: number
+}
+
+export interface GalleryProductCardProps {
+  image: string
+  title: string
+  description: string
+  category: string
+  oldPrice: string
+  newPrice: string
+}
+
+export interface YourProfileCardItemProps {
+  image: string
+  title: string
+  description: string
+}
+
+export interface CustomSwitchProps {
+  value: boolean
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }

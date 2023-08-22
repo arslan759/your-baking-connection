@@ -10,7 +10,24 @@ const SecondaryBtn = ({ handleClick, text, color }: SecondaryBtnProps) => {
 
   return (
     <Button
-      className={`bg-transparent hover:bg-transparent cursor-default rounded-[5px] p-[10px] flex items-center justify-center w-full h-full`}
+      // className={`bg-transparent hover:bg-transparent cursor-default rounded-[5px] p-[10px] flex items-center justify-center w-full h-full`}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        width: '100%',
+        height: '100%',
+        textTransform: 'capitalize',
+        backgroundColor: 'transparent',
+        borderRadius: '5px',
+        padding: '10px',
+        color: '#000',
+        '&:hover': {
+          backgroundColor: 'transparent',
+          color: '#fff',
+        },
+      }}
       disableElevation
       disableFocusRipple
       disableRipple

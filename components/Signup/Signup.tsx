@@ -1,32 +1,47 @@
-import Navbar from '../NavBar/NavBar'
-import SignupForm from '../SignupForm'
-import styles from './styles.module.css'
-
 import { useState } from 'react'
+import Navbar from '../NavBar/NavBar'
+import SignupForm from '../SignupForm/SignupForm'
+import AddShopDetailsForm from '../AddShopDetailsForm/AddShopDetailsForm'
+import SignupStepper from '../SignupStepper/SignupStepper'
+import styles from './styles.module.css'
+import SignupSuccess from '../SignupSuccess/SignupSuccess'
 
-import ForgotPasswordForm from '../ForgotPasswordForm/ForgotPasswordForm'
-import OTPForm from '../OTPForm/OTPForm'
+export default function Signup() {
+  // const [activeStep, setActiveStep] = useState(0)
+  // const [isSuccess, setIsSuccess] = useState(false)
 
-export default function ForgetPassword() {
-  const [isOtp, setIsOtp] = useState(false)
+  // const handleNext = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1)
+  // }
 
-  const handleOtpOpen = () => {
-    setIsOtp(true)
-  }
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1)
+  // }
 
-  const handleOtpClose = () => {
-    setIsOtp(false)
-    console.log('close')
-  }
+  // const handleReset = () => {
+  //   setActiveStep(0)
+  // }
+
+  // const StepperContent = () => {
+  //   switch (activeStep) {
+  //     case 0:
+  //       return <SignupForm />
+  //     case 1:
+  //       return <AddShopDetailsForm />
+  //     case 2:
+  //       return <div className='text-white'>step 3</div>
+  //     default:
+  //       return <SignupForm />
+  //   }
+  // }
+
+  // if (isSuccess) return <SignupSuccess setIsSuccess={setIsSuccess} />
 
   return (
-    <div className={`${styles.signup} pb-[180px] md:h-[1072px] md:bg-cover md:bg-center`}>
+    <div className={`${styles.signup}`}>
       <Navbar itemsColor='white' />
-      {isOtp ? (
-        <OTPForm closeOtp={handleOtpClose} type={'registration'} />
-      ) : (
-        <SignupForm openOtp={handleOtpOpen} />
-      )}
+      {/* <button onClick={() => setIsSuccess(true)}>success</button> */}
+      <SignupForm />
     </div>
   )
 }

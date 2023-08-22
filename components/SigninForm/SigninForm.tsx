@@ -124,7 +124,17 @@ const SigninForm = () => {
               WELCOME Back!
             </Typography>
 
-            <Typography variant='h5' className='text-green font-open_sans_bold  mt-[10px] p-0'>
+            <Typography
+              variant='h5'
+              sx={{
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '800',
+                textTransform: 'capitalize',
+                color: '#7DDEC1',
+              }}
+              className='mt-[10px] p-0'
+            >
               {' '}
               Sign in
             </Typography>
@@ -229,7 +239,7 @@ const SigninForm = () => {
 
             <div className='w-full flex flex-col items-center gap-[8px] md:gap-[24px] mt-[32px]'>
               <Typography variant='body1' className='text-[12px] text-[white]'>
-                Don’t have an account? &nbsp;
+                {`Don’t have an account? `}&nbsp;
                 <a
                   href='/signup'
                   style={{

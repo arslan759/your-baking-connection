@@ -2,7 +2,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormHelperText from '@mui/material/FormHelperText'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { Typography, dividerClasses } from '@mui/material'
+import { InputLabel, Typography, dividerClasses } from '@mui/material'
 import { DropdownProps } from 'types'
 import { useEffect, useState } from 'react'
 
@@ -23,6 +23,7 @@ const DropdownField = ({
   name,
   label,
   error,
+  placeholder,
   errorText,
   inputColor,
   value,
@@ -42,22 +43,24 @@ const DropdownField = ({
   }, [errorText, errorState])
 
   return (
-    <div className='flex flex-col capitalize mt-[8px]'>
-      <label
-        htmlFor={name}
-        style={{
-          color: inputColor,
-        }}
-      >
-        <Typography
-          className={`text-[12px] ${
-            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-          }`}
-          variant='body1'
+    <div className='flex flex-col capitalize'>
+      {!label ? null : (
+        <label
+          htmlFor={name}
+          style={{
+            color: inputColor,
+          }}
         >
-          {label}
-        </Typography>
-      </label>
+          <Typography
+            className={`text-[12px] ${
+              required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
+            }`}
+            variant='body1'
+          >
+            {label}
+          </Typography>
+        </label>
+      )}
       <FormControl
         sx={{
           '& .MuiOutlinedInput-root': {
@@ -66,6 +69,7 @@ const DropdownField = ({
             padding: '5px',
             borderRadius: '5px',
             fontSize: '12px',
+            marginTop: '5px',
 
             '& fieldset': {
               borderColor: inputColor,
@@ -80,10 +84,12 @@ const DropdownField = ({
         }}
         error={errorState}
       >
+        {/* <InputLabel id='demo-simple-select-label'>Age</InputLabel> */}
         <Select
-          className='mt-[5px]'
+          // className='mt-[5px]'
           labelId='demo-multiple-name-label'
           id='demo-multiple-name'
+          displayEmpty={placeholder ? true : false}
           value={value}
           onChange={handleChange}
           IconComponent={() => (
@@ -104,8 +110,13 @@ const DropdownField = ({
           )}
           // input={<OutlinedInput label='Name' />}
           MenuProps={MenuProps}
-          sx={{}}
         >
+          {placeholder ? (
+            <MenuItem disabled value=''>
+              {placeholder}
+            </MenuItem>
+          ) : null}
+
           {options.map((option, index) => (
             <MenuItem key={index} value={option}>
               {option}

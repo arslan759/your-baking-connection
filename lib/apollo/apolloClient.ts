@@ -50,6 +50,7 @@ export default function createApolloClient() {
         // eslint-disable-next-line no-console
         // @ts-ignore: Unreachable code error
         console.error(
+          // @ts-ignore: Unreachable code error
           `Unable to access the GraphQL API. Is it running and accessible at ${graphqlUrl} from the Storefront UI server?`,
         )
       } else {

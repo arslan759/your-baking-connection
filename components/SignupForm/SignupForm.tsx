@@ -1,24 +1,13 @@
-import { Button, FormControl, FormHelperText, Typography } from '@mui/material'
-import { withApollo } from 'lib/apollo/withApollo'
-import Checkbox from '@mui/material/Checkbox'
-import Image from 'next/image'
+import { Button, Checkbox, FormControl, FormHelperText, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
-import { PrimaryBtn } from '../Buttons'
-import { checkPassword, validateEmail } from 'helpers/validations'
 import DropdownField from '../DropdownField/DropdownField'
 import { cities, states } from 'Constants/constants'
-import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
-import { useRouter } from 'next/navigation'
-import { SignUpFormProps } from 'types'
-import withAuth from 'hocs/withAuth'
+import Image from 'next/image'
+import { checkPassword, validateEmail } from 'helpers/validations'
+import { PrimaryBtn } from '../Buttons'
 
-const SignupForm = ({ openOtp }: SignUpFormProps) => {
-  //sign up mutation hook
-  const [signUp, loadingSignUp] = useCreateUserWithOtp()
-
-  const router = useRouter()
-
+const SignupForm = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
@@ -84,7 +73,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   }
 
   // handleSubmit function for form submission
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // Checks if email is valid
@@ -179,45 +168,25 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
     console.log('checked is ', checked)
 
     // Resets the form fields
-    // setFirstName('')
-    // setLastName('')
-    // setEmail('')
-    // setPhone('')
-    // setState('')
-    // setCity('')
-    // setPassword('')
-    // setConfirmPassword('')
-    // setChecked(false)
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setPhone('')
+    setState('')
+    setCity('')
+    setPassword('')
+    setConfirmPassword('')
+    setChecked(false)
 
     // Resets the error states
-    // setFirstNameError('')
-    // setLastNameError('')
-    // setEmailError('')
-    // setPhoneError('')
-    // setStateError('')
-    // setCityError('')
-    // setPasswordError('')
-    // setConfirmPasswordError('')
-
-    //registration handler
-
-    try {
-      const userRand = Date.now()
-      const result = await signUp({
-        variables: {
-          user: { username: `u${userRand.toString()}`, email, password, type: 'email' },
-          profile: { firstName, lastName, state, city },
-        },
-      })
-      let userId = result?.data?.createUserWithOtp?.userId
-      if (userId) {
-        localStorage.setItem('userId', userId)
-
-        openOtp()
-      }
-    } catch (err) {
-      console.log(err)
-    }
+    setFirstNameError('')
+    setLastNameError('')
+    setEmailError('')
+    setPhoneError('')
+    setStateError('')
+    setCityError('')
+    setPasswordError('')
+    setConfirmPasswordError('')
   }
 
   return (
@@ -242,7 +211,14 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
 
             <Typography
               variant='h5'
-              className='text-green font-open_sans_bold capitalise mt-[10px] p-0'
+              sx={{
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '800',
+                textTransform: 'capitalize',
+                color: '#7DDEC1',
+              }}
+              className='mt-[10px] p-0'
             >
               {' '}
               Sign up
@@ -449,4 +425,4 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   )
 }
 
-export default withApollo()(withAuth(SignupForm))
+export default SignupForm
