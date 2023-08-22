@@ -154,6 +154,13 @@
   /* padding: 0px 40px 0px 40px; */
 }
 
+.review-swiper .swiper-wrapper {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 @media screen and (max-width: 1023px) {
   .review-swiper .swiper {
     height: 800px;
@@ -164,11 +171,12 @@
   .review-swiper .swiper {
     height: 600px;
   }
-}
 
-.review-swiper .swiper-wrapper {
-  display: flex;
-  justify-content: start;
+  .review-swiper .swiper-wrapper {
+    box-sizing: border-box;
+    justify-content: start;
+    align-items: start;
+  }
 }
 
 .review-swiper .swiper-slide {

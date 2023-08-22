@@ -61,16 +61,17 @@ const ClientReviewSwiper = () => {
             direction: 'vertical',
           },
 
-      //   1024: {
-      //     slidesPerView: 2,
-      //     direction: 'horizontal',
-      //   },
-      // }}
+          1024: {
+            slidesPerView: 2,
+            direction: 'horizontal',
+            spaceBetween: 1,
+          },
+        }}
       >
         {ReviewCardsData.map((review, index) => {
           const { name, content, image } = review
           return (
-            <SwiperSlide key={review?.name}>
+            <SwiperSlide key={index}>
               <ClientReviewCard
                 color={index % 2 === 0 ? '#FFD9E4' : '#7DDEC1'}
                 name={name}

@@ -359,7 +359,14 @@ const YourProfileCard = () => {
         <div className='w-full flex flex-wrap justify-center md:justify-start gap-y-[32px] md:gap-y-[56px] gap-x-[24px] mt-[48px] md:mt-[64px]'>
           {YourProfileCardItemData.map((item, index) => {
             const { image, title, description } = item
-            return <YourProfileCardItem title={title} image={image} description={description} />
+            return (
+              <YourProfileCardItem
+                key={title}
+                title={title}
+                image={image}
+                description={description}
+              />
+            )
           })}
         </div>
       </div>

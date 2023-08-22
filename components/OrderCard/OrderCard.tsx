@@ -66,6 +66,7 @@ const OrderCard = () => {
 
           return (
             <div
+              key={index}
               className='w-full flex justify-between py-[8px]'
               style={{
                 borderBottom: '1px solid #212529',
@@ -241,7 +242,7 @@ const OrderCard = () => {
 
         <div className='mt-[16px] flex flex-wrap justify-start gap-x-[10px] md:gap-x-[20px] gap-y-[20px]'>
           {paymentMethods.map((item) => (
-            <img src={item.img} alt={item.title} className='h-[22px]' />
+            <img key={item.title} src={item.img} alt={item.title} className='h-[22px]' />
           ))}
         </div>
 
