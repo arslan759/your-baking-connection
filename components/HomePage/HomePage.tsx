@@ -10,7 +10,7 @@ import StayInTouchForm from '../StayInTouch'
 
 const HomePage = () => {
   return (
-    <div>
+    <div className='!overflow-hidden'>
       <div className='relative'>
         <div className='absolute top-0 z-10'>
           <div className='w-[100vw] relative'>
