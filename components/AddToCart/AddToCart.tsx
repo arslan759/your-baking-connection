@@ -3,6 +3,7 @@ import NavBar from '../NavBar/NavBar'
 import { Typography } from '@mui/material'
 import CartCard from '../CartCard/CartCard'
 import OrderCard from '../OrderCard/OrderCard'
+import { orderItemsData } from 'Constants/constants'
 
 const AddToCart = () => {
   return (
@@ -38,7 +39,12 @@ const AddToCart = () => {
                 color: '#000',
               }}
             >
-              Total (1 item) 10$
+              Total ({orderItemsData.length} item){' '}
+              {orderItemsData.reduce(
+                (acc, item) => acc + parseInt(item.price) * parseInt(item.quantity),
+                0,
+              )}
+              $
             </Typography>
           </div>
 
