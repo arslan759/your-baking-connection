@@ -119,21 +119,39 @@ const SigninForm = () => {
       >
         <div className=''>
           <div className='md:mt-[24px]'>
-            <Typography variant='body2' className='text-white uppercase tracking-[1px] p-0'>
+            <Typography
+              sx={{
+                fontSize: '14px !important',
+                fontFamily: 'Josefin Sans',
+                lineHeight: 'normal',
+                fontWeight: '500',
+                letterSpacing: '1px',
+                padding: '0px',
+                textTransform: 'uppercase',
+                color: '#fff',
+                '@media (max-width: 767px)': {
+                  fontSize: '12px !important',
+                },
+              }}
+            >
               {' '}
               WELCOME Back!
             </Typography>
 
             <Typography
-              variant='h5'
               sx={{
+                marginTop: '10px',
+                padding: '0px',
+                fontSize: '32px !important',
                 fontFamily: 'Open Sans',
                 lineHeight: 'normal',
-                fontWeight: '800',
+                fontWeight: '800 !important',
                 textTransform: 'capitalize',
                 color: '#7DDEC1',
+                '@media (max-width: 767px)': {
+                  fontSize: '24px !important',
+                },
               }}
-              className='mt-[10px] p-0'
             >
               {' '}
               Sign in
@@ -199,8 +217,16 @@ const SigninForm = () => {
                     }}
                   />
                   <Typography
-                    variant='body1'
-                    className='text-[12px] flex justify-start items-center text-[white]'
+                    sx={{
+                      fontSize: '12px !important',
+                      fontFamily: 'Open Sans',
+                      lineHeight: 'normal',
+                      fontWeight: '400 !important',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'start',
+                      color: '#fff',
+                    }}
                   >
                     Remember Password
                   </Typography>
@@ -213,7 +239,15 @@ const SigninForm = () => {
                     textDecoration: 'none',
                   }}
                 >
-                  <Typography variant='body1' className='text-[12px] text-green'>
+                  <Typography
+                    sx={{
+                      fontSize: '12px !important',
+                      fontFamily: 'Open Sans',
+                      lineHeight: 'normal',
+                      fontWeight: '400 !important',
+                      color: '#7DDEC1',
+                    }}
+                  >
                     Forget Password?
                   </Typography>
                 </a>
@@ -230,7 +264,16 @@ const SigninForm = () => {
 
             <div className='flex justify-center items-center  mt-[20px]'>
               <div className='w-[97px] h-[0.5px] bg-[#fff]' />
-              <Typography variant='body1' className={`text-[12px] z-10 text-[white] mx-[10px]`}>
+              <Typography
+                sx={{
+                  fontSize: '12px !important',
+                  fontFamily: 'Open Sans',
+                  lineHeight: 'normal',
+                  fontWeight: '400 !important',
+                  color: '#fff',
+                  marginX: '10px',
+                }}
+              >
                 OR
               </Typography>
 
@@ -238,7 +281,15 @@ const SigninForm = () => {
             </div>
 
             <div className='w-full flex flex-col items-center gap-[8px] md:gap-[24px] mt-[32px]'>
-              <Typography variant='body1' className='text-[12px] text-[white]'>
+              <Typography
+                sx={{
+                  fontSize: '12px !important',
+                  fontFamily: 'Open Sans',
+                  lineHeight: 'normal',
+                  fontWeight: '400 !important',
+                  color: '#fff',
+                }}
+              >
                 {`Don’t have an account? `}&nbsp;
                 <a
                   href='/signup'
@@ -246,10 +297,25 @@ const SigninForm = () => {
                     textDecoration: 'none',
                   }}
                 >
-                  <span className='text-green'>Sign Up</span>
+                  <span
+                    style={{
+                      fontWeight: '600 !important',
+                      color: '#7DDEC1',
+                    }}
+                  >
+                    Sign Up
+                  </span>
                 </a>
               </Typography>
-              <Typography variant='body1' className='text-[12px] text-[white]'>
+              <Typography
+                sx={{
+                  fontSize: '12px !important',
+                  fontFamily: 'Open Sans',
+                  lineHeight: 'normal',
+                  fontWeight: '400 !important',
+                  color: '#fff',
+                }}
+              >
                 Are you a baker? &nbsp;
                 <a
                   href='/signin'
@@ -257,7 +323,14 @@ const SigninForm = () => {
                     textDecoration: 'none',
                   }}
                 >
-                  <span className='text-green'>Login</span>
+                  <span
+                    style={{
+                      fontWeight: '600 !important',
+                      color: '#7DDEC1',
+                    }}
+                  >
+                    Login
+                  </span>
                 </a>
               </Typography>
             </div>

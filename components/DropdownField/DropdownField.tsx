@@ -45,17 +45,22 @@ const DropdownField = ({
   return (
     <div className='flex flex-col capitalize'>
       {!label ? null : (
-        <label
-          htmlFor={name}
-          style={{
-            color: inputColor,
-          }}
-        >
+        <label htmlFor={name}>
           <Typography
-            className={`text-[12px] ${
-              required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-            }`}
-            variant='body1'
+            sx={{
+              color: inputColor,
+              fontSize: '12px !important',
+              '@media (max-width: 767px)': {
+                fontSize: '12px !important',
+              },
+              '::after': required
+                ? {
+                    content: "'*'",
+                    marginLeft: '5px',
+                    color: 'red',
+                  }
+                : {},
+            }}
           >
             {label}
           </Typography>
@@ -68,8 +73,11 @@ const DropdownField = ({
             height: '35px',
             padding: '5px',
             borderRadius: '5px',
-            fontSize: '12px',
-            marginTop: '5px',
+            fontSize: '12px !important',
+            '@media (max-width: 767px)': {
+              fontSize: '12px !important',
+            },
+            marginTop: label ? '5px' : '0px',
 
             '& fieldset': {
               borderColor: inputColor,

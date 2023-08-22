@@ -83,15 +83,19 @@ const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
         <div className=''>
           <div className='md:mt-[24px]'>
             <Typography
-              variant='h5'
               sx={{
+                marginTop: '10px',
+                padding: '0px',
+                fontSize: '32px !important',
                 fontFamily: 'Open Sans',
                 lineHeight: 'normal',
-                fontWeight: '800',
+                fontWeight: '800 !important',
                 textTransform: 'capitalize',
                 color: '#7DDEC1',
+                '@media (max-width: 767px)': {
+                  fontSize: '24px !important',
+                },
               }}
-              className='mt-[10px] p-0'
             >
               {' '}
               Enter verification code
@@ -107,7 +111,21 @@ const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
           />
         </div>
         <div className='w-[80%] md:w-[90%]'>
-          <Typography variant='body2' className='text-white normal-case  mt-[10px] p-0'>
+          <Typography
+            sx={{
+              marginTop: '10px',
+              padding: '0px',
+              fontSize: '18px !important',
+              fontFamily: 'Josefin Sans',
+              lineHeight: 'normal',
+              fontWeight: '400 !important',
+              textTransform: 'normal',
+              color: '#fff',
+              '@media (max-width: 767px)': {
+                fontSize: '12px !important',
+              },
+            }}
+          >
             {' '}
             Enter the verification code sent to your email address to reset your password!
           </Typography>
@@ -151,14 +169,48 @@ const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
             </div>
 
             <div className='w-full flex justify-center mt-[12px] md:mt-[24px]'>
-              <Typography variant='body1' className='text-[12px] normal-case text-[white]'>
+              <Typography
+                sx={{
+                  fontSize: '14px !important',
+                  fontFamily: 'Open Sans',
+                  lineHeight: 'normal',
+                  fontWeight: '700 !important',
+                  letterSpacing: '0.24px',
+                  color: '#fff',
+                  '@media (max-width: 767px)': {
+                    fontSize: '12px !important',
+                  },
+                }}
+              >
                 {`Didn't receive the CODE?`} &nbsp;
-                <span className='text-green cursor-pointer'>RESEND CODE</span>
+                <span
+                  style={{
+                    color: '#7DDEC1',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                  }}
+                >
+                  resend code
+                </span>
               </Typography>
             </div>
 
             <div className='w-full flex justify-center mt-[12px] md:mt-[24px]'>
-              <Typography variant='body1' className='text-white text-[12px] normal-case'>
+              <Typography
+                sx={{
+                  marginTop: '10px',
+                  padding: '0px',
+                  fontSize: '12px !important',
+                  fontFamily: 'Open Sans',
+                  lineHeight: 'normal',
+                  fontWeight: '400 !important',
+                  textTransform: 'normal',
+                  color: '#fff',
+                  '@media (max-width: 767px)': {
+                    fontSize: '12px !important',
+                  },
+                }}
+              >
                 Copyright © 2023 Your Baking Connection
               </Typography>
             </div>

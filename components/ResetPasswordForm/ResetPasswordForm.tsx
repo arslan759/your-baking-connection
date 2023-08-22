@@ -106,21 +106,39 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
       >
         <div className=''>
           <div className='md:mt-[24px]'>
-            <Typography variant='body2' className='text-white uppercase tracking-[1px] p-0'>
+            <Typography
+              sx={{
+                fontSize: '14px !important',
+                fontFamily: 'Josefin Sans',
+                lineHeight: 'normal',
+                fontWeight: '500',
+                letterSpacing: '1px',
+                padding: '0px',
+                textTransform: 'uppercase',
+                color: '#fff',
+                '@media (max-width: 767px)': {
+                  fontSize: '12px !important',
+                },
+              }}
+            >
               {' '}
               joining is quick and easy
             </Typography>
 
             <Typography
-              variant='h5'
               sx={{
+                marginTop: '10px',
+                padding: '0px',
+                fontSize: '32px !important',
                 fontFamily: 'Open Sans',
                 lineHeight: 'normal',
-                fontWeight: '800',
+                fontWeight: '800 !important',
                 textTransform: 'capitalize',
                 color: '#7DDEC1',
+                '@media (max-width: 767px)': {
+                  fontSize: '24px !important',
+                },
               }}
-              className='mt-[10px] p-0'
             >
               {' '}
               <span className='font-[800]'>New Password</span>
@@ -135,7 +153,21 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
           />
         </div>
         <div>
-          <Typography variant='body2' className='text-white normal-case  mt-[10px] p-0'>
+          <Typography
+            sx={{
+              marginTop: '24px',
+              padding: '0px',
+              fontSize: '18px !important',
+              fontFamily: 'Josefin Sans',
+              lineHeight: 'normal',
+              fontWeight: '400 !important',
+              textTransform: 'normal',
+              color: '#fff',
+              '@media (max-width: 767px)': {
+                fontSize: '12px !important',
+              },
+            }}
+          >
             {' '}
             Enter your new password
           </Typography>
@@ -175,7 +207,21 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
           </form>
         </div>
         <div className='w-full flex justify-center mt-[16px]'>
-          <Typography variant='body1' className='text-white text-[12px] normal-case mt-[10px] p-0'>
+          <Typography
+            sx={{
+              marginTop: '10px',
+              padding: '0px',
+              fontSize: '12px !important',
+              fontFamily: 'Open Sans',
+              lineHeight: 'normal',
+              fontWeight: '400 !important',
+              textTransform: 'normal',
+              color: '#fff',
+              '@media (max-width: 767px)': {
+                fontSize: '12px !important',
+              },
+            }}
+          >
             Copyright © 2023 Your Baking Connection
           </Typography>
         </div>

@@ -41,14 +41,19 @@ const InputField = ({
       {label ? (
         <label htmlFor={name}>
           <Typography
-            className={`${required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''}`}
-            variant='body1'
             sx={{
               color: inputColor,
               fontSize: '12px !important',
               '@media (max-width: 767px)': {
                 fontSize: '12px !important',
               },
+              '::after': required
+                ? {
+                    content: "'*'",
+                    marginLeft: '5px',
+                    color: 'red',
+                  }
+                : {},
             }}
           >
             {label}
@@ -59,7 +64,6 @@ const InputField = ({
       )}
 
       <TextField
-        className={`${label ? 'mt-[5px]' : 'mt-[0px]'}`}
         sx={{
           '& .MuiOutlinedInput-root': {
             color: inputColor,
@@ -67,7 +71,7 @@ const InputField = ({
             padding: '5px',
             borderRadius: '5px',
             fontSize: '12px',
-
+            marginTop: label ? '5px' : '0px',
             '& fieldset': {
               borderColor: inputColor,
             },
