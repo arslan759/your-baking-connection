@@ -177,3 +177,10 @@ export interface CustomSwitchProps {
   value: boolean
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
+
+export interface CartCardDetailsItemProps {
+  icon: string
+  title: string
+  description: string
+  value: string
+}
