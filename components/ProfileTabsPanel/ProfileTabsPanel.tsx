@@ -1,6 +1,5 @@
 import React from 'react'
 import { ProfileTabsPanelProps } from 'types'
-import UserProfile from '../UserProfile/UserProfile'
 import EditProfile from '../EditProfile/EditProfile'
 
 const ProfileTabsPanel = ({ activeTab }: ProfileTabsPanelProps) => {

@@ -15,9 +15,9 @@ const SecondaryBtn = ({ handleClick, text, color }: SecondaryBtnProps) => {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        cursor: 'pointer',
         width: '100%',
         height: '100%',
+        cursor: 'default',
         textTransform: 'capitalize',
         backgroundColor: 'transparent',
         borderRadius: '5px',
@@ -34,12 +34,12 @@ const SecondaryBtn = ({ handleClick, text, color }: SecondaryBtnProps) => {
     >
       <Typography
         onClick={handleClick}
-        className='hover:scale-125 ease-in-out transition-all duration-300'
         sx={{
           color: color,
           cursor: 'pointer',
           textTransform: 'capitalize',
           position: 'relative',
+          width: 'fit-content',
           '::after': {
             content: '""',
             position: 'absolute',
@@ -48,6 +48,10 @@ const SecondaryBtn = ({ handleClick, text, color }: SecondaryBtnProps) => {
             width: '100%',
             height: '1px',
             backgroundColor: color,
+          },
+          '&:hover': {
+            scale: 1.25,
+            transition: 'all 300ms ease-in-out',
           },
         }}
         variant='body2'
