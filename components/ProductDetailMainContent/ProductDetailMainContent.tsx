@@ -3,6 +3,7 @@ import { color } from 'framer-motion'
 import React from 'react'
 import InputField from '../InputField/InputField'
 import ProductDetailForm from '../ProductDetailForm/ProductDetailForm'
+import CartCardDetailsItem from '../CartCardDetailsItem/CartCardDetailsItem'
 
 const ProductDetailMainContent = () => {
   return (
@@ -125,6 +126,43 @@ const ProductDetailMainContent = () => {
       </div>
 
       <div className='mt-[24px] md:mt-[20px] bg-[#000] h-[1px] w-full' />
+
+      <Typography
+        sx={{
+          color: '#090909',
+          fontSize: '24px !important',
+          fontWeight: '700 !important',
+          lineHeight: 'normal',
+          fontFamily: 'Open Sans',
+          marginTop: '15px',
+          '@media (max-width:767px)': {
+            fontSize: '20px !important',
+          },
+        }}
+      >
+        Pickup and Delivery
+      </Typography>
+
+      <div className='mt-[22px] md:mt-[15px] w-full flex flex-col items-start gap-y-[16px]'>
+        <CartCardDetailsItem
+          icon='/Images/cart-pickup.svg'
+          title='Pickup'
+          description='Available for pickup on 12 Sep'
+          value='Free'
+        />
+        <CartCardDetailsItem
+          icon='/Images/cart-sales-tax.svg'
+          title='Sales Tax'
+          description='Eligible for sales tax'
+          value='Not included                     '
+        />
+        <CartCardDetailsItem
+          icon='/Images/cart-delivery-icon.svg'
+          title='Home Delivery'
+          description='Same day delivery available'
+          value='3.95$'
+        />
+      </div>
 
       {/* <div className='hidden lg:block mt-[12px] bg-[#6C6C6C] h-[0.5px] w-full' /> */}
     </div>

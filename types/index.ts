@@ -165,6 +165,8 @@ export interface GalleryProductCardProps {
   category: string
   oldPrice: string
   newPrice: string
+  width?: string
+  mdWidth?: string
 }
 
 export interface YourProfileCardItemProps {

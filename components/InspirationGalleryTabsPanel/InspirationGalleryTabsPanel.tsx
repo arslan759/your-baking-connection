@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { InspirationGalleryTabsPanelProps } from 'types'
 import GalleryNoAvailableProducts from '../GalleryNoAvailableProducts/GalleryNoAvailableProducts'
 import GalleryAvailableProducts from '../GalleryAvailableProducts/GalleryAvailableProducts'
+import ClientReviewSwiper from '../ClientReviewSwiper/ClientReviewSwiper'
 
 const InspirationGalleryTabsPanel = ({ activeTab }: InspirationGalleryTabsPanelProps) => {
   const [products, setProducts] = useState(1)
@@ -15,7 +16,13 @@ const InspirationGalleryTabsPanel = ({ activeTab }: InspirationGalleryTabsPanelP
       {activeTab == 1 && <div>Gallery of work</div>}
       {activeTab == 2 && <div>terms and conditions</div>}
       {activeTab == 3 && <div>allergen info</div>}
-      {activeTab == 4 && <div>reviews</div>}
+      {activeTab == 4 && (
+        <div className='w-full flex justify-center'>
+          <div className='review-swiper w-[90%]'>
+            <ClientReviewSwiper />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

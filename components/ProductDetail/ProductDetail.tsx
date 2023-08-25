@@ -5,6 +5,7 @@ import ProductDetailBreadCrumbs from '../ProductDetailBreadCrumbs/ProductDetailB
 import GallerySwiper from '../GallerySwiper/GallerySwiper'
 import ProductDetailMainContent from '../ProductDetailMainContent/ProductDetailMainContent'
 import ProductDetailTabsSection from '../ProductDetailTabsSection/ProductDetailTabsSection'
+import MatchMadeInHeaven from '../MatchMadeInHeaven/MatchMadeInHeaven'
 
 const ProductDetail = () => {
   return (
@@ -60,6 +61,12 @@ const ProductDetail = () => {
 
       <div className='w-full flex flex-col items-center mt-[24px] md:mt-[32px]'>
         <ProductDetailTabsSection />
+      </div>
+
+      <div className='w-full flex flex-col items-center mt-[48px] md:mt-[64px]'>
+        <div className='w-[90%] md:w-[95%]'>
+          <MatchMadeInHeaven />
+        </div>
       </div>
     </div>
   )
