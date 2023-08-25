@@ -399,6 +399,21 @@ export const GalleryNavigation = [
   },
 ]
 
+export const ProductDetailNavigationTabs = [
+  {
+    id: 1,
+    title: 'Description',
+  },
+  {
+    id: 2,
+    title: 'reviews',
+  },
+  {
+    id: 3,
+    title: 'FAQs',
+  },
+]
+
 export const GalleryProductsData = [
   {
     id: 1,

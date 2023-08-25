@@ -34,7 +34,7 @@ export interface ToggleNavBarProps {
 export interface SecondaryBtnProps {
   text: string
   color: string
-  handleClick: MouseEventHandler<HTMLButtonElement>
+  handleClick: MouseEventHandler<HTMLDivElement>
 }
 export interface InputFieldProps {
   type: string
@@ -165,6 +165,8 @@ export interface GalleryProductCardProps {
   category: string
   oldPrice: string
   newPrice: string
+  width?: string
+  mdWidth?: string
 }
 
 export interface YourProfileCardItemProps {
@@ -183,4 +185,13 @@ export interface CartCardDetailsItemProps {
   title: string
   description: string
   value: string
+}
+
+export interface ProductDetailTabsPanelProps {
+  activeTab: number
+}
+
+export interface ProductDetailTabsProps {
+  activeTab: number
+  handleChange: (event: React.SyntheticEvent, newValue: number) => void
 }

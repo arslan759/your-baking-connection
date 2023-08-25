@@ -135,12 +135,20 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .gallery-swiper .swiper-pagination,
+  .gallery-swiper .swiper-pagination {
+    width: 100% !important;
+  }
   .gallery-swiper .swiper-pagination-horizontal {
-    left: 70% !important;
+    /* left: 70% !important; */
+    left: none !important;
     bottom: 20px !important;
+    gap: 3px !important;
+    row-gap: 5px;
+    justify-content: center !important;
     height: 50px !important;
     flex-direction: row !important;
+    flex-wrap: wrap;
+    width: 70% !important;
     white-space: nowrap !important;
     /* transform: translate(-50%, 0%) !important; */
   }

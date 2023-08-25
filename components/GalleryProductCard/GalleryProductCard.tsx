@@ -11,6 +11,8 @@ const GalleryProductCard = ({
   category,
   oldPrice,
   newPrice,
+  width,
+  mdWidth,
 }: GalleryProductCardProps) => {
   const [isHovering, setIsHovering] = useState(false) // handle mouse enter and leave for more details on desktop view
   const [isDetailsVisible, setIsDetailsVisible] = useState(false) // Toggle More Details for mobile view
@@ -46,17 +48,20 @@ const GalleryProductCard = ({
   // console.log('isDetailsVisible', isDetailsVisible)
   // console.log('isHovering', isHovering)
 
+  console.log('mdWidth', mdWidth)
+  console.log('width', width)
+
   return (
     <Card
       elevation={0}
       sx={{
-        width: '32%',
+        width: mdWidth ? mdWidth : '32%',
         border: '0.5px solid #888',
         borderRadius: '5px',
         paddingBottom: '6px',
 
         '@media (max-width:767px)': {
-          width: '49%',
+          width: width ? width : '49%',
         },
         height: 'auto',
       }}

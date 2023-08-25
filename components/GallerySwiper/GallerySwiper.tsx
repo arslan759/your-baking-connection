@@ -28,15 +28,6 @@ const GallerySwiper = () => {
         rewind={true}
         pagination={{
           clickable: false,
-          dynamicBullets: true,
-        }}
-        breakpoints={{
-          1023: {
-            pagination: {
-              clickable: true,
-              dynamicBullets: false,
-            },
-          },
         }}
         slidesPerView={1}
         onSlideChange={handleSlideChange}

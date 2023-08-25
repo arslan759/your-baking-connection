@@ -6,7 +6,7 @@ const CartCardDetailsItem = ({ icon, title, description, value }: CartCardDetail
   return (
     <div className='w-full flex justify-between'>
       <div className='w-[80%] flex items-center'>
-        <img src={icon} alt={title} className='mr-[16px] w-[24px]git' />
+        <img src={icon} alt={title} className='mr-[16px] h-[22px] w-[22px]' />
         <Typography
           sx={{
             fontSize: '16px !important',
@@ -37,6 +37,7 @@ const CartCardDetailsItem = ({ icon, title, description, value }: CartCardDetail
             fontWeight: '600 !important',
             lineHeight: '24px',
             textTransform: 'capitalize',
+            textAlign: 'right',
             color: '#888',
           }}
         >
