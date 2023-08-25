@@ -13,7 +13,7 @@ const CustomPagination = () => {
       <Pagination
         count={99}
         boundaryCount={1}
-        siblingCount={0}
+        siblingCount={1}
         variant='outlined'
         shape='rounded'
         page={page}

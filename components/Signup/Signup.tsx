@@ -1,47 +1,32 @@
-import { useState } from 'react'
 import Navbar from '../NavBar/NavBar'
-import SignupForm from '../SignupForm/SignupForm'
-import AddShopDetailsForm from '../AddShopDetailsForm/AddShopDetailsForm'
-import SignupStepper from '../SignupStepper/SignupStepper'
+import SignupForm from '../SignupForm'
 import styles from './styles.module.css'
-import SignupSuccess from '../SignupSuccess/SignupSuccess'
 
-export default function Signup() {
-  // const [activeStep, setActiveStep] = useState(0)
-  // const [isSuccess, setIsSuccess] = useState(false)
+import { useState } from 'react'
 
-  // const handleNext = () => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1)
-  // }
+import ForgotPasswordForm from '../ForgotPasswordForm/ForgotPasswordForm'
+import OTPForm from '../OTPForm/OTPForm'
 
-  // const handleBack = () => {
-  //   setActiveStep((prevActiveStep) => prevActiveStep - 1)
-  // }
+export default function ForgetPassword() {
+  const [isOtp, setIsOtp] = useState(false)
 
-  // const handleReset = () => {
-  //   setActiveStep(0)
-  // }
+  const handleOtpOpen = () => {
+    setIsOtp(true)
+  }
 
-  // const StepperContent = () => {
-  //   switch (activeStep) {
-  //     case 0:
-  //       return <SignupForm />
-  //     case 1:
-  //       return <AddShopDetailsForm />
-  //     case 2:
-  //       return <div className='text-white'>step 3</div>
-  //     default:
-  //       return <SignupForm />
-  //   }
-  // }
-
-  // if (isSuccess) return <SignupSuccess setIsSuccess={setIsSuccess} />
+  const handleOtpClose = () => {
+    setIsOtp(false)
+    console.log('close')
+  }
 
   return (
-    <div className={`${styles.signup}`}>
+    <div className={`${styles.signup} pb-[180px] md:h-[1072px] md:bg-cover md:bg-center`}>
       <Navbar itemsColor='white' />
-      {/* <button onClick={() => setIsSuccess(true)}>success</button> */}
-      <SignupForm />
+      {isOtp ? (
+        <OTPForm closeOtp={handleOtpClose} type={'registration'} />
+      ) : (
+        <SignupForm openOtp={handleOtpOpen} />
+      )}
     </div>
   )
 }
