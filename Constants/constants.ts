@@ -478,6 +478,38 @@ export const GalleryProductsData = [
     newPrice: '8.00',
     category: 'biscuit',
   },
+  {
+    id: 7,
+    title: 'biscuit',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image: 'https://5.imimg.com/data5/WJ/RT/XR/ANDROID-59043477/product-jpeg-500x500.jpg',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'biscuit',
+  },
+  {
+    id: 8,
+    title: 'cupcake',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image:
+      'https://img.sndimg.com/food/image/upload/f_auto,c_thumb,q_55,w_744,ar_5:4/v1/img/recipes/13/37/67/pic5UBrag.jpg',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'cupcake',
+  },
+  {
+    id: 9,
+    title: 'cupcake',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue,',
+    image:
+      'https://img.sndimg.com/food/image/upload/f_auto,c_thumb,q_55,w_744,ar_5:4/v1/img/recipes/13/37/67/pic5UBrag.jpg',
+    oldPrice: '10.00',
+    newPrice: '8.00',
+    category: 'cupcake',
+  },
 ]
 
 export const GalleryShopImages = [

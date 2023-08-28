@@ -7,7 +7,7 @@ const BakerAvailableProducts = () => {
   return (
     <div className='w-full flex flex-col items-center'>
       <div className='w-[90vw] flex flex-wrap justify-start gap-x-[2%] gap-y-[8px] md:gap-y-[24px]'>
-        {GalleryProductsData.map((item) => {
+        {GalleryProductsData.slice(0, 6).map((item) => {
           return (
             <ProductCard
               key={item.id}
