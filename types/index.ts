@@ -195,3 +195,8 @@ export interface ProductDetailTabsProps {
   activeTab: number
   handleChange: (event: React.SyntheticEvent, newValue: number) => void
 }
+
+export interface GalleryItemProps {
+  image: string
+  title: string
+}
