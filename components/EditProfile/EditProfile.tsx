@@ -191,11 +191,7 @@ const EditProfile = () => {
 
           <div className='w-full flex justify-center mt-[0px] md:mt-[-100px] rounded-full overflow-hidden relative'>
             <img
-              src={
-                picture
-                  ? picture
-                  : `https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp`
-              }
+              src={picture ? picture : '/Images/DefaultAvatar.jpg'}
               alt=''
               className='w-[129px] h-[129px] rounded-full object-cover'
             />
