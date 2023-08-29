@@ -34,7 +34,7 @@ const YourProfileCard = () => {
 
       <div className='mt-[16px] md:mt-[32px] flex items-center gap-x-[24px]'>
         <img
-          src={`https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp`}
+          src={'/Images/DefaultAvatar.jpg'}
           alt=''
           className='w-[64px] md:w-[132px] h-[64px] md:h-[132px] rounded-full object-cover'
         />

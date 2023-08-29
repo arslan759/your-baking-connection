@@ -199,32 +199,28 @@ export const ReviewCardsData = [
   {
     id: 1,
     name: 'John Doe',
-    image:
-      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
+    image: '/Images/DefaultAvatar.jpg',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
   {
     id: 2,
     name: 'Sara Austin',
-    image:
-      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
+    image: '/Images/DefaultAvatar.jpg',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod,',
   },
   {
     id: 3,
     name: 'robert kent',
-    image:
-      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
+    image: '/Images/DefaultAvatar.jpg',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
   {
     id: 4,
     name: 'Suzy Clark',
-    image:
-      'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp',
+    image: '/Images/DefaultAvatar.jpg',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc. Sed euismod, diam id tincidunt dapibus, magna libero sodales augue, et ultricies velit nisl vitae nunc.',
   },
