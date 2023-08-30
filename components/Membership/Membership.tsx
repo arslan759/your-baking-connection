@@ -4,6 +4,9 @@ import { Typography } from '@mui/material'
 import Navbar from '../NavBar/NavBar'
 import BasicMembershipCard from '../BasicMembershipCard/BasicMembershipCard'
 import PremiumMembershipCard from '../PremiumMembershipCard/PremiumMembershipCard'
+import MembershipVideoPlayer from '../MembershipVideoPlayer/MembershipVideoPlayer'
+import FullfillmentSection from '../FullfillmentSection/FullfillmentSection'
+import StayInTouchForm from '../StayInTouch'
 
 const Membership = () => {
   return (
@@ -246,6 +249,38 @@ const Membership = () => {
               <PremiumMembershipCard />
             </div>
           </div>
+        </div>
+
+        <div className='w-[80%] mt-[48px] md:mt-[100px]'>
+          <Typography
+            sx={{
+              fontSize: '48px !important',
+              fontWeight: '700 !important',
+              fontFamily: 'Josefin Sans',
+              lineHeight: 'normal',
+              textAlign: 'center',
+              color: '#7DDEC1',
+              textTransform: 'capitalize',
+              fontFeatureSettings: "'clig' off, 'liga' off",
+              '@media (max-width: 767px)': {
+                fontSize: '24px !important',
+              },
+            }}
+          >
+            See Some of the Features for Yourself!
+          </Typography>
+        </div>
+
+        <div className='mt-[48px] md:mt-[71px] w-full md:w-[90vw] h-[200px] md:h-[674px] md:rounded-[15px] overflow-hidden'>
+          <MembershipVideoPlayer />
+        </div>
+
+        <div className='w-full mt-[48px] md:mt-[100px]'>
+          <FullfillmentSection />
+        </div>
+
+        <div className='w-full'>
+          <StayInTouchForm />
         </div>
       </div>
     </div>

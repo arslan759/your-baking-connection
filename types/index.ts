@@ -200,3 +200,12 @@ export interface GalleryItemProps {
   image: string
   title: string
 }
+
+export interface SearchBakerItemProps {
+  image: string
+  title: string
+  description: string
+  rating: string
+  state: string
+  city: string
+}
