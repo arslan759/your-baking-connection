@@ -814,3 +814,94 @@ export const fullfillmentsData = [
     description: 'Insider information, sale alerts and member discounts',
   },
 ]
+
+export const SearchBakerData = [
+  {
+    id: 1,
+    title: 'Sweet Delights Bakery',
+    description: 'Indulge in a wide variety of freshly baked pastries and cakes.',
+    rating: 4.7,
+    state: 'California',
+    city: 'Los Angeles',
+    image:
+      'https://i0.wp.com/www.classicbakery.net/wp-content/uploads/2022/07/Coconut-Cream-Pie-copy-e1658813908571.jpg?resize=1200%2C600&ssl=1',
+  },
+  {
+    id: 2,
+    title: 'Golden Crust Bakeshop',
+    description: `Whether you're in the mood for a bagel, a croissant, or a tasty cookie, we've got something for everyone. Whether you're in the mood for a bagel, a croissant, or a tasty cookie, we've got something for everyone. Whether you're in the mood for a bagel, a croissant, or a tasty cookie, we've got something for everyone`,
+    rating: 4.5,
+    state: 'New York',
+    city: 'New York City',
+    image: 'https://www.posist.com/restaurant-times/wp-content/uploads/2020/03/Baked-Goods.jpg',
+  },
+  {
+    id: 3,
+    title: 'Flour Power Bakery',
+    description: 'Discover the magic of handcrafted bread and delightful cookies.',
+    rating: 4.8,
+    state: 'Texas',
+    city: 'Austin',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQONCmHGi7_DBxq5l1O0pdEbbMPUCLjBGko7A&usqp=CAU',
+  },
+  {
+    id: 4,
+    title: 'Rise and Shine Pastries',
+    description: 'Start your day with our freshly baked croissants and morning treats.',
+    rating: 4.6,
+    state: 'Illinois',
+    city: 'Chicago',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1RG72CNnF1aQjeW4kgggekRwHeJiVX8l14Q&usqp=CAU',
+  },
+  {
+    id: 5,
+    title: 'Coastal Crumb Cakery',
+    description: 'Experience coastal flavors with our unique cakes and confections.',
+    rating: 4.9,
+    state: 'Florida',
+    city: 'Miami',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8S4eA99PtZaA6P7VxgfNz-EWkbZjlL1BHIQ&usqp=CAU',
+  },
+  {
+    id: 6,
+    title: 'Wholesome Harvest Bakery',
+    description: 'Savor the goodness of organic, whole-grain bread and treats.',
+    rating: 4.4,
+    state: 'Oregon',
+    city: 'Portland',
+    image:
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2oDdOuFoSLCDQjFBB2BJ2uO6lBBhzyRORCuSFRlSJZlef2YP645YdBRRiJOb2TI_6g8A&usqp=CAU',
+  },
+  {
+    id: 7,
+    title: 'Mountain Top Pies',
+    description: 'Taste the fresh flavors of mountain-harvested fruits in our pies.',
+    rating: 4.7,
+    state: 'Colorado',
+    city: 'Denver',
+    image: 'https://shareit.hk/pictures/listing-full/1/21.03.16.13.11-1615871509.7023-51101179.jpg',
+  },
+  {
+    id: 8,
+    title: 'Colonial Oven Bakery',
+    description: 'Journey back in time with our historic colonial-style baked goods.',
+    rating: 4.5,
+    state: 'Virginia',
+    city: 'Williamsburg',
+    image:
+      'https://i0.wp.com/www.classicbakery.net/wp-content/uploads/2022/07/Coconut-Cream-Pie-copy-e1658813908571.jpg?resize=1200%2C600&ssl=1',
+  },
+  {
+    id: 9,
+    title: 'Urban Sourdough',
+    description: 'Experience the tangy taste of sourdough bread in the heart of the city.',
+    rating: 4.6,
+    state: 'New Jersey',
+    city: 'Jersey City',
+    image:
+      'https://www.continental-equipment.com/wp-content/uploads/2021/06/Bakery-Featured-Image.jpg',
+  },
+]

@@ -1,41 +1,52 @@
 import Navbar from '../NavBar/NavBar'
-import { InputAdornment, TextField, Typography } from '@mui/material'
-
+import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
-import MapPinFindBaker from '../../assets/icons/mapPinFindBaker'
-import SearchFindBaker from '../../assets/icons/searchFindBaker'
-import SelecterFindBaker from '../../assets/icons/selecterFindBaker'
-
-import styles from './styles.module.css'
 import DropdownField from '../DropdownField/DropdownField'
 import { useState } from 'react'
-import { ProductTypes } from 'Constants/constants'
+import { ProductTypes, SearchBakerData, cities, states } from 'Constants/constants'
 import InputField from '../InputField/InputField'
+import SearchBakerItem from '../SearchBakerItem/SearchBakerItem'
+import styles from './styles.module.css'
 
 const Search = () => {
-  const [address, setAddress] = useState('')
+  const [state, setState] = useState<string | null>('')
+  const [city, setCity] = useState<string | null>('')
   const [search, setSearch] = useState('')
   const [productType, setProductType] = useState('')
 
-  const [addressError, setAddressError] = useState('')
+  // Error states
+  const [stateError, setStateError] = useState('')
+  const [cityError, setCityError] = useState('')
   const [searchErr, setSearchErr] = useState('')
   const [productTypeErr, setProductTypeErr] = useState('')
 
-  // handle change function for input fields
+  // onChange handler
   const handleChange = (name: string, value: string) => {
     if (name === 'search') {
       setSearch(value)
       // setSearchErr(value ? '' : 'Search is required')
-    } else if (name === 'address') {
-      setAddress(value)
-      // setAddressErr(value ? '' : 'Search is required')
     }
   }
 
-  // handle Product Type Change function for Product Types dropdown
+  // dropdown handlers
+  const handleStateChange = (state: string) => {
+    setState(state)
+    setStateError(state ? '' : 'State is required')
+  }
+
+  const handleCityChange = (state: string) => {
+    setCity(state)
+    setCityError(state ? '' : 'City is required')
+  }
+
   const handleProductTypeChange = (type: string) => {
     setProductType(type)
     // setProductTypeErr(type ? '' : 'State is required')
+  }
+
+  // seeMore handler
+  const handleSeeMore = () => {
+    console.log('see more clicked')
   }
 
   // handleSubmit function for form submission
@@ -43,148 +54,156 @@ const Search = () => {
     e.preventDefault()
 
     // Logs the form data
-    console.log('address is ', address)
+    console.log('state is ', state)
+    console.log('city is ', city)
     console.log('search is ', search)
     console.log('product type is ', productType)
 
-    // Resets the form fields
-    // setAddress('')
-    // setSearch('')
-    // setProductType('')
-
-    // Resets the error states
-    // setAddressErr('')
-    // setSearchErr('')
-    // setProductTypeErr('')
+    console.log('form submitted')
   }
 
   return (
     <>
       <Navbar />
-      <div className='relative flex flex-col justify-center items-center w-full'>
-        <div
-          className={`absolute top-[3%] md:top-[-5.2%] overflow-hidden w-[100vw] h-[432.26px] md:w-[932.14px] md:h-[853.55px] flex-shrink-0 ${styles.findYourBakerBackground}`}
-        />
-        <div className='flex flex-col justify-center items-center text-center w-[242px] h-[80px] md:w-[525px] md:h-[97px] mt-[35px] mb:mt-[100px]'>
-          <Typography variant='h4' sx={{ color: '#7DDEC1' }}>
-            Find Your Baker
-          </Typography>
-
-          <Typography variant='body2'>
-            Discover amazing, talented bakers in your community!
-          </Typography>
+      <div
+        className={`${styles.background} w-full flex flex-col items-center mt-[48px] md:mt-[100px]`}
+      >
+        <div className='w-[90vw] md:w-[70vw] flex flex-col items-center'>
+          <div className='w-full'>
+            <Typography
+              sx={{
+                fontSize: '48px !important',
+                fontWeight: '700 !important',
+                fontFamily: 'Josefin Sans',
+                lineHeight: 'normal',
+                textAlign: 'center',
+                color: '#7DDEC1',
+                textTransform: 'capitalize',
+                fontFeatureSettings: "'clig' off, 'liga' off",
+                '@media (max-width: 767px)': {
+                  fontSize: '24px !important',
+                },
+              }}
+            >
+              Find your Baker
+            </Typography>
+          </div>
+          <div className='w-[70%]'>
+            <Typography
+              sx={{
+                marginTop: '24px',
+                fontSize: '18px !important',
+                fontFamily: 'Open Sans',
+                fontWeight: '500 !important',
+                lineHeight: 'normal',
+                letterSpacing: '1px',
+                textAlign: 'center',
+                alignSelf: 'stretch',
+                color: '#090909',
+                textTransform: 'capitalize',
+                fontFeatureSettings: `'clig' off, 'liga' off`,
+                '@media (max-width: 767px)': {
+                  fontSize: '12px !important',
+                },
+              }}
+            >
+              {`Discover amazing,   bakers in your community!`}
+            </Typography>
+          </div>
         </div>
-        <div className='flex justify-center items-center w-[242px] h-[250px] md:w-[525px] md:h-[360px] mt-[24px]'>
-          <img
-            src='/Images/cupcake-findBaker.png'
-            alt='cupcake'
-            className='w-[204.808px] h-[250px] md:w-[295px] md:h-[360px]'
-          />
+
+        <div className='mt-[30px] md:mt-[50px]'>
+          <form onSubmit={handleSubmit} className='w-[90vw] md:w-[90vw] flex flex-col items-center'>
+            <div className='w-full flex flex-col md:flex-row items-center justify-center gap-[16px]'>
+              <div className='w-full md:w-[25%]'>
+                <DropdownField
+                  // label='state'
+                  required={false}
+                  placeholder='state'
+                  name='state'
+                  errorText={stateError}
+                  value={state}
+                  options={states}
+                  inputColor='#6C6C6C'
+                  onChange={handleStateChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[25%]'>
+                <DropdownField
+                  // label='city'
+                  placeholder='city'
+                  required={false}
+                  name='city'
+                  errorText={cityError}
+                  value={city}
+                  options={cities}
+                  inputColor='#6C6C6C'
+                  onChange={handleCityChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[25%]'>
+                <InputField
+                  // label='city'
+                  placeholder='search'
+                  type='text'
+                  required={false}
+                  startIcon={<img src='/Images/search-input-icon.svg' alt='search' />}
+                  name='search'
+                  errorText={cityError}
+                  value={search}
+                  inputColor='#6C6C6C'
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className='w-full md:w-[25%]'>
+                <DropdownField
+                  // label='city'
+                  placeholder='product type'
+                  required={false}
+                  name='productType'
+                  errorText={productTypeErr}
+                  value={productType}
+                  options={ProductTypes}
+                  inputColor='#6C6C6C'
+                  onChange={handleProductTypeChange}
+                />
+              </div>
+
+              <div className='w-full h-[35px] md:w-[25%]'>
+                <PrimaryBtn type='submit' text='Search' />
+              </div>
+            </div>
+          </form>
         </div>
 
-        {/* <form
-          onSubmit={handleSubmit}
-          className='w-full flex flex-col md:flex-row justify-between md: items-center gap-y-[12px]'
-        >
-          <div className='w-full md:w-[70%]  flex flex-col md:flex-row gap-x-[24px] gap-y-[12px]'>
-            <div className='w-full md:w-[45%]'>
-              <DropdownField
-                // label='state'
-                required={false}
-                name='state'
-                placeholder='Choose Product Category'
-                errorText={catagoryError}
-                value={catagory}
-                options={ProductsCatagory}
-                inputColor='#6C6C6C'
-                onChange={handleCatagoryChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[45%]'>
-              <InputField
-                // label='search'
-                type='text'
-                placeholder='Search'
-                inputColor='#6C6C6C'
-                name='search'
-                value={search}
-                startIcon={<img src='/Images/search-input-icon.svg' alt='search' />}
-                // error={isError}
-                errorText={searchErr}
-                required
-                onChange={handleChange}
-              />
+        <div className='w-[90vw] flex mt-[30px] md:mt-[50px]'>
+          <div className='w-full flex flex-col items-center  mt-[24px] md:mt-[50px]'>
+            <div className='w-full flex flex-col items-center gap-x-[4%] gap-y-[48px]'>
+              {SearchBakerData.slice(0, 6).map((item, index) => {
+                const { title, description, image, rating, city, state } = item
+                return (
+                  <div key={index} className='w-full md:w-[70%] flex flex-col items-center'>
+                    <SearchBakerItem
+                      image={image}
+                      title={title}
+                      description={description}
+                      rating={rating.toString()}
+                      city={city}
+                      state={state}
+                    />
+                  </div>
+                )
+              })}
             </div>
           </div>
-          <div className='w-full md:w-[30%]  flex justify-center gap-[20px] md:justify-between'>
-            <div className='flex items-center'>
-              <SecondaryBtn text='reset' color='#090909' handleClick={handleReset} />
-            </div>
-            <div className='w-[45%] md:w-[60%]'>
-              <PrimaryBtn text='search' type='submit' />
-            </div>
-          </div>
-        </form> */}
-        <form onSubmit={handleSubmit}>
-          <div className='flex flex-col justify-center items-center gap-y-[24px] w-[267px] h-[192px] md:w-[525px] md:h-[261px] mb-[48px] md:mb-[100px]'>
-            <div className='w-full md:w-[55%]'>
-              <InputField
-                // label='search'
-                type='text'
-                placeholder='Enter your address here'
-                inputColor='#6C6C6C'
-                name='search'
-                value={search}
-                startIcon={<MapPinFindBaker />}
-                // error={isError}
-                errorText={searchErr}
-                required
-                onChange={handleChange}
-              />
-            </div>
-            <div className='flex justify-center items-center'>
-              <div className='w-[97px] h-[0.5px] bg-[#000000]' />
-              <Typography variant='body1' className={`text-[12px] text-[#000000] mx-[10px]`}>
-                OR
-              </Typography>
-              <div className='w-[97px] h-[0.5px] bg-[#000]' />
-            </div>
+        </div>
 
-            <div className='w-full md:w-[55%]'>
-              <InputField
-                // label='search'
-                type='text'
-                placeholder='Search by bakery name'
-                inputColor='#6C6C6C'
-                name='search'
-                value={search}
-                startIcon={<SearchFindBaker />}
-                // error={isError}
-                errorText={searchErr}
-                required
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className='w-full md:w-[55%]'>
-              <DropdownField
-                // label='state'
-                required={false}
-                name='state'
-                placeholder='Product Type'
-                errorText={productTypeErr}
-                value={productType}
-                options={ProductTypes}
-                inputColor='#6C6C6C'
-                onChange={handleProductTypeChange}
-              />
-            </div>
-            <div className='rounded-[5px] w-[267px] h-[45px] mt-[24px]'>
-              <PrimaryBtn type='submit' text='Search' />
-            </div>
-          </div>
-        </form>
+        <div className='w-[100px] md:w-[160px] h-[45px] flex justify-center mt-[50px]'>
+          <PrimaryBtn type='button' text='see more' handleClick={handleSeeMore} />
+        </div>
       </div>
     </>
   )
