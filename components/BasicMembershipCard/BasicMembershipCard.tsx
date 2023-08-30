@@ -100,7 +100,7 @@ const BasicMembershipCard = () => {
             $12{' '}
             <span
               style={{
-                fontSize: '22px !important',
+                fontSize: '22px',
               }}
             >
               / month
@@ -146,7 +146,7 @@ const BasicMembershipCard = () => {
             $120{' '}
             <span
               style={{
-                fontSize: '22px !important',
+                fontSize: '22px',
               }}
             >
               / annual
@@ -171,8 +171,8 @@ const BasicMembershipCard = () => {
             Join annually and get{' '}
             <span
               style={{
-                fontSize: '18px !important',
-                fontWeight: '600 !important',
+                fontSize: '18px',
+                fontWeight: '600',
               }}
             >
               2 months free!
