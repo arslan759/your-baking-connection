@@ -9,6 +9,7 @@ const FullfillmentSection = () => {
         const { id, title, description, img } = fullfillment
         return (
           <div
+            key={index}
             className='w-[33%] flex justify-center items-start pr-[7px] py-[8px] md:py-[43px]'
             style={{
               borderBottom: id > 6 ? 'none' : '0.5px solid #6C6C6C',

@@ -32,7 +32,7 @@ const MembershipVideoPlayer = () => {
         onPause={handlePause}
       >
         <source src='/Videos/bakery-cinematic.mp4' type='video/mp4' />
-        Sorry, your browser doesn't support videos.
+        {`Sorry, your browser doesn't support videos`}
       </video>
       {showPlayButton && (
         <div
