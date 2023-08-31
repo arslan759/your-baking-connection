@@ -145,21 +145,21 @@ export interface SignupSuccessProps {
   setIsSuccess: (value: boolean) => void
 }
 
-export interface GalleryWeOfferItemProps {
+export interface BakerWeOfferItemProps {
   title: string
   image: string
 }
 
-export interface InspirationGalleryNavigationProps {
+export interface BakerNavigationProps {
   activeTab: number
   handleChange: (event: React.SyntheticEvent, newValue: number) => void
 }
 
-export interface InspirationGalleryTabsPanelProps {
+export interface BakerTabsPanelProps {
   activeTab: number
 }
 
-export interface GalleryProductCardProps {
+export interface ProductCardProps {
   image: string
   title: string
   description: string
@@ -195,4 +195,18 @@ export interface ProductDetailTabsPanelProps {
 export interface ProductDetailTabsProps {
   activeTab: number
   handleChange: (event: React.SyntheticEvent, newValue: number) => void
+}
+
+export interface GalleryItemProps {
+  image: string
+  title: string
+}
+
+export interface SearchBakerItemProps {
+  image: string
+  title: string
+  description: string
+  rating: string
+  state: string
+  city: string
 }

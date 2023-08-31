@@ -21,7 +21,7 @@ module.exports = {
         green: '#7DDEC1',
       },
       screens: {
-        xlm: '1440px',
+        xlm: '1441px',
         xll: '1536px',
         // => @media (min-width: 992px) { ... }
       },
