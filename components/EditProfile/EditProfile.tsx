@@ -17,7 +17,7 @@ const EditProfile = () => {
 
   const [viewer, loadingViewer] = useViewer()
 
-  
+  //@ts-ignore
   const [updateAccount, loadingUpdateAccount] = useUpdateAccount()
 
   const [uploadFile, loadingUploadFile] = useUploadFile()
@@ -175,7 +175,7 @@ const EditProfile = () => {
         lastName,
         picture,
         state,
-        city
+        city,
       },
     })
 
