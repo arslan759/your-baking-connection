@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import YourProfileCard from '../YourProfileCard/YourProfileCard'
+import withAuth from 'hocs/withAuth'
 
 const UserProfile = () => {
   return (

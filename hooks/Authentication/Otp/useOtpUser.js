@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import otpUserMutation from './otpUser.gql'
-import useViewer from 'hooks/viewer/useViewer'
+
 /**
  * Gets current viewer's data
  *

@@ -1,5 +1,4 @@
 import { Modal, Typography } from '@mui/material'
-
 import React, { useEffect, useRef, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
@@ -7,8 +6,21 @@ import { validateEmail } from 'helpers/validations'
 import DropdownField from '../DropdownField/DropdownField'
 import { cities, states } from 'Constants/constants'
 
+import withAuth from 'hocs/withAuth'
+import { withApollo } from 'lib/apollo/withApollo'
+import useUpdateAccount from 'hooks/Profile/useUpdateAccount'
+import useViewer from 'hooks/viewer/useViewer'
+import useUploadFile from 'hooks/FileUpload/useUploadFile'
+
 const EditProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const [viewer, loadingViewer] = useViewer()
+
+  
+  const [updateAccount, loadingUpdateAccount] = useUpdateAccount()
+
+  const [uploadFile, loadingUploadFile] = useUploadFile()
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -18,6 +30,18 @@ const EditProfile = () => {
   const [city, setCity] = useState<string | null>('')
   const [address, setAddress] = useState('')
   const [picture, setPicture] = useState('')
+  const [saveBtnDisable, setSaveBtnDisable] = useState(false)
+
+  // set current viewer data in fields
+  useEffect(() => {
+    setFirstName(viewer?.firstName)
+    setLastName(viewer?.lastName)
+    setCity(viewer?.city)
+    setState(viewer?.state)
+    setPicture(viewer?.picture)
+    setPhone(viewer?.phone)
+    setEmail(viewer?.primaryEmailAddress)
+  }, [viewer])
 
   // Edit Button Modal State
   const [isEdited, setIsEdited] = useState(false)
@@ -80,39 +104,87 @@ const EditProfile = () => {
   }
 
   // handlePictureChange function for picture upload
-  const handlePictureChange = (e: any) => {
+  const handlePictureChange = async (e: any) => {
     const file = e.target.files[0]
 
     console.log('files are ', e.target.files)
     console.log('picture is ', file?.name)
 
-    if (file.size > 1024 * 1024 * 5) {
-      setPictureError('Picture size should be less than 5mb')
+    if (file.size > 1024 * 1024 * 1) {
+      setPictureError('Picture size should be less than 1MB')
       return
     }
 
     if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
-      setPictureError('Invalid file type')
+      setPictureError('Selected file must be an image')
       return
     }
 
+    const uploadRes = await uploadFile(file, '/profile-images')
+
+    console.log('uploadRes is ', uploadRes)
+
+    if (uploadRes.result.status) {
+      setPicture(uploadRes.result.data[0].url)
+    }
+
     setPictureError('')
-    setPicture(file.name)
+  }
+
+  //reset states
+  const resetStates = () => {
+    // Resets the form fields
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setPhone('')
+    setState('')
+    setCity('')
+    setAddress('')
+  }
+
+  const resetErrorStates = () => {
+    // Resets the error states
+    setFirstNameError('')
+    setLastNameError('')
+    setEmailError('')
+    setPhoneError('')
+    setStateError('')
+    setCityError('')
+    setAddressError('')
   }
 
   // handleSubmit function for form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Checks if email is valid
+    resetErrorStates()
 
     if (email) {
       const isEmailValid = validateEmail(email)
-
+      console.log('if email check')
       if (!isEmailValid) {
         setEmailError('Email is not valid')
         return
       }
+    }
+
+    const account = await updateAccount({
+      variables: {
+        firstName,
+        lastName,
+        picture,
+        state,
+        city
+      },
+    })
+
+    console.log('updated account is ', account)
+
+    if (account?.data?.updateAccount?.account?._id) {
+      console.log('updated successfully')
+      setIsEdited(false)
+      resetStates()
     }
 
     // Logs the form data
@@ -124,24 +196,7 @@ const EditProfile = () => {
     console.log('state is ', state)
     console.log('city is ', city)
     console.log('address is ', address)
-
-    // Resets the form fields
-    setFirstName('')
-    setLastName('')
-    setEmail('')
-    setPhone('')
-    setState('')
-    setCity('')
-    setAddress('')
-
-    // Resets the error states
-    setFirstNameError('')
-    setLastNameError('')
-    setEmailError('')
-    setPhoneError('')
-    setStateError('')
-    setCityError('')
-    setAddressError('')
+    console.log('picture')
   }
 
   return (
@@ -212,7 +267,7 @@ const EditProfile = () => {
                 },
               }}
             >
-              John
+              {firstName} {lastName}
             </Typography>
             <img
               onClick={handleClick}
@@ -324,7 +379,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-[24px] md:mt-[23px]'>
-              <PrimaryBtn text='save' type='submit' />
+              <PrimaryBtn text='save' type='submit' isDisabled={loadingUpdateAccount} />
             </div>
           </form>
         </div>
@@ -333,4 +388,4 @@ const EditProfile = () => {
   )
 }
 
-export default EditProfile
+export default withApollo()(withAuth(EditProfile))

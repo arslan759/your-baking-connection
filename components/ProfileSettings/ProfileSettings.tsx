@@ -6,6 +6,7 @@ import ProfileNavigationMobile from '@/components/ProfileNavigationMobile/Profil
 import Sidebar from '@/components/Sidebar/Sidebar'
 import { useState } from 'react'
 import ProfileTabsPanel from '../ProfileTabsPanel/ProfileTabsPanel'
+import useUpdateAccount from 'hooks/Profile/useUpdateAccount'
 
 export default function ProfileSettings() {
   const [activeTab, setActiveTab] = useState(0)

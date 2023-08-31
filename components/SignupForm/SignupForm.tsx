@@ -206,7 +206,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       const result = await signUp({
         variables: {
           user: { username: `u${userRand.toString()}`, email, password, type: 'email' },
-          profile: { firstName, lastName, state, city },
+          profile: { firstName, lastName, state, city, phone },
         },
       })
       let userId = result?.data?.createUserWithOtp?.userId
