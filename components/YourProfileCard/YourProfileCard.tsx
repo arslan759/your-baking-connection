@@ -1,13 +1,39 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './styles.module.css'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import YourProfileCardItem from '../YourProfileCardItem/YourProfileCardItem'
 import { YourProfileCardItemData } from 'Constants/constants'
 import EditProfile from '../EditProfile/EditProfile'
+import useViewer from 'hooks/viewer/useViewer'
+import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
 
 const YourProfileCard = () => {
   const [isEdited, setIsEdited] = useState(false)
+
+  const [viewer, loadingViewer] = useViewer()
+
+  //data states
+  const [firstName, setFirstName] = useState<string>('')
+  const [lastName, setLastName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [state, setState] = useState<string>('')
+  const [city, setCity] = useState<string>('')
+  const [phone, setPhone] = useState<string>('')
+  const [profileImage, setProfileImage] = useState<string>('')
+
+  useEffect(() => {
+    setFirstName(viewer?.firstName)
+    setLastName(viewer?.lastName)
+    setEmail(viewer?.primaryEmailAddress)
+    setCity(viewer?.city)
+    setState(viewer?.state)
+    setPhone(viewer?.phone)
+    setProfileImage(viewer?.picture)
+  }, [viewer])
+
+  console.log('viewer in profile card is ', viewer)
 
   const handleEditUserProfile = () => {
     setIsEdited(!isEdited)
@@ -34,7 +60,7 @@ const YourProfileCard = () => {
 
       <div className='mt-[16px] md:mt-[32px] flex items-center gap-x-[24px]'>
         <img
-          src={`https://image.winudf.com/v2/image1/bmV0LndsbHBwci5naXJsc19wcm9maWxlX3BpY3R1cmVzX3NjcmVlbl8xXzE2Njc3MjczMTZfMDE3/screen-1.webp?fakeurl=1&type=.webp`}
+          src={profileImage}
           alt=''
           className='w-[64px] md:w-[132px] h-[64px] md:h-[132px] rounded-full object-cover'
         />
@@ -73,7 +99,8 @@ const YourProfileCard = () => {
                   },
                 }}
               >
-                Josh Avan
+                {' '}
+                {firstName} {lastName}
               </Typography>
             </div>
 
@@ -171,7 +198,9 @@ const YourProfileCard = () => {
                   },
                 }}
               >
-                <img src='/Images/profile-location.svg' alt='location' /> <span>New York, USA</span>
+                <img src='/Images/profile-location.svg' alt='location' />{' '}
+                <span style={{ textTransform: 'capitalize' }}>{city} </span>,
+                <span style={{ textTransform: 'capitalize' }}> {state}</span>
               </Typography>
 
               <Typography
@@ -191,8 +220,7 @@ const YourProfileCard = () => {
                   },
                 }}
               >
-                <img src='/Images/profile-email.svg' alt='email' />{' '}
-                <span>Josh.Avans@Gmail.Com</span>
+                <img src='/Images/profile-email.svg' alt='email' /> <span>{email}</span>
               </Typography>
 
               <Typography
@@ -212,7 +240,7 @@ const YourProfileCard = () => {
                   },
                 }}
               >
-                <img src='/Images/profile-phone.svg' alt='phone' /> <span>06372612312</span>
+                <img src='/Images/profile-phone.svg' alt='phone' /> <span>{phone}</span>
               </Typography>
             </div>
           </div>
@@ -350,7 +378,7 @@ const YourProfileCard = () => {
               },
             }}
           >
-            <img src='/Images/profile-phone.svg' alt='phone' /> <span>06372612312</span>
+            <img src='/Images/profile-phone.svg' alt='phone' /> <span>{phone}</span>
           </Typography>
         </div>
       </div>
@@ -374,4 +402,4 @@ const YourProfileCard = () => {
   )
 }
 
-export default YourProfileCard
+export default withApollo()(YourProfileCard)

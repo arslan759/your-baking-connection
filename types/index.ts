@@ -19,6 +19,7 @@ export interface PrimaryBtnProps {
   text: string
   type?: 'button' | 'submit' | 'reset'
   handleClick?: MouseEventHandler<HTMLButtonElement>
+  isDisabled?: boolean
 }
 
 export interface NavBarProps {
