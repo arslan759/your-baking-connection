@@ -120,6 +120,7 @@ const EditProfile = () => {
       return
     }
 
+    //@ts-ignore
     const uploadRes = await uploadFile(file, '/profile-images')
 
     console.log('uploadRes is ', uploadRes)

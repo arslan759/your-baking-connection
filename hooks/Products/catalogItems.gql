@@ -1,0 +1,30 @@
+query catalogItems($shopIds: [ID]!) {
+  catalogItems(shopIds: $shopIds) {
+    edges {
+      node {
+        ... on CatalogItemProduct {
+          product {
+            _id
+            title
+            description
+            media {
+              URLs {
+                thumbnail
+              }
+            }
+            variants {
+              variantId
+              pricing {
+                compareAtPrice {
+                  amount
+                  displayAmount
+                }
+                price
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
