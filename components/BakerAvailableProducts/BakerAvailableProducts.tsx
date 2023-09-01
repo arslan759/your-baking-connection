@@ -1,22 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GalleryProductsData } from 'Constants/constants'
 import CustomPagination from '../CustomPagination/CustomPagination'
 import ProductCard from '../ProductCard/ProductCard'
 
+import useCatalogItems from 'hooks/Products/useCatalogItems'
+
+import { withApollo } from 'lib/apollo/withApollo'
+
 const BakerAvailableProducts = () => {
+  const [catalogItems, loadingItems, refetchItems] = useCatalogItems({
+    shopIds: ['cmVhY3Rpb24vc2hvcDpkU3VYTGIzRHg3TXNvV29nSg=='],
+  })
+
+  useEffect(() => {
+    console.log('catalog items ', catalogItems)
+  }, [catalogItems])
+
   return (
     <div className='w-full flex flex-col items-center'>
       <div className='w-[90vw] flex flex-wrap justify-start gap-x-[2%] gap-y-[8px] md:gap-y-[24px]'>
-        {GalleryProductsData.slice(0, 6).map((item) => {
+        {catalogItems?.map((item: any) => {
+          const { product } = item?.node
+          const { pricing } = product.variants[0]
+
           return (
             <ProductCard
               key={item.id}
-              image={item.image}
-              title={item.title}
-              description={item.description}
-              category={item.category}
-              oldPrice={item.oldPrice}
-              newPrice={item.newPrice}
+              image={product?.media[0]?.URLs?.thumbnail}
+              title={product?.title}
+              description={product?.description}
+              category={item?.category}
+              oldPrice={pricing[0].compareAtPrice?.amount}
+              newPrice={pricing[0].price}
             />
           )
         })}
@@ -29,4 +44,4 @@ const BakerAvailableProducts = () => {
   )
 }
 
-export default BakerAvailableProducts
+export default withApollo()(BakerAvailableProducts)

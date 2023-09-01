@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../NavBar/NavBar'
 import BakerSwiper from '../BakerSwiper/BakerSwiper'
 import BakerLocation from '../BakerLocation/BakerLocation'
 import BakerMainContent from '../BakerMainContent/BakerMainContent'
 import BakerWeOffer from '../BakerWeOffer/BakerWeOffer'
 import BakerProducts from '../BakerProducts/BakerProducts'
+import useCatalogItems from 'hooks/Products/useCatalogItems'
+import { withApollo } from 'lib/apollo/withApollo'
 
 const Baker = () => {
   return (
@@ -47,4 +49,4 @@ const Baker = () => {
   )
 }
 
-export default Baker
+export default withApollo()(Baker)

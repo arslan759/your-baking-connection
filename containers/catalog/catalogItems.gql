@@ -1,14 +1,12 @@
 query catalogItemsQuery(
   $shopId: ID!
   $tagIds: [ID]
-  $searchQuery: String
-  $propertyFilters: propertyFiltersInput
+  # $searchQuery: String
   $first: ConnectionLimitInt
   $last: ConnectionLimitInt
   $before: ConnectionCursor
   $after: ConnectionCursor
   $sortBy: CatalogItemSortByField
-  $sortByPriceCurrencyCode: String
   $sortOrder: SortOrder
   $offset: Int
 ) {
