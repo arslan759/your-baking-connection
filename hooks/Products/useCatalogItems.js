@@ -5,23 +5,17 @@ import { useQuery } from '@apollo/client'
 import catalogItemsQuery from './catalogItems.gql'
 
 /**
- * Gets current viewer's data
+ * Gets the product catalog for the shops and filters specified
  *
- * @returns {Array} the viewer's data
+ * @returns {Array} the product catalog, loading state, refetch function and total count
  */
 export default function useCatalogItems(input) {
-  const authToken =
-    typeof window !== 'undefined' ? window.localStorage.getItem('accounts:accessToken') : undefined
-
   const { loading, data, refetch } = useQuery(catalogItemsQuery, {
     variables: input,
   })
 
   const catalogItems = data?.catalogItems?.edges
-  useEffect(() => {
-    console.log('incoming input is ', input)
-    refetch()
-  }, [authToken])
+  const totalCount = data?.catalogItems?.totalCount
 
-  return [catalogItems, loading, refetch]
+  return [catalogItems, loading, refetch, totalCount]
 }

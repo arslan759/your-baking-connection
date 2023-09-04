@@ -210,3 +210,11 @@ export interface SearchBakerItemProps {
   state: string
   city: string
 }
+
+export interface PaginatorProps {
+  count: number
+  boundaryCount: number
+  siblingCount: number
+  page: number
+  onChange: (value: number) => void
+}

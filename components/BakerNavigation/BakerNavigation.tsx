@@ -107,7 +107,7 @@ const BakerNavigation = ({ activeTab, handleChange }: BakerNavigationProps) => {
                     color: '#fff',
                     background: '#070707',
                     fontFamily: 'Josefin Sans',
-                    fontSize: '11px',
+                  fontSize: '11px',
                     lineHeight: '18px',
                     letterSpacing: '1px',
                     textTransform: 'uppercase',
