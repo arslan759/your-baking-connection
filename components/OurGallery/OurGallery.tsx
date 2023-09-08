@@ -2,6 +2,7 @@ import Sectionheading from '../SectionHeading/Sectionheading'
 import SectionSubHeading from '../SectionSubHeading/SectionSubHeading'
 import { galleryImages } from 'Constants/constants'
 import { PrimaryBtn } from '../Buttons'
+import Link from 'next/link'
 
 const OurGallery = () => {
   return (
@@ -48,7 +49,11 @@ const OurGallery = () => {
       </div>
 
       <div className='mt-[24px] md:mt-[60px] w-[160px] h-[45px] md:h-[50px] rounded-full overflow-hidden'>
-        <PrimaryBtn text='see More' />
+        <Link legacyBehavior href='/gallery'>
+          <a>
+            <PrimaryBtn text='see More' />
+          </a>
+        </Link>
       </div>
     </section>
   )

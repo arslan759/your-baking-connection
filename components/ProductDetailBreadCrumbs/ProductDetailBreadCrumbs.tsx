@@ -2,10 +2,12 @@ import { Breadcrumbs, Typography } from '@mui/material'
 import React from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
-const ProductDetailBreadCrumbs = () => {
+interface ProductDetailBreadCrumbsProps {
+  title: string
+}
+
+const ProductDetailBreadCrumbs = ({ title }: ProductDetailBreadCrumbsProps) => {
   const router = useRouter()
-  const pathName = usePathname()
-  const lastPathName = pathName?.split('/').pop()
 
   const handleBreadCrumbs = () => {
     router.push('/gallery')
@@ -52,7 +54,7 @@ const ProductDetailBreadCrumbs = () => {
           },
         }}
       >
-        {lastPathName?.replaceAll('-', ' ')}
+        {title}
       </Typography>
     </Breadcrumbs>
   )

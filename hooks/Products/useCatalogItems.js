@@ -17,5 +17,7 @@ export default function useCatalogItems(input) {
   const catalogItems = data?.catalogItems?.edges
   const totalCount = data?.catalogItems?.totalCount
 
+  console.log('catalogItems', catalogItems)
+
   return [catalogItems, loading, refetch, totalCount]
 }
