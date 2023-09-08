@@ -4,6 +4,7 @@ import { ProductCardProps } from 'types'
 import { PrimaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import { useRouter } from 'next/navigation'
 
 const ProductCard = ({
   image,
@@ -13,11 +14,14 @@ const ProductCard = ({
   oldPrice,
   newPrice,
   width,
+  slug,
   mdWidth,
 }: ProductCardProps) => {
   const [isHovering, setIsHovering] = useState(false) // handle mouse enter and leave for more details on desktop view
   const [isDetailsVisible, setIsDetailsVisible] = useState(false) // Toggle More Details for mobile view
   const [isFavorite, setIsFavorite] = useState(false) // handle favourite click
+
+  const router = useRouter()
 
   // handle mouse enter and leave
   const handleMouseEnter = () => {
@@ -45,7 +49,10 @@ const ProductCard = ({
   // handle more details click
   const handleMoreDetailsClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
-    console.log('more details clicked')
+
+    // console.log('slug', `/product/${slug}`)
+
+    router.push(`/product/${slug}`)
   }
 
   // console.log('isDetailsVisible', isDetailsVisible)

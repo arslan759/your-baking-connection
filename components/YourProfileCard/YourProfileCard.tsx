@@ -10,8 +10,6 @@ import { withApollo } from 'lib/apollo/withApollo'
 import withAuth from 'hocs/withAuth'
 
 const YourProfileCard = () => {
-  const [isEdited, setIsEdited] = useState(false)
-
   const [viewer, loadingViewer] = useViewer()
 
   //data states
@@ -34,10 +32,6 @@ const YourProfileCard = () => {
   }, [viewer])
 
   console.log('viewer in profile card is ', viewer)
-
-  const handleEditUserProfile = () => {
-    setIsEdited(!isEdited)
-  }
 
   return (
     <div className={styles.card}>

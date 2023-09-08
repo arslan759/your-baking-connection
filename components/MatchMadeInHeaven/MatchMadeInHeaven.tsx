@@ -2,8 +2,15 @@ import { GalleryProductsData } from 'Constants/constants'
 import React from 'react'
 import ProductCard from '../ProductCard/ProductCard'
 import { Typography } from '@mui/material'
+import useCatalogItems from 'hooks/Products/useCatalogItems'
+import Spinner from '../Spinner'
 
 const MatchMadeInHeaven = () => {
+  const [catalogItems, loadingItems, refetchItems, totalCount] = useCatalogItems({
+    shopIds: ['cmVhY3Rpb24vc2hvcDpkU3VYTGIzRHg3TXNvV29nSg=='],
+    first: 3,
+  })
+
   return (
     <div className='w-full flex flex-col items-center'>
       <div className='flex flex-col items-center'>
@@ -45,24 +52,35 @@ const MatchMadeInHeaven = () => {
       </div>
 
       <div className='w-[100%] flex flex-wrap justify-start gap-x-[2%] gap-y-[8px] md:gap-y-[24px] mt-[48px] md:mt-[32px]'>
-        {GalleryProductsData.slice(0, 3).map((item) => {
-          return (
-            // <div className='w-full md:w-[32%]'>
-            <ProductCard
-              key={item.id}
-              image={item.image}
-              title={item.title}
-              description={item.description}
-              category={item.category}
-              oldPrice={item.oldPrice}
-              newPrice={item.newPrice}
-              width='100% !important'
-            />
-            // </div>
-          )
-        })}
-      </div>
+        {loadingItems ? (
+          <div className='w-full flex flex-col items-center'>
+            <Spinner />
+          </div>
+        ) : (
+          <>
+            {catalogItems?.map((item: any) => {
+              const { product } = item?.node
+              const { pricing } = product.variants[0]
 
+              return (
+                // <div className='w-full md:w-[32%]'>
+                <ProductCard
+                  key={item.id}
+                  image={product?.media[0]?.URLs?.thumbnail}
+                  title={product?.title}
+                  slug={product?.slug}
+                  description={product?.description}
+                  category={item?.category}
+                  oldPrice={pricing[0].compareAtPrice?.amount}
+                  newPrice={pricing[0].price}
+                  width='100% !important'
+                />
+                // </div>
+              )
+            })}
+          </>
+        )}
+      </div>
       {/* <div className='w-[90vw] flex justify-center mt-[24px] md:mt-[48px]'>
         <CustomPagination />
       </div> */}

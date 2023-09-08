@@ -11,6 +11,23 @@ const Gallery = () => {
 
   const [occasionError, setOccasionError] = useState('')
 
+  //items per page to display
+  const [itemsPerPage, setItemsPerPage] = useState<number>(9)
+
+  //total number of pages for the paginator
+  const [pageCount, setPageCount] = useState<number>(0)
+
+  //we are using this state to display the current page, which differs from the offset value
+  const [page, setCurrentPage] = useState(1)
+
+  //for the offset filter
+  const [offset, setOffset] = useState(0)
+
+  const handlePageClick = (pageNum: number) => {
+    setOffset((pageNum - 1) * itemsPerPage)
+    setCurrentPage(pageNum)
+  }
+
   // handleOccasionChange function for occasion dropdown
   const handleOccasionChange = (occasion: string) => {
     setOccasion(occasion)
@@ -95,7 +112,13 @@ const Gallery = () => {
           </div>
         </div>
         <div className='w-[90vw] flex justify-center mt-[50px]'>
-          <CustomPagination />
+          <CustomPagination
+            count={pageCount}
+            boundaryCount={1}
+            siblingCount={1}
+            page={page}
+            onChange={handlePageClick}
+          />
         </div>
       </div>
     </div>

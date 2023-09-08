@@ -36,7 +36,7 @@ const MembershipVideoPlayer = () => {
       </video>
       {showPlayButton && (
         <div
-          className='absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[1] cursor-pointer'
+          className='hidden md:block absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[1] cursor-pointer'
           onClick={handlePlay}
         >
           <img
