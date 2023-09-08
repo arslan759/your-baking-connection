@@ -213,11 +213,11 @@ export interface SearchBakerItemProps {
 }
 
 export interface PaginatorProps {
-  count: number
-  boundaryCount: number
-  siblingCount: number
-  page: number
-  onChange: (value: number) => void
+  count?: number
+  boundaryCount?: number
+  siblingCount?: number
+  page?: number
+  onChange?: (value: number) => void
 }
 
 export interface ProductDetailMainContentProps {
