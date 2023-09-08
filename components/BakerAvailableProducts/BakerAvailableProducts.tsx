@@ -28,6 +28,8 @@ const BakerAvailableProducts = () => {
     shopIds: ['cmVhY3Rpb24vc2hvcDpkU3VYTGIzRHg3TXNvV29nSg=='],
     first: itemsPerPage,
     offset,
+    sortBy: 'updatedAt',
+    sortOrder: 'desc',
   })
 
   useEffect(() => {

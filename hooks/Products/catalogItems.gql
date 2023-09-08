@@ -1,5 +1,17 @@
-query catalogItems($shopIds: [ID]!, $first: ConnectionLimitInt, $offset: Int) {
-  catalogItems(shopIds: $shopIds, first: $first, offset: $offset) {
+query catalogItems(
+  $shopIds: [ID]!
+  $first: ConnectionLimitInt
+  $offset: Int
+  $sortBy: CatalogItemSortByField
+  $sortOrder: SortOrder
+) {
+  catalogItems(
+    shopIds: $shopIds
+    first: $first
+    offset: $offset
+    sortBy: $sortBy
+    sortOrder: $sortOrder
+  ) {
     totalCount
     edges {
       node {
