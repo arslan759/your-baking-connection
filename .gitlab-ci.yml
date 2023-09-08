@@ -129,6 +129,7 @@ build-test: # This job runs in the build stage, which runs first.
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && npm install --legacy-peer-deps"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && npm run build"
 
+
 deploy-test:
   only:
     - test
