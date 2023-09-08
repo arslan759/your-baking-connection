@@ -56,6 +56,7 @@ const BakerAvailableProducts = () => {
                   key={item.id}
                   image={product?.media[0]?.URLs?.thumbnail}
                   title={product?.title}
+                  slug={product?.slug}
                   description={product?.description}
                   category={item?.category}
                   oldPrice={pricing[0].compareAtPrice?.amount}

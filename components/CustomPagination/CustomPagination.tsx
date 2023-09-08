@@ -10,12 +10,12 @@ const CustomPagination = ({
   page,
   onChange,
 }: PaginatorProps) => {
-
-
-  
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     console.log('page value is ', value)
-    onChange(value)
+
+    if (onChange) {
+      onChange(value)
+    }
   }
   return (
     <Stack spacing={2}>

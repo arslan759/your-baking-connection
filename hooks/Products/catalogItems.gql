@@ -19,6 +19,7 @@ query catalogItems(
           product {
             _id
             title
+            slug
             description
             media {
               URLs {

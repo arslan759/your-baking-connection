@@ -166,6 +166,7 @@ export interface ProductCardProps {
   category: string
   oldPrice: string
   newPrice: string
+  slug: string
   width?: string
   mdWidth?: string
 }
@@ -212,9 +213,23 @@ export interface SearchBakerItemProps {
 }
 
 export interface PaginatorProps {
-  count: number
-  boundaryCount: number
-  siblingCount: number
-  page: number
-  onChange: (value: number) => void
+  count?: number
+  boundaryCount?: number
+  siblingCount?: number
+  page?: number
+  onChange?: (value: number) => void
+}
+
+export interface ProductDetailMainContentProps {
+  title: string
+  stock: number
+  oldPrice: number
+  newPrice: number
+  reviews: number
+  description: string
+  rating: number
+}
+
+export interface ProductSwiperProps {
+  images: any[]
 }
