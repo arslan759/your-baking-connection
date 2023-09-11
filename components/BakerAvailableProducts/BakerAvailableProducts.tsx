@@ -6,7 +6,11 @@ import useCatalogItems from 'hooks/Products/useCatalogItems'
 import { withApollo } from 'lib/apollo/withApollo'
 import Spinner from '../Spinner'
 
-const BakerAvailableProducts = () => {
+interface BakerAvailableProducts {
+  slug: string
+}
+
+const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
   //items per page to display
   const [itemsPerPage, setItemsPerPage] = useState<number>(6)
 
@@ -24,8 +28,12 @@ const BakerAvailableProducts = () => {
     setCurrentPage(pageNum)
   }
 
+  useEffect(() => {
+    console.log('slug in final', slug)
+  }, [slug])
+
   const [catalogItems, loadingItems, refetchItems, totalCount] = useCatalogItems({
-    shopIds: ['cmVhY3Rpb24vc2hvcDpkU3VYTGIzRHg3TXNvV29nSg=='],
+    shopIds: [slug],
     first: itemsPerPage,
     offset,
   })

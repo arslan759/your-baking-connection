@@ -4,7 +4,7 @@ import BakerNoAvailableProducts from '../BakerNoAvailableProducts/BakerNoAvailab
 import BakerAvailableProducts from '../BakerAvailableProducts/BakerAvailableProducts'
 import ClientReviewSwiper from '../ClientReviewSwiper/ClientReviewSwiper'
 
-const BakerTabsPanel = ({ activeTab }: BakerTabsPanelProps) => {
+const BakerTabsPanel = ({ activeTab, slug }: BakerTabsPanelProps) => {
   const [products, setProducts] = useState(1)
 
   console.log('active tab is', activeTab)
@@ -12,7 +12,7 @@ const BakerTabsPanel = ({ activeTab }: BakerTabsPanelProps) => {
   return (
     <div>
       {activeTab == 0 &&
-        (products === 0 ? <BakerNoAvailableProducts /> : <BakerAvailableProducts />)}
+        (products === 0 ? <BakerNoAvailableProducts /> : <BakerAvailableProducts slug={slug} />)}
       {activeTab == 1 && <div>Gallery of work</div>}
       {activeTab == 2 && <div>terms and conditions</div>}
       {activeTab == 3 && <div>allergen info</div>}

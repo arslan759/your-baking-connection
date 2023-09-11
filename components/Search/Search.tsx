@@ -7,6 +7,9 @@ import { ProductTypes, SearchBakerData, cities, states } from 'Constants/constan
 import InputField from '../InputField/InputField'
 import SearchBakerItem from '../SearchBakerItem/SearchBakerItem'
 import styles from './styles.module.css'
+import useBakers from 'hooks/baker/useBakers'
+import { withApollo } from 'lib/apollo/withApollo'
+import Spinner from '../Spinner'
 
 const Search = () => {
   const [state, setState] = useState<string | null>('')
@@ -61,6 +64,8 @@ const Search = () => {
 
     console.log('form submitted')
   }
+
+  const [bakers, loadingBakers, refetchBakers] = useBakers()
 
   return (
     <>
@@ -182,21 +187,31 @@ const Search = () => {
         <div className='w-[90vw] flex mt-[30px] md:mt-[50px]'>
           <div className='w-full flex flex-col items-center  mt-[24px] md:mt-[50px]'>
             <div className='w-full flex flex-col items-center gap-x-[4%] gap-y-[48px]'>
-              {SearchBakerData.slice(0, 6).map((item, index) => {
-                const { title, description, image, rating, city, state } = item
-                return (
-                  <div key={index} className='w-full md:w-[70%] flex flex-col items-center'>
-                    <SearchBakerItem
-                      image={image}
-                      title={title}
-                      description={description}
-                      rating={rating.toString()}
-                      city={city}
-                      state={state}
-                    />
-                  </div>
-                )
-              })}
+              {loadingBakers ? (
+                <div className='w-full flex flex-col items-center'>
+                  <Spinner />
+                </div>
+              ) : (
+                <>
+                  {bakers?.map((item: any, index: any) => {
+                    const { _id, name, slug, shopLogoUrls, description, addressBook } = item
+                    // const { city, region: state } = addressBook[0]
+                    return (
+                      <div key={index} className='w-full md:w-[70%] flex flex-col items-center'>
+                        <SearchBakerItem
+                          image={shopLogoUrls?.primaryShopLogoUrl}
+                          title={name}
+                          description={description}
+                          rating={'4.2'}
+                          city={addressBook ? addressBook[0]?.city : ''}
+                          state={addressBook ? addressBook[0]?.state : ''}
+                          slug={_id}
+                        />
+                      </div>
+                    )
+                  })}
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -209,4 +224,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default withApollo()(Search)
