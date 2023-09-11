@@ -7,24 +7,9 @@ import ContextProvider from './context-provider'
 
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import Header from '@/components/Header'
-import { usePathname } from 'next/navigation'
 import Footer from '@/components/Footer/Footer'
 
 export default function RootLayout({ children }: PropsWithChildren<{}>) {
-  const router = usePathname()
-
-  // const showHeader =
-  //   router === '/signin' ||
-  //   router === '/signup' ||
-  //   router === '/email' ||
-  //   router === '/password' ||
-  //   router === '/editprofile' ||
-  //   router === '/profile' ||
-  //   router === '/addmember' ||
-  //   router === '/allmember' ||
-  //   router === '/pricingplan'
-  //     ? false
-  //     : true
   return (
     <html lang='en'>
       <head>
