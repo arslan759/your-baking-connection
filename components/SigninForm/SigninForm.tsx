@@ -228,7 +228,7 @@ const SigninForm = () => {
                       color: '#fff',
                     }}
                   >
-                    Remember Password
+                    Remember me
                   </Typography>
                 </div>
               </div>
