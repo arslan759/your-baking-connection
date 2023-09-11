@@ -27,7 +27,7 @@ const BakerTabsPanel = ({ activeTab, slug, fetchTotalProducts }: BakerTabsPanelP
   return (
     <div>
       {activeTab == 0 &&
-        (totalCount !== 0 ? <BakerAvailableProducts /> : <BakerNoAvailableProducts />)}
+        (totalCount !== 0 ? <BakerAvailableProducts slug={slug} /> : <BakerNoAvailableProducts />)}
       {activeTab == 1 && <div>Gallery of work</div>}
       {activeTab == 2 && <div>terms and conditions</div>}
       {activeTab == 3 && <div>allergen info</div>}
