@@ -235,3 +235,12 @@ export interface ProductDetailMainContentProps {
 export interface ProductSwiperProps {
   images: any[]
 }
+
+export interface AccountDropdownProps {
+  account: any
+  color: string
+}
+
+export interface AddToCartModalProps {
+  color: string
+}

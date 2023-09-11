@@ -202,18 +202,20 @@ const ProductCard = ({
           {description}
         </Typography>
         <div className='flex gap-x-[14px] items-center'>
-          <Typography
-            sx={{
-              color: '#888',
-              fontSize: '12px !important',
-              fontWeight: '400',
-              lineHeight: 'normal',
-              fontFamily: 'Open Sans',
-              textDecoration: 'line-through',
-            }}
-          >
-            ${parseInt(oldPrice)}
-          </Typography>
+          {oldPrice ? (
+            <Typography
+              sx={{
+                color: '#888',
+                fontSize: '12px !important',
+                fontWeight: '400',
+                lineHeight: 'normal',
+                fontFamily: 'Open Sans',
+                textDecoration: 'line-through',
+              }}
+            >
+              ${parseInt(oldPrice)}
+            </Typography>
+          ) : null}
           <Typography
             sx={{
               color: '#090909',

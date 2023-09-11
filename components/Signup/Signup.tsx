@@ -4,7 +4,6 @@ import styles from './styles.module.css'
 
 import { useState } from 'react'
 
-import ForgotPasswordForm from '../ForgotPasswordForm/ForgotPasswordForm'
 import OTPForm from '../OTPForm/OTPForm'
 
 export default function ForgetPassword() {

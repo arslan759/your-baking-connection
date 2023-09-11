@@ -36,6 +36,8 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
     shopIds: [slug],
     first: itemsPerPage,
     offset,
+    sortBy: 'updatedAt',
+    sortOrder: 'desc',
   })
 
   useEffect(() => {
