@@ -1,0 +1,24 @@
+query baker($shopId: ID!) {
+  baker(shopId: $shopId) {
+    _id
+    name
+    slug
+    description
+    shopLogoUrls {
+      primaryShopLogoUrl
+    }
+    categories
+    featuredShopImages {
+      URLs {
+        large
+        medium
+        small
+        thumbnail
+      }
+    }
+    addressBook {
+      city
+      region
+    }
+  }
+}

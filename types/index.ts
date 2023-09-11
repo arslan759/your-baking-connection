@@ -157,6 +157,7 @@ export interface BakerNavigationProps {
 
 export interface BakerTabsPanelProps {
   activeTab: number
+  slug: string
 }
 
 export interface ProductCardProps {
@@ -210,6 +211,7 @@ export interface SearchBakerItemProps {
   rating: string
   state: string
   city: string
+  slug: string
 }
 
 export interface PaginatorProps {
