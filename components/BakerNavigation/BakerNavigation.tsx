@@ -3,7 +3,7 @@ import { GalleryNavigation } from 'Constants/constants'
 import React from 'react'
 import { BakerNavigationProps } from 'types'
 
-const BakerNavigation = ({ activeTab, handleChange }: BakerNavigationProps) => {
+const BakerNavigation = ({ activeTab, handleChange, totalProducts }: BakerNavigationProps) => {
   return (
     <Tabs
       value={activeTab}
@@ -107,7 +107,7 @@ const BakerNavigation = ({ activeTab, handleChange }: BakerNavigationProps) => {
                     color: '#fff',
                     background: '#070707',
                     fontFamily: 'Josefin Sans',
-                  fontSize: '11px',
+                    fontSize: '11px',
                     lineHeight: '18px',
                     letterSpacing: '1px',
                     textTransform: 'uppercase',
@@ -117,7 +117,7 @@ const BakerNavigation = ({ activeTab, handleChange }: BakerNavigationProps) => {
                     justifyContent: 'center',
                   }}
                 >
-                  0
+                  {totalProducts}
                 </span>
               </Typography>
             ) : (
