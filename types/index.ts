@@ -238,7 +238,6 @@ export interface ProductSwiperProps {
 
 export interface AccountDropdownProps {
   account: any
-  color: string
 }
 
 export interface AddToCartModalProps {

@@ -12,9 +12,8 @@ import Logout from '@mui/icons-material/Logout'
 import { useRouter } from 'next/navigation'
 import { AccountDropdownProps } from 'types'
 import { Typography } from '@mui/material'
-import AddToCartModal from '../AddToCartModal'
 
-const AccountDropdown = ({ account, color }: AccountDropdownProps) => {
+const AccountDropdown = ({ account }: AccountDropdownProps) => {
   const router = useRouter()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -33,24 +32,14 @@ const AccountDropdown = ({ account, color }: AccountDropdownProps) => {
 
   console.log('account in dropdown is ', account)
   return (
-    <div className='flex'>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <AddToCartModal color={color} />
-      </Box>
-
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title='Account settings'>
-          <IconButton
-            onClick={handleClick}
-            size='small'
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup='true'
-            aria-expanded={open ? 'true' : undefined}
-          >
-            <Avatar src={account.picture} alt='' sx={{ width: 40, height: 40 }} />
-          </IconButton>
-        </Tooltip>
+    <div className='flex items-center justify-center'>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }}>
+        <img
+          onClick={handleClick}
+          src='/Images/profile-icon.svg'
+          alt='profile-icon'
+          className='w-[20px] md:w-[25px] h-[20px] md:h-[25px]'
+        />
       </Box>
       <Menu
         anchorEl={anchorEl}
