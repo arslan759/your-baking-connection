@@ -153,11 +153,13 @@ export interface BakerWeOfferItemProps {
 export interface BakerNavigationProps {
   activeTab: number
   handleChange: (event: React.SyntheticEvent, newValue: number) => void
+  totalProducts: number
 }
 
 export interface BakerTabsPanelProps {
   activeTab: number
   slug: string
+  fetchTotalProducts: (total: number) => void
 }
 
 export interface ProductCardProps {
