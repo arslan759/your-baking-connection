@@ -8,28 +8,44 @@ import Loader from '@/components/Loader/Loader'
 
 const withAuth = (WrappedComponent) => {
   const AuthRedirect = (props) => {
+    let isAuthenticated
     const [viewer, loading] = useViewer()
     const router = useRouter()
     const pathName = usePathname()
 
     useEffect(() => {
       console.log('loading viewer is ', loading)
-      if (loading) {
-        return // No need to perform further checks while loading
-      }
+    }, [loading, viewer?._id, pathName, isAuthenticated])
 
-      // Consolidated condition to handle redirects
-      if (viewer?._id && (pathName === '/signin' || pathName === '/signup')) {
-        router.replace('/')
-      }
-    }, [loading, viewer?._id, pathName])
-
-    if (loading) {
+    if (loading && !viewer?._id) {
       return (
         <>
           <Loader />
         </>
       )
+    }
+
+    // Consolidated condition to handle redirects
+    if (!loading) {
+      if (
+        (viewer?._id && (pathName === '/signin' || pathName === '/signup')) ||
+        (!viewer?._id && pathName === `/profile`) ||
+        (!viewer?._id && pathName === `/profile/help`) ||
+        (!viewer?._id && pathName === `/profile/preferences`) ||
+        (!viewer?._id && pathName === `/profile/purchase-history`) ||
+        (!viewer?._id && pathName === `/profile/payment-details`) ||
+        (!viewer?._id && pathName === `/profile/ratings-and-reviews`) ||
+        (!viewer?._id && pathName === `/profile/settings`)
+      ) {
+        isAuthenticated = false
+      } else {
+        isAuthenticated = true
+      }
+    }
+
+    if (!isAuthenticated) {
+      router.replace('/')
+      return null
     }
 
     return <WrappedComponent {...props} />

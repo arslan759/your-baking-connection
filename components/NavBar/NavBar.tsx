@@ -10,13 +10,14 @@ import { NavBarProps } from 'types'
 import { withApollo } from 'lib/apollo/withApollo'
 import useStores from 'hooks/useStores'
 import AccountDropdown from '../AccountDropdown/AccountDropdown'
+import useViewer from 'hooks/viewer/useViewer'
+import AddToCartModal from '../AddToCartModal'
+import NotificationModal from '../NotificationModal/NotificationModal'
 
 const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarProps) => {
-  // @ts-ignore
-  const { authStore } = useStores()
-  const { account } = authStore
+  const [viewer, loading] = useViewer()
 
-  console.log('account is', account)
+  console.log('viewer in navbar is', viewer)
 
   const pathName = usePathname()
   const StyledToolbar = styled(Toolbar)({
@@ -91,7 +92,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
             //   <p style={{ color: 'black' }}>loading...</p>
             // ) : (
             <Grid>
-              {!account || Object.keys(account).length === 0 ? (
+              {!viewer || Object.keys(viewer).length === 0 ? (
                 <Box
                   sx={{
                     display: 'flex',
@@ -114,11 +115,19 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
               ) : (
                 <Box
                   sx={{
+                    display: 'flex',
+                    // flexDirection: 'row !important',
                     alignItems: 'center',
+                    gap: '24px',
+                    pr: '10px',
+                    '@media (max-width: 767px)': {
+                      gap: '18px',
+                    },
                   }}
-                  // className={styles.navbar}
                 >
-                  <AccountDropdown account={account} color={itemsColor} />
+                  <AccountDropdown account={viewer} />
+                  <NotificationModal color={itemsColor} />
+                  <AddToCartModal color={itemsColor} />
                 </Box>
               )}
             </Grid>

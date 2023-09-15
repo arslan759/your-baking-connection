@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
-// import PurchaseHistoryCard from '../PurchaseHistoryCard/PurchaseHistoryCard'
+import withAuth from 'hocs/withAuth'
+import { withApollo } from 'lib/apollo/withApollo'
 
 const PaymentDetails = () => {
   return (
@@ -8,11 +9,10 @@ const PaymentDetails = () => {
       <NavBar />
 
       <div className='mt-[24px] md:mt-[100px] flex justify-center'>
-        {/* <PurchaseHistoryCard /> */}
         PaymentDetails
       </div>
     </div>
   )
 }
 
-export default PaymentDetails
+export default withApollo()(withAuth(PaymentDetails))

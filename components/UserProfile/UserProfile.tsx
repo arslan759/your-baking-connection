@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import YourProfileCard from '../YourProfileCard/YourProfileCard'
 import withAuth from 'hocs/withAuth'
+import { withApollo } from 'lib/apollo/withApollo'
 
 const UserProfile = () => {
   return (
@@ -15,4 +16,4 @@ const UserProfile = () => {
   )
 }
 
-export default UserProfile
+export default withApollo()(withAuth(UserProfile))

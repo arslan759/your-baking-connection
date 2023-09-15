@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Badge, Modal, Typography } from '@mui/material'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { AddToCartModalProps } from 'types'
 import { orderItemsData } from 'Constants/constants'
 import CartTable from '../CartTable'
 import EmptyCart from '../EmptyCart'
 import { PrimaryBtn } from '../Buttons'
 
-const AddToCartModal = ({ color }: AddToCartModalProps) => {
+const NotificationModal = ({ color }: AddToCartModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleModal = () => {
@@ -18,8 +19,8 @@ const AddToCartModal = ({ color }: AddToCartModalProps) => {
       <Badge
         sx={{
           cursor: 'pointer',
-          height: 'fit-content',
-          width: 'fit-content',
+          height: '25px',
+          width: '25px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -32,8 +33,8 @@ const AddToCartModal = ({ color }: AddToCartModalProps) => {
         onClick={handleModal}
       >
         <img
-          src='/Images/cart-icon.svg'
-          alt='cart'
+          src='/Images/bell-icon.svg'
+          alt='bell-icon'
           className='w-[20px] md:w-[25px] h-[20px] md:h-[25px]'
         />
       </Badge>
@@ -93,4 +94,4 @@ const AddToCartModal = ({ color }: AddToCartModalProps) => {
   )
 }
 
-export default AddToCartModal
+export default NotificationModal
