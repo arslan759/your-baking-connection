@@ -2,11 +2,12 @@ import { Typography } from '@mui/material'
 import React from 'react'
 
 interface BakerMainContent {
-  bakerName: string | undefined
-  description: string | undefined
+  bakerName?: string | undefined
+  description?: string | undefined
+  slug: string
 }
 
-const BakerMainContent = ({ bakerName, description }: BakerMainContent) => {
+const BakerMainContent = ({ bakerName, description, slug }: BakerMainContent) => {
   return (
     <div className='mt-[48px] lg:mt-[100px] pb-[12px] lg:pb-[0px] bg-[#fff]'>
       <div className='w-full flex'>
@@ -52,32 +53,11 @@ const BakerMainContent = ({ bakerName, description }: BakerMainContent) => {
             >{`4.8`}</Typography>
           </div>
         </div>
-        {/* <div className='w-[10%] flex justify-end'>
-          <div className='flex flex-col items-center justify-end lg:justify-start gap-y-[4px] md:gap-y-[12px]'>
-            <img
-              src='/Images/edit.svg'
-              alt='edit-icon'
-              className='w-[18px] md:w-[24px] h-[18px] md:h-[24px]'
-            />
-            <Typography
-              sx={{
-                fontFamily: 'Josefin Sans',
-                fontSize: '16px',
-                fontWeight: '500',
-                lineHeight: 'normal',
-                textTransform: 'capitalize',
-                fontFeatureSettings: "'clig' off, 'liga' off",
-                color: '#090909',
-                '@media (max-width: 767px)': {
-                  fontSize: '12px',
-                },
-              }}
-            >
-              edit
-            </Typography>
-          </div>
-        </div> */}
+
+        {/* <EditBakerModal /> */}
       </div>
+
+      <div className='mt-[12px] w-full'>{/* <AddBakerProductModal slug={slug} /> */}</div>
 
       <div className='hidden lg:block mt-[24px] bg-[#6C6C6C] h-[0.5px] w-full' />
 

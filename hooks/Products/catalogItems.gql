@@ -18,16 +18,37 @@ query catalogItems(
         ... on CatalogItemProduct {
           product {
             _id
-            title
             slug
+            productId
+            title
             description
+            productAttributes {
+              attribute
+              options {
+                optionLabel
+                price
+              }
+            }
+            productListingSchedule {
+              startDate
+              endDate
+            }
+            availableFulfillmentDates
             media {
+              priority
+              productId
               URLs {
                 thumbnail
+                large
+                medium
+                small
+                original
               }
             }
             variants {
               variantId
+              isTaxable
+              inventoryInStock
               pricing {
                 compareAtPrice {
                   amount
