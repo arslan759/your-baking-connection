@@ -1,16 +1,30 @@
-import React, { useState } from 'react'
-import InputField from '../InputField/InputField'
+import React, { useEffect, useState } from 'react'
 import DropdownField from '../DropdownField/DropdownField'
-import { states } from 'Constants/constants'
 import { Typography } from '@mui/material'
 import ServeItem from './ServeItem'
-import { PrimaryBtn } from '../Buttons'
+import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
+import DropdownFieldAttributes from '../DropdownFieldAttributes'
 
-const ProductDetailForm = () => {
-  const [color, setColor] = useState('')
-  const [flavor, setFlavor] = useState('')
+interface ProductDetailFormProps {
+  attributes: any[]
+  updatePrice: (price: number) => void
+  newPrice: number
+}
+
+interface Option {
+  optionLabel: string
+  price: number | string
+}
+
+interface Attribute {
+  attribute: string
+  option: Option
+}
+
+const ProductDetailForm = ({ attributes, newPrice, updatePrice }: ProductDetailFormProps) => {
+  const [productAttributes, setProductAttributes] = useState<Attribute[]>([])
   const [quantity, setQuantity] = useState(1)
   const [serves, setServes] = useState<string | null>('1')
   const [isFavorite, setIsFavorite] = useState(false)
@@ -19,18 +33,43 @@ const ProductDetailForm = () => {
   const [colorError, setColorError] = useState('')
   const [flavorError, setFlavorError] = useState('')
 
-  // handleFlavorChange function for flavor dropdown
-  const handleFlavorChange = (flavor: string) => {
-    setFlavor(flavor)
-    setFlavorError(flavor ? '' : 'Flavor is required')
-  }
+  const handleDropdownChange = async (attribute: string, optionLabel: string, price: string) => {
+    console.log('attribute is ', attribute)
+    console.log('name is ', optionLabel)
+    console.log('value is ', price)
 
-  // handleChange function for input fields
-  const handleChange = (name: string, value: string) => {
-    if (name === 'color') {
-      setColor(value)
-      setColorError(value ? '' : 'Color is required')
+    const updatedAttributes = [...productAttributes]
+
+    console.log('updatedAttributes', updatedAttributes)
+
+    const attributeToUpdate = await updatedAttributes.filter(
+      (item) => item.attribute === attribute,
+    )[0]
+
+    console.log('attributeToUpdate is ', attributeToUpdate)
+
+    attributeToUpdate!.option = {
+      optionLabel,
+      price,
     }
+
+    let totalPrice: number[] = []
+
+    await updatedAttributes.map((item) => {
+      totalPrice.push(Number(item.option.price))
+    })
+
+    console.log('totalPrice is ', totalPrice)
+
+    const reducer = (accumulator: number, currentValue: number) => accumulator + currentValue
+
+    const newTotalPrice = await totalPrice.reduce(reducer)
+
+    console.log('newTotalPrice is ', newTotalPrice)
+
+    updatePrice(newPrice + newTotalPrice)
+
+    setProductAttributes(updatedAttributes)
   }
 
   //   onClick function for serves
@@ -39,18 +78,21 @@ const ProductDetailForm = () => {
   }
 
   // function for add and subtract quantity
-  const handleAddQuantity = (name: string, quantity: number) => {
-    console.log('add clicked for', name)
+  const handleAddQuantity = () => {
+    console.log('add quantity clicked')
 
-    quantity = quantity + 1
+    setQuantity((prev) => prev + 1)
 
     console.log('quantity is now', quantity)
   }
 
-  const handleSubtractQuantity = (name: string, quantity: number) => {
-    console.log('subtract clicked for', name)
+  const handleSubtractQuantity = () => {
+    console.log('subtract quantity clicked for', name)
 
-    quantity = quantity - 1
+    console.log('quantity is', quantity)
+
+    if (quantity === 1) return
+    setQuantity((prev) => prev - 1)
 
     console.log('quantity is now', quantity)
   }
@@ -59,25 +101,61 @@ const ProductDetailForm = () => {
     e.preventDefault()
 
     // form logs
-    console.log('color is ', color)
-    console.log('flavor is ', flavor)
     console.log('serves is ', serves)
     console.log('quantity is ', quantity)
     console.log('isFavorite is ', isFavorite)
-
-    // reset error fields
-    setColorError('')
-    setFlavorError('')
+    console.log('productAttributes is ', productAttributes)
 
     // reset form
-    setColor('')
-    setFlavor('')
+    const updatedAttributes = filterDetails(attributes)
+
+    console.log('updatedDetails', updatedAttributes)
+
+    setProductAttributes(updatedAttributes)
     setServes('1')
     setQuantity(1)
     setIsFavorite(false)
 
     console.log('form submitted')
   }
+
+  const filterDetails = (attribute: any) => {
+    return attribute?.map((item: any, index: number) => {
+      return {
+        attribute: item?.attribute,
+        option: {
+          optionLabel: '',
+          price: '',
+        },
+      }
+    })
+  }
+
+  const formReset = () => {
+    setColorError('')
+    setFlavorError('')
+    setServes('1')
+    updatePrice(newPrice)
+    setQuantity(1)
+    setIsFavorite(false)
+    const updatedAttributes = filterDetails(attributes)
+
+    console.log('updatedDetails', updatedAttributes)
+
+    setProductAttributes(updatedAttributes)
+  }
+
+  useEffect(() => {
+    const updatedAttributes = filterDetails(attributes)
+
+    console.log('updatedDetails', updatedAttributes)
+
+    setProductAttributes(updatedAttributes)
+  }, [attributes])
+
+  useEffect(() => {
+    console.log('productAttributes', productAttributes)
+  }, [productAttributes])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -111,21 +189,7 @@ const ProductDetailForm = () => {
           </div>
         </div>
 
-        <div className='max-[400px]:w-[100%] w-[60%] md:w-[25%]'>
-          <DropdownField
-            label='flavor'
-            required
-            name='flavor'
-            errorText={flavorError}
-            value={flavor}
-            placeholder='Select flavor'
-            options={states}
-            inputColor='#888'
-            onChange={handleFlavorChange}
-          />
-        </div>
-
-        <div className='max-[400px]:w-[100%] w-[60%] md:w-[25%]'>
+        {/* <div className='max-[400px]:w-[100%] w-[60%] md:w-[25%]'>
           <InputField
             label='color'
             type='text'
@@ -138,21 +202,47 @@ const ProductDetailForm = () => {
             required
             onChange={handleChange}
           />
-        </div>
+        </div> */}
+      </div>
+
+      <div className='w-full flex flex-wrap mt-[18px] gap-[18px]'>
+        {attributes.map((item, index) => {
+          console.log('attribute is', item)
+
+          console.log('attribute option value is ', productAttributes[index]?.option)
+          return (
+            <div key={index} className='max-[400px]:w-[100%] w-[60%] md:w-[25%]'>
+              <DropdownFieldAttributes
+                label={item?.attribute}
+                required
+                name={item?.attribute}
+                value={productAttributes[index]?.option}
+                placeholder={`Select ${item?.attribute}`}
+                options={item?.options}
+                inputColor='#888'
+                onChange={handleDropdownChange}
+              />
+            </div>
+          )
+        })}
+      </div>
+
+      <div className='w-fit mt-[18px]'>
+        <SecondaryBtn color='#000' text='Reset' handleClick={formReset} />
       </div>
 
       <div className='w-full mt-[18px] flex flex-wrap gap-[16px]'>
         <div className=' bg-[#000] w-fit flex items-center text-white rounded-[4px] px-[10px] py-[8px] gap-[8px] overflow-hidden'>
           <div
             className='flex items-center justify-center w-[20px] h-[20px] px-[4px] py-[4px] cursor-pointer'
-            onClick={() => handleSubtractQuantity('subtract', 1)}
+            onClick={handleSubtractQuantity}
           >
             -
           </div>
-          <div className='flex items-center text-[18px]'>1</div>
+          <div className='flex items-center text-[18px]'>{quantity}</div>
           <div
             className='flex items-center justify-center w-[20px] h-[20px] px-[4px] py-[4px] cursor-pointer'
-            onClick={() => handleAddQuantity('Add', 1)}
+            onClick={handleAddQuantity}
           >
             +
           </div>

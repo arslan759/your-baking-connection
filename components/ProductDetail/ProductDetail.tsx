@@ -1,15 +1,14 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import { Typography } from '@mui/material'
-import ProductSwiper from '../ProductSwiper/ProductSwiper'
 import ProductDetailBreadCrumbs from '../ProductDetailBreadCrumbs/ProductDetailBreadCrumbs'
 import ProductDetailMainContent from '../ProductDetailMainContent/ProductDetailMainContent'
 import ProductDetailTabsSection from '../ProductDetailTabsSection/ProductDetailTabsSection'
-import MatchMadeInHeaven from '../MatchMadeInHeaven/MatchMadeInHeaven'
-import useCatalogItemProduct from 'hooks/Products/useCatalogItemProduct'
-import { withApollo } from 'lib/apollo/withApollo'
-import Loader from '../Loader'
+import useCatalogItemProduct from '../../hooks/Products/useCatalogItemProduct'
 import Spinner from '../Spinner'
+import ProductSwiper from '../ProductSwiper'
+import { withApollo } from 'lib/apollo/withApollo'
+import MatchMadeInHeaven from '../MatchMadeInHeaven'
 
 interface ProductDetailProps {
   slug: string
@@ -45,7 +44,7 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
   console.log('slug', slug)
   console.log('catalogItemProduct', catalogItemProduct)
 
-  const { title, description, media, variants } = catalogItemProduct
+  const { title, description, media, variants, productAttributes } = catalogItemProduct
   const { pricing, inventoryInStock } = variants[0]
   const { URLs } = media[0]
 
@@ -101,6 +100,7 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
                 newPrice={pricing[0].price}
                 rating={3}
                 reviews={10}
+                productAttributes={productAttributes}
                 stock={inventoryInStock}
               />
             </div>
