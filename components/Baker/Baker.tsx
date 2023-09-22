@@ -28,7 +28,7 @@ const Baker = ({ slug }: BakerProps) => {
     setBakerName(baker?.name)
     setBakerDescription(baker?.description)
     setCategories(baker?.categories)
-    setFeaturedImages(baker?.featuredShopImages)
+    setFeaturedImages(baker?.featuredShopImages), localStorage.setItem('shopId', slug)
   }, [baker])
 
   return (

@@ -4,6 +4,7 @@ query catalogItemProductQuery($slugOrId: String!) {
     product {
       _id
       title
+      productId
       description
       productAttributes {
         attribute

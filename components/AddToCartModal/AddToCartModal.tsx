@@ -6,12 +6,14 @@ import CartTable from '../CartTable'
 import EmptyCart from '../EmptyCart'
 import { PrimaryBtn } from '../Buttons'
 
-const AddToCartModal = ({ color }: AddToCartModalProps) => {
+const AddToCartModal = ({ color, cartItems }: AddToCartModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
+
+  console.log('cartItems in AddToCartModal is', cartItems)
 
   return (
     <>
@@ -28,7 +30,7 @@ const AddToCartModal = ({ color }: AddToCartModalProps) => {
             backgroundColor: '#7DDEC1',
           },
         }}
-        badgeContent={orderItemsData.length}
+        badgeContent={cartItems?.length}
         onClick={handleModal}
       >
         <img
@@ -69,18 +71,18 @@ const AddToCartModal = ({ color }: AddToCartModalProps) => {
                   color: '#6C6C6C',
                 }}
               >
-                ({orderItemsData.length}){' '}
+                ({cartItems?.length}){' '}
               </span>
             </Typography>
           </div>
 
-          {orderItemsData.length === 0 ? (
+          {cartItems.length === 0 ? (
             <div className='w-full flex justify-center'>
               <EmptyCart />
             </div>
           ) : (
             <div className='w-full'>
-              <CartTable />
+              <CartTable items={cartItems} />
             </div>
           )}
 

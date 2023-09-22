@@ -26,6 +26,8 @@ export interface NavBarProps {
   itemsColor?: string
   activeItemColor?: string
   navbarIconColor?: string
+
+  [key: string]: any
 }
 
 export interface ToggleNavBarProps {
@@ -246,6 +248,8 @@ export interface ProductDetailMainContentProps {
   description: string
   rating: number
   productAttributes: any[]
+  productId: string
+  productVariantId: string
 }
 
 export interface ProductSwiperProps {
@@ -258,4 +262,5 @@ export interface AccountDropdownProps {
 
 export interface AddToCartModalProps {
   color: string
+  cartItems: any[]
 }

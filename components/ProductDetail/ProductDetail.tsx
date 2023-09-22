@@ -44,8 +44,8 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
   console.log('slug', slug)
   console.log('catalogItemProduct', catalogItemProduct)
 
-  const { title, description, media, variants, productAttributes } = catalogItemProduct
-  const { pricing, inventoryInStock } = variants[0]
+  const { title, description, media, variants, productAttributes, productId } = catalogItemProduct
+  const { pricing, inventoryInStock, variantId } = variants[0]
   const { URLs } = media[0]
 
   return (
@@ -102,6 +102,8 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
                 reviews={10}
                 productAttributes={productAttributes}
                 stock={inventoryInStock}
+                productId={productId}
+                productVariantId={variantId}
               />
             </div>
           </div>

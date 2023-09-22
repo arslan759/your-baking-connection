@@ -8,13 +8,18 @@ import styles from './styles.module.css'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import { NavBarProps } from 'types'
 import { withApollo } from 'lib/apollo/withApollo'
-import useStores from 'hooks/useStores'
+import withCart from 'containers/cart/withCart'
+import inject from 'hocs/inject'
 import AccountDropdown from '../AccountDropdown/AccountDropdown'
 import useViewer from 'hooks/viewer/useViewer'
 import AddToCartModal from '../AddToCartModal'
 import NotificationModal from '../NotificationModal/NotificationModal'
 
-const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarProps) => {
+const Navbar = ({
+  itemsColor = 'black',
+  activeItemColor = '#7DDEC1',
+  ...restProps
+}: NavBarProps) => {
   const [viewer, loading] = useViewer()
 
   console.log('viewer in navbar is', viewer)
@@ -35,6 +40,10 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
     { name: 'GALLERY', path: '/gallery' },
     { name: 'SEARCH', path: '/search' },
   ]
+
+  useEffect(() => {
+    console.log('restProps in navbar is', restProps?.cart)
+  }, [restProps?.cart])
 
   return (
     <AppBar
@@ -126,8 +135,8 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
                   }}
                 >
                   <AccountDropdown account={viewer} />
-                  <NotificationModal color={itemsColor} />
-                  <AddToCartModal color={itemsColor} />
+                  <NotificationModal color={itemsColor} cartItems={[]} />
+                  <AddToCartModal color={itemsColor} cartItems={restProps?.cart?.items} />
                 </Box>
               )}
             </Grid>
@@ -139,4 +148,5 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
   )
 }
 
-export default withApollo()(Navbar)
+export default withApollo()(withCart(inject('uiStore')(Navbar)))
+// export default withApollo()(Navbar)
