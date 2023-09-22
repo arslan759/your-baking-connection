@@ -9,7 +9,7 @@ const CartCard = () => {
     <div className={styles.card}>
       <div className='w-full flex flex-col gap-y-[40px] md:gap-y-[24px]'>
         <div className='w-full'>
-          <CartTable />
+          <CartTable items={[]} />
         </div>
 
         <div className='w-full flex flex-col items-start gap-y-[16px]'>

@@ -80,9 +80,7 @@ const NotificationModal = ({ color }: AddToCartModalProps) => {
               <EmptyCart />
             </div>
           ) : (
-            <div className='w-full'>
-              <CartTable />
-            </div>
+            <div className='w-full'>{/* <CartTable items={[]} /> */}</div>
           )}
 
           <div className='w-[50%] self-center'>
