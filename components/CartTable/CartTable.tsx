@@ -1,10 +1,14 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 
-const CartTable = () => {
-  function createData(img: string, name: string, price: number, quantity: number) {
-    return { img, name, price, quantity }
-  }
+interface CartTableProps {
+  items: any[]
+}
+
+const CartTable = ({ items }: CartTableProps) => {
+  // function createData(img: string, name: string, price: number, quantity: number) {
+  //   return { img, name, price, quantity }
+  // }
 
   const handleAddQuantity = (name: string, quantity: number) => {
     console.log('add clicked for', name)
@@ -22,13 +26,13 @@ const CartTable = () => {
     console.log('quantity is now', quantity)
   }
 
-  const rows = [
-    createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
-    createData('/Images/cart-dummy-img.png', 'Rose Royale', 2.99, 1),
-    createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
-    createData('/Images/cart-dummy-img.png', 'Rose Royale', 2.99, 1),
-    createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
-  ]
+  // const rows = [
+  //   createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
+  //   createData('/Images/cart-dummy-img.png', 'Rose Royale', 2.99, 1),
+  //   createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
+  //   createData('/Images/cart-dummy-img.png', 'Rose Royale', 2.99, 1),
+  //   createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
+  // ]
 
   return (
     <TableContainer>
@@ -68,7 +72,7 @@ const CartTable = () => {
             },
           }}
         >
-          {rows.map((row, index) => (
+          {items?.map((item, index) => (
             <TableRow key={index}>
               <TableCell
                 sx={{
@@ -84,11 +88,15 @@ const CartTable = () => {
                 scope='row'
               >
                 <img
-                  src={row.img}
-                  alt={row.name}
+                  src={
+                    item?.imageURLs?.thumbnail
+                      ? item.imageURLs.thumbnail
+                      : '/Images/cart-dummy-img.png'
+                  }
+                  alt={item.title}
                   className='w-[56px] md:w-[72px] h-[56px] md:h-[72px] rounded-[4px]'
                 />{' '}
-                {row.name}
+                {item.title}
               </TableCell>
               <TableCell
                 sx={{
@@ -96,13 +104,13 @@ const CartTable = () => {
                   fontWeight: '500 !important',
                 }}
               >
-                {row.price}$
+                {item?.price?.amount}$
               </TableCell>
               <TableCell>
                 <div className='flex'>
                   <div
                     className='bg-[#F3F3F3] px-[12px] md:px-[16px] py-[5px] md:py-[6px] cursor-pointer'
-                    onClick={() => handleSubtractQuantity(row.name, row.quantity)}
+                    onClick={() => handleSubtractQuantity(item?.title, item?.quantity)}
                   >
                     -
                   </div>
@@ -112,17 +120,17 @@ const CartTable = () => {
                       border: '0.758px solid #CBCBCB',
                     }}
                   >
-                    {row.quantity}
+                    {item?.quantity}
                   </div>
                   <div
                     className='bg-[#F3F3F3] px-[12px] md:px-[16px] py-[5px] md:py-[6px] cursor-pointer'
-                    onClick={() => handleAddQuantity(row.name, row.quantity)}
+                    onClick={() => handleAddQuantity(item?.title, item?.quantity)}
                   >
                     +
                   </div>
                 </div>
               </TableCell>
-              <TableCell>{row.price * row.quantity}$</TableCell>
+              <TableCell>{item?.subtotal?.amount}$</TableCell>
             </TableRow>
           ))}
         </TableBody>

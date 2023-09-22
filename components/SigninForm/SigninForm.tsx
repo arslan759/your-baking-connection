@@ -93,6 +93,8 @@ const SigninForm = () => {
       const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
       const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
 
+      console.log('access token is', accessToken)
+
       if (accessToken) {
         localStorage.setItem('accounts:accessToken', accessToken)
         localStorage.setItem('accounts:refreshToken', refreshToken)

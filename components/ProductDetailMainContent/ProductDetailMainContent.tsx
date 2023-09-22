@@ -12,6 +12,8 @@ const ProductDetailMainContent = ({
   reviews,
   rating,
   description,
+  productId,
+  productVariantId,
   productAttributes,
 }: ProductDetailMainContentProps) => {
   const [priceToDisplay, setPriceToDisplay] = useState<number>(newPrice)
@@ -146,6 +148,9 @@ const ProductDetailMainContent = ({
           attributes={productAttributes}
           newPrice={newPrice}
           updatePrice={setPriceToDisplay}
+          stock={stock}
+          productId={productId}
+          productVariantId={productVariantId}
         />
       </div>
 
@@ -178,7 +183,7 @@ const ProductDetailMainContent = ({
           icon='/Images/cart-sales-tax.svg'
           title='Sales Tax'
           description='Eligible for sales tax'
-          value='Not included                     '
+          value='Not included'
         />
         <CartCardDetailsItem
           icon='/Images/cart-delivery-icon.svg'
