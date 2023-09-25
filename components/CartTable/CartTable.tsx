@@ -1,38 +1,93 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import { SecondaryBtn } from '../Buttons'
+import Spinner from '../Spinner'
+import EmptyCart from '../EmptyCart'
 
 interface CartTableProps {
   items: any[]
+
+  cartFunctions: any
 }
 
-const CartTable = ({ items }: CartTableProps) => {
+const CartTable = ({ items, cartFunctions }: CartTableProps) => {
   // function createData(img: string, name: string, price: number, quantity: number) {
   //   return { img, name, price, quantity }
   // }
 
-  const handleAddQuantity = (name: string, quantity: number) => {
-    console.log('add clicked for', name)
+  // const [isUpdatingQuantity, setIsUpdatingQuantity] = useState(false)
 
-    quantity = quantity + 1
+  const { setIsUpdatingQuantity, isUpdatingQuantity } = cartFunctions?.uiStore
 
-    console.log('quantity is now', quantity)
+  console.log('cartFunctions in cartTable is', cartFunctions)
+
+  const handleAddQuantity = async (cartItem: any) => {
+    setIsUpdatingQuantity(true)
+
+    const { onChangeCartItemsQuantity } = cartFunctions
+
+    const input = {
+      cartItemId: cartItem?._id,
+      quantity: cartItem?.quantity + 1,
+    }
+
+    console.log('cartItem in handleAddQuantity is', cartItem)
+    // return
+
+    try {
+      await onChangeCartItemsQuantity(input)
+
+      setIsUpdatingQuantity(false)
+    } catch (error: any) {
+      console.log('error in handleAddQuantity is', error?.message)
+
+      setIsUpdatingQuantity(false)
+    }
   }
 
-  const handleSubtractQuantity = (name: string, quantity: number) => {
-    console.log('subtract clicked for', name)
+  const handleSubtractQuantity = async (cartItem: any) => {
+    setIsUpdatingQuantity(true)
+    const { onChangeCartItemsQuantity } = cartFunctions
 
-    quantity = quantity - 1
+    const input = {
+      cartItemId: cartItem?._id,
+      quantity: cartItem?.quantity - 1,
+    }
 
-    console.log('quantity is now', quantity)
+    console.log('cartItem in handleSubtractQuantity is', cartItem)
+
+    // return
+
+    try {
+      await onChangeCartItemsQuantity(input)
+
+      setIsUpdatingQuantity(false)
+    } catch (error: any) {
+      console.log('error in handleAddQuantity is', error?.message)
+
+      setIsUpdatingQuantity(false)
+    }
   }
 
-  // const rows = [
-  //   createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
-  //   createData('/Images/cart-dummy-img.png', 'Rose Royale', 2.99, 1),
-  //   createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
-  //   createData('/Images/cart-dummy-img.png', 'Rose Royale', 2.99, 1),
-  //   createData('/Images/cart-dummy-img.png', 'Chocolate Cupcake', 2.99, 1),
-  // ]
+  const handleRemoveItem = async (cartItemsId: string) => {
+    const { onRemoveCartItems } = cartFunctions
+
+    await onRemoveCartItems(cartItemsId)
+  }
+
+  if (cartFunctions?.removeCartItemsLoading || isUpdatingQuantity)
+    return (
+      <div className='w-full'>
+        <Spinner />
+      </div>
+    )
+
+  if (items?.length === 0)
+    return (
+      <div className='w-full flex justify-center'>
+        <EmptyCart />
+      </div>
+    )
 
   return (
     <TableContainer>
@@ -55,6 +110,7 @@ const CartTable = ({ items }: CartTableProps) => {
             <TableCell>Price</TableCell>
             <TableCell>Quantity</TableCell>
             <TableCell>Total</TableCell>
+            <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
 
@@ -104,13 +160,13 @@ const CartTable = ({ items }: CartTableProps) => {
                   fontWeight: '500 !important',
                 }}
               >
-                {item?.price?.amount}$
+                ${parseFloat(item?.price?.amount).toFixed(2)}
               </TableCell>
               <TableCell>
                 <div className='flex'>
                   <div
                     className='bg-[#F3F3F3] px-[12px] md:px-[16px] py-[5px] md:py-[6px] cursor-pointer'
-                    onClick={() => handleSubtractQuantity(item?.title, item?.quantity)}
+                    onClick={() => handleSubtractQuantity(item)}
                   >
                     -
                   </div>
@@ -124,13 +180,20 @@ const CartTable = ({ items }: CartTableProps) => {
                   </div>
                   <div
                     className='bg-[#F3F3F3] px-[12px] md:px-[16px] py-[5px] md:py-[6px] cursor-pointer'
-                    onClick={() => handleAddQuantity(item?.title, item?.quantity)}
+                    onClick={() => handleAddQuantity(item)}
                   >
                     +
                   </div>
                 </div>
               </TableCell>
-              <TableCell>{item?.subtotal?.amount}$</TableCell>
+              <TableCell>${parseFloat(item?.subtotal?.amount).toFixed(2)}</TableCell>
+              <TableCell>
+                <SecondaryBtn
+                  color='#000'
+                  handleClick={(e) => handleRemoveItem(item?._id)}
+                  text='Remove'
+                />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

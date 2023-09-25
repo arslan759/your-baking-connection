@@ -1,19 +1,29 @@
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { Badge, Modal, Typography } from '@mui/material'
 import { AddToCartModalProps } from 'types'
 import { orderItemsData } from 'Constants/constants'
 import CartTable from '../CartTable'
 import EmptyCart from '../EmptyCart'
 import { PrimaryBtn } from '../Buttons'
+import Spinner from '../Spinner'
+import { useRouter } from 'next/navigation'
 
-const AddToCartModal = ({ color, cartItems }: AddToCartModalProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps) => {
+  const router = useRouter()
+
+  // const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleModal = () => {
-    setIsModalOpen(!isModalOpen)
+    cartFunctions?.uiStore?.toggleCartOpen()
   }
 
   console.log('cartItems in AddToCartModal is', cartItems)
+
+  console.log('cartFunctions in AddToCartModal is', cartFunctions)
+
+  useEffect(() => {
+    console.log('cartFunctions in AddToCartModal is', cartFunctions)
+  }, [cartFunctions?.uiStore?.isCartOpen])
 
   return (
     <>
@@ -31,7 +41,7 @@ const AddToCartModal = ({ color, cartItems }: AddToCartModalProps) => {
           },
         }}
         badgeContent={cartItems?.length}
-        onClick={handleModal}
+        onClick={cartFunctions?.uiStore?.openCart}
       >
         <img
           src='/Images/cart-icon.svg'
@@ -40,8 +50,8 @@ const AddToCartModal = ({ color, cartItems }: AddToCartModalProps) => {
         />
       </Badge>
 
-      <Modal open={isModalOpen} onClose={handleModal}>
-        <div className='bg-white outline-none absolute right-0 h-[100vh] overflow-y-scroll w-[90vw] md:w-[600px] p-[16px] md:p-[32px] pb-[50px] flex flex-col gap-y-[24px]'>
+      <Modal open={cartFunctions.uiStore.isCartOpen} onClose={handleModal}>
+        <div className='bg-white outline-none absolute right-0 h-[100vh] overflow-y-scroll w-[100vw] md:w-[600px] p-[16px] md:p-[32px] pb-[50px] flex flex-col gap-y-[24px]'>
           <div className='relative'>
             <img
               src='/Images/x.svg'
@@ -75,20 +85,48 @@ const AddToCartModal = ({ color, cartItems }: AddToCartModalProps) => {
               </span>
             </Typography>
           </div>
+          {!cartFunctions?.isLoadingCart ? (
+            <>
+              {cartItems?.length === 0 ? (
+                <div className='w-full flex justify-center  mt-[50px] md:mt-[80px]'>
+                  <EmptyCart handleModal={() => handleModal()} />
+                </div>
+              ) : (
+                <div className='w-full'>
+                  <CartTable cartFunctions={cartFunctions} items={cartItems} />
+                </div>
+              )}
 
-          {cartItems.length === 0 ? (
-            <div className='w-full flex justify-center'>
-              <EmptyCart />
-            </div>
+              {(!cartFunctions?.removeCartItemsLoading ||
+                !cartFunctions.uiStore.isUpdatingQuantity) && (
+                <div className='w-full flex flex-col items-center gap-[18px]'>
+                  <div className='w-[50%] self-center'>
+                    <PrimaryBtn
+                      text='Proceed to Add to Cart'
+                      handleClick={() => {
+                        router.push('/add-to-cart')
+                        handleModal()
+                      }}
+                      // loading={cartFunctions?.removeCartItemsLoading}
+                    />
+                  </div>
+
+                  <div className='w-[50%] self-center'>
+                    <PrimaryBtn
+                      text='Proceed to checkout'
+                      handleClick={() => {
+                        router.push('/checkout')
+                        handleModal()
+                      }}
+                      // loading={cartFunctions?.removeCartItemsLoading}
+                    />
+                  </div>
+                </div>
+              )}
+            </>
           ) : (
-            <div className='w-full'>
-              <CartTable items={cartItems} />
-            </div>
+            <Spinner />
           )}
-
-          <div className='w-[50%] self-center'>
-            <PrimaryBtn text='Continue shopping' handleClick={handleModal} />
-          </div>
         </div>
       </Modal>
     </>

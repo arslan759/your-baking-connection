@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavBar from '../NavBar/NavBar'
 import OrderCard from '../OrderCard/OrderCard'
 import DeliveryDetails from '../DeliveryDetails/DeliveryDetails'
+import withInjectedStores from 'hocs/inject'
+import withCart from 'containers/cart/withCart'
+import { withApollo } from 'lib/apollo/withApollo'
 
-const Checkout = () => {
+interface AddToCartProps {
+  [key: string]: any
+}
+
+const Checkout = ({ ...restProps }: AddToCartProps) => {
+  useEffect(() => {
+    console.log('restProps in checkout is', restProps)
+    // restProps?.uiStore?.closeCart()
+  })
+
   return (
     <div>
       <NavBar />
@@ -25,4 +37,5 @@ const Checkout = () => {
   )
 }
 
-export default Checkout
+// export default Checkout
+export default withApollo()(withCart(withInjectedStores('uiStore')(Checkout)))

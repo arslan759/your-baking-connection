@@ -18,8 +18,9 @@ export interface FooterLinksProps {
 export interface PrimaryBtnProps {
   text: string
   type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
+  loading?: boolean
   handleClick?: MouseEventHandler<HTMLButtonElement>
-  isDisabled?: boolean
 }
 
 export interface NavBarProps {
@@ -263,4 +264,6 @@ export interface AccountDropdownProps {
 export interface AddToCartModalProps {
   color: string
   cartItems: any[]
+
+  cartFunctions: any
 }

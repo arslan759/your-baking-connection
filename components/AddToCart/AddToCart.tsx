@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { use, useEffect } from 'react'
 import NavBar from '../NavBar/NavBar'
 import { Typography } from '@mui/material'
 import CartCard from '../CartCard/CartCard'
 import OrderCard from '../OrderCard/OrderCard'
 import { orderItemsData } from 'Constants/constants'
+import withInjectedStores from 'hocs/inject'
+import withCart from 'containers/cart/withCart'
+import { withApollo } from 'lib/apollo/withApollo'
 
-const AddToCart = () => {
+interface AddToCartProps {
+  [key: string]: any
+}
+
+const AddToCart = ({ ...restProps }: AddToCartProps) => {
+  useEffect(() => {
+    console.log('restProps in navbar is', restProps)
+  }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
+
   return (
     <div>
       <NavBar />
@@ -39,9 +50,9 @@ const AddToCart = () => {
                 color: '#000',
               }}
             >
-              Total ({orderItemsData.length} item){' '}
-              {orderItemsData.reduce(
-                (acc, item) => acc + parseInt(item.price) * parseInt(item.quantity),
+              Total ({restProps?.cart?.items?.length} item){' '}
+              {restProps?.cart?.items.reduce(
+                (total: number, item: any) => total + item?.subtotal?.amount,
                 0,
               )}
               $
@@ -50,7 +61,7 @@ const AddToCart = () => {
 
           <div className='w-full flex flex-col lg:flex-row items-start lg:justify-between gap-y-[24px]'>
             <div className='w-full lg:w-[48%]'>
-              <CartCard />
+              <CartCard cartFunctions={restProps} />
             </div>
 
             <div className='w-full lg:w-[48%]'>
@@ -63,4 +74,5 @@ const AddToCart = () => {
   )
 }
 
-export default AddToCart
+// export default AddToCart
+export default withApollo()(withCart(withInjectedStores('uiStore')(AddToCart)))
