@@ -380,7 +380,7 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-[24px] md:mt-[23px]'>
-              <PrimaryBtn text='save' type='submit' isDisabled={loadingUpdateAccount} />
+              <PrimaryBtn text='save' type='submit' loading={loadingUpdateAccount} />
             </div>
           </form>
         </div>
