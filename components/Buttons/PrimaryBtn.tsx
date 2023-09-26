@@ -1,11 +1,11 @@
-import { Button, Typography } from '@mui/material'
+import { Button, CircularProgress, Typography } from '@mui/material'
 import { PrimaryBtnProps } from 'types'
 
-const PrimaryBtn = ({ handleClick, type = 'button', text, isDisabled }: PrimaryBtnProps) => {
+const PrimaryBtn = ({ handleClick, type = 'button', text, disabled, loading }: PrimaryBtnProps) => {
   return (
     <Button
       // className={`flex items-center justify-center w-full h-full group`}
-      disabled={isDisabled ? isDisabled : false}
+      disabled={disabled || loading ? true : false}
       disableElevation
       type={type}
       sx={{
@@ -27,7 +27,17 @@ const PrimaryBtn = ({ handleClick, type = 'button', text, isDisabled }: PrimaryB
       }}
       onClick={handleClick}
     >
-      {<Typography className='text-black group-hover:text-white'>{text}</Typography>}
+      {loading ? (
+        <CircularProgress
+          sx={{
+            color: 'grey',
+            width: '20px !important',
+            height: '20px !important',
+          }}
+        />
+      ) : (
+        <Typography className='text-black group-hover:text-white'>{text}</Typography>
+      )}
     </Button>
   )
 }

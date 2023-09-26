@@ -1,10 +1,17 @@
 import { Typography } from '@mui/material'
 import React from 'react'
 import { PrimaryBtn } from '../Buttons'
+import { useRouter } from 'next/navigation'
 
-const EmptyCart = () => {
+interface EmptyCartProps {
+  handleModal?: () => void
+}
+
+const EmptyCart = ({ handleModal }: EmptyCartProps) => {
+  const router = useRouter()
+
   return (
-    <div className='w-[70%] flex flex-col mt-[50px] md:mt-[80px]'>
+    <div className='w-[70%] flex flex-col'>
       <img
         src='/Images/empty-cart.svg'
         alt='empty-cart-icon'
@@ -46,12 +53,15 @@ const EmptyCart = () => {
         {`You have no items in  your bag. Let’s go buy something!`}
       </Typography>
 
-      {/* <div className='mt-[24px] w-[80%] self-center'>
+      <div className='mt-[24px] w-[80%] self-center'>
         <PrimaryBtn
-          text='Continue shopping'
-          handleClick={() => console.log('continue shopping clicked')}
+          text='Go to Bakers'
+          handleClick={() => {
+            router.push('/search')
+            handleModal ? handleModal() : null
+          }}
         />
-      </div> */}
+      </div>
     </div>
   )
 }

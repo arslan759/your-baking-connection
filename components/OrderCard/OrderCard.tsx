@@ -1,11 +1,65 @@
 import React, { useState } from 'react'
 import styles from './styles.module.css'
-import { Typography } from '@mui/material'
-import { orderItemsData, paymentMethods } from 'Constants/constants'
-import { PrimaryBtn, TertiaryBtn } from '../Buttons'
+import { CircularProgress, Typography } from '@mui/material'
+import { paymentMethods } from 'Constants/constants'
+import { TertiaryBtn } from '../Buttons'
+import EmptyCart from '../EmptyCart'
+import { useRouter } from 'next/navigation'
 
-const OrderCard = () => {
+interface OrderCardProps {
+  items: any[]
+  cartFunctions: any
+  setTotalAmountWithTax: (value: number) => void
+}
+
+const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardProps) => {
+  console.log('cartFunctions in OrderCard is', cartFunctions)
+
+  const router = useRouter()
+
   const [salesTax, setSalesTax] = useState(13)
+
+  if (
+    cartFunctions?.isLoadingCart ||
+    cartFunctions?.uiStore?.isUpdatingQuantity ||
+    cartFunctions?.removeCartItemsLoading ||
+    cartFunctions?.addOrCreateCartLoading
+  )
+    return (
+      <div className={styles.card}>
+        {/* <div className='w-full flex flex-col gap-y-[40px] md:gap-y-[24px]'> */}
+        <div className='w-full min-h-[calc(300px-64px)] flex justify-center items-center'>
+          <CircularProgress
+            sx={{
+              color: '#7DDEC1',
+            }}
+          />
+        </div>
+        {/* </div> */}
+      </div>
+    )
+
+  if (items?.length === 0)
+    return (
+      <div className={styles.card}>
+        <div className='w-full flex justify-center'>
+          <EmptyCart />
+        </div>
+      </div>
+    )
+
+  const { amount: totalAmount } = cartFunctions.cart.checkout.summary.itemTotal
+
+  const totalTaxIfApplicableonItems = items?.reduce((total, item) => {
+    if (item?.isTaxable) return total + item.subtotal.amount * (salesTax / 100)
+    else return total
+  }, 0)
+
+  console.log('totalTaxIfApplicableonItems is', totalTaxIfApplicableonItems)
+
+  const totalAmountWithTax = totalAmount + totalTaxIfApplicableonItems
+
+  setTotalAmountWithTax(totalAmountWithTax)
 
   return (
     <div className={styles.card}>
@@ -61,12 +115,12 @@ const OrderCard = () => {
 
         {/* Cart item */}
 
-        {orderItemsData.map((item, index) => {
-          const { title, price, quantity } = item
+        {items?.map((item, index) => {
+          // const { title, price, quantity } = item
 
           return (
             <div
-              key={index}
+              key={item?._id}
               className='w-full flex justify-between py-[8px]'
               style={{
                 borderBottom: '1px solid #212529',
@@ -83,7 +137,7 @@ const OrderCard = () => {
                   textTransform: 'capitalize',
                 }}
               >
-                {title}{' '}
+                {item.title}{' '}
                 <span
                   style={{
                     textTransform: 'lowercase',
@@ -96,7 +150,7 @@ const OrderCard = () => {
                     fontWeight: 'bold',
                   }}
                 >
-                  {quantity}
+                  {item.quantity}
                 </span>
               </Typography>
 
@@ -111,7 +165,7 @@ const OrderCard = () => {
                   textTransform: 'capitalize',
                 }}
               >
-                {price}$
+                ${item.subtotal.amount.toFixed(2)}
               </Typography>
             </div>
           )
@@ -148,7 +202,7 @@ const OrderCard = () => {
               textTransform: 'capitalize',
             }}
           >
-            {salesTax}$
+            {salesTax}%
           </Typography>
         </div>
 
@@ -183,7 +237,7 @@ const OrderCard = () => {
               textTransform: 'capitalize',
             }}
           >
-            24$
+            ${totalAmount.toFixed(2)}
           </Typography>
         </div>
 
@@ -218,11 +272,7 @@ const OrderCard = () => {
               textTransform: 'capitalize',
             }}
           >
-            {orderItemsData.reduce(
-              (acc, item) => acc + parseInt(item.price) * parseInt(item.quantity),
-              0,
-            ) + salesTax}
-            ${' '}
+            ${(totalAmount + totalTaxIfApplicableonItems).toFixed(2)}{' '}
           </Typography>
         </div>
 
@@ -248,18 +298,18 @@ const OrderCard = () => {
 
         <div className='mt-[24px] w-full flex justify-between'>
           {/* Desktop View */}
-          <div className='hidden md:block h-[38px] md:h-[57px] w-fit md:w-[45%]'>
-            <TertiaryBtn text='Continue Shopping' />
+          <div className='h-[38px] md:h-[57px] w-full md:w-[45%]'>
+            <TertiaryBtn text='Continue Shopping' handleClick={() => router.push('/search')} />
           </div>
 
-          {/* Mobile View */}
-          <div className='block md:hidden h-[38px] md:h-[57px] w-fit md:w-[45%]'>
+          {/* Mobile View
+          <div className='block md:hidden h-[38px] md:h-[57px] w-full md:w-[50%]'>
             <TertiaryBtn text='Continue' />
-          </div>
+          </div> */}
 
-          <div className='h-[38px] md:h-[57px] w-fit md:w-[45%]'>
+          {/* <div className='h-[38px] md:h-[57px] w-fit md:w-[45%]'>
             <PrimaryBtn text='Proceed to Checkout' />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

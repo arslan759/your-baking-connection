@@ -315,7 +315,11 @@ const ProductDetailForm = ({
         </div>
 
         <div className='w-[100px] md:w-[146px]'>
-          <PrimaryBtn text='Add to Cart' type='submit' />
+          <PrimaryBtn
+            text='Add to Cart'
+            type='submit'
+            loading={restProps?.addOrCreateCartLoading}
+          />
         </div>
 
         <div

@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { use, useEffect } from 'react'
 import NavBar from '../NavBar/NavBar'
-import { Typography } from '@mui/material'
+import { Skeleton, Typography } from '@mui/material'
 import CartCard from '../CartCard/CartCard'
 import OrderCard from '../OrderCard/OrderCard'
 import { orderItemsData } from 'Constants/constants'
+import withInjectedStores from 'hocs/inject'
+import withCart from 'containers/cart/withCart'
+import { withApollo } from 'lib/apollo/withApollo'
 
-const AddToCart = () => {
+interface AddToCartProps {
+  [key: string]: any
+}
+
+const AddToCart = ({ ...restProps }: AddToCartProps) => {
+  useEffect(() => {
+    console.log('restProps in navbar is', restProps)
+  }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
+
   return (
     <div>
       <NavBar />
@@ -29,33 +40,41 @@ const AddToCart = () => {
             >
               Your Bag
             </Typography>
-
-            <Typography
-              sx={{
-                fontSize: '16px !important',
-                fontFamily: 'Open Sans',
-                fontWeight: 'bold !important',
-                lineHeight: '24px',
-                color: '#000',
-              }}
-            >
-              Total ({orderItemsData.length} item){' '}
-              {orderItemsData.reduce(
-                (acc, item) => acc + parseInt(item.price) * parseInt(item.quantity),
-                0,
-              )}
-              $
-            </Typography>
+            {restProps?.isLoadingCart ||
+            restProps?.uiStore?.isUpdatingQuantity ||
+            restProps?.removeCartItemsLoading ||
+            restProps?.addOrCreateCartLoading ? (
+              <Skeleton variant='text' width='100px' height='40px' />
+            ) : (
+              <Typography
+                sx={{
+                  fontSize: '16px !important',
+                  fontFamily: 'Open Sans',
+                  fontWeight: 'bold !important',
+                  lineHeight: '24px',
+                  color: '#000',
+                }}
+              >
+                Total ({restProps?.cart?.items?.length} item){' '}
+                {parseFloat(
+                  restProps?.cart?.items.reduce(
+                    (total: number, item: any) => total + item?.subtotal?.amount,
+                    0,
+                  ),
+                ).toFixed(2)}
+                $
+              </Typography>
+            )}
           </div>
 
           <div className='w-full flex flex-col lg:flex-row items-start lg:justify-between gap-y-[24px]'>
-            <div className='w-full lg:w-[48%]'>
-              <CartCard />
+            <div className='w-full'>
+              <CartCard cartFunctions={restProps} />
             </div>
 
-            <div className='w-full lg:w-[48%]'>
-              <OrderCard />
-            </div>
+            {/* <div className='w-full lg:w-[48%]'>
+              <OrderCard cartFunctions={restProps} />
+            </div> */}
           </div>
         </div>
       </div>
@@ -63,4 +82,5 @@ const AddToCart = () => {
   )
 }
 
-export default AddToCart
+// export default AddToCart
+export default withApollo()(withCart(withInjectedStores('uiStore')(AddToCart)))

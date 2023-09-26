@@ -151,6 +151,7 @@ fragment CartItemConnectionFragment on CartItemConnection {
       isBackorder
       isLowQuantity
       isSoldOut
+      isTaxable
       imageURLs {
         large
         small

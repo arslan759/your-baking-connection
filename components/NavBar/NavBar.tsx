@@ -42,8 +42,8 @@ const Navbar = ({
   ]
 
   useEffect(() => {
-    console.log('restProps in navbar is', restProps?.cart)
-  }, [restProps?.cart])
+    console.log('restProps in navbar is', restProps)
+  }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
 
   return (
     <AppBar
@@ -135,8 +135,12 @@ const Navbar = ({
                   }}
                 >
                   <AccountDropdown account={viewer} />
-                  <NotificationModal color={itemsColor} cartItems={[]} />
-                  <AddToCartModal color={itemsColor} cartItems={restProps?.cart?.items} />
+                  <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} />
+                  <AddToCartModal
+                    color={itemsColor}
+                    cartItems={restProps?.cart?.items}
+                    cartFunctions={restProps}
+                  />
                 </Box>
               )}
             </Grid>
