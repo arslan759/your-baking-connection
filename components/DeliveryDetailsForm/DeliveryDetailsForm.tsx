@@ -1,5 +1,5 @@
 import { Checkbox, FormControl, FormHelperText, Radio, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import DropdownField from '../DropdownField/DropdownField'
 import {
@@ -10,12 +10,23 @@ import {
   states,
 } from 'Constants/constants'
 import { PrimaryBtn } from '../Buttons'
+import usePlaceOrder from 'hooks/order/usePlaceOrder'
+import { getCitiesApi, getStatesApi } from 'helpers/apis'
+import { withApollo } from 'lib/apollo/withApollo'
 
-const DeliveryDetailsForm = () => {
+interface DeliveryDetailsFormProps {
+  amount: number
+}
+
+const DeliveryDetailsForm = ({ amount }: DeliveryDetailsFormProps) => {
+  const [placeOrderFunction, placeOrderLoading] = usePlaceOrder()
+
   const [address, setAddress] = useState('')
-  const [country, setCountry] = useState('')
+  // const [country, setCountry] = useState('')
   const [postCode, setPostCode] = useState('')
+  const [states, setStates] = useState<any>([])
   const [state, setState] = useState<string | null>('')
+  const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
   const [additionalNotes, setAdditionalNotes] = useState('')
   const [deliveryMethod, setDeliveryMethod] = useState(true)
@@ -64,12 +75,6 @@ const DeliveryDetailsForm = () => {
     setTermsAndConditionsError(checked ? '' : 'Please accept the terms and conditions')
   }
 
-  // handleCountryChange function for country dropdown
-  const handleCountryChange = (country: string) => {
-    setCountry(country)
-    setCountryError(country ? '' : 'Country is required')
-  }
-
   // handleStateChange function for state dropdown
   const handleStateChange = (state: string) => {
     setState(state)
@@ -94,26 +99,71 @@ const DeliveryDetailsForm = () => {
     // setPickupHoursError(hour ? '' : 'Pickup Hour is required')
   }
 
+  const resetForm = () => {
+    // Resets the form fields
+    setAddress('')
+    setPostCode('')
+    setState('')
+    setCity('')
+    setAdditionalNotes('')
+    setDeliveryMethod(true)
+    setPickupDay('')
+    setPickupHours('')
+    setTermsAndConditions(false)
+
+    // Resets the error states
+    setAddressError('')
+    setCountryError('')
+    setPostCodeError('')
+    setStateError('')
+    setCityError('')
+    setDeliveryMethodError('')
+    setTermsAndConditionsError('')
+  }
+
+  const placeOrderHandler = async () => {
+    const input = {
+      order: {},
+      payments: {
+        amount: parseFloat(amount.toString()),
+        billingAddress: {
+          address1: address,
+          city: city,
+          phone: '1234567890',
+          fullName: 'Syed Irtaza',
+          region: state,
+          postal: postCode,
+          metafiels: [
+            {
+              key: 'notes',
+              description: additionalNotes,
+            },
+          ],
+        },
+        method: 'iou_example',
+      },
+    }
+
+    try {
+      //@ts-ignore
+      const response = await placeOrderFunction({
+        variables: {
+          input,
+        },
+      })
+    } catch (error: any) {
+      console.log('error in placeOrderHandler is', error?.message)
+    }
+  }
+
   // handleSubmit function for form submission
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // Checks if all fields are filled
-    if (
-      !address ||
-      !country ||
-      !postCode ||
-      !state ||
-      !city ||
-      !deliveryMethod ||
-      !termsAndConditions
-    ) {
+    if (!address || !postCode || !state || !city || !deliveryMethod || !termsAndConditions) {
       if (!address) {
         setAddressError('Address is required')
-      }
-
-      if (!country) {
-        setCountryError('Country is required')
       }
 
       if (!postCode) {
@@ -140,39 +190,23 @@ const DeliveryDetailsForm = () => {
       return
     }
 
-    // Logs the form data
-    console.log('address is ', address)
-    console.log('country is ', country)
-    console.log('postCode is ', postCode)
-    console.log('state is ', state)
-    console.log('city is ', city)
-    console.log('additionalNotes is ', additionalNotes)
-    console.log('deliveryMethod is ', deliveryMethod)
-    console.log('pickupDay is ', pickupDay)
-    console.log('pickupHours is ', pickupHours)
-    console.log('termsAndConditions is ', termsAndConditions)
+    // If all fields are filled, then place the order
+    placeOrderHandler()
 
     // Resets the form fields
-    setAddress('')
-    setCountry('')
-    setPostCode('')
-    setState('')
-    setCity('')
-    setAdditionalNotes('')
-    setDeliveryMethod(true)
-    setPickupDay('')
-    setPickupHours('')
-    setTermsAndConditions(false)
-
-    // Resets the error states
-    setAddressError('')
-    setCountryError('')
-    setPostCodeError('')
-    setStateError('')
-    setCityError('')
-    setDeliveryMethodError('')
-    setTermsAndConditionsError('')
+    // resetForm()
   }
+
+  useEffect(() => {
+    getStatesApi(setStates)
+  }, [])
+
+  useEffect(() => {
+    setCities([])
+    setCity('')
+    getCitiesApi(state, setCities)
+  }, [state])
+
   return (
     <form onSubmit={handleSubmit}>
       <div className='w-full flex flex-wrap gap-y-[24px] md:gap-y-[24px] justify-between'>
@@ -189,7 +223,7 @@ const DeliveryDetailsForm = () => {
           />
         </div>
 
-        <div className='w-full md:w-[45%]'>
+        {/* <div className='w-full md:w-[45%]'>
           <DropdownField
             label='country'
             required
@@ -200,7 +234,7 @@ const DeliveryDetailsForm = () => {
             inputColor='#212529'
             onChange={handleCountryChange}
           />
-        </div>
+        </div> */}
 
         <div className='w-full md:w-[45%]'>
           <InputField
@@ -417,4 +451,4 @@ const DeliveryDetailsForm = () => {
   )
 }
 
-export default DeliveryDetailsForm
+export default withApollo()(DeliveryDetailsForm)

@@ -1,5 +1,13 @@
 import React, { useState } from 'react'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import {
+  CircularProgress,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material'
 import { SecondaryBtn } from '../Buttons'
 import Spinner from '../Spinner'
 import EmptyCart from '../EmptyCart'
@@ -70,17 +78,13 @@ const CartTable = ({ items, cartFunctions }: CartTableProps) => {
   }
 
   const handleRemoveItem = async (cartItemsId: string) => {
+    setIsUpdatingQuantity(true)
     const { onRemoveCartItems } = cartFunctions
 
     await onRemoveCartItems(cartItemsId)
-  }
 
-  if (cartFunctions?.removeCartItemsLoading || isUpdatingQuantity)
-    return (
-      <div className='w-full'>
-        <Spinner />
-      </div>
-    )
+    setIsUpdatingQuantity(false)
+  }
 
   if (items?.length === 0)
     return (

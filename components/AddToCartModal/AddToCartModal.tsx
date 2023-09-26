@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react'
-import { Badge, Modal, Typography } from '@mui/material'
+import { Badge, CircularProgress, Modal, Typography } from '@mui/material'
 import { AddToCartModalProps } from 'types'
 import { orderItemsData } from 'Constants/constants'
 import CartTable from '../CartTable'
@@ -85,7 +85,9 @@ const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps
               </span>
             </Typography>
           </div>
-          {!cartFunctions?.isLoadingCart ? (
+          {!cartFunctions?.isLoadingCart &&
+          !cartFunctions?.uiStore?.isUpdatingQuantity &&
+          !cartFunctions?.removeCartItemsLoading ? (
             <>
               {cartItems?.length === 0 ? (
                 <div className='w-full flex justify-center  mt-[50px] md:mt-[80px]'>
@@ -125,7 +127,13 @@ const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps
               )}
             </>
           ) : (
-            <Spinner />
+            <div className='w-full flex justify-center items-center'>
+              <CircularProgress
+                sx={{
+                  color: '#7DDEC1',
+                }}
+              />
+            </div>
           )}
         </div>
       </Modal>

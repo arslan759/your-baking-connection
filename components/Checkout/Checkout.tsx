@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../NavBar/NavBar'
 import OrderCard from '../OrderCard/OrderCard'
 import DeliveryDetails from '../DeliveryDetails/DeliveryDetails'
@@ -11,10 +11,16 @@ interface AddToCartProps {
 }
 
 const Checkout = ({ ...restProps }: AddToCartProps) => {
+  const [totalAmount, setTotalAmount] = useState(0)
+
+  const fetchTotalAmount = (value: number) => {
+    setTotalAmount(value)
+  }
+
   useEffect(() => {
     console.log('restProps in checkout is', restProps)
     // restProps?.uiStore?.closeCart()
-  })
+  }, [totalAmount])
 
   return (
     <div>
@@ -24,11 +30,15 @@ const Checkout = ({ ...restProps }: AddToCartProps) => {
         <div className='w-[90vw] md:[95vw] flex flex-col gap-y-[24px]'>
           <div className='w-full flex flex-col lg:flex-row items-start lg:justify-between gap-y-[24px]'>
             <div className='w-full lg:w-[48%]'>
-              <DeliveryDetails />
+              <DeliveryDetails totalAmountWithTax={totalAmount} />
             </div>
 
             <div className='w-full lg:w-[48%]'>
-              <OrderCard />
+              <OrderCard
+                items={restProps?.cart?.items}
+                cartFunctions={restProps}
+                setTotalAmountWithTax={fetchTotalAmount}
+              />
             </div>
           </div>
         </div>

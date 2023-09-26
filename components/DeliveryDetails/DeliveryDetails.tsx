@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { Typography } from '@mui/material'
 import DeliveryDetailsForm from '../DeliveryDetailsForm/DeliveryDetailsForm'
 
-const DeliveryDetails = () => {
+interface DeliveryDetailsProps {
+  totalAmountWithTax: number
+}
+
+const DeliveryDetails = ({ totalAmountWithTax }: DeliveryDetailsProps) => {
+  const [salesTax, setSalesTax] = useState(13)
+
   return (
     <div className={styles.card}>
       <div>
@@ -26,7 +32,7 @@ const DeliveryDetails = () => {
       </div>
 
       <div className='mt-[24px] md:mt-[22px]'>
-        <DeliveryDetailsForm />
+        <DeliveryDetailsForm amount={totalAmountWithTax} />
       </div>
     </div>
   )
