@@ -68,6 +68,7 @@ const CustomAccordion = () => {
             }}
             expanded={expanded === `panel${index}`}
             onChange={handleChange(`panel${index}`)}
+            disableGutters
           >
             <AccordionSummary
               key={index}
