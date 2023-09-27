@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Badge, Modal, Typography } from '@mui/material'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import { AddToCartModalProps } from 'types'
-import { orderItemsData } from 'Constants/constants'
-import CartTable from '../CartTable'
+import { notifications } from 'Constants/constants'
 import EmptyCart from '../EmptyCart'
-import { PrimaryBtn } from '../Buttons'
+import { PrimaryBtn, SecondaryBtn } from '../Buttons'
+import NotificationItem from '../NotificationItem'
 
 const NotificationModal = ({ color }: AddToCartModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -29,7 +28,7 @@ const NotificationModal = ({ color }: AddToCartModalProps) => {
             backgroundColor: '#7DDEC1',
           },
         }}
-        badgeContent={orderItemsData.length}
+        badgeContent={notifications.length}
         onClick={handleModal}
       >
         <img
@@ -40,7 +39,7 @@ const NotificationModal = ({ color }: AddToCartModalProps) => {
       </Badge>
 
       <Modal open={isModalOpen} onClose={handleModal}>
-        <div className='bg-white outline-none absolute right-0 h-[100vh] overflow-y-scroll w-[90vw] md:w-[600px] p-[16px] md:p-[32px] pb-[50px] flex flex-col gap-y-[24px]'>
+        <div className='bg-white outline-none absolute right-0 h-[100vh] overflow-y-scroll w-[100vw] md:w-[600px] p-[16px] md:p-[32px] pb-[50px] flex flex-col gap-y-[24px]'>
           <div className='relative'>
             <img
               src='/Images/x.svg'
@@ -49,7 +48,7 @@ const NotificationModal = ({ color }: AddToCartModalProps) => {
               onClick={handleModal}
             />
           </div>
-          <div className='flex flex-col gap-y-[8px] md:gap-y-[20px]'>
+          <div className='mt-[10px] w-full flex justify-between items-center'>
             <Typography
               sx={{
                 fontSize: '24px !important',
@@ -62,7 +61,7 @@ const NotificationModal = ({ color }: AddToCartModalProps) => {
                 },
               }}
             >
-              My Cart{' '}
+              Notifications{' '}
               <span
                 style={{
                   fontSize: '18px',
@@ -70,21 +69,37 @@ const NotificationModal = ({ color }: AddToCartModalProps) => {
                   color: '#6C6C6C',
                 }}
               >
-                ({orderItemsData.length}){' '}
+                ({notifications.length}){' '}
               </span>
             </Typography>
+
+            <div className='w-fit'>
+              <SecondaryBtn
+                text='Mark all as read'
+                color='#7DDEC1'
+                handleClick={() => console.log('mark as read clicked')}
+              />
+            </div>
           </div>
 
-          {orderItemsData.length === 0 ? (
-            <div className='w-full flex justify-center'>
-              <EmptyCart />
-            </div>
-          ) : (
-            <div className='w-full'>{/* <CartTable items={[]} /> */}</div>
-          )}
-
-          <div className='w-[50%] self-center'>
-            <PrimaryBtn text='Continue shopping' handleClick={handleModal} />
+          <div className='w-full flex flex-col gap-y-[30px]'>
+            {notifications.length === 0 ? (
+              <div className='w-full flex justify-center'>
+                <EmptyCart />
+              </div>
+            ) : (
+              notifications.map((notification, index) => (
+                <div key={notification.id} className='w-full h-fit'>
+                  <NotificationItem
+                    // id={notification?.id}
+                    status={notification?.status}
+                    description={notification?.description}
+                    image={notification?.image}
+                    time={notification?.time}
+                  />
+                </div>
+              ))
+            )}
           </div>
         </div>
       </Modal>

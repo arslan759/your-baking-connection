@@ -905,3 +905,69 @@ export const SearchBakerData = [
       'https://www.continental-equipment.com/wp-content/uploads/2021/06/Bakery-Featured-Image.jpg',
   },
 ]
+
+export const notifications = [
+  {
+    id: 1,
+    description: 'Baker Bliss has approved your custom order request (order #123456)',
+    time: '2 hours ago',
+    image: '/Images/shop-1.png',
+    status: 'read',
+  },
+  {
+    id: 2,
+    description: 'Baker Bliss accepted your order (order #789012)',
+    time: '1 hours ago',
+    image: '/Images/shop-2.png',
+    status: 'unread',
+  },
+  {
+    id: 3,
+    description: 'Baker Bliss has approved your custom order request (order #123456)',
+    time: '2 hours ago',
+    image: '/Images/shop-3.png',
+    status: 'read',
+  },
+  {
+    id: 4,
+    description: 'Baker Bliss accepted your order (order #789012)',
+    time: '1 hours ago',
+    image: '/Images/shop-1.png',
+    status: 'unread',
+  },
+  {
+    id: 5,
+    description: 'Baker Bliss has approved your custom order request (order #123456)',
+    time: '2 hours ago',
+    image: '/Images/shop-2.png',
+    status: 'read',
+  },
+  {
+    id: 6,
+    description: 'Baker Bliss has approved your custom order request (order #123456)',
+    time: '2 hours ago',
+    image: '/Images/shop-2.png',
+    status: 'read',
+  },
+  {
+    id: 7,
+    description: 'Baker Bliss has approved your custom order request (order #123456)',
+    time: '2 hours ago',
+    image: '/Images/shop-2.png',
+    status: 'read',
+  },
+  {
+    id: 8,
+    description: 'Baker Bliss has approved your custom order request (order #123456)',
+    time: '2 hours ago',
+    image: '/Images/shop-2.png',
+    status: 'read',
+  },
+  {
+    id: 9,
+    description: 'Baker Bliss has approved your custom order request (order #123456)',
+    time: '2 hours ago',
+    image: '/Images/shop-2.png',
+    status: 'read',
+  },
+]
