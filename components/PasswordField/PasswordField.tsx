@@ -89,20 +89,21 @@ const PasswordField = ({
             <InputAdornment
               position='end'
               sx={{
-                color: 'white',
+                color: inputColor,
               }}
             >
               <IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>
                 {showPassword ? (
-                  <VisibilityOffOutlinedIcon sx={{ color: '#fff' }} />
+                  <VisibilityOffOutlinedIcon sx={{ color: inputColor }} />
                 ) : (
-                  <VisibilityOutlinedIcon sx={{ color: '#fff' }} />
+                  <VisibilityOutlinedIcon sx={{ color: inputColor }} />
                 )}
               </IconButton>
             </InputAdornment>
           ),
         }}
         name='password'
+        placeholder={placeholder ? placeholder : ''}
         type={showPassword ? 'text' : 'password'}
         error={errorState}
         onChange={handleChange}

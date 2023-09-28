@@ -1,7 +1,5 @@
-import React from 'react'
 import NavBar from '../NavBar/NavBar'
-import PreferencesCard from '../PreferencesCard'
-// import PurchaseHistoryCard from '../PurchaseHistoryCard/PurchaseHistoryCard'
+import PersonalizationCard from '../PersonalizationCard'
 
 const Settings = () => {
   return (
@@ -9,7 +7,7 @@ const Settings = () => {
       <NavBar />
 
       <div className='mt-[24px] md:mt-[100px] flex justify-center'>
-        <PreferencesCard />
+        <PersonalizationCard />
       </div>
     </div>
   )
