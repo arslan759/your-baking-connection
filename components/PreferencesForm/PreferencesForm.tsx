@@ -1,32 +1,19 @@
-import React, { useState } from 'react'
-import styles from './styles.module.css'
 import { Typography } from '@mui/material'
-import DropdownField from '../DropdownField/DropdownField'
-import { bakingStyleOptions, dietaryRestrictionOptions } from 'Constants/constants'
-import CustomSwitch from '../CustomSwitch/CustomSwitch'
+import React, { useState } from 'react'
 import { PrimaryBtn } from '../Buttons'
+import CustomSwitch from '../CustomSwitch/CustomSwitch'
+import PasswordField from '../PasswordField'
+import styles from './styles.module.css'
 
 const PreferencesForm = () => {
-  const [dietaryRestriction, setDietaryRestriction] = useState('')
-  const [bakingStyle, setBakingStyle] = useState('')
+  const [oldPassword, setOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [orderPlaced, setOrderPlaced] = useState(false)
   const [orderCompleted, setOrderCompleted] = useState(false)
   const [promotionsAvailable, setPromotionsAvailable] = useState(false)
 
   //   Error state for input fields
-  const [dietaryRestrictionError, setDietaryRestrictionError] = useState('')
-  const [bakingStyleError, setBakingStyleError] = useState('')
-
-  //   dropdown change functions
-  const handleDietaryRestrictionChange = (dietaryRestriction: string) => {
-    setDietaryRestriction(dietaryRestriction)
-    // setDietaryRestrictionError(dietaryRestriction ? '' : 'dietaryRestriction is required')
-  }
-
-  const handleBakingStyleChange = (bakingStyle: string) => {
-    setBakingStyle(bakingStyle)
-    // setDietaryRestrictionError(bakingStyle ? '' : 'bakingStyle is required')
-  }
 
   //   switch change functions
   const handleOrderPlacedChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,28 +28,24 @@ const PreferencesForm = () => {
     setPromotionsAvailable(event.target.checked)
   }
 
+  // handleChange function for input fields
+  const handleChange = (name: string, value: string) => {
+    if (name === 'old_password') {
+      setOldPassword(value)
+    } else if (name === 'new_password') {
+      setNewPassword(value)
+    } else if (name === 'confirm_password') {
+      setConfirmPassword(value)
+    }
+  }
   // handle submit function
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // form logs
-    console.log('dietaryRestriction: ', dietaryRestriction)
-    console.log('bakingStyle: ', bakingStyle)
     console.log('orderPlaced: ', orderPlaced)
     console.log('orderCompleted: ', orderCompleted)
     console.log('promotionsAvailable: ', promotionsAvailable)
-
-    // reset error states
-    // setDietaryRestrictionError('')
-    // setBakingStyleError('')
-
-    // reset form
-    // setDietaryRestriction('')
-    // setBakingStyle('')
-    // setOrderPlaced(false)
-    // setOrderCompleted(false)
-    // setPromotionsAvailable(false)
-
     console.log('form submitted')
   }
 
@@ -86,50 +69,38 @@ const PreferencesForm = () => {
             },
           }}
         >
-          <img src='/Images/customize-icon.svg' alt='Customize' className='w-[22px] h-[22px]' />
-          <span>Customization</span>
+          <img src='/Images/profile-icon-pink.svg' alt='Customize' className='w-[22px] h-[22px]' />
+          <span>Profile</span>
         </Typography>
       </div>
 
       <div className='mt-[32px]'>
-        <div className='w-full'>
-          <DropdownField
-            label='Dietary Restrictions'
-            required={false}
-            name='dietaryRestrictions'
-            errorText={dietaryRestrictionError}
-            placeholder='Select your desired restriction'
-            value={dietaryRestriction}
-            options={dietaryRestrictionOptions}
-            inputColor='#888'
-            onChange={handleDietaryRestrictionChange}
-          />
-          <Typography
-            sx={{
-              marginTop: '4px',
-              fontSize: '14px !important',
-              fontFamily: 'Open Sans',
-              fontWeight: '600 !important',
-              lineHeight: '20px',
-              color: '#676767',
-            }}
-          >
-            Choose from a wide range of fields, such as food allergies
-          </Typography>
-        </div>
-
         <div className='mt-[22px] w-full'>
-          <DropdownField
-            label='baking Style'
-            required={false}
-            name='bakingStyle'
-            errorText={bakingStyleError}
-            placeholder='Choose a preferred baking style '
-            value={bakingStyle}
-            options={bakingStyleOptions}
+          <PasswordField
+            label='Current Password'
+            placeholder='Enter your current password'
+            name='old_password'
+            value={oldPassword}
             inputColor='#888'
-            onChange={handleBakingStyleChange}
+            onChange={handleChange}
           />
+          <PasswordField
+            label='new password'
+            placeholder='Enter your new password'
+            name='new_password'
+            value={newPassword}
+            inputColor='#888'
+            onChange={handleChange}
+          />
+          <PasswordField
+            label='confirm password'
+            placeholder='Confirm your new password'
+            name='confirm_password'
+            value={confirmPassword}
+            inputColor='#888'
+            onChange={handleChange}
+          />
+
           <Typography
             sx={{
               marginTop: '4px',
@@ -140,7 +111,7 @@ const PreferencesForm = () => {
               color: '#676767',
             }}
           >
-            Choose from a wide range of fields, such as vegan, gluten-free and dairy-free
+            Please reset your password by entering previous and current password
           </Typography>
         </div>
 
@@ -220,7 +191,7 @@ const PreferencesForm = () => {
         </div>
 
         <div className='mt-[48px] w-full h-[45px]'>
-          <PrimaryBtn type='submit' text='Save preference settings' />
+          <PrimaryBtn type='submit' text='Save personalization settings' />
         </div>
       </div>
     </form>

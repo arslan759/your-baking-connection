@@ -32,10 +32,6 @@ const InputField = ({
     setErrorState(errorText ? true : false)
   }, [errorText, errorState])
 
-  // useEffect(() => {
-  //   // setErrorState(errorText ? true : false)
-  // }, [handleKeyPress])
-
   return (
     <div className='flex flex-col capitalize'>
       {label ? (

@@ -4,7 +4,7 @@ import { Typography } from '@mui/material'
 import ProfileBreadCrumbs from '../ProfileBreadCrumbs/ProfileBreadCrumbs'
 import PreferencesForm from '../PreferencesForm/PreferencesForm'
 
-const PreferencesCard = () => {
+const PersonalizationCard = () => {
   return (
     <div className={styles.card}>
       <ProfileBreadCrumbs />
@@ -43,7 +43,7 @@ const PreferencesCard = () => {
             fontFeatureSettings: `'clig' off, 'liga' off`,
           }}
         >
-          Personalize your experience with our preferences feature
+          Personalize your experience with our settings feature
         </Typography>
       </div>
 
@@ -54,4 +54,4 @@ const PreferencesCard = () => {
   )
 }
 
-export default PreferencesCard
+export default PersonalizationCard

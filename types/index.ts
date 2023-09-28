@@ -74,7 +74,7 @@ export interface PasswordFieldProps {
   errorText?: string
   inputColor?: string
   label: string
-  required: boolean
+  required?: boolean
   placeholder?: string
   value: string
   onChange: (name: string, value: string) => void
