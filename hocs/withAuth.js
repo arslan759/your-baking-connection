@@ -38,17 +38,21 @@ const withAuth = (WrappedComponent) => {
         (!viewer?._id && pathName === `/profile/settings`)
       ) {
         isAuthenticated = false
+        console.log('Authentication false', isAuthenticated)
       } else {
         isAuthenticated = true
+        console.log('Authentication', isAuthenticated)
       }
     }
-
-    if (!isAuthenticated) {
-      router.replace('/')
-      return null
-    }
-
     return <WrappedComponent {...props} />
+    // if (!isAuthenticated) {
+    //   console.log('Authentication after', isAuthenticated)
+    //   router.replace('/')
+    //   return null
+    // } else {
+    //   console.log('Authentication else', isAuthenticated)
+    //   return <WrappedComponent {...props} />
+    // }
   }
 
   return AuthRedirect
