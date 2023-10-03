@@ -30,27 +30,36 @@ const FooterDesktop = () => {
       <div className='mt-[80px] w-[auto] md:w-[100%] flex flex-col md:flex-row gap-[10px] items-center md:items-start flex-nowrap md:flex-wrap'>
         <FooterLinks
           header='Quick Links'
-          link1='About Your Baking Connection'
-          link2='About The Bakers'
-          link3='FAQs'
+          title1='About Your Baking Connection'
+          link1='/about-your-baking-connection/'
+          title2='About Your Baking Connection'
+          link2='/about-the-bakers/'
+          title3='FAQs'
+          link3='/faqs/'
         />
         <FooterLinks
           header='Resources'
-          link3='Baker Terms & Conditions'
-          link1='Are You a Baker?'
-          link2='Baker Resources'
+          title1='Are You a Baker?'
+          link1='/are-you-a-baker/'
+          title2='Baker Resources'
+          link2='/baker-resources/'
+          title3='Baker Terms & Conditions'
+          link3='/baker-terms-and-conditions/'
         />
         <FooterLinks
           header='Useful Information'
-          link3='Terms & Conditions'
-          link2='Privacy Policy'
-          link1='Search'
+          link2='/privacy-policy/'
+          link3='/terms-&-conditions/'
+          link1='/search/'
+          title3='Terms & Conditions'
+          title2='Privacy Policy'
+          title1='Search'
         />
         <FooterLinks
           header='Contact Us'
-          link1='support@yourbakingconnection.com'
-          link2='172 S Broadway, Denver, Colorado '
-          link3='+1-234-567-89'
+          title1='support@yourbakingconnection.com'
+          title2='172 S Broadway, Denver, Colorado '
+          title3='+1-234-567-89'
         />
         <FooterLinks
           header='Follow Us'
