@@ -6,9 +6,10 @@ import ProductDetailMainContent from '../ProductDetailMainContent/ProductDetailM
 import ProductDetailTabsSection from '../ProductDetailTabsSection/ProductDetailTabsSection'
 import useCatalogItemProduct from '../../hooks/Products/useCatalogItemProduct'
 import Spinner from '../Spinner'
-import ProductSwiper from '../ProductSwiper'
+// import ProductSwiper from '../ProductSwiper'
 import { withApollo } from 'lib/apollo/withApollo'
 import MatchMadeInHeaven from '../MatchMadeInHeaven'
+import ProductPics from '../ProductPics'
 
 interface ProductDetailProps {
   slug: string
@@ -90,7 +91,8 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
         <div className='w-[90%] md:w-[95%]'>
           <div className='flex flex-col items-center lg:flex-row lg:items-start'>
             <div className='w-[100%] lg:w-[40vw]'>
-              <ProductSwiper images={media} />
+              {/* <ProductSwiper images={media} /> */}
+              <ProductPics images={media} />
             </div>
             <div className='relative w-[100%] mt-[40px] lg:mt-[0px] lg:w-[100%] lg:pl-[40px]'>
               <ProductDetailMainContent
