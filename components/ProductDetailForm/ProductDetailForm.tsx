@@ -134,7 +134,9 @@ const ProductDetailForm = ({
       cartId: '123',
       items: {
         price: {
-          amount: priceToDisplay,
+          // We are sending original price for the time being, when backend is built, we will send the updated price that is with attributes
+          // amount: priceToDisplay,
+          amount: newPrice,
           currencyCode: 'USD',
         },
         productConfiguration: {
@@ -151,7 +153,9 @@ const ProductDetailForm = ({
       const addItemsToCartResponse = await addItemsToCart([
         {
           price: {
-            amount: priceToDisplay,
+            // We are sending original price for the time being, when backend is built, we will send the updated price that is with attributes
+            // amount: priceToDisplay,
+            amount: newPrice,
             currencyCode: 'USD',
           },
           productConfiguration: {
