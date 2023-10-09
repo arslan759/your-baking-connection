@@ -102,6 +102,7 @@ const SigninForm = () => {
       if (accessToken) {
         localStorage.setItem('accounts:accessToken', accessToken)
         localStorage.setItem('accounts:refreshToken', refreshToken)
+        router.push('/')
       }
     } catch (err: any) {
       console.log(err)
