@@ -106,7 +106,7 @@ const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps
                     <div className='w-full flex flex-col items-center gap-[18px]'>
                       <div className='w-[50%] self-center'>
                         <PrimaryBtn
-                          text='Proceed to Add to Cart'
+                          text='Proceed to Cart'
                           handleClick={() => {
                             router.push('/add-to-cart')
                             handleModal()
