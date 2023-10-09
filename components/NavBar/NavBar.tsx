@@ -21,7 +21,7 @@ const Navbar = ({
 }: NavBarProps) => {
   const [viewer, loading] = useViewer()
 
-  console.log('viewer in navbar is', viewer)
+  // console.log('viewer in navbar is', viewer)
 
   const pathName = usePathname()
   const StyledToolbar = styled(Toolbar)({
@@ -41,7 +41,7 @@ const Navbar = ({
   ]
 
   useEffect(() => {
-    console.log('restProps in navbar is', restProps)
+    // console.log('restProps in navbar is', restProps)
   }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
 
   return (
