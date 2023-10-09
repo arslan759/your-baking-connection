@@ -31,7 +31,7 @@ export default function useCart() {
 
   const accountId = viewer && viewer.userId
 
-  console.log('accountId is', accountId)
+  // console.log('accountId is', accountId)
 
   const shouldSkipAccountCartByAccountIdQuery = Boolean(
     !accountId || cartStore.hasAnonymousCartCredentials || isLoadingViewer || !shop || !shop._id,
