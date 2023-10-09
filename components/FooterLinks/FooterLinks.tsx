@@ -58,7 +58,7 @@ const FooterLinks = ({ header, title1, link1, title2, link2, title3, link3 }: Fo
           ) : (
             <div className='hidden md:block bg-white shrink-0 w-2.5 h-2.5 relative'></div>
           )}
-          <Link href={`${process.env.NEXT_PUBLIC_BLOG_URL}${link1}`}>
+          <Link href={`${link1}`}>
             <Typography
               sx={{ overflowWrap: 'anywhere' }}
               variant='body1'
@@ -81,7 +81,7 @@ const FooterLinks = ({ header, title1, link1, title2, link2, title3, link3 }: Fo
           ) : (
             <div className='hidden md:block bg-white shrink-0 w-2.5 h-2.5 relative'></div>
           )}
-          <Link href={`${process.env.NEXT_PUBLIC_BLOG_URL}${link2}`}>
+          <Link href={`${link2}`}>
             <Typography
               variant='body1'
               className='text-black for-text text-center md:text-left relative cursor-pointer'
@@ -103,7 +103,7 @@ const FooterLinks = ({ header, title1, link1, title2, link2, title3, link3 }: Fo
           ) : (
             <div className='hidden md:block bg-white shrink-0 w-2.5 h-2.5 relative'></div>
           )}
-          <Link href={`${process.env.NEXT_PUBLIC_BLOG_URL}${link3}`}>
+          <Link href={`${link3}`}>
             <Typography
               variant='body1'
               className='text-black for-text text-center md:text-left relative cursor-pointer'
