@@ -40,16 +40,16 @@ const FooterDesktop = () => {
         <FooterLinks
           header='Resources'
           title1='Are You a Baker?'
-          link1={`${process.env.NEXT_PUBLIC_BLOG_URL}/are-you-a-baker/`}
+          link1={`${process.env.NEXT_PUBLIC_OWN_URL}/membership/`}
           title2='Baker Resources'
           link2={`${process.env.NEXT_PUBLIC_BLOG_URL}/baker-resources/`}
           title3='Baker Terms & Conditions'
-          link3={`${process.env.NEXT_PUBLIC_BLOG_URL}/baker-terms-and-conditions/`}
+          link3={`${process.env.NEXT_PUBLIC_INFO_URL}/baker-terms-of-use/`}
         />
         <FooterLinks
           header='Useful Information'
           link2={`${process.env.NEXT_PUBLIC_BLOG_URL}/privacy-policy/`}
-          link3={`${process.env.NEXT_PUBLIC_BLOG_URL}/terms-&-conditions/`}
+          link3={`${process.env.NEXT_PUBLIC_INFO_URL}/terms-of-use/`}
           link1={`${process.env.NEXT_PUBLIC_OWN_URL}/search/`}
           title3='Terms & Conditions'
           title2='Privacy Policy'
