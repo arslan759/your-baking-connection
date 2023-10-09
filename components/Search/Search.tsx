@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from 'react'
 import Navbar from '../NavBar/NavBar'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import DropdownField from '../DropdownField/DropdownField'
-import { useState } from 'react'
 import { ProductTypes, SearchBakerData, cities, states } from 'Constants/constants'
 import InputField from '../InputField/InputField'
 import SearchBakerItem from '../SearchBakerItem/SearchBakerItem'
@@ -11,17 +11,27 @@ import useBakers from 'hooks/baker/useBakers'
 import { withApollo } from 'lib/apollo/withApollo'
 import Spinner from '../Spinner'
 
+import useViewer from 'hooks/viewer/useViewer'
+
 const Search = () => {
   const [state, setState] = useState<string | null>('')
   const [city, setCity] = useState<string | null>('')
   const [search, setSearch] = useState('')
   const [productType, setProductType] = useState('')
 
+  const [viewer, loadingViewer, refetchViewer] = useViewer()
+
   // Error states
   const [stateError, setStateError] = useState('')
   const [cityError, setCityError] = useState('')
   const [searchErr, setSearchErr] = useState('')
   const [productTypeErr, setProductTypeErr] = useState('')
+
+  useEffect(() => {
+    console.log('viewer in search is ', viewer)
+    setCity(viewer?.city)
+    setState(viewer?.state)
+  }, [viewer])
 
   // onChange handler
   const handleChange = (name: string, value: string) => {
@@ -52,20 +62,37 @@ const Search = () => {
     console.log('see more clicked')
   }
 
+  const [getBakers, loadingBakers, bakers] = useBakers()
+
   // handleSubmit function for form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // Logs the form data
-    console.log('state is ', state)
-    console.log('city is ', city)
-    console.log('search is ', search)
-    console.log('product type is ', productType)
-
-    console.log('form submitted')
+    try {
+      await getBakers({
+        variables: {
+          filter: {
+            city: 'Dallas',
+            region: 'Texas',
+          },
+        },
+      })
+    } catch (error) {
+      console.error('Error fetching bakers:', error)
+    }
   }
 
-  const [bakers, loadingBakers, refetchBakers] = useBakers()
+  const fetchBakers = async () => {
+    await getBakers()
+  }
+
+  useEffect(() => {
+    fetchBakers()
+  }, [])
+
+  useEffect(() => {
+    console.log('bakers ', bakers)
+  }, [bakers])
 
   return (
     <>
@@ -193,7 +220,7 @@ const Search = () => {
                 </div>
               ) : (
                 <>
-                  {bakers?.map((item: any, index: any) => {
+                  {bakers?.bakers?.nodes?.map((item: any, index: any) => {
                     const { _id, name, slug, shopLogoUrls, description, addressBook } = item
                     // const { city, region: state } = addressBook[0]
                     return (
