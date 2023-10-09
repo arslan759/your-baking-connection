@@ -37,9 +37,9 @@ const CustomAccordion = () => {
                   paddingBottom: '4.5px',
                 },
                 '&.Mui-expanded': {
-                  // marginTop: '24px',
+                  marginTop: '24px',
                   '@media (max-width: 768px)': {
-                    // marginTop: '4.5px',
+                    marginTop: '4.5px',
                   },
 
                   // padding: '0px',
@@ -68,6 +68,7 @@ const CustomAccordion = () => {
             }}
             expanded={expanded === `panel${index}`}
             onChange={handleChange(`panel${index}`)}
+            disableGutters
           >
             <AccordionSummary
               key={index}
@@ -127,7 +128,22 @@ const CustomAccordion = () => {
                 },
               }}
             >
-              <Typography>{item.content}</Typography>
+              <Typography
+                sx={{
+                  fontFamily: 'Open Sans',
+                  fontSize: '16px !important',
+                  fontWeight: '400 !imporatnt',
+                  lineHeight: '24px',
+                  color: '#090909',
+                  fontStyle: 'normal',
+                  '@media (max-width: 768px)': {
+                    fontSize: '8px !important',
+                    lineHeight: 'normal',
+                  },
+                }}
+              >
+                {item.content}
+              </Typography>
             </AccordionDetails>
           </Accordion>
         )

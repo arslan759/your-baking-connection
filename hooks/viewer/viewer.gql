@@ -1,7 +1,6 @@
 query viewer {
   viewer {
     _id
-  
 
     addressBook {
       edges {
@@ -24,12 +23,16 @@ query viewer {
     }
     firstName
     lastName
+    state
+    city
+    phone
     emailRecords {
       address
     }
+    userId
+    username
     name
     picture
     primaryEmailAddress
-  
   }
 }

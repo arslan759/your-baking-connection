@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { TextField, Typography } from '@mui/material'
+import { InputAdornment, TextField, Typography } from '@mui/material'
 import { InputFieldProps } from 'types'
+import { useEffect, useState } from 'react'
 
 const InputField = ({
   type,
@@ -9,8 +9,9 @@ const InputField = ({
   inputColor,
   placeholder,
   value,
+  handleKeyPress,
   error,
-  multiline,
+  startIcon,
   rows,
   onChange,
   required,
@@ -34,17 +35,22 @@ const InputField = ({
   return (
     <div className='flex flex-col capitalize'>
       {label ? (
-        <label
-          htmlFor={name}
-          style={{
-            color: inputColor,
-          }}
-        >
+        <label htmlFor={name}>
           <Typography
-            className={`text-[12px] ${
-              required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-            }`}
-            variant='body1'
+            sx={{
+              color: inputColor,
+              fontSize: '12px !important',
+              '@media (max-width: 767px)': {
+                fontSize: '12px !important',
+              },
+              '::after': required
+                ? {
+                    content: "'*'",
+                    marginLeft: '5px',
+                    color: 'red',
+                  }
+                : {},
+            }}
           >
             {label}
           </Typography>
@@ -54,15 +60,14 @@ const InputField = ({
       )}
 
       <TextField
-        className={`${label ? 'mt-[5px]' : 'mt-[0px]'}`}
         sx={{
           '& .MuiOutlinedInput-root': {
             color: inputColor,
-            height: multiline ? 'auto' : '35px',
+            height: type === 'textarea' ? 'auto' : '35px',
             padding: '5px',
             borderRadius: '5px',
             fontSize: '12px',
-
+            marginTop: label ? '5px' : '0px',
             '& fieldset': {
               borderColor: inputColor,
             },
@@ -77,11 +82,17 @@ const InputField = ({
         placeholder={placeholder}
         type={type}
         name={name}
-        multiline={multiline}
-        rows={rows}
+        InputProps={{
+          startAdornment: startIcon ? (
+            <InputAdornment position='start'>{startIcon}</InputAdornment>
+          ) : null,
+        }}
+        onKeyPress={handleKeyPress ? handleKeyPress : () => {}}
+        multiline={type === 'textarea' ? true : false}
+        rows={type === 'textarea' ? rows : 1}
         error={errorState}
         id='outlined-error-helper-text'
-        defaultValue={value}
+        value={value}
         onChange={handleChange}
         helperText={errorState ? errorText : ''}
       />

@@ -46,16 +46,25 @@ const PasswordField = ({
         }}
       >
         <Typography
-          className={`text-[12px] ${
-            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-          }`}
-          variant='body1'
+          sx={{
+            color: inputColor,
+            fontSize: '12px !important',
+            '@media (max-width: 767px)': {
+              fontSize: '12px !important',
+            },
+            '::after': required
+              ? {
+                  content: "'*'",
+                  marginLeft: '5px',
+                  color: 'red',
+                }
+              : {},
+          }}
         >
           {label}
         </Typography>
       </label>
       <TextField
-        className='mt-[5px]'
         sx={{
           '& .MuiOutlinedInput-root': {
             color: inputColor,
@@ -63,7 +72,7 @@ const PasswordField = ({
             padding: '5px',
             borderRadius: '5px',
             fontSize: '12px',
-
+            marginTop: label ? '5px' : '0px',
             '& fieldset': {
               borderColor: inputColor,
             },
@@ -80,20 +89,21 @@ const PasswordField = ({
             <InputAdornment
               position='end'
               sx={{
-                color: 'white',
+                color: inputColor,
               }}
             >
               <IconButton onClick={handleClickShowPassword} onMouseDown={handleMouseDownPassword}>
                 {showPassword ? (
-                  <VisibilityOffOutlinedIcon sx={{ color: '#fff' }} />
+                  <VisibilityOffOutlinedIcon sx={{ color: inputColor }} />
                 ) : (
-                  <VisibilityOutlinedIcon sx={{ color: '#fff' }} />
+                  <VisibilityOutlinedIcon sx={{ color: inputColor }} />
                 )}
               </IconButton>
             </InputAdornment>
           ),
         }}
         name='password'
+        placeholder={placeholder ? placeholder : ''}
         type={showPassword ? 'text' : 'password'}
         error={errorState}
         onChange={handleChange}

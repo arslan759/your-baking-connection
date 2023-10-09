@@ -2,7 +2,7 @@ import MenuItem from '@mui/material/MenuItem'
 import FormHelperText from '@mui/material/FormHelperText'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { Typography, dividerClasses } from '@mui/material'
+import { InputLabel, Typography, dividerClasses } from '@mui/material'
 import { DropdownProps } from 'types'
 import { useEffect, useState } from 'react'
 
@@ -23,6 +23,7 @@ const DropdownField = ({
   name,
   label,
   error,
+  placeholder,
   errorText,
   inputColor,
   value,
@@ -42,22 +43,29 @@ const DropdownField = ({
   }, [errorText, errorState])
 
   return (
-    <div className='flex flex-col capitalize mt-[8px]'>
-      <label
-        htmlFor={name}
-        style={{
-          color: inputColor,
-        }}
-      >
-        <Typography
-          className={`text-[12px] ${
-            required ? "after:content-['*'] after:ml-[5px] after:text-[red]" : ''
-          }`}
-          variant='body1'
-        >
-          {label}
-        </Typography>
-      </label>
+    <div className='flex flex-col capitalize'>
+      {!label ? null : (
+        <label htmlFor={name}>
+          <Typography
+            sx={{
+              color: inputColor,
+              fontSize: '12px !important',
+              '@media (max-width: 767px)': {
+                fontSize: '12px !important',
+              },
+              '::after': required
+                ? {
+                    content: "'*'",
+                    marginLeft: '5px',
+                    color: 'red',
+                  }
+                : {},
+            }}
+          >
+            {label}
+          </Typography>
+        </label>
+      )}
       <FormControl
         sx={{
           '& .MuiOutlinedInput-root': {
@@ -65,26 +73,33 @@ const DropdownField = ({
             height: '35px',
             padding: '5px',
             borderRadius: '5px',
-            fontSize: '12px',
+            fontSize: '12px !important',
+            '@media (max-width: 767px)': {
+              fontSize: '12px !important',
+            },
+            marginTop: label ? '5px' : '0px',
 
             '& fieldset': {
-              borderColor: inputColor,
+              borderColor: options?.length === 0 || !options ? '' : inputColor,
             },
             '&:hover fieldset': {
-              borderColor: inputColor,
+              borderColor: options?.length === 0 || !options ? '' : inputColor,
             },
             '&.Mui-focused fieldset': {
-              borderColor: inputColor,
+              borderColor: options?.length === 0 || !options ? '' : inputColor,
             },
           },
         }}
         error={errorState}
       >
+        {/* <InputLabel id='demo-simple-select-label'>Age</InputLabel> */}
         <Select
-          className='mt-[5px]'
           labelId='demo-multiple-name-label'
           id='demo-multiple-name'
+          autoWidth={true}
+          displayEmpty={placeholder ? true : false}
           value={value}
+          disabled={options?.length === 0 || !options ? true : false}
           onChange={handleChange}
           IconComponent={() => (
             <svg
@@ -104,9 +119,14 @@ const DropdownField = ({
           )}
           // input={<OutlinedInput label='Name' />}
           MenuProps={MenuProps}
-          sx={{}}
         >
-          {options.map((option, index) => (
+          {placeholder ? (
+            <MenuItem disabled value=''>
+              {placeholder}
+            </MenuItem>
+          ) : null}
+
+          {options?.map((option, index) => (
             <MenuItem key={index} value={option}>
               {option}
             </MenuItem>

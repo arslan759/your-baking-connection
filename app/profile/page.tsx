@@ -1,11 +1,11 @@
 'use client'
 
-import Profile from '@/components/Profile/Profile'
+import UserProfile from '@/components/UserProfile/UserProfile'
 
 export default function ProfilePage() {
   return (
     <>
-      <Profile />
+      <UserProfile />
     </>
   )
 }

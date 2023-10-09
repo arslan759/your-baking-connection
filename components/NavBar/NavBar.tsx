@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import MenuIcon from '@mui/icons-material/Menu'
-import { AppBar, Box, Menu, MenuItem, styled, Grid, Toolbar, Typography } from '@mui/material'
-import { usePathname, useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { PrimaryBtn, SecondaryBtn } from '../Buttons'
-import styles from './styles.module.css'
-import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
-import { NavBarProps } from 'types'
+import { AppBar, Box, Grid, Toolbar, Typography, styled } from '@mui/material'
+import withCart from 'containers/cart/withCart'
+import inject from 'hocs/inject'
 import useViewer from 'hooks/viewer/useViewer'
 import { withApollo } from 'lib/apollo/withApollo'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
+import { NavBarProps } from 'types'
+import AccountDropdown from '../AccountDropdown/AccountDropdown'
+import AddToCartModal from '../AddToCartModal'
+import { PrimaryBtn, SecondaryBtn } from '../Buttons'
+import NotificationModal from '../NotificationModal/NotificationModal'
+import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
+import styles from './styles.module.css'
 
-const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarProps) => {
-  const [viewer, loading, refetch] = useViewer()
+const Navbar = ({
+  itemsColor = 'black',
+  activeItemColor = '#7DDEC1',
+  ...restProps
+}: NavBarProps) => {
+  const [viewer, loading] = useViewer()
 
-  console.log('viewer is ', viewer)
+  console.log('viewer in navbar is', viewer)
 
-  const [open, SetOpen] = useState(false)
   const pathName = usePathname()
-  const router = useRouter()
   const StyledToolbar = styled(Toolbar)({
-    // display: "flex",
     justifyContent: 'space-between',
     height: '88px',
-  })
-  const SocialBox = styled(Box)({
-    display: 'flex',
-    // gap: 12,
   })
   const SearchBox = styled(Box)({
     display: 'flex',
@@ -39,20 +40,14 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
     { name: 'SEARCH', path: '/search' },
   ]
 
-  const handleLogOut = () => {
-    localStorage.clear()
-    router.push('/signin')
-  }
   useEffect(() => {
-    console.log('viewre in navbar', viewer)
-  }, [viewer])
+    console.log('restProps in navbar is', restProps)
+  }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
 
   return (
     <AppBar
       sx={{
         background: 'transparent',
-        // paddingLeft: { xs: '1px', sm: '25px' },
-        // paddingRight: { xs: '1px', md: '30px' },
       }}
       position={'static'}
       elevation={0}
@@ -95,24 +90,31 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
           ))}
         </Box>
 
+        <div className={styles.navbarMenu}>
+          <ToggleNavBar navbarIconColor={itemsColor} />
+        </div>
+
         <SearchBox sx={{ display: 'flex', alignItems: 'center' }}>
-          {loading ? (
-            <p style={{ color: 'black' }}>loading...</p>
-          ) : (
+          {
+            // loading ? (
+            //   <p style={{ color: 'black' }}>loading...</p>
+            // ) : (
             <Grid>
               {!viewer || Object.keys(viewer).length === 0 ? (
                 <Box
                   sx={{
+                    display: 'flex',
                     alignItems: 'center',
+                    gap: '15px',
                   }}
-                  className={styles.navbar}
+                  // className={styles.navbar}
                 >
-                  <div className='w-[146px] h-[50px]'>
+                  <div className='w-[50px] md:w-[146px] h-[30px] md:h-[50px]'>
                     <a href='/signup'>
                       <PrimaryBtn handleClick={() => {}} text='register' />
                     </a>
                   </div>
-                  <div className='w-[146px] h-[50px]'>
+                  <div className='w-[50px] md:w-[146px] h-[30px] md:h-[50px]'>
                     <a href='/signin'>
                       <SecondaryBtn handleClick={() => {}} text='sign in' color={`${itemsColor}`} />
                     </a>
@@ -121,77 +123,33 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#7DDEC1' }: NavBarPro
               ) : (
                 <Box
                   sx={{
+                    display: 'flex',
+                    // flexDirection: 'row !important',
                     alignItems: 'center',
+                    gap: '24px',
+                    pr: '10px',
+                    '@media (max-width: 767px)': {
+                      gap: '18px',
+                    },
                   }}
-                  className={styles.navbar}
                 >
-                  <p style={{ color: 'black', fontWeight: 700, marginRight: '10px' }}>
-                    {`${viewer?.firstName} ${viewer?.lastName}`}
-                  </p>{' '}
-                  <PrimaryBtn text={'Logout'} handleClick={handleLogOut} />
+                  <AccountDropdown account={viewer} />
+                  <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} />
+                  <AddToCartModal
+                    color={itemsColor}
+                    cartItems={restProps?.cart?.items}
+                    cartFunctions={restProps}
+                  />
                 </Box>
               )}
             </Grid>
-          )}
-          <div className={styles.navbarMenu}>
-            <ToggleNavBar navbarIconColor={itemsColor} />
-          </div>
+            // )
+          }
         </SearchBox>
       </StyledToolbar>
-      {/* <Menu
-        id='demo-positioned-menu'
-        aria-labelledby='demo-positioned-button'
-        open={open}
-        onClose={() => SetOpen(!open)}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <Box sx={{ width: 350, height: '90vh' }}>
-          {MenuItems.map((item, i) => (
-            <MenuItem
-              key={i}
-              sx={{
-                cursor: 'pointer',
-                fontSize: '14px',
-                fontWeight: '500',
-                textTransform: 'uppercase',
-                fontFamily: 'Rubik',
-                lineHeight: '18px',
-                fontStyle: 'normal',
-                textAlign: 'center',
-              }}
-            >
-              <Link
-                style={
-                  pathName === `${item.path}`
-                    ? {
-                        color: 'white',
-                        textAlign: 'center',
-                        textDecoration: 'none',
-                        borderRadius: '25px',
-                        padding: '7px',
-                        paddingLeft: '20px',
-                        paddingRight: '20px',
-                        border: '2px solid #FF6744',
-                      }
-                    : { color: 'white', textDecoration: 'none' }
-                }
-                href={item.path}
-              >
-                {item.name}
-              </Link>
-            </MenuItem>
-          ))}
-        </Box>
-      </Menu> */}
     </AppBar>
   )
 }
 
-export default withApollo()(Navbar)
+export default withApollo()(withCart(inject('uiStore')(Navbar)))
+// export default withApollo()(Navbar)
