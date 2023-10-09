@@ -160,7 +160,7 @@ const DeliveryDetailsForm = ({ amount }: DeliveryDetailsFormProps) => {
   }
 
   // handleSubmit function for form submission
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     // Checks if all fields are filled
@@ -194,7 +194,7 @@ const DeliveryDetailsForm = ({ amount }: DeliveryDetailsFormProps) => {
     }
 
     // If all fields are filled, then place the order
-    placeOrderHandler()
+    await placeOrderHandler()
 
     // Resets the form fields
     // resetForm()

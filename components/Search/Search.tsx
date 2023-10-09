@@ -3,7 +3,7 @@ import Navbar from '../NavBar/NavBar'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import DropdownField from '../DropdownField/DropdownField'
-import { ProductTypes, SearchBakerData, cities, states } from 'Constants/constants'
+import { ProductTypes, SearchBakerData } from 'Constants/constants'
 import InputField from '../InputField/InputField'
 import SearchBakerItem from '../SearchBakerItem/SearchBakerItem'
 import styles from './styles.module.css'
@@ -78,8 +78,8 @@ const Search = () => {
       await getBakers({
         variables: {
           filter: {
-            city: 'Dallas',
-            region: 'Texas',
+            city: city,
+            region: state,
           },
         },
       })
@@ -268,6 +268,7 @@ const Search = () => {
                   {
                     //@ts-ignore
                     bakers?.bakers?.nodes?.map((item: any, index: any) => {
+                      console.log('item is ', item)
                       const { _id, name, slug, shopLogoUrls, description, addressBook } = item
                       // const { city, region: state } = addressBook[0]
                       return (
@@ -278,7 +279,7 @@ const Search = () => {
                             description={description}
                             rating={'4.2'}
                             city={addressBook ? addressBook[0]?.city : ''}
-                            state={addressBook ? addressBook[0]?.state : ''}
+                            state={addressBook ? addressBook[0]?.region : ''}
                             slug={_id}
                           />
                         </div>
