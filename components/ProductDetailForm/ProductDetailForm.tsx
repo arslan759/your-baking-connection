@@ -272,7 +272,7 @@ const ProductDetailForm = ({
       </div>
 
       <div className='w-full flex flex-wrap mt-[18px] gap-[18px]'>
-        {attributes.map((item, index) => {
+        {attributes?.map((item, index) => {
           console.log('attribute is', item)
 
           console.log('attribute option value is ', productAttributes[index]?.option)

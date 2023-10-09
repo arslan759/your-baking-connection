@@ -1,16 +1,16 @@
-import { useQuery } from '@apollo/client'
-
-import bakersQuery from './bakers.gql'
+import { useLazyQuery } from '@apollo/client';
+import bakersQuery from './bakers.gql';
 
 /**
  * Gets the bakers list based on search parameters
  *
- * @returns {Array} the bakers' list
+ * @returns {[Function, boolean, Object]} - An array containing the following elements:
+ *   - getBakersData: Function to trigger the query
+ *   - loading: A boolean indicating whether the query is loading
+ *   - data: The query result data
  */
 export default function useBakers() {
-  const { data, loading, refetch } = useQuery(bakersQuery)
+  const [getBakersData, { loading, data }] = useLazyQuery(bakersQuery);
 
-  const bakers = data?.bakers?.nodes
-
-  return [bakers, loading, refetch]
+  return [getBakersData, loading, data];
 }

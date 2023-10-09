@@ -1,5 +1,5 @@
-query bakers {
-  bakers {
+query bakers($filter: BakersFilterInput) {
+  bakers(filter: $filter) {
     nodes {
       _id
       name
