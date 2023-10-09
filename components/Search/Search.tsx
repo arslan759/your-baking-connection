@@ -265,23 +265,26 @@ const Search = () => {
                 </div>
               ) : (
                 <>
-                  {bakers?.bakers?.nodes?.map((item: any, index: any) => {
-                    const { _id, name, slug, shopLogoUrls, description, addressBook } = item
-                    // const { city, region: state } = addressBook[0]
-                    return (
-                      <div key={index} className='w-full md:w-[70%] flex flex-col items-center'>
-                        <SearchBakerItem
-                          image={shopLogoUrls?.primaryShopLogoUrl}
-                          title={name}
-                          description={description}
-                          rating={'4.2'}
-                          city={addressBook ? addressBook[0]?.city : ''}
-                          state={addressBook ? addressBook[0]?.state : ''}
-                          slug={_id}
-                        />
-                      </div>
-                    )
-                  })}
+                  {
+                    //@ts-ignore
+                    bakers?.bakers?.nodes?.map((item: any, index: any) => {
+                      const { _id, name, slug, shopLogoUrls, description, addressBook } = item
+                      // const { city, region: state } = addressBook[0]
+                      return (
+                        <div key={index} className='w-full md:w-[70%] flex flex-col items-center'>
+                          <SearchBakerItem
+                            image={shopLogoUrls?.primaryShopLogoUrl}
+                            title={name}
+                            description={description}
+                            rating={'4.2'}
+                            city={addressBook ? addressBook[0]?.city : ''}
+                            state={addressBook ? addressBook[0]?.state : ''}
+                            slug={_id}
+                          />
+                        </div>
+                      )
+                    })
+                  }
                 </>
               )}
             </div>
