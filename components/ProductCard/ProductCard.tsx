@@ -4,7 +4,7 @@ import { ProductCardProps } from 'types'
 import { PrimaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const ProductCard = ({
   image,
@@ -22,6 +22,7 @@ const ProductCard = ({
   const [isFavorite, setIsFavorite] = useState(false) // handle favourite click
 
   const router = useRouter()
+  const pathname = usePathname()
 
   // handle mouse enter and leave
   const handleMouseEnter = () => {
@@ -52,14 +53,14 @@ const ProductCard = ({
 
     // console.log('slug', `/product/${slug}`)
 
-    router.push(`/product/${slug}`)
+    router.push(`${pathname}/product/${slug}`)
   }
 
   // console.log('isDetailsVisible', isDetailsVisible)
   // console.log('isHovering', isHovering)
 
-  console.log('mdWidth', mdWidth)
-  console.log('width', width)
+  // console.log('mdWidth', mdWidth)
+  // console.log('width', width)
 
   return (
     <Card
@@ -79,7 +80,7 @@ const ProductCard = ({
       <div className='relative'>
         <CardMedia
           sx={{
-            bordeRadius: '5px 5px 0px 0px',
+            borderRadius: '5px 5px 0px 0px',
             background:
               isHovering || isDetailsVisible
                 ? `linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${image}), lightgray 50% / cover no-repeat`
