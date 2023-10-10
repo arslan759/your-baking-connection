@@ -2,7 +2,7 @@ import Navbar from '../NavBar/NavBar'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import DropdownField from '../DropdownField/DropdownField'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ProductTypes, SearchBakerData, cities, states } from 'Constants/constants'
 import InputField from '../InputField/InputField'
 import SearchBakerItem from '../SearchBakerItem/SearchBakerItem'
@@ -10,9 +10,15 @@ import styles from './styles.module.css'
 import useBakers from 'hooks/baker/useBakers'
 import { withApollo } from 'lib/apollo/withApollo'
 import Spinner from '../Spinner'
+import { getCitiesApi, getStatesApi } from 'helpers/apis'
+import CustomAutocomplete from '../CustomAutocomplete'
 
 const Search = () => {
+  const [states, setStates] = useState<any>([])
+  const [isLoadingStates, setIsLoadingStates] = useState(false)
   const [state, setState] = useState<string | null>('')
+  const [isLoadingCities, setIsLoadingCities] = useState(false)
+  const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
   const [search, setSearch] = useState('')
   const [productType, setProductType] = useState('')
@@ -34,12 +40,12 @@ const Search = () => {
   // dropdown handlers
   const handleStateChange = (state: string) => {
     setState(state)
-    setStateError(state ? '' : 'State is required')
+    // setStateError(state ? '' : 'State is required')
   }
 
   const handleCityChange = (state: string) => {
     setCity(state)
-    setCityError(state ? '' : 'City is required')
+    // setCityError(state ? '' : 'City is required')
   }
 
   const handleProductTypeChange = (type: string) => {
@@ -66,6 +72,16 @@ const Search = () => {
   }
 
   const [bakers, loadingBakers, refetchBakers] = useBakers()
+
+  useEffect(() => {
+    getStatesApi(setStates, setIsLoadingStates)
+  }, [])
+
+  useEffect(() => {
+    setCities([])
+    setCity('')
+    getCitiesApi(state, setCities, setIsLoadingCities)
+  }, [state])
 
   return (
     <>
@@ -121,7 +137,7 @@ const Search = () => {
           <form onSubmit={handleSubmit} className='w-[90vw] md:w-[90vw] flex flex-col items-center'>
             <div className='w-full flex flex-col md:flex-row items-center justify-center gap-[16px]'>
               <div className='w-full md:w-[25%]'>
-                <DropdownField
+                {/* <DropdownField
                   // label='state'
                   required={false}
                   placeholder='state'
@@ -131,11 +147,26 @@ const Search = () => {
                   options={states}
                   inputColor='#6C6C6C'
                   onChange={handleStateChange}
+                /> */}
+
+                <CustomAutocomplete
+                  // label='state'
+                  loading={isLoadingStates}
+                  required
+                  name='state'
+                  placeholder='State'
+                  inputColor='#6C6C6C'
+                  options={states}
+                  value={state}
+                  errorText={stateError}
+                  // setValue={setState}
+                  onChange={handleStateChange}
+                  setError={setStateError}
                 />
               </div>
 
               <div className='w-full md:w-[25%]'>
-                <DropdownField
+                {/* <DropdownField
                   // label='city'
                   placeholder='city'
                   required={false}
@@ -145,13 +176,27 @@ const Search = () => {
                   options={cities}
                   inputColor='#6C6C6C'
                   onChange={handleCityChange}
+                /> */}
+                <CustomAutocomplete
+                  // label='city'
+                  loading={isLoadingCities}
+                  required
+                  name='city'
+                  placeholder='City'
+                  inputColor='#6C6C6C'
+                  options={cities}
+                  value={city}
+                  errorText={cityError}
+                  // setValue={setCity}
+                  onChange={handleCityChange}
+                  setError={setCityError}
                 />
               </div>
 
               <div className='w-full md:w-[25%]'>
                 <InputField
                   // label='city'
-                  placeholder='search'
+                  placeholder='Search'
                   type='text'
                   required={false}
                   startIcon={<img src='/Images/search-input-icon.svg' alt='search' />}
