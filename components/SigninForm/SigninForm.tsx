@@ -19,6 +19,10 @@ const SigninForm = () => {
   const [loginUser, loadingLoginUser] = useLoginUser()
   const [viewer, loading, refetch] = useViewer()
 
+  useEffect(() => {
+    console.log('loading login user', loadingLoginUser)
+  }, [loadingLoginUser])
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [checked, setChecked] = React.useState(false)
@@ -98,6 +102,7 @@ const SigninForm = () => {
       if (accessToken) {
         localStorage.setItem('accounts:accessToken', accessToken)
         localStorage.setItem('accounts:refreshToken', refreshToken)
+        router.push('/')
       }
     } catch (err: any) {
       console.log(err)
@@ -261,7 +266,12 @@ const SigninForm = () => {
             </div>
 
             <div className='mt-[27px] md:mt-[20px]'>
-              <PrimaryBtn text='Sign In' type='submit' />
+              <PrimaryBtn
+                text='Sign In'
+                type='submit'
+                disabled={loadingLoginUser}
+                loading={loadingLoginUser}
+              />
             </div>
 
             <div className='flex justify-center items-center  mt-[20px]'>
