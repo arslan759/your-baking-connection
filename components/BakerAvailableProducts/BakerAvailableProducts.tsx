@@ -62,6 +62,8 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
               return (
                 <ProductCard
                   key={item.id}
+                  productId={product.productId}
+                  shopId={slug}
                   image={product?.media[0]?.URLs?.thumbnail}
                   title={product?.title}
                   slug={product?.slug}
