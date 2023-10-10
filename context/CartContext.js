@@ -63,7 +63,7 @@ export const CartProvider = ({ children }) => {
     setCheckoutPayments([])
   }
 
-  console.log('accountCartId', accountCartId)
+  // console.log('accountCartId', accountCartId)
 
   return (
     <CartContext.Provider

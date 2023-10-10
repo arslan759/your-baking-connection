@@ -29,7 +29,7 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
   }
 
   useEffect(() => {
-    console.log('slug in final', slug)
+    // console.log('slug in final', slug)
   }, [slug])
 
   const [catalogItems, loadingItems, refetchItems, totalCount] = useCatalogItems({

@@ -14,7 +14,7 @@ export default function withCart(Component: any) {
     // eslint-disable-line require-jsdoc
     const cart = useCart()
 
-    console.log('cart is ', cart)
+    // console.log('cart is ', cart)
 
     return <Component {...props} {...cart} />
   }
