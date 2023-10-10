@@ -64,7 +64,7 @@ const ProductCard = ({
       //   handleErrorOpen();
     }
     setIsFavorite(!isFavorite)
-    // console.log('favourite clicked')
+    console.log('favourite clicked')
   }
 
   // handle more details click
