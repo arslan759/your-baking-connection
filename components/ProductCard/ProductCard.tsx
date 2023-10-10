@@ -44,7 +44,7 @@ const ProductCard = ({
   const handleFavouriteClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     e.stopPropagation()
     setIsFavorite(!isFavorite)
-    console.log('favourite clicked')
+    // console.log('favourite clicked')
   }
 
   // handle more details click
