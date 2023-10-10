@@ -12,6 +12,7 @@ import { useRouter } from 'next/navigation'
 import { SignUpFormProps } from 'types'
 import withAuth from 'hocs/withAuth'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
+import CustomAutocomplete from '../CustomAutocomplete'
 
 const SignupForm = ({ openOtp }: SignUpFormProps) => {
   //sign up mutation hook
@@ -24,7 +25,9 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [states, setStates] = useState<any>([])
+  const [isLoadingStates, setIsLoadingStates] = useState(false)
   const [state, setState] = useState<string | null>('')
+  const [isLoadingCities, setIsLoadingCities] = useState(false)
   const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
   const [password, setPassword] = useState('')
@@ -223,13 +226,13 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   }
 
   useEffect(() => {
-    getStatesApi(setStates)
+    getStatesApi(setStates, setIsLoadingStates)
   }, [])
 
   useEffect(() => {
     setCities([])
     setCity('')
-    getCitiesApi(state, setCities)
+    getCitiesApi(state, setCities, setIsLoadingCities)
   }, [state])
 
   return (
@@ -346,7 +349,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
               </div>
 
               <div className='w-full md:w-[45%]'>
-                <DropdownField
+                {/* <DropdownField
                   label='state'
                   required
                   name='state'
@@ -355,11 +358,25 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   options={states}
                   inputColor='white'
                   onChange={handleStateChange}
+                /> */}
+
+                <CustomAutocomplete
+                  label='state'
+                  loading={isLoadingStates}
+                  required
+                  name='state'
+                  inputColor='white'
+                  options={states}
+                  value={state}
+                  errorText={stateError}
+                  // setValue={setState}
+                  onChange={handleStateChange}
+                  setError={setStateError}
                 />
               </div>
 
               <div className='w-full md:w-[45%]'>
-                <DropdownField
+                {/* <DropdownField
                   label='city'
                   required
                   name='city'
@@ -368,7 +385,21 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   options={cities}
                   inputColor='white'
                   onChange={handleCityChange}
+                /> */}
+                <CustomAutocomplete
+                  label='city'
+                  loading={isLoadingCities}
+                  required
+                  name='city'
+                  inputColor='white'
+                  options={cities}
+                  value={city}
+                  errorText={cityError}
+                  // setValue={setCity}
+                  onChange={handleCityChange}
+                  setError={setCityError}
                 />
+                {/* <div>{cityError ? cityError : ''}</div> */}
               </div>
 
               <div className='w-full md:w-[45%]'>
