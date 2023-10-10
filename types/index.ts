@@ -182,6 +182,8 @@ export interface BakerTabsPanelProps {
 }
 
 export interface ProductCardProps {
+  productId:string
+  shopId:string
   image: string
   title: string
   description: string
