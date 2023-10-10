@@ -2,13 +2,7 @@ import { Checkbox, FormControl, FormHelperText, Radio, Typography } from '@mui/m
 import React, { useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import DropdownField from '../DropdownField/DropdownField'
-import {
-  cities,
-  countries,
-  pickupDayOptions,
-  pickupHoursOptions,
-  states,
-} from 'Constants/constants'
+import { pickupDayOptions, pickupHoursOptions } from 'Constants/constants'
 import { PrimaryBtn } from '../Buttons'
 import usePlaceOrder from 'hooks/order/usePlaceOrder'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
@@ -201,13 +195,13 @@ const DeliveryDetailsForm = ({ amount }: DeliveryDetailsFormProps) => {
   }
 
   useEffect(() => {
-    getStatesApi(setStates)
+    getStatesApi(setStates, setIsLoadingStates)
   }, [])
 
   useEffect(() => {
     setCities([])
     setCity('')
-    getCitiesApi(state, setCities)
+    getCitiesApi(state, setCities, setIsLoadingCities)
   }, [state])
 
   return (

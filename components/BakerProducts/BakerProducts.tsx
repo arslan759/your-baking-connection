@@ -64,7 +64,7 @@ const BakerProducts = ({ slug }: BakerProductsProps) => {
       </div>
 
       <div className='w-[90vw] mt-[48px] md:mt-[100px]'>
-        <CustomOrders />
+        <CustomOrders shopId={slug} />
       </div>
     </div>
   )

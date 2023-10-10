@@ -2,7 +2,11 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import CustomOrdersForm from '../CustomOrdersForm/CustomOrdersForm'
 
-const CustomOrders = () => {
+interface CustomOrdersProps {
+  shopId: string
+}
+
+const CustomOrders = ({ shopId }: CustomOrdersProps) => {
   return (
     <div>
       <Typography
@@ -25,7 +29,7 @@ const CustomOrders = () => {
       </Typography>
 
       <div className='mt-[24px] md:mt-[50px]'>
-        <CustomOrdersForm />
+        <CustomOrdersForm shopId={shopId} />
       </div>
     </div>
   )
