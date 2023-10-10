@@ -1,10 +1,21 @@
-import { Typography } from '@mui/material'
+import { Alert, AlertTitle, Collapse, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import InputField from '../InputField/InputField'
 import { validateEmail } from 'helpers/validations'
 import { PrimaryBtn, SecondaryBtn } from '../Buttons'
+import useCustomOrder from 'hooks/order/useCustomOrder'
+import { withApollo } from 'lib/apollo/withApollo'
 
-const CustomOrdersForm = () => {
+interface CustomOrdersFormProps {
+  shopId: string
+}
+
+const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
+  const [createCustomOrder, loadingCustomOrder] = useCustomOrder()
+
+  const [open, setOpen] = React.useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -46,6 +57,26 @@ const CustomOrdersForm = () => {
       setDetails(value)
       setDetailsErr(value ? '' : 'Details are required')
     }
+  }
+
+  const resetForm = () => {
+    // Resets the form fields
+    setName('')
+    setEmail('')
+    setPhone('')
+    setDate('')
+    setOccasion('')
+    setQuantity('')
+    setDetails('')
+
+    // Resets the error states
+    setNameErr('')
+    setEmailErr('')
+    setPhoneErr('')
+    setDateErr('')
+    setOccasionErr('')
+    setQuantityErr('')
+    setDetailsErr('')
   }
 
   // handleSubmit function for form submission
@@ -99,33 +130,48 @@ const CustomOrdersForm = () => {
       return
     }
 
-    // Logs the form data
-    console.log('form submitted')
-    console.log('name is ', name)
-    console.log('email is ', email)
-    console.log('phone is ', phone)
-    console.log('date is ', date)
-    console.log('occasion is ', occasion)
-    console.log('quantity is ', quantity)
-    console.log('details are ', details)
+    try {
+      const input = {
+        itemName: name,
+        email: email,
+        phoneNumber: phone,
+        quantity: parseInt(quantity),
+        details: details,
+        shopId: shopId,
+        occasion: occasion,
+        fulfillmentDate: date,
+      }
 
-    // Resets the form fields
-    setName('')
-    setEmail('')
-    setPhone('')
-    setDate('')
-    setOccasion('')
-    setQuantity('')
-    setDetails('')
+      //@ts-ignore
+      const result = await createCustomOrder({
+        variables: {
+          input,
+        },
+      })
 
-    // Resets the error states
-    setNameErr('')
-    setEmailErr('')
-    setPhoneErr('')
-    setDateErr('')
-    setOccasionErr('')
-    setQuantityErr('')
-    setDetailsErr('')
+      if (result?.data?.createCustomOrder?.referenceId) {
+        setErrorMsg('')
+        setOpen(false)
+        resetForm()
+      }
+    } catch (error: any) {
+      console.log('error in creating custom order is ', error?.message)
+      setErrorMsg(error?.message)
+      setOpen(true)
+      setTimeout(() => {
+        setOpen(false)
+      }, 7000)
+    }
+
+    // // Logs the form data
+    // console.log('form submitted')
+    // console.log('name is ', name)
+    // console.log('email is ', email)
+    // console.log('phone is ', phone)
+    // console.log('date is ', date)
+    // console.log('occasion is ', occasion)
+    // console.log('quantity is ', quantity)
+    // console.log('details are ', details)
   }
   return (
     <div
@@ -206,7 +252,7 @@ const CustomOrdersForm = () => {
             <div className='w-full md:w-[45%]'>
               <InputField
                 label='phone number'
-                type='text'
+                type='number'
                 //   placeholder='Search'
                 inputColor='#090909'
                 name='phone'
@@ -222,7 +268,7 @@ const CustomOrdersForm = () => {
             <div className='w-full md:w-[45%]'>
               <InputField
                 label={`Date you'd like item(s)`}
-                type='text'
+                type='date'
                 //   placeholder='Search'
                 inputColor='#090909'
                 name='date'
@@ -252,7 +298,7 @@ const CustomOrdersForm = () => {
             <div className='w-full md:w-[45%]'>
               <InputField
                 label='quantity'
-                type='text'
+                type='number'
                 //   placeholder='Search'
                 inputColor='#090909'
                 name='quantity'
@@ -317,15 +363,33 @@ const CustomOrdersForm = () => {
             </div>
 
             <div className='w-full flex flex-col items-center'>
-              <SecondaryBtn
+              {/* <SecondaryBtn
                 text='select from favourites'
                 color='#090909'
                 handleClick={() => console.log('fav btn clicked')}
               />
 
-              <Typography>or</Typography>
+              <Typography>or</Typography> */}
+              <Collapse
+                in={open}
+                sx={{
+                  width: '100%',
+                }}
+              >
+                <Alert
+                  severity='error'
+                  sx={{
+                    width: '100%',
+                  }}
+                >
+                  <AlertTitle>Error</AlertTitle>
+                  {errorMsg}
+                </Alert>
+              </Collapse>
+
               <div className='w-full mt-[12px]'>
-                <PrimaryBtn text='send message' type='submit' />
+                {/* @ts-ignore */}
+                <PrimaryBtn loading={loadingCustomOrder} text='send message' type='submit' />
               </div>
             </div>
           </div>
@@ -335,4 +399,4 @@ const CustomOrdersForm = () => {
   )
 }
 
-export default CustomOrdersForm
+export default withApollo()(CustomOrdersForm)
