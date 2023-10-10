@@ -13,6 +13,7 @@ import { PrimaryBtn } from '../Buttons'
 import usePlaceOrder from 'hooks/order/usePlaceOrder'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
 import { withApollo } from 'lib/apollo/withApollo'
+import CustomAutocomplete from '../CustomAutocomplete'
 
 interface DeliveryDetailsFormProps {
   amount: number
@@ -25,7 +26,9 @@ const DeliveryDetailsForm = ({ amount }: DeliveryDetailsFormProps) => {
   // const [country, setCountry] = useState('')
   const [postCode, setPostCode] = useState('')
   const [states, setStates] = useState<any>([])
+  const [isLoadingStates, setIsLoadingStates] = useState(false)
   const [state, setState] = useState<string | null>('')
+  const [isLoadingCities, setIsLoadingCities] = useState(false)
   const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
   const [additionalNotes, setAdditionalNotes] = useState('')
@@ -250,9 +253,10 @@ const DeliveryDetailsForm = ({ amount }: DeliveryDetailsFormProps) => {
         </div>
 
         <div className='w-full md:w-[45%]'>
-          <DropdownField
+          <CustomAutocomplete
             label='state'
             required
+            loading={isLoadingStates}
             name='state'
             errorText={stateError}
             value={state}
@@ -263,9 +267,10 @@ const DeliveryDetailsForm = ({ amount }: DeliveryDetailsFormProps) => {
         </div>
 
         <div className='w-full md:w-[45%]'>
-          <DropdownField
+          <CustomAutocomplete
             label='city'
             required
+            loading={isLoadingCities}
             name='city'
             errorText={cityError}
             value={city}

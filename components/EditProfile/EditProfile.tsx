@@ -11,6 +11,8 @@ import { withApollo } from 'lib/apollo/withApollo'
 import useUpdateAccount from 'hooks/Profile/useUpdateAccount'
 import useViewer from 'hooks/viewer/useViewer'
 import useUploadFile from 'hooks/FileUpload/useUploadFile'
+import CustomAutocomplete from '../CustomAutocomplete'
+import { getCitiesApi, getStatesApi } from 'helpers/apis'
 
 const EditProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -26,7 +28,11 @@ const EditProfile = () => {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [states, setStates] = useState<any>([])
+  const [isLoadingStates, setIsLoadingStates] = useState(false)
   const [state, setState] = useState<string | null>('')
+  const [isLoadingCities, setIsLoadingCities] = useState(false)
+  const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
   const [address, setAddress] = useState('')
   const [picture, setPicture] = useState('')
@@ -200,6 +206,15 @@ const EditProfile = () => {
     console.log('picture')
   }
 
+  useEffect(() => {
+    getStatesApi(setStates, setIsLoadingStates)
+  }, [])
+
+  useEffect(() => {
+    setCities([])
+    setCity('')
+    getCitiesApi(state, setCities, setIsLoadingCities)
+  }, [state])
   return (
     <>
       {/* desktop View  Edit Button*/}
@@ -332,8 +347,9 @@ const EditProfile = () => {
               </div>
 
               <div className='w-full md:w-[45%]'>
-                <DropdownField
+                <CustomAutocomplete
                   label='state'
+                  loading={isLoadingStates}
                   required={false}
                   name='state'
                   errorText={stateError}
@@ -345,9 +361,10 @@ const EditProfile = () => {
               </div>
 
               <div className='w-full md:w-[45%]'>
-                <DropdownField
+                <CustomAutocomplete
                   label='city'
                   required={false}
+                  loading={isLoadingCities}
                   name='city'
                   errorText={cityError}
                   value={city}
