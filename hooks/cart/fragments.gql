@@ -138,6 +138,7 @@ fragment CartItemConnectionFragment on CartItemConnection {
   edges {
     node {
       _id
+      thumbnailImage
       productConfiguration {
         productId
         productVariantId

@@ -148,11 +148,7 @@ const CartTable = ({ items, cartFunctions }: CartTableProps) => {
                 scope='row'
               >
                 <img
-                  src={
-                    item?.imageURLs?.thumbnail
-                      ? item.imageURLs.thumbnail
-                      : '/Images/cart-dummy-img.png'
-                  }
+                  src={item?.thumbnailImage ? item?.thumbnailImage : '/Images/cart-dummy-img.png'}
                   alt={item.title}
                   className='w-[56px] md:w-[72px] h-[56px] md:h-[72px] rounded-[4px]'
                 />{' '}
