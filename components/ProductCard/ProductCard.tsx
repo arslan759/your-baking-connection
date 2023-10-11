@@ -1,12 +1,16 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProductCardProps } from 'types'
 import { PrimaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { usePathname, useRouter } from 'next/navigation'
+import useMarkProductAsFavorite from '../../hooks/Favorite/useMarkProductAsFavorite'
 
 const ProductCard = ({
+  isFavoriteFlag,
+  productId,
+  shopId,
   image,
   title,
   description,
@@ -20,6 +24,7 @@ const ProductCard = ({
   const [isHovering, setIsHovering] = useState(false) // handle mouse enter and leave for more details on desktop view
   const [isDetailsVisible, setIsDetailsVisible] = useState(false) // Toggle More Details for mobile view
   const [isFavorite, setIsFavorite] = useState(false) // handle favourite click
+  const [favorite]: any = useMarkProductAsFavorite()
 
   const router = useRouter()
   const pathname = usePathname()
@@ -41,10 +46,25 @@ const ProductCard = ({
   }
 
   // handle favourite click
-  const handleFavouriteClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+  const handleFavouriteClick = async (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     e.stopPropagation()
+    // console.log('clicked')
+    try {
+      // console.log('productId', productId)
+      await favorite({
+        variables: {
+          productId: productId,
+          shopId: shopId,
+        },
+      })
+      console.log('Success')
+      //   handleSuccessOpen();
+    } catch (err) {
+      console.log(err)
+      //   handleErrorOpen();
+    }
     setIsFavorite(!isFavorite)
-    // console.log('favourite clicked')
+    console.log('favourite clicked')
   }
 
   // handle more details click
@@ -52,15 +72,13 @@ const ProductCard = ({
     e.stopPropagation()
 
     // console.log('slug', `/product/${slug}`)
+    // console.log(pathname)
 
     router.push(`${pathname}/product/${slug}`)
   }
-
-  // console.log('isDetailsVisible', isDetailsVisible)
-  // console.log('isHovering', isHovering)
-
-  // console.log('mdWidth', mdWidth)
-  // console.log('width', width)
+  useEffect(() => {
+    setIsFavorite(isFavoriteFlag)
+  }, [isFavoriteFlag])
 
   return (
     <Card

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { GalleryProductsData } from 'Constants/constants'
 import CustomPagination from '../CustomPagination/CustomPagination'
 import ProductCard from '../ProductCard/ProductCard'
-import useCatalogItems from 'hooks/Products/useCatalogItems'
+import useFavorite from 'hooks/Products/useFavorites'
 import { withApollo } from 'lib/apollo/withApollo'
 import Spinner from '../Spinner'
 
-interface BakerAvailableProducts {
+interface BakerFavoriteProducts {
   slug: string
 }
 
-const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
+const BakerFavoriteProducts = ({ slug }: BakerFavoriteProducts) => {
   //items per page to display
   const [itemsPerPage, setItemsPerPage] = useState<number>(6)
 
@@ -32,8 +32,7 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
     // console.log('slug in final', slug)
   }, [slug])
 
-  const [catalogItems, loadingItems, refetchItems, totalCount] = useCatalogItems({
-    shopIds: [slug],
+  const [catalogItems, loadingItems, refetchItems, totalCount] = useFavorite({
     first: itemsPerPage,
     offset,
     sortBy: 'updatedAt',
@@ -42,6 +41,7 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
 
   useEffect(() => {
     let page = Math.ceil(totalCount / itemsPerPage)
+    console.log('catalogItems', catalogItems)
     setPageCount(page)
   }, [totalCount])
 
@@ -60,8 +60,8 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
 
               return (
                 <ProductCard
-                  key={item.id}
                   isFavoriteFlag={product.isFavorite}
+                  key={item.id}
                   productId={product.productId}
                   shopId={slug}
                   image={product?.media[0]?.URLs?.thumbnail}
@@ -93,4 +93,4 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
   )
 }
 
-export default withApollo()(BakerAvailableProducts)
+export default withApollo()(BakerFavoriteProducts)
