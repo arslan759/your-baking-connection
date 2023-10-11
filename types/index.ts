@@ -182,6 +182,7 @@ export interface BakerTabsPanelProps {
 }
 
 export interface ProductCardProps {
+  isFavoriteFlag: boolean
   productId:string
   shopId:string
   image: string

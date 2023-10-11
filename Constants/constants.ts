@@ -387,7 +387,7 @@ export const GalleryNavigation = [
   },
   {
     id: 4,
-    title: 'Allergen Information',
+    title: 'Favorites',
   },
   {
     id: 5,
