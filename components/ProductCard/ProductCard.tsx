@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProductCardProps } from 'types'
 import { PrimaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import useMarkProductAsFavorite from '../../hooks/Favorite/useMarkProductAsFavorite'
 
 const ProductCard = ({
+  isFavoriteFlag,
   productId,
   shopId,
   image,
@@ -75,12 +76,9 @@ const ProductCard = ({
 
     router.push(`${pathname}/product/${slug}`)
   }
-
-  // console.log('isDetailsVisible', isDetailsVisible)
-  // console.log('isHovering', isHovering)
-
-  // console.log('mdWidth', mdWidth)
-  // console.log('width', width)
+  useEffect(() => {
+    setIsFavorite(isFavoriteFlag)
+  }, [isFavoriteFlag])
 
   return (
     <Card

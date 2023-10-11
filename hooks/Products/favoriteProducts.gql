@@ -1,17 +1,10 @@
-query catalogItems(
-  $shopIds: [ID]!
+query favoriteProducts(
   $first: ConnectionLimitInt
   $offset: Int
   $sortBy: CatalogItemSortByField
   $sortOrder: SortOrder
 ) {
-  catalogItems(
-    shopIds: $shopIds
-    first: $first
-    offset: $offset
-    sortBy: $sortBy
-    sortOrder: $sortOrder
-  ) {
+  favoriteProducts(first: $first, offset: $offset, sortBy: $sortBy, sortOrder: $sortOrder) {
     totalCount
     edges {
       node {
