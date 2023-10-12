@@ -23,7 +23,7 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const [isHovering, setIsHovering] = useState(false) // handle mouse enter and leave for more details on desktop view
   const [isDetailsVisible, setIsDetailsVisible] = useState(false) // Toggle More Details for mobile view
-  const [isFavorite, setIsFavorite] = useState(false) // handle favourite click
+  const [isFavorite, setIsFavorite] = useState(isFavoriteFlag) // handle favourite click
   const [favorite]: any = useMarkProductAsFavorite()
 
   const router = useRouter()
@@ -76,9 +76,10 @@ const ProductCard = ({
 
     router.push(`${pathname}/product/${slug}`)
   }
-  useEffect(() => {
-    setIsFavorite(isFavoriteFlag)
-  }, [isFavoriteFlag])
+
+  // useEffect(() => {
+  //   setIsFavorite(isFavoriteFlag)
+  // }, [isFavoriteFlag])
 
   return (
     <Card
