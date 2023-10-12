@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import styles from './styles.module.css'
 import { Typography } from '@mui/material'
-import { PrimaryBtn } from '../Buttons'
 import YourProfileCardItem from '../YourProfileCardItem/YourProfileCardItem'
 import { YourProfileCardItemData } from 'Constants/constants'
 import EditProfile from '../EditProfile/EditProfile'
 import useViewer from 'hooks/viewer/useViewer'
 import { withApollo } from 'lib/apollo/withApollo'
-import withAuth from 'hocs/withAuth'
 
 const YourProfileCard = () => {
   const [viewer, loadingViewer] = useViewer()

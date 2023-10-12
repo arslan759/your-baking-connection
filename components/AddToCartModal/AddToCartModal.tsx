@@ -17,12 +17,12 @@ const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps
     cartFunctions?.uiStore?.toggleCartOpen()
   }
 
-  console.log('cartItems in AddToCartModal is', cartItems)
+  // console.log('cartItems in AddToCartModal is', cartItems)
 
-  console.log('cartFunctions in AddToCartModal is', cartFunctions)
+  // console.log('cartFunctions in AddToCartModal is', cartFunctions)
 
   useEffect(() => {
-    console.log('cartFunctions in AddToCartModal is', cartFunctions)
+    // console.log('cartFunctions in AddToCartModal is', cartFunctions)
   }, [cartFunctions?.uiStore?.isCartOpen])
 
   return (

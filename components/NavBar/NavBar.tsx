@@ -1,7 +1,7 @@
 import { AppBar, Box, Grid, Toolbar, Typography, styled } from '@mui/material'
 import withCart from 'containers/cart/withCart'
 import inject from 'hocs/inject'
-import useViewer from 'hooks/viewer/useViewer'
+// import useViewer from 'hooks/viewer/useViewer'
 import { withApollo } from 'lib/apollo/withApollo'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -13,11 +13,16 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import NotificationModal from '../NotificationModal/NotificationModal'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import styles from './styles.module.css'
+import { useSession } from 'next-auth/react'
 
 const Navbar = ({ itemsColor = 'black', activeItemColor = '#000', ...restProps }: NavBarProps) => {
-  const [viewer, loading] = useViewer()
+  const { data: session, status } = useSession()
+  const token = localStorage.getItem('accounts:accessToken')
 
-  // console.log('viewer in navbar is', viewer)
+  if (status === 'authenticated' && !token) {
+    localStorage.setItem('accounts:accessToken', session?.user?.accessToken)
+    localStorage.setItem('accounts:refreshToken', session?.user?.refreshToken)
+  }
 
   const pathName = usePathname()
   const StyledToolbar = styled(Toolbar)({
@@ -36,9 +41,9 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#000', ...restProps }
     { name: 'SEARCH', path: '/search' },
   ]
 
-  useEffect(() => {
-    // console.log('restProps in navbar is', restProps)
-  }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
+  // useEffect(() => {
+  //   // console.log('restProps in navbar is', restProps)
+  // }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
 
   return (
     <AppBar
@@ -98,7 +103,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#000', ...restProps }
             //   <p style={{ color: 'black' }}>loading...</p>
             // ) : (
             <Grid>
-              {!viewer || Object.keys(viewer).length === 0 ? (
+              {status === 'unauthenticated' ? (
                 <Box
                   sx={{
                     display: 'flex',
@@ -131,7 +136,7 @@ const Navbar = ({ itemsColor = 'black', activeItemColor = '#000', ...restProps }
                     },
                   }}
                 >
-                  <AccountDropdown account={viewer} />
+                  <AccountDropdown />
                   <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} />
                   <AddToCartModal
                     color={itemsColor}
