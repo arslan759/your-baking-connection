@@ -15,11 +15,7 @@ import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import styles from './styles.module.css'
 import { useSession } from 'next-auth/react'
 
-const Navbar = ({
-  itemsColor = 'black',
-  activeItemColor = '#7DDEC1',
-  ...restProps
-}: NavBarProps) => {
+const Navbar = ({ itemsColor = 'black', activeItemColor = '#000', ...restProps }: NavBarProps) => {
   const { data: session, status } = useSession()
   const token = localStorage.getItem('accounts:accessToken')
 
