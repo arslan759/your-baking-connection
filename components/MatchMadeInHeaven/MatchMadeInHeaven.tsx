@@ -66,6 +66,9 @@ const MatchMadeInHeaven = () => {
                 // <div className='w-full md:w-[32%]'>
                 <ProductCard
                   key={item.id}
+                  isFavoriteFlag={product.isFavorite}
+                  productId={product.productId}
+                  shopId={'cmVhY3Rpb24vc2hvcDpkU3VYTGIzRHg3TXNvV29nSg=='}
                   image={product?.media[0]?.URLs?.thumbnail}
                   title={product?.title}
                   slug={product?.slug}
