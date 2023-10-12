@@ -10,11 +10,11 @@ export interface ClientReviewCardProps {
 
 export interface FooterLinksProps {
   header?: string
-  title1?:string
+  title1?: string
   link1?: string
-  title2?:string
+  title2?: string
   link2?: string
-  title3?:string
+  title3?: string
   link3?: string
 }
 
@@ -182,9 +182,9 @@ export interface BakerTabsPanelProps {
 }
 
 export interface ProductCardProps {
-  isFavoriteFlag: boolean
-  productId:string
-  shopId:string
+  isFavoriteFlag?: boolean
+  productId: string
+  shopId: string
   image: string
   title: string
   description: string
