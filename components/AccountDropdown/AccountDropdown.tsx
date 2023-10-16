@@ -12,8 +12,9 @@ import Logout from '@mui/icons-material/Logout'
 import { useRouter } from 'next/navigation'
 import { AccountDropdownProps } from 'types'
 import { Typography } from '@mui/material'
+import { signOut } from 'next-auth/react'
 
-const AccountDropdown = ({ account }: AccountDropdownProps) => {
+const AccountDropdown = () => {
   const router = useRouter()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -25,12 +26,13 @@ const AccountDropdown = ({ account }: AccountDropdownProps) => {
     setAnchorEl(null)
   }
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     localStorage.clear()
-    router.push('/signin')
+    await signOut()
+    // router.push('/signin')
   }
 
-  console.log('account in dropdown is ', account)
+  // console.log('account in dropdown is ', account)
   return (
     <div className='flex items-center justify-center'>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }}>
@@ -83,7 +85,7 @@ const AccountDropdown = ({ account }: AccountDropdownProps) => {
           }}
           onClick={() => router.push('/profile')}
         >
-          <Avatar src={account?.picture} />{' '}
+          <Avatar />{' '}
           <Typography
             sx={{
               fontSize: '16px !important',

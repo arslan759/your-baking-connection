@@ -6,11 +6,9 @@ import React, { useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { checkPassword, validateEmail } from 'helpers/validations'
-import DropdownField from '../DropdownField/DropdownField'
 import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
 import { useRouter } from 'next/navigation'
 import { SignUpFormProps } from 'types'
-import withAuth from 'hocs/withAuth'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
 import CustomAutocomplete from '../CustomAutocomplete'
 
@@ -546,4 +544,4 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   )
 }
 
-export default withApollo()(withAuth(SignupForm))
+export default withApollo()(SignupForm)

@@ -3,10 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
-import DropdownField from '../DropdownField/DropdownField'
-import { cities, states } from 'Constants/constants'
-
-import withAuth from 'hocs/withAuth'
 import { withApollo } from 'lib/apollo/withApollo'
 import useUpdateAccount from 'hooks/Profile/useUpdateAccount'
 import useViewer from 'hooks/viewer/useViewer'
@@ -406,4 +402,4 @@ const EditProfile = () => {
   )
 }
 
-export default withApollo()(withAuth(EditProfile))
+export default withApollo()(EditProfile)
