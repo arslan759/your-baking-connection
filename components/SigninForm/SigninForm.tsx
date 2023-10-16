@@ -114,6 +114,13 @@ const SigninForm = () => {
     setGenError(value)
   }
 
+  const handleKeyDown = async (e: any) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      await handleSubmit(e)
+    }
+  }
+
   return (
     <div className='flex justify-center md:justify-end md:mr-[50px] md:mt-[126px]'>
       <div
@@ -173,7 +180,7 @@ const SigninForm = () => {
           />
         </div>
         <div className='mt-[24px] md:mt-[42px]'>
-          <form onSubmit={handleSubmit} className=''>
+          <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className=''>
             <div className='flex flex-wrap gap-y-[8px] md:gap-y-[24px]'>
               <div className='w-full'>
                 <InputField
