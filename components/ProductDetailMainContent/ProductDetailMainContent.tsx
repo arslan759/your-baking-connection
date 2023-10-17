@@ -125,7 +125,7 @@ const ProductDetailMainContent = ({
         >{`(${reviews} reviews)`}</Typography>
       </div>
 
-      <div className='w-[100%] lg:w-[95%] mt-[16px] lg:mt-[18px]'>
+      {/* <div className='w-[100%] lg:w-[95%] mt-[16px] lg:mt-[18px]'>
         <Typography
           sx={{
             fontFamily: 'Open Sans',
@@ -141,7 +141,7 @@ const ProductDetailMainContent = ({
         >
           {description}
         </Typography>
-      </div>
+      </div> */}
 
       <div className=' mt-[16px] md:mt-[18px]'>
         <ProductDetailForm
