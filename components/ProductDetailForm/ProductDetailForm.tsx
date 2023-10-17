@@ -230,7 +230,7 @@ const ProductDetailForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <div className='flex flex-col md:flex-row gap-x-[32px] gap-y-[12px]'>
-        <div>
+        {/* <div>
           <Typography
             sx={{
               color: '#888',
@@ -257,7 +257,7 @@ const ProductDetailForm = ({
               />
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* <div className='max-[400px]:w-[100%] w-[60%] md:w-[25%]'>
           <InputField

@@ -3,10 +3,10 @@ import { ProductDetailTabsPanelProps } from 'types'
 import ProductDetailDescription from '../ProductDetailDescription/ProductDetailDescription'
 import ClientReviewsTab from '../ClientReviewsTab'
 
-const ProductDetailTabsPanel = ({ activeTab }: ProductDetailTabsPanelProps) => {
+const ProductDetailTabsPanel = ({ activeTab, productDescription }: ProductDetailTabsPanelProps) => {
   return (
     <div>
-      {activeTab == 0 && <ProductDetailDescription />}
+      {activeTab == 0 && <ProductDetailDescription productDescription={productDescription} />}
       {activeTab == 1 && (
         <div className='w-full'>
           <ClientReviewsTab />

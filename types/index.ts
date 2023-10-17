@@ -216,6 +216,7 @@ export interface CartCardDetailsItemProps {
 
 export interface ProductDetailTabsPanelProps {
   activeTab: number
+  productDescription: string
 }
 
 export interface ProductDetailTabsProps {
@@ -272,4 +273,12 @@ export interface AddToCartModalProps {
   cartItems: any[]
 
   cartFunctions: any
+}
+
+export interface ProductDetailTabsSectionProps {
+  productDescription: string
+}
+
+export interface ProductDetailDescriptionTypes {
+  productDescription: string
 }

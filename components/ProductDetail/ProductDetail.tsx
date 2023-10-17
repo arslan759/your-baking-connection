@@ -113,7 +113,7 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
       </div>
 
       <div className='w-full flex flex-col items-center mt-[24px] md:mt-[32px]'>
-        <ProductDetailTabsSection />
+        <ProductDetailTabsSection productDescription={description}/>
       </div>
 
       <div className='w-full flex flex-col items-center mt-[48px] md:mt-[64px]'>
