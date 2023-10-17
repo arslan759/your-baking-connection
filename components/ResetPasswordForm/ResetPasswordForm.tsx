@@ -7,6 +7,7 @@ import { checkPassword } from 'helpers/validations'
 import useResetPasswordOtpVerify from '../../hooks/Authentication/ResetPassword/useResetPasswordOtpVerify'
 import { withApollo } from 'lib/apollo/withApollo'
 import { useRouter } from 'next/navigation'
+import hashPassword from 'lib/utils/hashPassword'
 
 interface ResetPasswordProps {
   otp: string // Change `any` to the appropriate type for `otp`
@@ -66,7 +67,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
           user: {
             userId: localStorage.getItem('userId'),
             otp: parseInt(otp),
-            password: password,
+            password: hashPassword(password),
           },
         },
       })

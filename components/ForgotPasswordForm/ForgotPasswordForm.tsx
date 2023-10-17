@@ -8,6 +8,7 @@ import { ForgetPasswordFormProps } from 'types'
 import useForgotPasswordUser from 'hooks/Authentication/ForgotPassword/useForgotPasswordUser'
 import { withApollo } from 'lib/apollo/withApollo'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import hashPassword from 'lib/utils/hashPassword'
 
 const ForgotPasswordForm = ({ openOtp, setEmail, email }: ForgetPasswordFormProps) => {
   // const [email, setEmail] = useState('')
@@ -64,7 +65,7 @@ const ForgotPasswordForm = ({ openOtp, setEmail, email }: ForgetPasswordFormProp
             type: 'email',
             emailPhone: email,
           },
-        },
+        },  
       })
       const userId = res?.data?.resetPasswordOtp?.userId
       if (userId) {
