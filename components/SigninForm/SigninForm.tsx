@@ -90,7 +90,7 @@ const SigninForm = () => {
     try {
       setIsLoggingIn(true)
       const res = await signIn('credentials', {
-        username: email,
+        username: email.toLocaleLowerCase(),
         password,
         redirect: false,
         // callbackUrl: '/',

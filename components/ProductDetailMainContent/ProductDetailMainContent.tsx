@@ -46,7 +46,9 @@ const ProductDetailMainContent = ({
             {title}
           </Typography>
         </div>
-        <div className='w-fit rounded-[16px] bg-primary px-[8px] py-[4px]'>
+
+        {/* out of stock commented out, requires implmentation */}
+        {/* <div className='w-fit rounded-[16px] bg-primary px-[8px] py-[4px]'>
           <Typography
             sx={{
               fontFamily: 'Open Sans',
@@ -63,7 +65,7 @@ const ProductDetailMainContent = ({
           >
             {!stock ? `out of stock` : `${stock} left in stock`}
           </Typography>
-        </div>
+        </div> */}
       </div>
 
       <div className='mt-[6px] md:mt-[9px] flex gap-x-[12px] items-center'>
