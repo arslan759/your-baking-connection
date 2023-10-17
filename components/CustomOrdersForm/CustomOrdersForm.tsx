@@ -5,6 +5,8 @@ import { validateEmail } from 'helpers/validations'
 import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import useCustomOrder from 'hooks/order/useCustomOrder'
 import { withApollo } from 'lib/apollo/withApollo'
+import AddCustomOrderImages from '../AddCustomOrderImages/AddCustomOrderImages'
+import { ProductMediaInterface, ProductMediaURLsInterface } from 'types'
 
 interface CustomOrdersFormProps {
   shopId: string
@@ -24,6 +26,9 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
   const [quantity, setQuantity] = useState('')
   const [details, setDetails] = useState('')
 
+  const [productMedia, setProductMedia] = useState<ProductMediaURLsInterface[]>([])
+  const [mediaPriority, setMediaPriority] = useState<number>(1)
+
   //   error states
   const [nameErr, setNameErr] = useState('')
   const [emailErr, setEmailErr] = useState('')
@@ -32,6 +37,32 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
   const [occasionErr, setOccasionErr] = useState('')
   const [quantityErr, setQuantityErr] = useState('')
   const [detailsErr, setDetailsErr] = useState('')
+  // const [productImagesError, setProductImagesError] = useState('')
+
+  //update Custom Order images
+
+  const handleUpdateProductMedia = (image: string) => {
+    console.log('image in parent is ', image)
+
+    // setProductImagesError('')
+
+    setMediaPriority((prev) => prev + 1)
+
+    setProductMedia([
+      ...productMedia,
+      {
+        // productId: '',
+        // URLs: {
+        large: image,
+        medium: image,
+        original: image,
+        small: image,
+        thumbnail: image,
+        // },
+        // priority: mediaPriority,
+      },
+    ])
+  }
 
   // handleChange function for input fields
   const handleChange = (name: string, value: string) => {
@@ -68,6 +99,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
     setOccasion('')
     setQuantity('')
     setDetails('')
+    setProductMedia([])
 
     // Resets the error states
     setNameErr('')
@@ -82,6 +114,10 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
   // handleSubmit function for form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    // console.log('product media in custom order form is ', productMedia)
+
+    // return
 
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
@@ -140,6 +176,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
         shopId: shopId,
         occasion: occasion,
         fulfillmentDate: date,
+        inspirationMedia: productMedia,
       }
 
       //@ts-ignore
@@ -327,8 +364,13 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
               />
             </div>
 
-            <div className='mt-[24px] md:mt-[48px] w-full flex justify-center'>
-              <div
+            <div className='mt-[24px]  w-full flex justify-center'>
+              <AddCustomOrderImages
+                productMedia={productMedia}
+                handleUpdateProductMedia={handleUpdateProductMedia}
+                setProductMedia={setProductMedia}
+              />
+              {/* <div
                 className='w-[90%] md:max-w-[350px] flex flex-col items-center px-[24px] py-[40px]'
                 style={{
                   border: '1px dashed #6C6C6C',
@@ -359,7 +401,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
                     <span>{`Upload inspiration pictures`}</span>
                   </Typography>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className='w-full flex flex-col items-center'>

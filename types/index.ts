@@ -18,6 +18,25 @@ export interface FooterLinksProps {
   link3?: string
 }
 
+export interface ProductMediaURLsInterface {
+  large: string
+  original: string
+  small: string
+  thumbnail: string
+  medium: string
+}
+export interface ProductMediaInterface {
+  productId: string
+  priority: number
+  URLs: ProductMediaURLsInterface
+}
+
+export interface AddCustomOrderImagesProps {
+  productMedia: ProductMediaURLsInterface[]
+  setProductMedia: any
+  handleUpdateProductMedia: (image: string) => void
+}
+
 export interface PrimaryBtnProps {
   text: string
   type?: 'button' | 'submit' | 'reset'
