@@ -4,12 +4,51 @@ import { PrimaryBtn } from '../Buttons'
 import { useState } from 'react'
 import styles from './styles.module.css'
 import InputField from '../InputField'
+import useCreateReview from '../../hooks/Reviews/useCreateReview'
+import { usePathname, useRouter } from 'next/navigation'
 
 const AddReviewCard = ({ open, onClose }: any) => {
   const [rating, setRating] = useState(0)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [addReview]: any = useCreateReview()
+  const router = useRouter()
+  const pathname = usePathname()
+  console.log(pathname)
+  if (!pathname) {
+    return <div>Loading...</div> // or handle the null case in an appropriate way
+  }
+  const path = pathname.split(`/`)
+  const slug = path[2]
+  const urlParams = path[4]
 
+  const handleCreateReview = async (e: any) => {
+    e.stopPropagation()
+    // console.log('clicked')
+    try {
+      const input = {
+        productId: urlParams,
+        shopId: slug,
+        rating: parseInt(rating.toString()),
+        title: title,
+        description: description,
+        reviewType: 'product',
+      }
+      // console.log('productId', productId)
+      const id = await addReview({
+        variables: {
+          input,
+        },
+      })
+      console.log('Success')
+      //   handleSuccessOpen();
+    } catch (err) {
+      console.log(err)
+      //   handleErrorOpen();
+    }
+    // setIsFavorite(!isFavorite)
+    console.log('favourite clicked')
+  }
   return (
     <Modal
       open={open}
@@ -32,7 +71,7 @@ const AddReviewCard = ({ open, onClose }: any) => {
           <h1
             style={{
               margin: '5%',
-              marginTop: '16px',
+              // marginTop: '16px',
               marginBottom: '16px',
               textAlign: 'center',
               fontSize: '24px',
@@ -86,7 +125,7 @@ const AddReviewCard = ({ open, onClose }: any) => {
             />
           </div>
           <div>
-            <div style={{ display: 'flex', justifyContent: 'end' }}>
+            <div className='my-[10px]' style={{ display: 'flex', justifyContent: 'end' }}>
               <PrimaryBtn
                 text='Submit Review'
                 // disabled={true}
@@ -104,9 +143,7 @@ const AddReviewCard = ({ open, onClose }: any) => {
                 //     ? styles.btnDisabled
                 //     : styles.btnCreate
                 // }
-                handleClick={() => {
-                  console.log('Add review')
-                }}
+                handleClick={handleCreateReview}
                 // className={styles.btnCreate}
               />
             </div>
