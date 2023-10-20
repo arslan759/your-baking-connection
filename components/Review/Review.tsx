@@ -3,6 +3,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
 import { ReviewCardsData } from 'Constants/constants'
 import Image from 'next/image'
 const rating = 3
+
 const Review = () => {
   return (
     <div className='flex flex-col text-[16px] font-medium text-black leading-6 pb-[12px] pt-[24px] border-solid border-[0px] border-b-[1px] border-b-[#FFD9E4]'>

@@ -1,0 +1,28 @@
+query reviews(
+  $first: ConnectionLimitInt
+  $offset: Int
+  $sortBy: CatalogItemSortByField
+  $sortOrder: SortOrder
+) {
+  ReviewConnection(first: $first, offset: $offset, sortBy: $sortBy, sortOrder: $sortOrder) {
+    totalCount
+    edges{
+      node{
+        _id
+        shopId
+        reviewByInfo{
+        _id
+        firstName
+        lastName
+        picture
+      }
+      createdAt
+      updateAt
+      rating
+      title
+      description
+    }
+    }
+    
+  }
+}

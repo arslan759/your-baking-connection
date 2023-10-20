@@ -1,6 +1,8 @@
 import { Rating, LinearProgress, Typography, Button } from '@mui/material'
 import Image from 'next/image'
 import { PrimaryBtn } from '../Buttons'
+import { useState } from 'react'
+import AddReviewCard from '../AddReviewCard'
 
 const rating = 3.2
 const noOfRating = 46
@@ -13,6 +15,12 @@ const linearProgress = [
 ]
 
 const Statistics = () => {
+  const [addReviewModal, setAddReviewModal] = useState(false)
+  const handleAddReviewModalOpen = () => {
+    setAddReviewModal(true)
+    console.log('clicked')
+  }
+  const handleAddReviewModalClose = () => setAddReviewModal(false)
   return (
     <>
       <div className='flex justify-between w-full flex-wrap'>
@@ -68,9 +76,7 @@ const Statistics = () => {
           <div className='w-[100%] self-center'>
             <PrimaryBtn
               text='Write a review'
-              handleClick={() => {
-                console.log('Review clicked')
-              }}
+              handleClick={handleAddReviewModalOpen}
               // loading=
             />
           </div>
@@ -118,6 +124,7 @@ const Statistics = () => {
           </div>
         </div>
       </div>
+      <AddReviewCard open={addReviewModal} onClose={handleAddReviewModalClose} />
     </>
   )
 }

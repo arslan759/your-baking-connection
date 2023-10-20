@@ -6,6 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import { usePathname, useRouter } from 'next/navigation'
 import useMarkProductAsFavorite from '../../hooks/Favorite/useMarkProductAsFavorite'
+import Link from 'next/link'
 
 const ProductCard = ({
   isFavoriteFlag,
@@ -74,7 +75,7 @@ const ProductCard = ({
     // console.log('slug', `/product/${slug}`)
     // console.log(pathname)
 
-    router.push(`${pathname}/product/${slug}`)
+    // router.push(`${pathname}/product/${slug}`)
   }
 
   // useEffect(() => {
@@ -157,7 +158,7 @@ const ProductCard = ({
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <PrimaryBtn text='More details' handleClick={handleMoreDetailsClick} />
+            <Link href={`${pathname}/product/${slug}`}><PrimaryBtn text='More details' handleClick={handleMoreDetailsClick} /></Link>
           </div>
         )}
 
