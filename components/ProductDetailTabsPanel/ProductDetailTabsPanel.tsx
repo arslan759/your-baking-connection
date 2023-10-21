@@ -4,6 +4,7 @@ import ProductDetailDescription from '../ProductDetailDescription/ProductDetailD
 import ClientReviewsTab from '../ClientReviewsTab'
 
 const ProductDetailTabsPanel = ({ activeTab, productDescription }: ProductDetailTabsPanelProps) => {
+  // console.log("productDescription",productDescription)
   return (
     <div>
       {activeTab == 0 && <ProductDetailDescription productDescription={productDescription} />}
