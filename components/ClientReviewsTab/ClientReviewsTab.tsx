@@ -11,10 +11,11 @@ const ClientReviewsTab = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(6)
   const pathname = usePathname()
 
-  if (!pathname) {
-    return <div>Loading...</div> // or handle the null case in an appropriate way
-  }
-  const path = pathname.split(`/`)
+  // if (!pathname) {
+  //   return <div>Loading...</div> // or handle the null case in an appropriate way
+  // }
+
+  const path = pathname ? pathname.split(`/`) : ''
   const slug = path[2]
   const urlParams = path[4]
 
