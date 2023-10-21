@@ -17,6 +17,10 @@ import { withApollo } from 'lib/apollo/withApollo'
 import CustomAutocomplete from '../CustomAutocomplete'
 import useViewer from 'hooks/viewer/useViewer'
 import useGetFlatRateFulfillmentByShopId from 'hooks/order/useGetFlatRateFulfillmentByShopId'
+import useCreateStripeSinglePrice from 'hooks/stripe/useCreateStripeSinglePrice'
+import useCreateStripeCheckOutSession from 'hooks/stripe/useCreateStripeCheckOutSession'
+import { useRouter } from 'next/navigation'
+
 interface DeliveryDetailsFormProps {
   amount: number
   cartFunctions: any
@@ -24,7 +28,11 @@ interface DeliveryDetailsFormProps {
 }
 
 const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFormProps) => {
+  const router = useRouter()
   const [viewer, loadingViewer, refetchViewer] = useViewer()
+
+  const [createStripePrice, loadingStripePrice] = useCreateStripeSinglePrice()
+  const [createStripeCheckoutSession, loadingStripeCheckout] = useCreateStripeCheckOutSession()
 
   const [flatRateData, loadingFlatRate] = useGetFlatRateFulfillmentByShopId('')
 
@@ -145,6 +153,45 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
     setTermsAndConditionsError('')
   }
 
+  const [stripePriceId, setStripePriceId] = useState()
+  const createStripePriceHandler = async () => {
+    try {
+      //@ts-ignore
+      const price = await createStripePrice({
+        variables: {
+          unitAmount: amount * 100,
+          currency: 'usd',
+        },
+      })
+
+      console.log('price is ', price)
+      const priceId = price.data.createStripeSinglePrice.stripeData.id
+      await createStripeCheckoutSessionHandler(priceId)
+    } catch (err) {
+      console.log('err', err)
+    }
+  }
+
+  const createStripeCheckoutSessionHandler = async (priceId: string) => {
+    try {
+      //@ts-ignore
+      const session = await createStripeCheckoutSession({
+        variables: {
+          priceId,
+          quantity: 1,
+          mode: 'payment',
+        },
+      })
+      console.log('session', session)
+      const url = session.data.createStripeCheckOutSession.stripeData
+      console.log('stripe url is ', url)
+      await placeOrderHandler()
+      window.location.href = url
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const placeOrderHandler = async () => {
     const items = cartFunctions?.cart?.items?.map((item: any, index: any) => {
       const quantity = item?.quantity
@@ -202,7 +249,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
             },
           ],
         },
-        method: 'stripe_payment_intent',
+        method: 'iou_example',
       },
     }
 
@@ -253,7 +300,8 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
     }
 
     // If all fields are filled, then place the order
-    await placeOrderHandler()
+    // await placeOrderHandler()
+    await createStripePriceHandler()
 
     // Resets the form fields
     // resetForm()

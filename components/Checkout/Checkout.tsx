@@ -31,7 +31,11 @@ const Checkout = ({ slug, ...restProps }: AddToCartProps) => {
         <div className='w-[90vw] md:[95vw] flex flex-col gap-y-[24px]'>
           <div className='w-full flex flex-col lg:flex-row items-start lg:justify-between gap-y-[24px]'>
             <div className='w-full lg:w-[48%]'>
-              <DeliveryDetails totalAmountWithTax={totalAmount} cartFunctions={restProps} slug={slug} />
+              <DeliveryDetails
+                totalAmountWithTax={totalAmount}
+                cartFunctions={restProps}
+                slug={slug}
+              />
             </div>
 
             <div className='w-full lg:w-[48%]'>
