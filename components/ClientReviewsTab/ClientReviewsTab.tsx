@@ -4,6 +4,7 @@ import Review from '../Review'
 import useReviews from 'hooks/Reviews/useReviews'
 import Statistics from '../Statistics'
 import { useEffect, useState } from 'react'
+import Spinner from '../Spinner'
 
 const ClientReviewsTab = () => {
   //items per page to display
@@ -23,7 +24,9 @@ const ClientReviewsTab = () => {
     setCurrentPage(pageNum)
   }
 
-  const [reviews, loadingItems, refetchItems, totalCount] = useReviews({
+  const [reviews, loadingReviews, refetchReviews, totalCount] = useReviews({
+    shopId: 'dSuXLb3Dx7MsoWogJ',
+    productId: 'GSQxCyYp6Y8Guupzg',
     first: itemsPerPage,
     offset,
     sortBy: 'updatedAt',
@@ -31,22 +34,33 @@ const ClientReviewsTab = () => {
   })
 
   useEffect(() => {
+    console.log('reviews are ', reviews)
+  }, [reviews])
+
+  useEffect(() => {
     let page = Math.ceil(totalCount / itemsPerPage)
     console.log('reviews', reviews)
     setPageCount(page)
   }, [totalCount])
+
   return (
-    <div className='flex flex-col lg:flex-col items-center'>
-      <Statistics />
-      {ReviewCardsData.map((review, index) => {
-        const { name, content, image } = review
-        return (
-          <div key={index}>
-            <Review />
-          </div>
-        )
-      })}
-    </div>
+    <>
+      {loadingReviews ? (
+        <Spinner />
+      ) : (
+        <div className='flex flex-col lg:flex-col items-center'>
+          <Statistics />
+          {reviews?.map((review: any, index: any) => {
+            const { name, content, image } = review
+            return (
+              <div key={index}>
+                <Review reviewData={review} />
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </>
   )
 }
 

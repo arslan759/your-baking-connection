@@ -2,9 +2,11 @@ import { Rating } from '@mui/material'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
 import { ReviewCardsData } from 'Constants/constants'
 import Image from 'next/image'
+import formatDateAgo from 'utils/formatDateAgo'
 const rating = 3
 
-const Review = () => {
+const Review = ({ reviewData }: any) => {
+  console.log('review Data is ', reviewData)
   return (
     <div className='flex flex-col text-[16px] font-medium text-black leading-6 pb-[12px] pt-[24px] border-solid border-[0px] border-b-[1px] border-b-[#FFD9E4]'>
       {/* Desktop */}
@@ -13,7 +15,7 @@ const Review = () => {
           <div>
             <Image
               className='rounded-full'
-              src='/Images/DefaultAvatar.jpg'
+              src={reviewData?.reviewByInfo?.picture}
               alt='profile picture'
               width={140}
               height={140}
@@ -30,23 +32,26 @@ const Review = () => {
                     gap: '3px',
                   }}
                   name='read-only'
-                  value={rating}
+                  value={reviewData?.rating}
                   readOnly
                 />
               </div>
             </div>
-            <div className='text-[20px] font-[600] mb-[6px]'>Berry Cream Fantasy</div>
+            <div className='text-[20px] font-[600] mb-[6px]'>
+              <span>{reviewData?.title}</span>
+            </div>
             <div className='text-[#090909] leading-6'>
-              The cake was moist and not too heavy, making it the perfect dessert for a summer
-              evening. The fresh scent of raspberries filled the air and made me feel like I was
-              sitting in a garden on a sunny day. If you&apos;re looking for something unique and
-              delicious, give this raspberry cake a try!
+              <span>{reviewData?.description}</span>
             </div>
           </div>
         </div>
         <div className='flex justify-between'>
           <div className='flex flex-col'>
-            <div className='!font-[500]'>John Mike</div>
+            <div className='!font-[500]'>
+              <span>
+                {reviewData?.reviewByInfo?.firstName} {reviewData?.reviewByInfo?.lastName}
+              </span>
+            </div>
             <div className='text-[#7DDEC1]'>
               <Image
                 className='mr-[5px]'
@@ -59,7 +64,7 @@ const Review = () => {
             </div>
           </div>
           <div className='flex flex-col text-[#888] '>
-            <div className='text-right'>2 days ago</div>
+            <div className='text-right'>{formatDateAgo(new Date(reviewData?.createdAt))} ago</div>
             <div className='leading-4 text-[14px]'>
               <ThumbUpOffAltIcon
                 onClick={() => console.log('ThumbsUpOff')}
@@ -130,17 +135,14 @@ const Review = () => {
                     gap: '3px',
                   }}
                   name='read-only'
-                  value={rating}
+                  value={reviewData?.rating}
                   readOnly
                 />
               </div>
             </div>
             <div className='text-[20px] font-[600] mb-[6px]'>Berry Cream Fantasy</div>
             <div className='text-[#090909] leading-6 text-justify'>
-              The cake was moist and not too heavy, making it the perfect dessert for a summer
-              evening. The fresh scent of raspberries filled the air and made me feel like I was
-              sitting in a garden on a sunny day. If you&apos;re looking for something unique and
-              delicious, give this raspberry cake a try!
+              <span>{reviewData?.description}</span>
             </div>
           </div>
         </div>
