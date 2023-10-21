@@ -20,9 +20,10 @@ import useGetFlatRateFulfillmentByShopId from 'hooks/order/useGetFlatRateFulfill
 interface DeliveryDetailsFormProps {
   amount: number
   cartFunctions: any
+  slug: string
 }
 
-const DeliveryDetailsForm = ({ amount, cartFunctions }: DeliveryDetailsFormProps) => {
+const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFormProps) => {
   const [viewer, loadingViewer, refetchViewer] = useViewer()
 
   const [flatRateData, loadingFlatRate] = useGetFlatRateFulfillmentByShopId('')
@@ -157,13 +158,13 @@ const DeliveryDetailsForm = ({ amount, cartFunctions }: DeliveryDetailsFormProps
 
     const input = {
       order: {
-        shopId: 'cmVhY3Rpb24vc2hvcDpYenZBUnhjanNmQVo5d3hzNQ==',
+        shopId: slug,
         cartId: cartFunctions?.cart?._id,
         currencyCode: 'USD',
         email: viewer?.primaryEmailAddress,
         fulfillmentGroups: {
           type: 'shipping',
-          shopId: 'cmVhY3Rpb24vc2hvcDpYenZBUnhjanNmQVo5d3hzNQ==',
+          shopId: slug,
           selectedFulfillmentMethodId: flatRateData?._id,
           data: {
             shippingAddress: {
@@ -201,7 +202,7 @@ const DeliveryDetailsForm = ({ amount, cartFunctions }: DeliveryDetailsFormProps
             },
           ],
         },
-        method: 'iou_example',
+        method: 'stripe_payment_intent',
       },
     }
 

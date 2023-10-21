@@ -12,6 +12,7 @@ import Link from 'next/link'
 const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps) => {
   const router = useRouter()
 
+  console.log('cart function in modal', cartFunctions)
   // const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleModal = () => {
@@ -118,7 +119,7 @@ const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps
                       </div>
 
                       <div className='w-[50%] self-center'>
-                        <Link href='/checkout'>
+                        <Link href={`/checkout/${cartFunctions?.cart?.shop?._id}`}>
                           <PrimaryBtn
                             text='Proceed to checkout'
                             handleClick={() => {

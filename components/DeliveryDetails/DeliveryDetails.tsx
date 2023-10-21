@@ -5,11 +5,11 @@ import DeliveryDetailsForm from '../DeliveryDetailsForm/DeliveryDetailsForm'
 
 interface DeliveryDetailsProps {
   totalAmountWithTax: number
-
   cartFunctions: any
+  slug : string
 }
 
-const DeliveryDetails = ({ totalAmountWithTax, cartFunctions }: DeliveryDetailsProps) => {
+const DeliveryDetails = ({ slug, totalAmountWithTax, cartFunctions }: DeliveryDetailsProps) => {
   const [salesTax, setSalesTax] = useState(13)
 
   return (
@@ -36,7 +36,7 @@ const DeliveryDetails = ({ totalAmountWithTax, cartFunctions }: DeliveryDetailsP
       <div className='mt-[24px] md:mt-[22px]'>
 
         
-        <DeliveryDetailsForm amount={totalAmountWithTax} cartFunctions={cartFunctions} />
+        <DeliveryDetailsForm amount={totalAmountWithTax} cartFunctions={cartFunctions} slug={slug}/>
       </div>
     </div>
   )
