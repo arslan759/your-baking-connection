@@ -29,7 +29,7 @@ const Baker = ({ slug }: BakerProps) => {
     setBakerDescription(baker?.description)
     setCategories(baker?.categories)
     setFeaturedImages(baker?.featuredShopImages)
-    //  localStorage.setItem('shopId', slug)
+    localStorage.setItem('shopId', slug)
   }, [baker])
 
   return (
