@@ -34,7 +34,7 @@ const YourProfileCard = () => {
   return (
     <div className={styles.card}>
       {loadingViewer ? (
-        <>
+        <div className='w-full flex justify-center items-center'>
           <CircularProgress
             sx={{
               color: '#7DDEC1',
@@ -42,7 +42,7 @@ const YourProfileCard = () => {
               width: '20px !important',
             }}
           />
-        </>
+        </div>
       ) : (
         <>
           <Typography

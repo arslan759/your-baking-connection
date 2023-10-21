@@ -39,7 +39,7 @@ const Navbar = ({
   })
   const MenuItems = [
     { name: 'HOME', path: '/' },
-    { name: 'ABOUT BAKERS', path: '/about-bakers' },
+    { name: 'ABOUT BAKERS', path: `${process.env.NEXT_PUBLIC_BLOG_URL}/about-the-bakers/` },
     { name: 'MEMBERSHIP', path: '/membership' },
     { name: 'GALLERY', path: '/gallery' },
     { name: 'SEARCH', path: '/search' },
@@ -141,7 +141,7 @@ const Navbar = ({
                   }}
                 >
                   <AccountDropdown />
-                  <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} />
+                  {/* <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} /> */}
                   <AddToCartModal
                     color={itemsColor}
                     cartItems={restProps?.cart?.items}

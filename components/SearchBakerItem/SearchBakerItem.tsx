@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { SearchBakerItemProps } from 'types'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const SearchBakerItem = ({
   image,
@@ -13,18 +14,19 @@ const SearchBakerItem = ({
   slug,
 }: SearchBakerItemProps) => {
   const router = useRouter()
-  function handleBakerDetailsClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    e.stopPropagation()
+  // function handleBakerDetailsClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  //   e.stopPropagation()
 
-    // console.log('slug', `/product/${slug}`)
+  //   // console.log('slug', `/product/${slug}`)
 
-    router.push(`/baker/${slug}`)
-  }
+  //   // router.push(`/baker/${slug}`)
+  // }
 
   return (
-    <div
+    <Link
+      href={`/baker/${slug}`}
       className='w-full h-full flex items-start justify-center gap-x-[16px] cursor-pointer'
-      onClick={(e) => handleBakerDetailsClick(e)}
+      // onClick={(e) => handleBakerDetailsClick(e)}
     >
       <img
         src={image}
@@ -108,7 +110,7 @@ const SearchBakerItem = ({
           </Typography>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
