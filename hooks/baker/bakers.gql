@@ -1,5 +1,5 @@
-query bakers($filter: BakersFilterInput) {
-  bakers(filter: $filter) {
+query bakers($filter: BakersFilterInput, $searchQuery: String) {
+  bakers(filter: $filter, searchQuery: $searchQuery) {
     nodes {
       _id
       name

@@ -274,6 +274,7 @@ export interface ProductDetailMainContentProps {
   newPrice: number
   reviews: number
   description: string
+  shopId: any
   rating: number
   productAttributes: any[]
   productId: string

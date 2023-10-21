@@ -7,6 +7,7 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DropdownFieldAttributes from '../DropdownFieldAttributes'
+import { toast } from 'react-toastify'
 
 interface ProductDetailFormProps {
   attributes: any[]
@@ -15,6 +16,7 @@ interface ProductDetailFormProps {
   productVariantId: string
   productId: string
   stock: number
+  shopId?: string
   [key: string]: any
 }
 
@@ -35,6 +37,7 @@ const ProductDetailForm = ({
   productId,
   productVariantId,
   stock,
+  shopId,
   ...restProps
 }: ProductDetailFormProps) => {
   const [productAttributes, setProductAttributes] = useState<Attribute[]>([])
@@ -124,9 +127,9 @@ const ProductDetailForm = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const shopId = localStorage.getItem('shopId')
+    // const shopId = localStorage.getItem('shopId')
 
-    console.log('shopId is ', shopId)
+    console.log('shopId is in details form is ', shopId)
 
     // return
 
@@ -150,6 +153,7 @@ const ProductDetailForm = ({
     console.log('cartItem is ', cartItem)
 
     try {
+      // throw new Error('test error')
       const addItemsToCartResponse = await addItemsToCart([
         {
           price: {
@@ -166,8 +170,30 @@ const ProductDetailForm = ({
         },
       ])
       console.log('addItemsToCartResponse is ', addItemsToCartResponse)
+      if (addItemsToCartResponse?.data?.addCartItems?.cart?._id) {
+        toast.success('Item added to cart', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        })
+      }
     } catch (error: any) {
       console.log('error is ', error?.message)
+      toast.error('Failed to add item!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
     }
 
     // form logs

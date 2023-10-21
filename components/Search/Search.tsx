@@ -74,9 +74,11 @@ const Search = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    console.log('search is ', search)
     try {
       await getBakers({
         variables: {
+          searchQuery: search,
           filter: {
             city: city,
             region: state,
@@ -263,6 +265,32 @@ const Search = () => {
                 <div className='w-full flex flex-col items-center'>
                   <Spinner />
                 </div>
+              ) : // @ts-ignore
+              !bakers || bakers?.bakers?.nodes?.length == 0 ? (
+                <>
+                  <Typography
+                    sx={{
+                      fontSize: '48px !important',
+                      fontWeight: '700 !important',
+                      fontFamily: 'Josefin Sans',
+                      lineHeight: 'normal',
+                      textAlign: 'center',
+                      color: '#7DDEC1',
+                      textTransform: 'capitalize',
+                      fontFeatureSettings: "'clig' off, 'liga' off",
+                      '@media (max-width: 767px)': {
+                        fontSize: '24px !important',
+                      },
+                    }}
+                  >
+                    No Bakers Found
+                  </Typography>
+                  <img
+                    src='/Images/no-baker-found.png'
+                    alt='no baker'
+                    className='w-[150px] md:w-[350px] h-[200px] md:h-[400px]'
+                  />
+                </>
               ) : (
                 <>
                   {

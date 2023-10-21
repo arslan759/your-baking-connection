@@ -377,14 +377,14 @@ export const GalleryNavigation = [
     id: 1,
     title: 'Available Products',
   },
-  {
-    id: 2,
-    title: 'Gallery of work',
-  },
-  {
-    id: 3,
-    title: 'Terms & Conditions',
-  },
+  // {
+  //   id: 2,
+  //   title: 'Gallery of work',
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Terms & Conditions',
+  // },
   {
     id: 4,
     title: 'Favorites',
@@ -404,10 +404,10 @@ export const ProductDetailNavigationTabs = [
     id: 2,
     title: 'reviews',
   },
-  {
-    id: 3,
-    title: 'FAQs',
-  },
+  // {
+  //   id: 3,
+  //   title: 'FAQs',
+  // },
 ]
 
 export const GalleryProductsData = [
