@@ -583,7 +583,12 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
             </div>
 
             <div className='w-full h-[45px]'>
-              <PrimaryBtn text='place order' type='submit' />
+              <PrimaryBtn
+                text='place order'
+                type='submit'
+                //@ts-ignore
+                loading={loadingStripeCheckout || loadingStripePrice || placeOrderLoading}
+              />
             </div>
           </div>
         </form>
