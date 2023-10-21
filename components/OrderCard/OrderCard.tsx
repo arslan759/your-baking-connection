@@ -48,7 +48,7 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
       </div>
     )
 
-  const { amount: totalAmount } = cartFunctions.cart.checkout.summary.itemTotal
+  const { amount: totalAmount } = cartFunctions?.cart?.checkout?.summary?.itemTotal
 
   const totalTaxIfApplicableonItems = items?.reduce((total, item) => {
     if (item?.isTaxable) return total + item.subtotal.amount * (salesTax / 100)

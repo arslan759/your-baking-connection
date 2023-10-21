@@ -1,0 +1,28 @@
+query ordersByAccountId($accountId: ID!, $shopIds: [ID]!) {
+  ordersByAccountId(accountId: $accountId, shopIds: $shopIds) {
+    edges {
+      node {
+        _id
+        updatedAt
+        summary {
+          total {
+            amount
+          }
+        }
+        referenceId
+        account {
+          firstName
+        }
+        displayStatus(language: "en")
+        shop {
+          name
+        }
+        payments {
+          method {
+            displayName
+          }
+        }
+      }
+    }
+  }
+}

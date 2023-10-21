@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { Typography } from '@mui/material'
 import InputField from '../InputField/InputField'
@@ -7,8 +7,18 @@ import DropdownField from '../DropdownField/DropdownField'
 import { BakeryNameOptions, DurationOptions, RatingOptions } from 'Constants/constants'
 import PurchaseHistoryTable from '../PurchaseHistoryTable/PurchaseHistoryTable'
 import ProfileBreadCrumbs from '../ProfileBreadCrumbs/ProfileBreadCrumbs'
+import useViewer from 'hooks/viewer/useViewer'
+import useOrdersByAccountId from 'hooks/order/useOrdersByAccountId'
 
 const PurchaseHistoryCard = () => {
+  const [viewer, loadingViewer] = useViewer()
+
+  const [orders, loadingOrders] = useOrdersByAccountId(viewer?._id)
+
+  useEffect(() => {
+    console.log('orders in card ', orders)
+  }, [orders])
+
   const [search, setSearch] = useState('')
 
   const [duration, setDuration] = useState('')
@@ -198,7 +208,7 @@ const PurchaseHistoryCard = () => {
       </div>
 
       <div className='mt-[56px] md:mt-[64px]'>
-        <PurchaseHistoryTable />
+        <PurchaseHistoryTable orders={orders} />
       </div>
     </div>
   )

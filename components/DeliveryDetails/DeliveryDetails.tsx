@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
-import { Typography } from '@mui/material'
+import { Typography, CircularProgress } from '@mui/material'
 import DeliveryDetailsForm from '../DeliveryDetailsForm/DeliveryDetailsForm'
 
 interface DeliveryDetailsProps {
   totalAmountWithTax: number
+
+  cartFunctions: any
 }
 
-const DeliveryDetails = ({ totalAmountWithTax }: DeliveryDetailsProps) => {
+const DeliveryDetails = ({ totalAmountWithTax, cartFunctions }: DeliveryDetailsProps) => {
   const [salesTax, setSalesTax] = useState(13)
 
   return (
@@ -32,7 +34,9 @@ const DeliveryDetails = ({ totalAmountWithTax }: DeliveryDetailsProps) => {
       </div>
 
       <div className='mt-[24px] md:mt-[22px]'>
-        <DeliveryDetailsForm amount={totalAmountWithTax} />
+
+        
+        <DeliveryDetailsForm amount={totalAmountWithTax} cartFunctions={cartFunctions} />
       </div>
     </div>
   )

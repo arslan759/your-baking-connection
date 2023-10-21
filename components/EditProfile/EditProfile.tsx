@@ -43,6 +43,7 @@ const EditProfile = () => {
     setPicture(viewer?.picture)
     setPhone(viewer?.phone)
     setEmail(viewer?.primaryEmailAddress)
+    setAddress(viewer?.currentAddress)
   }, [viewer])
 
   // Edit Button Modal State
@@ -105,33 +106,43 @@ const EditProfile = () => {
     }
   }
 
+  const [loadingImage, setLoadingImage] = useState(false)
+
   // handlePictureChange function for picture upload
   const handlePictureChange = async (e: any) => {
-    const file = e.target.files[0]
+    try {
+      setLoadingImage(true)
 
-    console.log('files are ', e.target.files)
-    console.log('picture is ', file?.name)
+      const file = e.target.files[0]
 
-    if (file.size > 1024 * 1024 * 1) {
-      setPictureError('Picture size should be less than 1MB')
-      return
+      console.log('files are ', e.target.files)
+      console.log('picture is ', file?.name)
+
+      if (file.size > 1024 * 1024 * 1) {
+        setPictureError('Picture size should be less than 1MB')
+        return
+      }
+
+      if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+        setPictureError('Selected file must be an image')
+        return
+      }
+
+      //@ts-ignore
+      const uploadRes = await uploadFile(file, '/profile-images')
+
+      console.log('uploadRes is ', uploadRes)
+
+      if (uploadRes.result.status) {
+        setPicture(uploadRes.result.data[0].availableSizes.thumbnail)
+      }
+
+      setPictureError('')
+      setLoadingImage(false)
+    } catch (err) {
+      console.log(err)
+      setLoadingImage(false)
     }
-
-    if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
-      setPictureError('Selected file must be an image')
-      return
-    }
-
-    //@ts-ignore
-    const uploadRes = await uploadFile(file, '/profile-images')
-
-    console.log('uploadRes is ', uploadRes)
-
-    if (uploadRes.result.status) {
-      setPicture(uploadRes.result.data[0].url)
-    }
-
-    setPictureError('')
   }
 
   //reset states
@@ -179,6 +190,7 @@ const EditProfile = () => {
         picture,
         state,
         city,
+        currentAddress: address,
       },
     })
 
@@ -257,11 +269,15 @@ const EditProfile = () => {
           />
 
           <div className='w-full flex justify-center mt-[0px] md:mt-[-100px] rounded-full overflow-hidden relative'>
-            <img
-              src={picture ? picture : '/Images/DefaultAvatar.jpg'}
-              alt=''
-              className='w-[129px] h-[129px] rounded-full object-cover'
-            />
+            {loadingImage ? (
+              <p>Loading...</p>
+            ) : (
+              <img
+                src={picture ? picture : '/Images/DefaultAvatar.jpg'}
+                alt=''
+                className='w-[129px] h-[129px] rounded-full object-cover'
+              />
+            )}
           </div>
           <div className='w-full flex gap-[12px] justify-center items-center mt-[8px]'>
             <Typography
@@ -393,7 +409,12 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-[24px] md:mt-[23px]'>
-              <PrimaryBtn text='save' type='submit' loading={loadingUpdateAccount} />
+              <PrimaryBtn
+                text='save'
+                type='submit'
+                loading={loadingUpdateAccount}
+                disabled={loadingImage || loadingUpdateAccount}
+              />
             </div>
           </form>
         </div>

@@ -24,6 +24,7 @@ query viewer {
     firstName
     lastName
     state
+    currentAddress
     city
     phone
     emailRecords {

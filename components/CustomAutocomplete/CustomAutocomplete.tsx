@@ -16,6 +16,7 @@ interface CustomAutocompleteProps {
   errorText?: string | undefined
   onChange: (value: string) => void
   name?: string
+  disabled?: boolean
 }
 
 export default function CustomAutocomplete({
@@ -31,6 +32,7 @@ export default function CustomAutocomplete({
   errorText,
   inputColor,
   name,
+  disabled
 }: CustomAutocompleteProps) {
   const [errorState, setErrorState] = React.useState(errorText ? true : false)
 
@@ -76,7 +78,7 @@ export default function CustomAutocomplete({
           loading={loading}
           value={value ? value : null}
           onChange={handleChange}
-          disabled={loading || !options}
+          disabled={loading || !options || disabled}
           options={options ? options : []}
           // sx={{
           //   '& .MuiOutlinedInput-root': {
