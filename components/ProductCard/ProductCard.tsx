@@ -158,7 +158,9 @@ const ProductCard = ({
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <Link href={`${pathname}/product/${slug}`}><PrimaryBtn text='More details' handleClick={handleMoreDetailsClick} /></Link>
+            <Link href={`${pathname}/product/${slug}`}>
+              <PrimaryBtn text='More details' />
+            </Link>
           </div>
         )}
 

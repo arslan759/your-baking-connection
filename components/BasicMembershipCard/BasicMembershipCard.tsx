@@ -4,7 +4,7 @@ import React from 'react'
 const BasicMembershipCard = () => {
   return (
     <div
-      className='w-full relative'
+      className='w-full relative h-full'
       style={{
         background: '#fff',
         boxShadow: '0px 1px 30px 0px rgba(0, 0, 0, 0.15)',
@@ -31,6 +31,7 @@ const BasicMembershipCard = () => {
               fontFamily: 'Josefin Sans',
               lineHeight: 'normal',
               color: '#090909',
+              textAlign: 'center',
               textTransform: 'uppercase',
               '@media (max-width: 767px)': {
                 fontSize: '18px !important',

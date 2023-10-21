@@ -292,9 +292,9 @@ const Search = () => {
           </div>
         </div>
 
-        <div className='w-[100px] md:w-[160px] h-[45px] flex justify-center mt-[50px]'>
+        {/* <div className='w-[100px] md:w-[160px] h-[45px] flex justify-center mt-[50px]'>
           <PrimaryBtn type='button' text='see more' handleClick={handleSeeMore} />
-        </div>
+        </div> */}
       </div>
     </>
   )

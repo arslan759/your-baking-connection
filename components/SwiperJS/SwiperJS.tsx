@@ -10,6 +10,7 @@ import 'swiper/css/pagination'
 import { HomePageBackgrounds } from 'Constants/constants'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
+import Link from 'next/link'
 
 const SwiperJS = () => {
   return (
@@ -75,7 +76,9 @@ const SwiperJS = () => {
                 </div>
 
                 <div className='mt-[24px] md:mt-[36px] w-[172px] md:w-[209px] h-[50px] rounded-full overflow-hidden'>
-                  <PrimaryBtn text='get started now' />
+                  <Link href={`/search`}>
+                    <PrimaryBtn text='get started now' />
+                  </Link>
                 </div>
               </div>
             </div>
