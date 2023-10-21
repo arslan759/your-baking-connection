@@ -48,12 +48,12 @@ const ClientReviewsTab = () => {
       {loadingReviews ? (
         <Spinner />
       ) : (
-        <div className='flex flex-col lg:flex-col items-center'>
-          <Statistics />
+        <div className='w-full flex flex-col lg:flex-col items-center'>
+          <Statistics refetchReviews={refetchReviews} />
           {reviews?.map((review: any, index: any) => {
             const { name, content, image } = review
             return (
-              <div key={index}>
+              <div className='w-full' key={index}>
                 <Review reviewData={review} />
               </div>
             )

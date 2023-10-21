@@ -14,7 +14,7 @@ const linearProgress = [
   { value: 8, name: '1 stars' },
 ]
 
-const Statistics = () => {
+const Statistics = ({ refetchReviews }: any) => {
   const [addReviewModal, setAddReviewModal] = useState(false)
   const handleAddReviewModalOpen = () => {
     setAddReviewModal(true)
@@ -80,7 +80,7 @@ const Statistics = () => {
               // loading=
             />
           </div>
-          <div className='w-[100%] self-center'>
+          {/* <div className='w-[100%] self-center'>
             <Button
               sx={{
                 border: '2px solid #7DDEC1',
@@ -121,10 +121,14 @@ const Statistics = () => {
                 See all review
               </Typography>
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
-      <AddReviewCard open={addReviewModal} onClose={handleAddReviewModalClose} />
+      <AddReviewCard
+        open={addReviewModal}
+        onClose={handleAddReviewModalClose}
+        refetchReviews={refetchReviews}
+      />
     </>
   )
 }
