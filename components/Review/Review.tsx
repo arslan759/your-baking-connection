@@ -21,7 +21,7 @@ const Review = ({ reviewData }: any) => {
               height={140}
             />
           </div>
-          <div className='flex flex-col ml-[16px]'>
+          <div className='w-full flex flex-col ml-[16px]'>
             <div className='flex flex-row justify-between'>
               <div className='text-[14px] bg-[#FFD9E4] px-[8px] py-[4px] rounded-2xl mb-[10px]'>
                 Top Buyer
@@ -45,7 +45,7 @@ const Review = ({ reviewData }: any) => {
             </div>
           </div>
         </div>
-        <div className='flex justify-between'>
+        <div className='w-full flex justify-between'>
           <div className='flex flex-col'>
             <div className='!font-[500]'>
               <span>

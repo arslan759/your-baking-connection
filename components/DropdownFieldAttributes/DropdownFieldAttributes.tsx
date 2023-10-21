@@ -165,7 +165,7 @@ const DropdownFieldAttributes = ({
               value={option}
             >
               <span>{option?.optionLabel}</span>
-              <span>{option?.price ? `${option.price}$` : ''}</span>
+              <span>{option?.price ? `$${option.price}` : ''}</span>
             </MenuItem>
           ))}
         </Select>

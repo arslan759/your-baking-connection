@@ -6,11 +6,18 @@ import styles from './styles.module.css'
 import InputField from '../InputField'
 import useCreateReview from '../../hooks/Reviews/useCreateReview'
 import { usePathname, useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
-const AddReviewCard = ({ open, onClose }: any) => {
+const AddReviewCard = ({ open, onClose, refetchReviews }: any) => {
   const [rating, setRating] = useState(0)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+
+  // Error state for input fields
+  const [titleError, setTitleError] = useState('')
+  const [descriptionError, setDescriptionError] = useState('')
+  const [ratingError, setRatingError] = useState('')
+
   const [addReview]: any = useCreateReview()
   const router = useRouter()
   const pathname = usePathname()
@@ -22,9 +29,33 @@ const AddReviewCard = ({ open, onClose }: any) => {
   const slug = path[2]
   const urlParams = path[4]
 
+  const resetFields = () => {
+    setTitle('')
+    setDescription('')
+    setRating(0)
+
+    setTitleError('')
+    setDescriptionError('')
+    setRatingError('')
+  }
+
   const handleCreateReview = async (e: any) => {
     e.stopPropagation()
     // console.log('clicked')
+    if (!rating || !title || !description) {
+      if (!rating) {
+        setRatingError('Rating is required')
+      }
+      if (!title) {
+        setTitleError('Title is required')
+      }
+      if (!description) {
+        setDescriptionError('Description is required')
+      }
+
+      return
+    }
+
     try {
       const input = {
         productId: urlParams,
@@ -35,16 +66,41 @@ const AddReviewCard = ({ open, onClose }: any) => {
         reviewType: 'product',
       }
       // console.log('productId', productId)
-      const id = await addReview({
+      const res = await addReview({
         variables: {
           input,
         },
       })
-      console.log('Success')
+      console.log('res is ', res)
+
+      toast.success('Review added successfully', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
+      resetFields()
+      refetchReviews()
+      onClose()
+
       //   handleSuccessOpen();
     } catch (err) {
       console.log(err)
       //   handleErrorOpen();
+      toast.error('Failed to add review!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
     }
     // setIsFavorite(!isFavorite)
     console.log('favourite clicked')
@@ -90,9 +146,29 @@ const AddReviewCard = ({ open, onClose }: any) => {
               name='read-only'
               value={rating}
               onChange={(e: any) => {
+                setRatingError('')
                 setRating(e.target.value)
               }}
             />
+            {ratingError && (
+              <Typography
+                sx={{
+                  color: '#d32f2f',
+                  fontSize: '0.75rem !important',
+                  fontFamily: `"Roboto","Helvetica","Arial",sans-serif`,
+                  fontWeight: '400',
+                  lineHeight: '1.66',
+                  letterSpacing: '0.03333em',
+                  textAlign: 'left',
+                  marginTop: '3px',
+                  marginRight: '14px',
+                  marginBottom: '0px',
+                  marginLeft: '14px',
+                }}
+              >
+                {ratingError}
+              </Typography>
+            )}
           </div>
           <div className='w-full'>
             <InputField
@@ -102,9 +178,10 @@ const AddReviewCard = ({ open, onClose }: any) => {
               // rows={7}
               name='shopDescription'
               value={title}
-              // errorText={shopDescriptionError}
+              errorText={titleError}
               required={false}
               changeHandler={(e: any) => {
+                setTitleError('')
                 setTitle(e.target.value)
               }}
             />
@@ -117,9 +194,10 @@ const AddReviewCard = ({ open, onClose }: any) => {
               rows={7}
               name='shopDescription'
               value={description}
-              // errorText={shopDescriptionError}
+              errorText={descriptionError}
               required={false}
               changeHandler={(e: any) => {
+                setDescriptionError('')
                 setDescription(e.target.value)
               }}
             />

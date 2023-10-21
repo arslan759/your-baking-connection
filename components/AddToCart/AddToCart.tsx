@@ -55,14 +55,13 @@ const AddToCart = ({ ...restProps }: AddToCartProps) => {
                   color: '#000',
                 }}
               >
-                Total ({restProps?.cart?.items?.length} item){' '}
+                Total ({restProps?.cart?.items?.length} item) $
                 {parseFloat(
                   restProps?.cart?.items.reduce(
                     (total: number, item: any) => total + item?.subtotal?.amount,
                     0,
                   ),
                 ).toFixed(2)}
-                $
               </Typography>
             )}
           </div>

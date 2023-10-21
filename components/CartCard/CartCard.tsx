@@ -73,7 +73,7 @@ const CartCard = ({ cartFunctions }: CartCardProps) => {
                   icon='/Images/cart-delivery-icon.svg'
                   title='Home Delivery'
                   description='Same day delivery available'
-                  value='3.95$'
+                  value='$3.95'
                 />
               </div>
 

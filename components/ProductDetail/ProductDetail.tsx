@@ -13,12 +13,15 @@ import ProductPics from '../ProductPics'
 
 interface ProductDetailProps {
   slug: string
+  shopId?: string
 }
 
-const ProductDetail = ({ slug }: ProductDetailProps) => {
+const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
   const [catalogItemProduct, loadingProduct, refetchProduct] = useCatalogItemProduct({
     slugOrId: slug,
   })
+
+  console.log('shop id in product details is ', shopId)
 
   if (loadingProduct)
     return (
@@ -106,6 +109,7 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
                 stock={inventoryInStock}
                 productId={productId}
                 productVariantId={variantId}
+                shopId={shopId}
               />
             </div>
           </div>
@@ -113,7 +117,7 @@ const ProductDetail = ({ slug }: ProductDetailProps) => {
       </div>
 
       <div className='w-full flex flex-col items-center mt-[24px] md:mt-[32px]'>
-        <ProductDetailTabsSection productDescription={description}/>
+        <ProductDetailTabsSection productDescription={description} />
       </div>
 
       <div className='w-full flex flex-col items-center mt-[48px] md:mt-[64px]'>

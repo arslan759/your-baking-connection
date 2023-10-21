@@ -11,6 +11,7 @@ const ProductDetailMainContent = ({
   newPrice,
   reviews,
   rating,
+  shopId,
   description,
   productId,
   productVariantId,
@@ -83,7 +84,7 @@ const ProductDetailMainContent = ({
               },
             }}
           >
-            {oldPrice}$
+            ${oldPrice}
           </Typography>
         )}
         <Typography
@@ -98,7 +99,7 @@ const ProductDetailMainContent = ({
             },
           }}
         >
-          {priceToDisplay.toFixed(2)}$
+          ${priceToDisplay.toFixed(2)}
         </Typography>
       </div>
 
@@ -152,6 +153,7 @@ const ProductDetailMainContent = ({
           updatePrice={setPriceToDisplay}
           stock={stock}
           productId={productId}
+          shopId={shopId}
           productVariantId={productVariantId}
         />
       </div>
@@ -191,7 +193,7 @@ const ProductDetailMainContent = ({
           icon='/Images/cart-delivery-icon.svg'
           title='Home Delivery'
           description='Same day delivery available'
-          value='3.95$'
+          value='$3.95'
         />
       </div>
 
