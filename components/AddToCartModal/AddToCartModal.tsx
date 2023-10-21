@@ -7,6 +7,7 @@ import EmptyCart from '../EmptyCart'
 import { PrimaryBtn } from '../Buttons'
 import Spinner from '../Spinner'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps) => {
   const router = useRouter()
@@ -105,25 +106,27 @@ const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps
                     !cartFunctions.uiStore.isUpdatingQuantity) && (
                     <div className='w-full flex flex-col items-center gap-[18px]'>
                       <div className='w-[50%] self-center'>
-                        <PrimaryBtn
-                          text='Proceed to Cart'
-                          handleClick={() => {
-                            router.push('/add-to-cart')
-                            handleModal()
-                          }}
-                          // loading={cartFunctions?.removeCartItemsLoading}
-                        />
+                        <Link href='/add-to-cart'>
+                          <PrimaryBtn
+                            text='Proceed to Cart'
+                            handleClick={() => {
+                              handleModal()
+                            }}
+                            // loading={cartFunctions?.removeCartItemsLoading}
+                          />
+                        </Link>
                       </div>
 
                       <div className='w-[50%] self-center'>
-                        <PrimaryBtn
-                          text='Proceed to checkout'
-                          handleClick={() => {
-                            router.push('/checkout')
-                            handleModal()
-                          }}
-                          // loading={cartFunctions?.removeCartItemsLoading}
-                        />
+                        <Link href='/checkout'>
+                          <PrimaryBtn
+                            text='Proceed to checkout'
+                            handleClick={() => {
+                              handleModal()
+                            }}
+                            // loading={cartFunctions?.removeCartItemsLoading}
+                          />
+                        </Link>
                       </div>
                     </div>
                   )}

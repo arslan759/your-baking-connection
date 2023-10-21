@@ -1,5 +1,11 @@
-query ordersByAccountId($accountId: ID!, $shopIds: [ID]!) {
-  ordersByAccountId(accountId: $accountId, shopIds: $shopIds) {
+query ordersByAccountId(
+  $accountId: ID!
+  $shopIds: [ID]!
+  $first: ConnectionLimitInt
+  $offset: Int
+) {
+  ordersByAccountId(accountId: $accountId, shopIds: $shopIds, first: $first, offset: $offset) {
+    totalCount
     edges {
       node {
         _id

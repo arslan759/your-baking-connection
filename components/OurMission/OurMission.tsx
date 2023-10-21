@@ -2,6 +2,7 @@ import React from 'react'
 import Sectionheading from '../SectionHeading/Sectionheading'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
+import Link from 'next/link'
 
 const OurMission = () => {
   return (
@@ -104,7 +105,9 @@ const OurMission = () => {
             </div>
           </div>
           <div className='h-[45px] md:h-[50px] w-[160px] rounded-full overflow-hidden mt-[36px]'>
-            <PrimaryBtn text='read More' />
+            <Link href={`${process.env.NEXT_PUBLIC_BLOG_URL}/about-your-baking-connection/`}>
+              <PrimaryBtn text='read More' />
+            </Link>
           </div>
         </div>
       </div>

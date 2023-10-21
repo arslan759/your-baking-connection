@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
-import { Typography } from '@mui/material'
+import { CircularProgress, Typography } from '@mui/material'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import DropdownField from '../DropdownField/DropdownField'
@@ -9,11 +9,34 @@ import PurchaseHistoryTable from '../PurchaseHistoryTable/PurchaseHistoryTable'
 import ProfileBreadCrumbs from '../ProfileBreadCrumbs/ProfileBreadCrumbs'
 import useViewer from 'hooks/viewer/useViewer'
 import useOrdersByAccountId from 'hooks/order/useOrdersByAccountId'
+import CustomPagination from '../CustomPagination'
 
 const PurchaseHistoryCard = () => {
   const [viewer, loadingViewer] = useViewer()
 
-  const [orders, loadingOrders] = useOrdersByAccountId(viewer?._id)
+  //items per page to display
+  const [itemsPerPage, setItemsPerPage] = useState<number>(5)
+
+  //total number of pages for the paginator
+  const [pageCount, setPageCount] = useState<number>(0)
+
+  //we are using this state to display the current page, which differs from the offset value
+  const [page, setCurrentPage] = useState(1)
+
+  //for the offset filter
+  const [offset, setOffset] = useState(0)
+
+  const handlePageClick = (pageNum: number) => {
+    setOffset((pageNum - 1) * itemsPerPage)
+    setCurrentPage(pageNum)
+  }
+
+  const [orders, loadingOrders, totalCount] = useOrdersByAccountId(
+    viewer?._id,
+    'cmVhY3Rpb24vc2hvcDpYenZBUnhjanNmQVo5d3hzNQ==',
+    itemsPerPage,
+    offset,
+  )
 
   useEffect(() => {
     console.log('orders in card ', orders)
@@ -89,6 +112,11 @@ const PurchaseHistoryCard = () => {
 
     console.log('form submitted')
   }
+
+  useEffect(() => {
+    let page = Math.ceil(totalCount / itemsPerPage)
+    setPageCount(page)
+  }, [totalCount])
 
   return (
     <div className={styles.card}>
@@ -207,9 +235,31 @@ const PurchaseHistoryCard = () => {
         </form>
       </div>
 
-      <div className='mt-[56px] md:mt-[64px]'>
-        <PurchaseHistoryTable orders={orders} />
-      </div>
+      {loadingOrders ? (
+        <div className='w-full flex justify-center items-center mt-[56px] md:mt-[64px]'>
+          <CircularProgress
+            sx={{
+              color: '#7DDEC1',
+            }}
+          />
+        </div>
+      ) : (
+        <>
+          <div className='mt-[56px] md:mt-[64px]'>
+            <PurchaseHistoryTable orders={orders} />
+          </div>
+
+          <div className='mt-[32px] md:mt-[56px] flex justify-center'>
+            <CustomPagination
+              count={pageCount}
+              boundaryCount={1}
+              siblingCount={1}
+              page={page}
+              onChange={handlePageClick}
+            />
+          </div>
+        </>
+      )}
     </div>
   )
 }
