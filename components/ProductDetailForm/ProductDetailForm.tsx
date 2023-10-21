@@ -170,7 +170,10 @@ const ProductDetailForm = ({
         },
       ])
       console.log('addItemsToCartResponse is ', addItemsToCartResponse)
-      if (addItemsToCartResponse?.data?.addCartItems?.cart?._id) {
+      if (
+        addItemsToCartResponse?.data?.addCartItems?.cart?._id ||
+        addItemsToCartResponse?.data?.createCart?.cart?._id
+      ) {
         toast.success('Item added to cart', {
           position: 'top-right',
           autoClose: 5000,

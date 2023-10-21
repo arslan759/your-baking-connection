@@ -5,10 +5,18 @@ import useReviews from 'hooks/Reviews/useReviews'
 import Statistics from '../Statistics'
 import { useEffect, useState } from 'react'
 import Spinner from '../Spinner'
-
+import { usePathname, useRouter } from 'next/navigation'
 const ClientReviewsTab = () => {
   //items per page to display
   const [itemsPerPage, setItemsPerPage] = useState<number>(6)
+  const pathname = usePathname()
+
+  if (!pathname) {
+    return <div>Loading...</div> // or handle the null case in an appropriate way
+  }
+  const path = pathname.split(`/`)
+  const slug = path[2]
+  const urlParams = path[4]
 
   //total number of pages for the paginator
   const [pageCount, setPageCount] = useState<number>(0)
@@ -25,8 +33,8 @@ const ClientReviewsTab = () => {
   }
 
   const [reviews, loadingReviews, refetchReviews, totalCount] = useReviews({
-    shopId: 'dSuXLb3Dx7MsoWogJ',
-    productId: 'GSQxCyYp6Y8Guupzg',
+    shopId: slug,
+    productId: urlParams,
     first: itemsPerPage,
     offset,
     sortBy: 'updatedAt',
