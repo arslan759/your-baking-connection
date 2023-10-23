@@ -100,6 +100,7 @@ deploy-main:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && pm2 delete app-main"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && pm2 start 'npm start' --name app-main"
 
+
 # THIS IS THE PIPELINE FOR STAGING BRANCH
 build-test: # This job runs in the build stage, which runs first.
   stage: build
