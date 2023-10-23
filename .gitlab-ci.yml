@@ -83,7 +83,7 @@ build-main: # This job runs in the build stage, which runs first.
 
 deploy-main:
   only:
-    - main
+    - master
   stage: deploy
   before_script:
     - apt update
