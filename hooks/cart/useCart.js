@@ -31,7 +31,7 @@ export default function useCart() {
 
   const accountId = viewer && viewer.userId
 
-  console.log('accountId is', accountId)
+  // console.log('accountId is', accountId)
 
   const shouldSkipAccountCartByAccountIdQuery = Boolean(
     !accountId || cartStore.hasAnonymousCartCredentials || isLoadingViewer || !shop || !shop._id,
@@ -69,10 +69,10 @@ export default function useCart() {
   })
 
   if (!accountCartQueryCalled && !shouldSkipAccountCartByAccountIdQuery) {
-    console.log('fetching account cart')
+    // console.log('fetching account cart')
     fetchAccountCart()
   } else if (!anonymousCartQueryCalled && !shouldSkipAnonymousCartByCartIdQuery) {
-    console.log('fetching anonymous cart')
+    // console.log('fetching anonymous cart')
     fetchAnonymousCart()
   }
 
@@ -188,9 +188,9 @@ export default function useCart() {
     const input = {
       items: data.items,
     }
-    console.log(input, 'item')
+    // console.log(input, 'item')
     if (!isCreating && (!viewer || !viewer._id) && cartStore.hasAnonymousCartCredentials) {
-      console.log('in IF')
+      // console.log('in IF')
       // Given an anonymous user, with a cart, add token and cartId to input
       const { anonymousCartId, anonymousCartToken } = cartStore
 
@@ -202,10 +202,10 @@ export default function useCart() {
       input.cartId = cartStore.accountCartId
     } else if (isCreating) {
       // With no anonymous or account cart, add shop Id to input as it will be needed for the create cart mutation
-      console.log('in else')
+      // console.log('in else')
       input.shopId = shop._id
 
-      console.log('input is ', input)
+      // console.log('input is ', input)
     }
 
     // Run the mutation function provided as a param.

@@ -115,7 +115,7 @@ const PreferencesForm = () => {
           </Typography>
         </div>
 
-        <div className='mt-[48px]'>
+        {/* <div className='mt-[48px]'>
           <Typography
             sx={{
               display: 'flex',
@@ -140,9 +140,9 @@ const PreferencesForm = () => {
             />
             <span>Notifications</span>
           </Typography>
-        </div>
+        </div> */}
 
-        <div className='mt-[32px] flex flex-col gap-y-[16px]'>
+        {/* <div className='mt-[32px] flex flex-col gap-y-[16px]'>
           <div className='flex justify-between w-full md:w-[40%] items-center'>
             <Typography
               sx={{
@@ -188,7 +188,7 @@ const PreferencesForm = () => {
               handleChange={handlePromotionsAvailableChange}
             />
           </div>
-        </div>
+        </div> */}
 
         <div className='mt-[48px] w-full h-[45px]'>
           <PrimaryBtn type='submit' text='Save personalization settings' />

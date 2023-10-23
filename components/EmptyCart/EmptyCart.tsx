@@ -2,6 +2,7 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import { PrimaryBtn } from '../Buttons'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface EmptyCartProps {
   handleModal?: () => void
@@ -54,13 +55,15 @@ const EmptyCart = ({ handleModal }: EmptyCartProps) => {
       </Typography>
 
       <div className='mt-[24px] w-[80%] self-center'>
-        <PrimaryBtn
-          text='Go to Bakers'
-          handleClick={() => {
-            router.push('/search')
-            handleModal ? handleModal() : null
-          }}
-        />
+        <Link href='/search'>
+          <PrimaryBtn
+            text='Go to Bakers'
+            handleClick={() => {
+              // router.push('/search')
+              handleModal ? handleModal() : null
+            }}
+          />
+        </Link>
       </div>
     </div>
   )

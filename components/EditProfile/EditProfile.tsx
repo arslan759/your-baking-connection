@@ -3,14 +3,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { validateEmail } from 'helpers/validations'
-import DropdownField from '../DropdownField/DropdownField'
-import { cities, states } from 'Constants/constants'
-
-import withAuth from 'hocs/withAuth'
 import { withApollo } from 'lib/apollo/withApollo'
 import useUpdateAccount from 'hooks/Profile/useUpdateAccount'
 import useViewer from 'hooks/viewer/useViewer'
 import useUploadFile from 'hooks/FileUpload/useUploadFile'
+import CustomAutocomplete from '../CustomAutocomplete'
+import { getCitiesApi, getStatesApi } from 'helpers/apis'
 
 const EditProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -26,7 +24,11 @@ const EditProfile = () => {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [states, setStates] = useState<any>([])
+  const [isLoadingStates, setIsLoadingStates] = useState(false)
   const [state, setState] = useState<string | null>('')
+  const [isLoadingCities, setIsLoadingCities] = useState(false)
+  const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
   const [address, setAddress] = useState('')
   const [picture, setPicture] = useState('')
@@ -41,6 +43,7 @@ const EditProfile = () => {
     setPicture(viewer?.picture)
     setPhone(viewer?.phone)
     setEmail(viewer?.primaryEmailAddress)
+    setAddress(viewer?.currentAddress)
   }, [viewer])
 
   // Edit Button Modal State
@@ -103,33 +106,43 @@ const EditProfile = () => {
     }
   }
 
+  const [loadingImage, setLoadingImage] = useState(false)
+
   // handlePictureChange function for picture upload
   const handlePictureChange = async (e: any) => {
-    const file = e.target.files[0]
+    try {
+      setLoadingImage(true)
 
-    console.log('files are ', e.target.files)
-    console.log('picture is ', file?.name)
+      const file = e.target.files[0]
 
-    if (file.size > 1024 * 1024 * 1) {
-      setPictureError('Picture size should be less than 1MB')
-      return
+      console.log('files are ', e.target.files)
+      console.log('picture is ', file?.name)
+
+      if (file.size > 1024 * 1024 * 1) {
+        setPictureError('Picture size should be less than 1MB')
+        return
+      }
+
+      if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
+        setPictureError('Selected file must be an image')
+        return
+      }
+
+      //@ts-ignore
+      const uploadRes = await uploadFile(file, '/profile-images')
+
+      console.log('uploadRes is ', uploadRes)
+
+      if (uploadRes.result.status) {
+        setPicture(uploadRes.result.data[0].availableSizes.thumbnail)
+      }
+
+      setPictureError('')
+      setLoadingImage(false)
+    } catch (err) {
+      console.log(err)
+      setLoadingImage(false)
     }
-
-    if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
-      setPictureError('Selected file must be an image')
-      return
-    }
-
-    //@ts-ignore
-    const uploadRes = await uploadFile(file, '/profile-images')
-
-    console.log('uploadRes is ', uploadRes)
-
-    if (uploadRes.result.status) {
-      setPicture(uploadRes.result.data[0].url)
-    }
-
-    setPictureError('')
   }
 
   //reset states
@@ -177,6 +190,7 @@ const EditProfile = () => {
         picture,
         state,
         city,
+        currentAddress: address,
       },
     })
 
@@ -200,6 +214,15 @@ const EditProfile = () => {
     console.log('picture')
   }
 
+  useEffect(() => {
+    getStatesApi(setStates, setIsLoadingStates)
+  }, [])
+
+  useEffect(() => {
+    setCities([])
+    setCity('')
+    getCitiesApi(state, setCities, setIsLoadingCities)
+  }, [state])
   return (
     <>
       {/* desktop View  Edit Button*/}
@@ -246,11 +269,15 @@ const EditProfile = () => {
           />
 
           <div className='w-full flex justify-center mt-[0px] md:mt-[-100px] rounded-full overflow-hidden relative'>
-            <img
-              src={picture ? picture : '/Images/DefaultAvatar.jpg'}
-              alt=''
-              className='w-[129px] h-[129px] rounded-full object-cover'
-            />
+            {loadingImage ? (
+              <p>Loading...</p>
+            ) : (
+              <img
+                src={picture ? picture : '/Images/DefaultAvatar.jpg'}
+                alt=''
+                className='w-[129px] h-[129px] rounded-full object-cover'
+              />
+            )}
           </div>
           <div className='w-full flex gap-[12px] justify-center items-center mt-[8px]'>
             <Typography
@@ -332,8 +359,9 @@ const EditProfile = () => {
               </div>
 
               <div className='w-full md:w-[45%]'>
-                <DropdownField
+                <CustomAutocomplete
                   label='state'
+                  loading={isLoadingStates}
                   required={false}
                   name='state'
                   errorText={stateError}
@@ -345,9 +373,10 @@ const EditProfile = () => {
               </div>
 
               <div className='w-full md:w-[45%]'>
-                <DropdownField
+                <CustomAutocomplete
                   label='city'
                   required={false}
+                  loading={isLoadingCities}
                   name='city'
                   errorText={cityError}
                   value={city}
@@ -380,7 +409,12 @@ const EditProfile = () => {
             </div>
 
             <div className='mt-[24px] md:mt-[23px]'>
-              <PrimaryBtn text='save' type='submit' loading={loadingUpdateAccount} />
+              <PrimaryBtn
+                text='save'
+                type='submit'
+                loading={loadingUpdateAccount}
+                disabled={loadingImage || loadingUpdateAccount}
+              />
             </div>
           </form>
         </div>
@@ -389,4 +423,4 @@ const EditProfile = () => {
   )
 }
 
-export default withApollo()(withAuth(EditProfile))
+export default withApollo()(EditProfile)

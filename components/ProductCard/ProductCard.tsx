@@ -1,12 +1,17 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProductCardProps } from 'types'
 import { PrimaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import useMarkProductAsFavorite from '../../hooks/Favorite/useMarkProductAsFavorite'
+import Link from 'next/link'
 
 const ProductCard = ({
+  isFavoriteFlag,
+  productId,
+  shopId,
   image,
   title,
   description,
@@ -19,9 +24,11 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const [isHovering, setIsHovering] = useState(false) // handle mouse enter and leave for more details on desktop view
   const [isDetailsVisible, setIsDetailsVisible] = useState(false) // Toggle More Details for mobile view
-  const [isFavorite, setIsFavorite] = useState(false) // handle favourite click
+  const [isFavorite, setIsFavorite] = useState(isFavoriteFlag) // handle favourite click
+  const [favorite]: any = useMarkProductAsFavorite()
 
   const router = useRouter()
+  const pathname = usePathname()
 
   // handle mouse enter and leave
   const handleMouseEnter = () => {
@@ -40,8 +47,23 @@ const ProductCard = ({
   }
 
   // handle favourite click
-  const handleFavouriteClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+  const handleFavouriteClick = async (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     e.stopPropagation()
+    // console.log('clicked')
+    try {
+      // console.log('productId', productId)
+      await favorite({
+        variables: {
+          productId: productId,
+          shopId: shopId,
+        },
+      })
+      console.log('Success')
+      //   handleSuccessOpen();
+    } catch (err) {
+      console.log(err)
+      //   handleErrorOpen();
+    }
     setIsFavorite(!isFavorite)
     console.log('favourite clicked')
   }
@@ -51,15 +73,14 @@ const ProductCard = ({
     e.stopPropagation()
 
     // console.log('slug', `/product/${slug}`)
+    // console.log(pathname)
 
-    router.push(`/product/${slug}`)
+    // router.push(`${pathname}/product/${slug}`)
   }
 
-  // console.log('isDetailsVisible', isDetailsVisible)
-  // console.log('isHovering', isHovering)
-
-  console.log('mdWidth', mdWidth)
-  console.log('width', width)
+  // useEffect(() => {
+  //   setIsFavorite(isFavoriteFlag)
+  // }, [isFavoriteFlag])
 
   return (
     <Card
@@ -79,7 +100,7 @@ const ProductCard = ({
       <div className='relative'>
         <CardMedia
           sx={{
-            bordeRadius: '5px 5px 0px 0px',
+            borderRadius: '5px 5px 0px 0px',
             background:
               isHovering || isDetailsVisible
                 ? `linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%), url(${image}), lightgray 50% / cover no-repeat`
@@ -137,7 +158,9 @@ const ProductCard = ({
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <PrimaryBtn text='More details' handleClick={handleMoreDetailsClick} />
+            <Link href={`${pathname}/product/${slug}`}>
+              <PrimaryBtn text='More details' />
+            </Link>
           </div>
         )}
 

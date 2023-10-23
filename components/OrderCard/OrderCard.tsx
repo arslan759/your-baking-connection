@@ -5,6 +5,7 @@ import { paymentMethods } from 'Constants/constants'
 import { TertiaryBtn } from '../Buttons'
 import EmptyCart from '../EmptyCart'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface OrderCardProps {
   items: any[]
@@ -48,7 +49,7 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
       </div>
     )
 
-  const { amount: totalAmount } = cartFunctions.cart.checkout.summary.itemTotal
+  const totalAmount = cartFunctions?.cart?.checkout?.summary?.itemTotal?.amount
 
   const totalTaxIfApplicableonItems = items?.reduce((total, item) => {
     if (item?.isTaxable) return total + item.subtotal.amount * (salesTax / 100)
@@ -237,7 +238,7 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
               textTransform: 'capitalize',
             }}
           >
-            ${totalAmount.toFixed(2)}
+            ${totalAmount?.toFixed(2)}
           </Typography>
         </div>
 
@@ -299,7 +300,9 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
         <div className='mt-[24px] w-full flex justify-between'>
           {/* Desktop View */}
           <div className='h-[38px] md:h-[57px] w-full md:w-[45%]'>
-            <TertiaryBtn text='Continue Shopping' handleClick={() => router.push('/search')} />
+            <Link href='/search'>
+              <TertiaryBtn text='Continue Shopping' />
+            </Link>
           </div>
 
           {/* Mobile View

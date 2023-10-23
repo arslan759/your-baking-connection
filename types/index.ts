@@ -10,12 +10,31 @@ export interface ClientReviewCardProps {
 
 export interface FooterLinksProps {
   header?: string
-  title1?:string
+  title1?: string
   link1?: string
-  title2?:string
+  title2?: string
   link2?: string
-  title3?:string
+  title3?: string
   link3?: string
+}
+
+export interface ProductMediaURLsInterface {
+  large: string
+  original: string
+  small: string
+  thumbnail: string
+  medium: string
+}
+export interface ProductMediaInterface {
+  productId: string
+  priority: number
+  URLs: ProductMediaURLsInterface
+}
+
+export interface AddCustomOrderImagesProps {
+  productMedia: ProductMediaURLsInterface[]
+  setProductMedia: any
+  handleUpdateProductMedia: (image: string) => void
 }
 
 export interface PrimaryBtnProps {
@@ -55,7 +74,8 @@ export interface InputFieldProps {
   required: boolean
   placeholder?: string
   value: string
-  onChange: (name: string, value: string) => void
+  changeHandler?: any
+  onChange?: (name: string, value: string) => void
   handleKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void
 }
 
@@ -182,6 +202,9 @@ export interface BakerTabsPanelProps {
 }
 
 export interface ProductCardProps {
+  isFavoriteFlag?: boolean
+  productId: string
+  shopId: string
   image: string
   title: string
   description: string
@@ -213,6 +236,7 @@ export interface CartCardDetailsItemProps {
 
 export interface ProductDetailTabsPanelProps {
   activeTab: number
+  productDescription: string
 }
 
 export interface ProductDetailTabsProps {
@@ -250,6 +274,7 @@ export interface ProductDetailMainContentProps {
   newPrice: number
   reviews: number
   description: string
+  shopId: any
   rating: number
   productAttributes: any[]
   productId: string
@@ -269,4 +294,12 @@ export interface AddToCartModalProps {
   cartItems: any[]
 
   cartFunctions: any
+}
+
+export interface ProductDetailTabsSectionProps {
+  productDescription: string
+}
+
+export interface ProductDetailDescriptionTypes {
+  productDescription: string
 }

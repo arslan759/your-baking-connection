@@ -33,7 +33,6 @@ build-staging:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm install --legacy-peer-deps"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm run build"
 
-
 deploy-staging:
   only:
     - staging

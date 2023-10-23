@@ -12,8 +12,10 @@ import Logout from '@mui/icons-material/Logout'
 import { useRouter } from 'next/navigation'
 import { AccountDropdownProps } from 'types'
 import { Typography } from '@mui/material'
+import { signOut } from 'next-auth/react'
+import Link from 'next/link'
 
-const AccountDropdown = ({ account }: AccountDropdownProps) => {
+const AccountDropdown = () => {
   const router = useRouter()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -25,12 +27,13 @@ const AccountDropdown = ({ account }: AccountDropdownProps) => {
     setAnchorEl(null)
   }
 
-  const handleLogOut = () => {
+  const handleLogOut = async () => {
     localStorage.clear()
-    router.push('/signin')
+    await signOut()
+    // router.push('/signin')
   }
 
-  console.log('account in dropdown is ', account)
+  // console.log('account in dropdown is ', account)
   return (
     <div className='flex items-center justify-center'>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', cursor: 'pointer' }}>
@@ -76,49 +79,52 @@ const AccountDropdown = ({ account }: AccountDropdownProps) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <MenuItem
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-          onClick={() => router.push('/profile')}
-        >
-          <Avatar src={account?.picture} />{' '}
-          <Typography
+        <Link href='/profile'>
+          <MenuItem
             sx={{
-              fontSize: '16px !important',
-              fontFamily: 'Open Sans',
-              lineHeight: 'normal',
-              fontWeight: '400 !important',
-              color: '#000',
-              '@media (max-width: 767px)': {
-                fontSize: '14px !important',
-              },
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
-            Profile
-          </Typography>
-        </MenuItem>
+            <Avatar />{' '}
+            <Typography
+              sx={{
+                fontSize: '16px !important',
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '400 !important',
+                color: '#000',
+                '@media (max-width: 767px)': {
+                  fontSize: '14px !important',
+                },
+              }}
+            >
+              Profile
+            </Typography>
+          </MenuItem>
+        </Link>
         <Divider />
-        <MenuItem onClick={() => router.push('/profile/settings')}>
-          <ListItemIcon>
-            <Settings fontSize='small' />
-          </ListItemIcon>
-          <Typography
-            sx={{
-              fontSize: '16px !important',
-              fontFamily: 'Open Sans',
-              lineHeight: 'normal',
-              fontWeight: '400 !important',
-              color: '#000',
-              '@media (max-width: 767px)': {
-                fontSize: '14px !important',
-              },
-            }}
-          >
-            Settings
-          </Typography>
-        </MenuItem>
+        <Link href='/profile/settings'>
+          <MenuItem>
+            <ListItemIcon>
+              <Settings fontSize='small' />
+            </ListItemIcon>
+            <Typography
+              sx={{
+                fontSize: '16px !important',
+                fontFamily: 'Open Sans',
+                lineHeight: 'normal',
+                fontWeight: '400 !important',
+                color: '#000',
+                '@media (max-width: 767px)': {
+                  fontSize: '14px !important',
+                },
+              }}
+            >
+              Settings
+            </Typography>
+          </MenuItem>
+        </Link>
         <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout fontSize='small' />

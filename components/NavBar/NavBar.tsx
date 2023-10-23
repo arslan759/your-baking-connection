@@ -1,7 +1,7 @@
 import { AppBar, Box, Grid, Toolbar, Typography, styled } from '@mui/material'
 import withCart from 'containers/cart/withCart'
 import inject from 'hocs/inject'
-import useViewer from 'hooks/viewer/useViewer'
+// import useViewer from 'hooks/viewer/useViewer'
 import { withApollo } from 'lib/apollo/withApollo'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -13,15 +13,20 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import NotificationModal from '../NotificationModal/NotificationModal'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import styles from './styles.module.css'
+import { useSession } from 'next-auth/react'
 
 const Navbar = ({
   itemsColor = 'black',
   activeItemColor = '#7DDEC1',
   ...restProps
 }: NavBarProps) => {
-  const [viewer, loading] = useViewer()
+  const { data: session, status } = useSession()
+  const token = localStorage.getItem('accounts:accessToken')
 
-  console.log('viewer in navbar is', viewer)
+  if (status === 'authenticated' && !token) {
+    localStorage.setItem('accounts:accessToken', session?.user?.accessToken)
+    localStorage.setItem('accounts:refreshToken', session?.user?.refreshToken)
+  }
 
   const pathName = usePathname()
   const StyledToolbar = styled(Toolbar)({
@@ -34,15 +39,15 @@ const Navbar = ({
   })
   const MenuItems = [
     { name: 'HOME', path: '/' },
-    { name: 'ABOUT BAKERS', path: '/about-bakers' },
+    { name: 'ABOUT BAKERS', path: `${process.env.NEXT_PUBLIC_BLOG_URL}/about-the-bakers/` },
     { name: 'MEMBERSHIP', path: '/membership' },
     { name: 'GALLERY', path: '/gallery' },
     { name: 'SEARCH', path: '/search' },
   ]
 
-  useEffect(() => {
-    console.log('restProps in navbar is', restProps)
-  }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
+  // useEffect(() => {
+  //   // console.log('restProps in navbar is', restProps)
+  // }, [restProps?.cart, restProps?.uiStore?.isCartOpen])
 
   return (
     <AppBar
@@ -74,10 +79,12 @@ const Navbar = ({
                   pathName === `${item.path}`
                     ? {
                         color: `${activeItemColor}`,
+                        // borderBottom: '7px solid #7DDEC1',
                         fontWeight: '700',
                         textDecoration: 'none',
                         borderRadius: '25px',
                         padding: '10px',
+                        // margin: '10px',
                         width: '2px',
                       }
                     : { color: `${itemsColor}`, textDecoration: 'none' }
@@ -100,7 +107,7 @@ const Navbar = ({
             //   <p style={{ color: 'black' }}>loading...</p>
             // ) : (
             <Grid>
-              {!viewer || Object.keys(viewer).length === 0 ? (
+              {status === 'unauthenticated' ? (
                 <Box
                   sx={{
                     display: 'flex',
@@ -133,8 +140,8 @@ const Navbar = ({
                     },
                   }}
                 >
-                  <AccountDropdown account={viewer} />
-                  <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} />
+                  <AccountDropdown />
+                  {/* <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} /> */}
                   <AddToCartModal
                     color={itemsColor}
                     cartItems={restProps?.cart?.items}

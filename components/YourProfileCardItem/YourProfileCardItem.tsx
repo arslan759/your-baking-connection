@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { Typography } from '@mui/material'
 import styles from './styles.module.css'
 import { YourProfileCardItemProps } from 'types'
+import Link from 'next/link'
 
 const YourProfileCardItem = ({ image, title, description }: YourProfileCardItemProps) => {
   const router = useRouter()
@@ -13,8 +14,10 @@ const YourProfileCardItem = ({ image, title, description }: YourProfileCardItemP
     router.push(`/profile/${slug}`)
   }
 
+  const slug = title.toLowerCase().replace(/\s+/g, '-')
+
   return (
-    <div className={`${styles.cardItem}`} onClick={() => handleCardItemClick(title)}>
+    <Link href={`/profile/${slug}`} className={`${styles.cardItem}`}>
       <img src={image} alt='card-img' className='w-[48px] md:w-[64px] h-[48px] md:h-[64px]' />
       <div>
         <Typography
@@ -52,7 +55,7 @@ const YourProfileCardItem = ({ image, title, description }: YourProfileCardItemP
           {description}
         </Typography>
       </div>
-    </div>
+    </Link>
   )
 }
 

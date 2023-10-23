@@ -3,18 +3,24 @@ import Navbar from '../NavBar/NavBar'
 import { Typography } from '@mui/material'
 import { PrimaryBtn } from '../Buttons'
 import DropdownField from '../DropdownField/DropdownField'
-import { ProductTypes, SearchBakerData, cities, states } from 'Constants/constants'
+import { ProductTypes, SearchBakerData } from 'Constants/constants'
 import InputField from '../InputField/InputField'
 import SearchBakerItem from '../SearchBakerItem/SearchBakerItem'
 import styles from './styles.module.css'
 import useBakers from 'hooks/baker/useBakers'
 import { withApollo } from 'lib/apollo/withApollo'
 import Spinner from '../Spinner'
+import { getCitiesApi, getStatesApi } from 'helpers/apis'
+import CustomAutocomplete from '../CustomAutocomplete'
 
 import useViewer from 'hooks/viewer/useViewer'
 
 const Search = () => {
+  const [states, setStates] = useState<any>([])
+  const [isLoadingStates, setIsLoadingStates] = useState(false)
   const [state, setState] = useState<string | null>('')
+  const [isLoadingCities, setIsLoadingCities] = useState(false)
+  const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
   const [search, setSearch] = useState('')
   const [productType, setProductType] = useState('')
@@ -44,12 +50,12 @@ const Search = () => {
   // dropdown handlers
   const handleStateChange = (state: string) => {
     setState(state)
-    setStateError(state ? '' : 'State is required')
+    // setStateError(state ? '' : 'State is required')
   }
 
   const handleCityChange = (state: string) => {
     setCity(state)
-    setCityError(state ? '' : 'City is required')
+    // setCityError(state ? '' : 'City is required')
   }
 
   const handleProductTypeChange = (type: string) => {
@@ -68,12 +74,14 @@ const Search = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
+    console.log('search is ', search)
     try {
       await getBakers({
         variables: {
+          searchQuery: search,
           filter: {
-            city: 'Dallas',
-            region: 'Texas',
+            city: city,
+            region: state,
           },
         },
       })
@@ -93,6 +101,16 @@ const Search = () => {
   useEffect(() => {
     console.log('bakers ', bakers)
   }, [bakers])
+
+  useEffect(() => {
+    getStatesApi(setStates, setIsLoadingStates)
+  }, [])
+
+  useEffect(() => {
+    setCities([])
+    setCity('')
+    getCitiesApi(state, setCities, setIsLoadingCities)
+  }, [state])
 
   return (
     <>
@@ -148,7 +166,7 @@ const Search = () => {
           <form onSubmit={handleSubmit} className='w-[90vw] md:w-[90vw] flex flex-col items-center'>
             <div className='w-full flex flex-col md:flex-row items-center justify-center gap-[16px]'>
               <div className='w-full md:w-[25%]'>
-                <DropdownField
+                {/* <DropdownField
                   // label='state'
                   required={false}
                   placeholder='state'
@@ -158,11 +176,26 @@ const Search = () => {
                   options={states}
                   inputColor='#6C6C6C'
                   onChange={handleStateChange}
+                /> */}
+
+                <CustomAutocomplete
+                  // label='state'
+                  loading={isLoadingStates}
+                  required
+                  name='state'
+                  placeholder='State'
+                  inputColor='#6C6C6C'
+                  options={states}
+                  value={state}
+                  errorText={stateError}
+                  // setValue={setState}
+                  onChange={handleStateChange}
+                  setError={setStateError}
                 />
               </div>
 
               <div className='w-full md:w-[25%]'>
-                <DropdownField
+                {/* <DropdownField
                   // label='city'
                   placeholder='city'
                   required={false}
@@ -172,13 +205,27 @@ const Search = () => {
                   options={cities}
                   inputColor='#6C6C6C'
                   onChange={handleCityChange}
+                /> */}
+                <CustomAutocomplete
+                  // label='city'
+                  loading={isLoadingCities}
+                  required
+                  name='city'
+                  placeholder='City'
+                  inputColor='#6C6C6C'
+                  options={cities}
+                  value={city}
+                  errorText={cityError}
+                  // setValue={setCity}
+                  onChange={handleCityChange}
+                  setError={setCityError}
                 />
               </div>
 
               <div className='w-full md:w-[25%]'>
                 <InputField
                   // label='city'
-                  placeholder='search'
+                  placeholder='Search'
                   type='text'
                   required={false}
                   startIcon={<img src='/Images/search-input-icon.svg' alt='search' />}
@@ -218,11 +265,38 @@ const Search = () => {
                 <div className='w-full flex flex-col items-center'>
                   <Spinner />
                 </div>
+              ) : // @ts-ignore
+              !bakers || bakers?.bakers?.nodes?.length == 0 ? (
+                <>
+                  <Typography
+                    sx={{
+                      fontSize: '48px !important',
+                      fontWeight: '700 !important',
+                      fontFamily: 'Josefin Sans',
+                      lineHeight: 'normal',
+                      textAlign: 'center',
+                      color: '#7DDEC1',
+                      textTransform: 'capitalize',
+                      fontFeatureSettings: "'clig' off, 'liga' off",
+                      '@media (max-width: 767px)': {
+                        fontSize: '24px !important',
+                      },
+                    }}
+                  >
+                    No Bakers Found
+                  </Typography>
+                  <img
+                    src='/Images/no-baker-found.png'
+                    alt='no baker'
+                    className='w-[150px] md:w-[350px] h-[200px] md:h-[400px]'
+                  />
+                </>
               ) : (
                 <>
                   {
                     //@ts-ignore
                     bakers?.bakers?.nodes?.map((item: any, index: any) => {
+                      console.log('item is ', item)
                       const { _id, name, slug, shopLogoUrls, description, addressBook } = item
                       // const { city, region: state } = addressBook[0]
                       return (
@@ -233,7 +307,7 @@ const Search = () => {
                             description={description}
                             rating={'4.2'}
                             city={addressBook ? addressBook[0]?.city : ''}
-                            state={addressBook ? addressBook[0]?.state : ''}
+                            state={addressBook ? addressBook[0]?.region : ''}
                             slug={_id}
                           />
                         </div>
@@ -246,9 +320,9 @@ const Search = () => {
           </div>
         </div>
 
-        <div className='w-[100px] md:w-[160px] h-[45px] flex justify-center mt-[50px]'>
+        {/* <div className='w-[100px] md:w-[160px] h-[45px] flex justify-center mt-[50px]'>
           <PrimaryBtn type='button' text='see more' handleClick={handleSeeMore} />
-        </div>
+        </div> */}
       </div>
     </>
   )

@@ -6,6 +6,7 @@ import CartCardDetailsItem from '../CartCardDetailsItem/CartCardDetailsItem'
 import EmptyCart from '../EmptyCart'
 import { PrimaryBtn } from '../Buttons'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 interface CartCardProps {
   cartFunctions: any
@@ -72,7 +73,7 @@ const CartCard = ({ cartFunctions }: CartCardProps) => {
                   icon='/Images/cart-delivery-icon.svg'
                   title='Home Delivery'
                   description='Same day delivery available'
-                  value='3.95$'
+                  value='$3.95'
                 />
               </div>
 
@@ -120,13 +121,15 @@ const CartCard = ({ cartFunctions }: CartCardProps) => {
               </div>
 
               <div className='w-fit self-end'>
-                <PrimaryBtn
-                  text='Proceed to checkout'
-                  handleClick={() => {
-                    router.push('/checkout')
-                  }}
-                  // loading={cartFunctions?.removeCartItemsLoading}
-                />
+                <Link href='/checkout'>
+                  <PrimaryBtn
+                    text='Proceed to checkout'
+                    // handleClick={() => {
+                    //   router.push('/checkout')
+                    // }}
+                    // loading={cartFunctions?.removeCartItemsLoading}
+                  />
+                </Link>
               </div>
             </>
           )}

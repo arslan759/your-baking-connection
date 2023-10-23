@@ -1,11 +1,13 @@
 import { Chip, Radio, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import DropdownField from '../DropdownField/DropdownField'
 import { cities, states } from 'Constants/constants'
 import Image from 'next/image'
 import { PrimaryBtn } from '../Buttons'
 import UploadInputField from '../UploadInputField/UploadInputField'
+import CustomAutocomplete from '../CustomAutocomplete'
+import { getCitiesApi, getStatesApi } from 'helpers/apis'
 
 const SignupForm = () => {
   const [shopName, setShopName] = useState('')
@@ -13,7 +15,11 @@ const SignupForm = () => {
   const [logo, setLogo] = useState<File | null>(null)
   const [featuredImage, setFeaturedImage] = useState<File | null>(null)
 
+  const [states, setStates] = useState<any>([])
+  const [isLoadingStates, setIsLoadingStates] = useState(false)
   const [state, setState] = useState<string | null>('')
+  const [isLoadingCities, setIsLoadingCities] = useState(false)
+  const [cities, setCities] = useState<any>([])
   const [city, setCity] = useState<string | null>('')
 
   const [PickupService, setPickupService] = useState(true)
@@ -183,6 +189,16 @@ const SignupForm = () => {
     setPickupServiceError('')
   }
 
+  useEffect(() => {
+    getStatesApi(setStates, setIsLoadingStates)
+  }, [])
+
+  useEffect(() => {
+    setCities([])
+    setCity('')
+    getCitiesApi(state, setCities, setIsLoadingCities)
+  }, [state])
+
   return (
     <div className=''>
       <div className=''>
@@ -235,7 +251,7 @@ const SignupForm = () => {
             </div>
 
             <div className='w-full md:w-[45%]'>
-              <DropdownField
+              {/* <DropdownField
                 label='state'
                 required
                 name='state'
@@ -244,11 +260,24 @@ const SignupForm = () => {
                 options={states}
                 inputColor='white'
                 onChange={handleStateChange}
+              /> */}
+              <CustomAutocomplete
+                label='state'
+                loading={isLoadingStates}
+                required
+                name='state'
+                inputColor='white'
+                options={cities}
+                value={city}
+                errorText={cityError}
+                // setValue={setCity}
+                onChange={handleCityChange}
+                setError={setCityError}
               />
             </div>
 
             <div className='w-full md:w-[45%]'>
-              <DropdownField
+              {/* <DropdownField
                 label='city'
                 required
                 name='city'
@@ -257,6 +286,20 @@ const SignupForm = () => {
                 options={cities}
                 inputColor='white'
                 onChange={handleCityChange}
+              /> */}
+              <CustomAutocomplete
+                label='city'
+                loading={isLoadingCities}
+                required
+                name='city'
+                placeholder='City'
+                inputColor='#6C6C6C'
+                options={cities}
+                value={city}
+                errorText={cityError}
+                // setValue={setCity}
+                onChange={handleCityChange}
+                setError={setCityError}
               />
             </div>
 

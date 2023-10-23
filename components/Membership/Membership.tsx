@@ -240,7 +240,7 @@ const Membership = () => {
             </Typography>
           </div>
 
-          <div className='mt-[128px] w-full flex flex-col md:flex-row md:justify-between gap-y-[170px]'>
+          <div className='mt-[128px] w-full flex flex-col md:flex-row md:justify-between md:flex-wrap gap-y-[170px]'>
             <div className='w-full md:w-[49%]'>
               <BasicMembershipCard />
             </div>

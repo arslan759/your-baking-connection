@@ -1,3 +1,5 @@
+'use Client'
+
 import React, { createContext } from 'react'
 import PropTypes from 'prop-types'
 

@@ -26,7 +26,7 @@ const BakerProducts = ({ slug }: BakerProductsProps) => {
 
   return (
     <div className='w-full flex flex-col items-center'>
-      <div className='w-[90vw] md:w-[70vw] flex flex-col items-center'>
+      {/* <div className='w-[90vw] md:w-[70vw] flex flex-col items-center'>
         <div className='w-[100%] md:w-[60%]'>
           <Typography
             variant='h1'
@@ -49,7 +49,7 @@ const BakerProducts = ({ slug }: BakerProductsProps) => {
         <div className='w-[70%] md:w-full mt-[42px]  flex justify-center'>
           <BakerProductsForm />
         </div>
-      </div>
+      </div> */}
 
       <div className='w-[90vw] mt-[48px] flex justify-center'>
         <BakerNavigation
@@ -64,7 +64,7 @@ const BakerProducts = ({ slug }: BakerProductsProps) => {
       </div>
 
       <div className='w-[90vw] mt-[48px] md:mt-[100px]'>
-        <CustomOrders />
+        <CustomOrders shopId={slug} />
       </div>
     </div>
   )

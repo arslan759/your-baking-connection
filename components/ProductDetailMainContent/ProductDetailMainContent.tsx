@@ -11,6 +11,7 @@ const ProductDetailMainContent = ({
   newPrice,
   reviews,
   rating,
+  shopId,
   description,
   productId,
   productVariantId,
@@ -46,7 +47,9 @@ const ProductDetailMainContent = ({
             {title}
           </Typography>
         </div>
-        <div className='w-fit rounded-[16px] bg-primary px-[8px] py-[4px]'>
+
+        {/* out of stock commented out, requires implmentation */}
+        {/* <div className='w-fit rounded-[16px] bg-primary px-[8px] py-[4px]'>
           <Typography
             sx={{
               fontFamily: 'Open Sans',
@@ -63,7 +66,7 @@ const ProductDetailMainContent = ({
           >
             {!stock ? `out of stock` : `${stock} left in stock`}
           </Typography>
-        </div>
+        </div> */}
       </div>
 
       <div className='mt-[6px] md:mt-[9px] flex gap-x-[12px] items-center'>
@@ -81,7 +84,7 @@ const ProductDetailMainContent = ({
               },
             }}
           >
-            {oldPrice}$
+            ${oldPrice}
           </Typography>
         )}
         <Typography
@@ -96,7 +99,7 @@ const ProductDetailMainContent = ({
             },
           }}
         >
-          {priceToDisplay.toFixed(2)}$
+          ${priceToDisplay.toFixed(2)}
         </Typography>
       </div>
 
@@ -125,7 +128,7 @@ const ProductDetailMainContent = ({
         >{`(${reviews} reviews)`}</Typography>
       </div>
 
-      <div className='w-[100%] lg:w-[95%] mt-[16px] lg:mt-[18px]'>
+      {/* <div className='w-[100%] lg:w-[95%] mt-[16px] lg:mt-[18px]'>
         <Typography
           sx={{
             fontFamily: 'Open Sans',
@@ -141,7 +144,7 @@ const ProductDetailMainContent = ({
         >
           {description}
         </Typography>
-      </div>
+      </div> */}
 
       <div className=' mt-[16px] md:mt-[18px]'>
         <ProductDetailForm
@@ -150,6 +153,7 @@ const ProductDetailMainContent = ({
           updatePrice={setPriceToDisplay}
           stock={stock}
           productId={productId}
+          shopId={shopId}
           productVariantId={productVariantId}
         />
       </div>
@@ -189,7 +193,7 @@ const ProductDetailMainContent = ({
           icon='/Images/cart-delivery-icon.svg'
           title='Home Delivery'
           description='Same day delivery available'
-          value='3.95$'
+          value='$3.95'
         />
       </div>
 

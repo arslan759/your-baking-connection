@@ -29,7 +29,7 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
   }
 
   useEffect(() => {
-    console.log('slug in final', slug)
+    // console.log('slug in final', slug)
   }, [slug])
 
   const [catalogItems, loadingItems, refetchItems, totalCount] = useCatalogItems({
@@ -42,7 +42,6 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
 
   useEffect(() => {
     let page = Math.ceil(totalCount / itemsPerPage)
-
     setPageCount(page)
   }, [totalCount])
 
@@ -62,6 +61,9 @@ const BakerAvailableProducts = ({ slug }: BakerAvailableProducts) => {
               return (
                 <ProductCard
                   key={item.id}
+                  isFavoriteFlag={product.isFavorite}
+                  productId={product.productId}
+                  shopId={slug}
                   image={product?.media[0]?.URLs?.thumbnail}
                   title={product?.title}
                   slug={product?.slug}

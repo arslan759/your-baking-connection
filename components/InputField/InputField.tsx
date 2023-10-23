@@ -13,6 +13,7 @@ const InputField = ({
   error,
   startIcon,
   rows,
+  changeHandler,
   onChange,
   required,
   errorText,
@@ -22,7 +23,7 @@ const InputField = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    onChange(name, value)
+    onChange ? onChange(name, value) : null
 
     if (value === '') setErrorState(true)
     else setErrorState(false)
@@ -31,6 +32,10 @@ const InputField = ({
   useEffect(() => {
     setErrorState(errorText ? true : false)
   }, [errorText, errorState])
+
+  // useEffect(() => {
+  //   // setErrorState(errorText ? true : false)
+  // }, [handleKeyPress])
 
   return (
     <div className='flex flex-col capitalize'>
@@ -77,6 +82,15 @@ const InputField = ({
             '&.Mui-focused fieldset': {
               borderColor: inputColor,
             },
+
+            '& input[type="number"]::-webkit-outer-spin-button, & input[type="number"]::-webkit-inner-spin-button':
+              {
+                '-webkit-appearance': 'none',
+                margin: 0,
+              },
+            '& input[type="number"]': {
+              '-moz-appearance': 'textfield' /* Firefox */,
+            },
           },
         }}
         placeholder={placeholder}
@@ -93,7 +107,7 @@ const InputField = ({
         error={errorState}
         id='outlined-error-helper-text'
         value={value}
-        onChange={handleChange}
+        onChange={changeHandler ? changeHandler : handleChange}
         helperText={errorState ? errorText : ''}
       />
     </div>

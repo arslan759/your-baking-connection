@@ -1,7 +1,6 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import PreferencesCard from '../PreferencesCard/PreferencesCard'
-import withAuth from 'hocs/withAuth'
 import { withApollo } from 'lib/apollo/withApollo'
 
 const Preferences = () => {
@@ -16,4 +15,4 @@ const Preferences = () => {
   )
 }
 
-export default withApollo()(withAuth(Preferences))
+export default withApollo()(Preferences)

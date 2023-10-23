@@ -377,17 +377,17 @@ export const GalleryNavigation = [
     id: 1,
     title: 'Available Products',
   },
-  {
-    id: 2,
-    title: 'Gallery of work',
-  },
-  {
-    id: 3,
-    title: 'Terms & Conditions',
-  },
+  // {
+  //   id: 2,
+  //   title: 'Gallery of work',
+  // },
+  // {
+  //   id: 3,
+  //   title: 'Terms & Conditions',
+  // },
   {
     id: 4,
-    title: 'Allergen Information',
+    title: 'Favorites',
   },
   {
     id: 5,
@@ -404,10 +404,10 @@ export const ProductDetailNavigationTabs = [
     id: 2,
     title: 'reviews',
   },
-  {
-    id: 3,
-    title: 'FAQs',
-  },
+  // {
+  //   id: 3,
+  //   title: 'FAQs',
+  // },
 ]
 
 export const GalleryProductsData = [
@@ -609,24 +609,24 @@ export const YourProfileCardItemData = [
     description: 'Customer management, financial and inventory management',
     image: '/Images/profile-rating-and-reviews.svg',
   },
-  {
-    id: 3,
-    title: 'Preferences',
-    description: 'Order confirmation, payment reminder, account balance update',
-    image: '/Images/profile-preferences.svg',
-  },
+  // {
+  //   id: 3,
+  //   title: 'Preferences',
+  //   description: 'Order confirmation, payment reminder, account balance update',
+  //   image: '/Images/profile-preferences.svg',
+  // },
   // {
   //   id: 4,
   //   title: 'Privacy Setting',
   //   description: 'Track, return, cancel an order, download invoice or buy again',
   //   image: '/Images/profile-privacy-settings.svg',
   // },
-  {
-    id: 5,
-    title: 'Payment Details',
-    description: 'Customer management, financial and inventory management',
-    image: '/Images/profile-payment-details.svg',
-  },
+  // {
+  //   id: 5,
+  //   title: 'Payment Details',
+  //   description: 'Customer management, financial and inventory management',
+  //   image: '/Images/profile-payment-details.svg',
+  // },
   {
     id: 6,
     title: 'Settings',

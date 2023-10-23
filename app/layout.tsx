@@ -8,6 +8,9 @@ import ContextProvider from './context-provider'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
+import NextAuthProvider from './nextAuthProvider'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function RootLayout({ children }: PropsWithChildren<{}>) {
   return (
@@ -19,13 +22,27 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
       </head>
       <ThemeProvider theme={lightTheme}>
         <ContextProvider>
-          <body>
-            <CssBaseline />
-            {/* {showHeader && <Header />} */}
-            {<Header />}
-            {children}
-            {<Footer />}
-          </body>
+          <NextAuthProvider>
+            <body>
+              <CssBaseline />
+              {/* {showHeader && <Header />} */}
+              {<Header />}
+              {children}
+              {<Footer />}
+            </body>
+            <ToastContainer
+              position='top-right'
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme='light'
+            />
+          </NextAuthProvider>
         </ContextProvider>
       </ThemeProvider>
     </html>

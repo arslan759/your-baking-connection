@@ -8,9 +8,10 @@ import { withApollo } from 'lib/apollo/withApollo'
 
 interface AddToCartProps {
   [key: string]: any
+  slug: string
 }
 
-const Checkout = ({ ...restProps }: AddToCartProps) => {
+const Checkout = ({ slug, ...restProps }: AddToCartProps) => {
   const [totalAmount, setTotalAmount] = useState(0)
 
   const fetchTotalAmount = (value: number) => {
@@ -30,7 +31,11 @@ const Checkout = ({ ...restProps }: AddToCartProps) => {
         <div className='w-[90vw] md:[95vw] flex flex-col gap-y-[24px]'>
           <div className='w-full flex flex-col lg:flex-row items-start lg:justify-between gap-y-[24px]'>
             <div className='w-full lg:w-[48%]'>
-              <DeliveryDetails totalAmountWithTax={totalAmount} />
+              <DeliveryDetails
+                totalAmountWithTax={totalAmount}
+                cartFunctions={restProps}
+                slug={slug}
+              />
             </div>
 
             <div className='w-full lg:w-[48%]'>

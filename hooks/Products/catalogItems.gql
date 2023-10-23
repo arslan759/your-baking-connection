@@ -19,6 +19,7 @@ query catalogItems(
           product {
             _id
             slug
+            isFavorite
             productId
             title
             description
