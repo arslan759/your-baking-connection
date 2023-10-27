@@ -2,7 +2,8 @@ import { Rating, LinearProgress, Typography, Button } from '@mui/material'
 import Image from 'next/image'
 import { PrimaryBtn } from '../Buttons'
 import { useState } from 'react'
-import AddReviewCard from '../AddReviewCard'
+// import AddReviewCard from '../AddReviewCard'
+import AddReviewCardShop from '../AddReviewCardShop'
 
 const rating = 3.2
 const noOfRating = 46
@@ -14,7 +15,7 @@ const linearProgress = [
   { value: 8, name: '1 stars' },
 ]
 
-const Statistics = ({ refetchReviews }: any) => {
+const StatisticsShop = ({ refetchReviews }: any) => {
   const [addReviewModal, setAddReviewModal] = useState(false)
   const handleAddReviewModalOpen = () => {
     setAddReviewModal(true)
@@ -124,7 +125,7 @@ const Statistics = ({ refetchReviews }: any) => {
           </div> */}
         </div>
       </div>
-      <AddReviewCard
+      <AddReviewCardShop
         open={addReviewModal}
         onClose={handleAddReviewModalClose}
         refetchReviews={refetchReviews}
@@ -133,4 +134,4 @@ const Statistics = ({ refetchReviews }: any) => {
   )
 }
 
-export default Statistics
+export default StatisticsShop
