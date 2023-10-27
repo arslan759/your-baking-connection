@@ -87,7 +87,7 @@ const Review = ({ reviewData }: any) => {
           <div>
             <Image
               className='rounded-full'
-              src='/Images/DefaultAvatar.jpg'
+              src={reviewData?.reviewByInfo?.picture}
               alt='profile picture'
               width={60}
               height={60}
@@ -95,7 +95,10 @@ const Review = ({ reviewData }: any) => {
           </div>
           <div className='flex justify-between'>
             <div className='flex flex-col'>
-              <div className='!font-[500]'>John Mike</div>
+              <div className='!font-[500]'>
+                {' '}
+                {reviewData?.reviewByInfo?.firstName} {reviewData?.reviewByInfo?.lastName}
+              </div>
               <div className='text-[#7DDEC1]'>
                 <Image
                   className='mr-[5px]'
@@ -108,7 +111,7 @@ const Review = ({ reviewData }: any) => {
               </div>
             </div>
             <div className='flex flex-col text-[#888] '>
-              <div className='text-right'>2 days ago</div>
+              <div className='text-right'>{formatDateAgo(new Date(reviewData?.createdAt))} ago</div>
               <div className='leading-4 text-[14px]'>
                 <ThumbUpOffAltIcon
                   onClick={() => console.log('ThumbsUpOff')}
@@ -140,7 +143,7 @@ const Review = ({ reviewData }: any) => {
                 />
               </div>
             </div>
-            <div className='text-[20px] font-[600] mb-[6px]'>Berry Cream Fantasy</div>
+            <div className='text-[20px] font-[600] mb-[6px]'>{reviewData?.title}</div>
             <div className='text-[#090909] leading-6 text-justify'>
               <span>{reviewData?.description}</span>
             </div>
