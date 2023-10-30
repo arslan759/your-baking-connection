@@ -10,7 +10,7 @@ const ProductPics = ({ images }: any) => {
   return (
     <div className='flex flex-col gap-[11px]'>
       <div className='relative w-[100%] md:w-[400px] lg:w-[500px] h-[400px] md:h-[400px] lg:h-[500px]'>
-        <img className='w-full h-full rounded object-fill' src={selected} alt='Product display' />
+        <img className='w-full h-full rounded object-cover' src={selected} alt='Product display' />
       </div>
       <div className='flex gap-[5px] w-full md:w-[400px] lg:w-[500px] h-[100px]'>
         {images?.map((background: any, index: any) => {
