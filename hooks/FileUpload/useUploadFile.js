@@ -12,7 +12,7 @@ const useFileUpload = () => {
 
     const requestOptions = {
       method: 'POST',
-      body: formData,
+      body: formData, 
       redirect: 'follow',
     }
 

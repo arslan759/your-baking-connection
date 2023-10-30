@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { CircularProgress, Typography } from '@mui/material'
 import { paymentMethods } from 'Constants/constants'
 import { TertiaryBtn } from '../Buttons'
 import EmptyCart from '../EmptyCart'
 import { useRouter } from 'next/navigation'
+import useTaxRates from 'hooks/baker/useTaxRates'
 import Link from 'next/link'
 
 interface OrderCardProps {
@@ -14,11 +15,28 @@ interface OrderCardProps {
 }
 
 const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardProps) => {
-  console.log('cartFunctions in OrderCard is', cartFunctions)
-
+  console.log('cartFunctions in OrderCard is', cartFunctions, items)
+  const [taxRate, loadingTaxRate, refetchTaxRate] = useTaxRates(cartFunctions?.cart?.shop?._id)
   const router = useRouter()
+  const [salesTax, setSalesTax] = useState(0)
+  let totalTaxIfApplicableonItems
+  useEffect(() => {
+    console.log('Refreshed')
+    setSalesTax(taxRate)
+  }, [cartFunctions?.cart?.shop?._id])
+  const totalAmount = cartFunctions?.cart?.checkout?.summary?.itemTotal?.amount
+  useEffect(() => {
+    totalTaxIfApplicableonItems = items?.reduce((total, item) => {
+      if (item?.isTaxable) return total + item.subtotal.amount * (salesTax / 100)
+      else return total
+    }, 0)
 
-  const [salesTax, setSalesTax] = useState(13)
+    console.log('totalTaxIfApplicableonItems is', totalTaxIfApplicableonItems)
+
+    const totalAmountWithTax = totalAmount + totalTaxIfApplicableonItems
+
+    setTotalAmountWithTax(totalAmountWithTax)
+  }, [salesTax])
 
   if (
     cartFunctions?.isLoadingCart ||
@@ -48,19 +66,6 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
         </div>
       </div>
     )
-
-  const totalAmount = cartFunctions?.cart?.checkout?.summary?.itemTotal?.amount
-
-  const totalTaxIfApplicableonItems = items?.reduce((total, item) => {
-    if (item?.isTaxable) return total + item.subtotal.amount * (salesTax / 100)
-    else return total
-  }, 0)
-
-  console.log('totalTaxIfApplicableonItems is', totalTaxIfApplicableonItems)
-
-  const totalAmountWithTax = totalAmount + totalTaxIfApplicableonItems
-
-  setTotalAmountWithTax(totalAmountWithTax)
 
   return (
     <div className={styles.card}>

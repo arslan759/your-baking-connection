@@ -7,7 +7,8 @@ import useStores from 'hooks/useStores'
 import useCatalogItems from 'hooks/Products/useCatalogItems'
 import { withApollo } from 'lib/apollo/withApollo'
 import BakerFavoriteProducts from '../BakerFavoriteProducts'
-import ClientReviewsTab from '../ClientReviewsTab'
+// import ClientReviewsTab from '../ClientReviewsTab'
+import ClientReviewsTabShop from '../ClientReviewsTabShop'
 
 const BakerTabsPanel = ({ activeTab, slug, fetchTotalProducts }: BakerTabsPanelProps) => {
   // const [products, setProducts] = useState(0)
@@ -38,7 +39,7 @@ const BakerTabsPanel = ({ activeTab, slug, fetchTotalProducts }: BakerTabsPanelP
         <div className='w-full flex justify-center'>
           <div className='review-swiper w-[90%]'>
             {/* <ClientReviewSwiper /> */}
-            <ClientReviewsTab />
+            <ClientReviewsTabShop />
           </div>
         </div>
       )}
