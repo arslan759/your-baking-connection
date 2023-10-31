@@ -190,7 +190,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
       await placeOrderHandler()
       window.location.href = url
     } catch (err: any) {
-      toast.error(`Error is ', ${error?.message}`)
+      toast.error(`Error is ', ${err?.message}`)
       // console.log(err)
     }
   }
