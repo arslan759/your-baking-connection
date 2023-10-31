@@ -50,7 +50,7 @@ const ForgotPasswordForm = ({ openOtp, setEmail, email }: ForgetPasswordFormProp
     }
 
     // Logs form data
-    console.log('email is ', email)
+    // console.log('email is ', email)
 
     // Reset form fields
     setEmail('')

@@ -6,7 +6,8 @@ import styles from './styles.module.css'
 import InputField from '../InputField'
 import useCreateReview from '../../hooks/Reviews/useCreateReview'
 import { usePathname, useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 
 const AddReviewCardShop = ({ open, onClose, refetchReviews }: any) => {
   const [rating, setRating] = useState(0)
@@ -71,18 +72,18 @@ const AddReviewCardShop = ({ open, onClose, refetchReviews }: any) => {
           input,
         },
       })
-      console.log('res is ', res)
-
-      toast.success('Review added successfully', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      })
+      // console.log('res is ', res)
+      toast.success('Review added successfully')
+      // toast.success('Review added successfully', {
+      //   position: 'top-right',
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: 'light',
+      // })
       resetFields()
       refetchReviews()
       onClose()
@@ -91,19 +92,20 @@ const AddReviewCardShop = ({ open, onClose, refetchReviews }: any) => {
     } catch (err) {
       console.log(err)
       //   handleErrorOpen();
-      toast.error('Failed to add review!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      })
+      toast.error('Failed to add review!')
+      // toast.error('Failed to add review!', {
+      //   position: 'top-right',
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: 'light',
+      // })
     }
     // setIsFavorite(!isFavorite)
-    console.log('favourite clicked')
+    // console.log('favourite clicked')
   }
   return (
     <Modal

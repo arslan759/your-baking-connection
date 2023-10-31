@@ -2,7 +2,6 @@ import React, { useState, useEffect, ChangeEvent, useRef } from 'react'
 import { CircularProgress, Typography } from '@mui/material'
 import useFileUpload from 'hooks/FileUpload/useUploadFile'
 import DeleteIcon from '@mui/icons-material/Delete'
-
 import { AddCustomOrderImagesProps } from 'types'
 
 const AddCustomOrderImages = ({
@@ -32,9 +31,9 @@ const AddCustomOrderImages = ({
       setImageUploadCounter(0)
     }
 
-    console.log('product media in addproductImages is ', productMedia)
-    console.log('image loading is ', imageLoading)
-    console.log('image upload counter is ', imageUploadCounter)
+    // console.log('product media in addproductImages is ', productMedia)
+    // console.log('image loading is ', imageLoading)
+    // console.log('image upload counter is ', imageUploadCounter)
   }, [productMedia])
 
   const [uploadFile, loadingUploadFile] = useFileUpload()
@@ -51,7 +50,7 @@ const AddCustomOrderImages = ({
       }
     })
 
-    console.log('updated image loading is ', updatedLoading)
+    // console.log('updated image loading is ', updatedLoading)
 
     updatedImages.splice(index, 1)
     setImages(updatedImages)
@@ -66,9 +65,9 @@ const AddCustomOrderImages = ({
       //@ts-ignore
       const image = e.target.files[0]
 
-      console.log('image is ', image)
+      // console.log('image is ', image)
 
-      console.log('picture is ', image?.name)
+      // console.log('picture is ', image?.name)
 
       if (!image) return
 
@@ -99,8 +98,8 @@ const AddCustomOrderImages = ({
       //@ts-ignore
       const uploadRes = await uploadFile(image, '/product-images')
       if (uploadRes.result.status) {
-        console.log('upload res is', uploadRes)
-        console.log('setting product media', uploadRes.result.data[0].availableSizes.large)
+        // console.log('upload res is', uploadRes)
+        // console.log('setting product media', uploadRes.result.data[0].availableSizes.large)
         handleUpdateProductMedia(uploadRes.result.data[0].availableSizes.large)
       }
 

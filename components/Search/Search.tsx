@@ -65,7 +65,7 @@ const Search = () => {
 
   // seeMore handler
   const handleSeeMore = () => {
-    console.log('see more clicked')
+    // console.log('see more clicked')
   }
 
   const [getBakers, loadingBakers, bakers] = useBakers()
@@ -74,7 +74,7 @@ const Search = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    console.log('search is ', search)
+    // console.log('search is ', search)
     try {
       await getBakers({
         variables: {
@@ -85,7 +85,7 @@ const Search = () => {
           },
         },
       })
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching bakers:', error)
     }
   }
@@ -99,7 +99,7 @@ const Search = () => {
   }, [])
 
   useEffect(() => {
-    console.log('bakers ', bakers)
+    // console.log('bakers ', bakers)
   }, [bakers])
 
   useEffect(() => {

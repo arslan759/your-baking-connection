@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
 import {
-  CircularProgress,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow
 } from '@mui/material'
 import { SecondaryBtn } from '../Buttons'
-import Spinner from '../Spinner'
+// import Spinner from '../Spinner'
 import EmptyCart from '../EmptyCart'
 
 interface CartTableProps {
@@ -27,7 +25,7 @@ const CartTable = ({ items, cartFunctions }: CartTableProps) => {
 
   const { setIsUpdatingQuantity, isUpdatingQuantity } = cartFunctions?.uiStore
 
-  console.log('cartFunctions in cartTable is', cartFunctions)
+  // console.log('cartFunctions in cartTable is', cartFunctions)
 
   const handleAddQuantity = async (cartItem: any) => {
     setIsUpdatingQuantity(true)
@@ -39,7 +37,7 @@ const CartTable = ({ items, cartFunctions }: CartTableProps) => {
       quantity: cartItem?.quantity + 1,
     }
 
-    console.log('cartItem in handleAddQuantity is', cartItem)
+    // console.log('cartItem in handleAddQuantity is', cartItem)
     // return
 
     try {
@@ -47,7 +45,7 @@ const CartTable = ({ items, cartFunctions }: CartTableProps) => {
 
       setIsUpdatingQuantity(false)
     } catch (error: any) {
-      console.log('error in handleAddQuantity is', error?.message)
+      // console.log('error in handleAddQuantity is', error?.message)
 
       setIsUpdatingQuantity(false)
     }
@@ -62,7 +60,7 @@ const CartTable = ({ items, cartFunctions }: CartTableProps) => {
       quantity: cartItem?.quantity - 1,
     }
 
-    console.log('cartItem in handleSubtractQuantity is', cartItem)
+    // console.log('cartItem in handleSubtractQuantity is', cartItem)
 
     // return
 
@@ -71,7 +69,7 @@ const CartTable = ({ items, cartFunctions }: CartTableProps) => {
 
       setIsUpdatingQuantity(false)
     } catch (error: any) {
-      console.log('error in handleAddQuantity is', error?.message)
+      // console.log('error in handleAddQuantity is', error?.message)
 
       setIsUpdatingQuantity(false)
     }

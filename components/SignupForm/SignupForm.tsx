@@ -7,7 +7,7 @@ import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import { checkPassword, validateEmail } from 'helpers/validations'
 import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { SignUpFormProps } from 'types'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
 import CustomAutocomplete from '../CustomAutocomplete'
@@ -16,7 +16,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
   //sign up mutation hook
   const [signUp, loadingSignUp] = useCreateUserWithOtp()
 
-  const router = useRouter()
+  // const router = useRouter()
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -169,39 +169,6 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       return
     }
 
-    // Logs the form data
-    console.log('form submitted')
-    console.log('firstname is ', firstName)
-    console.log('lastname is ', lastName)
-    console.log('email is ', email)
-    console.log('phone is ', phone)
-    console.log('state is ', state)
-    console.log('city is ', city)
-    console.log('password is ', password)
-    console.log('confirm password is ', confirmPassword)
-    console.log('checked is ', checked)
-
-    // Resets the form fields
-    // setFirstName('')
-    // setLastName('')
-    // setEmail('')
-    // setPhone('')
-    // setState('')
-    // setCity('')
-    // setPassword('')
-    // setConfirmPassword('')
-    // setChecked(false)
-
-    // Resets the error states
-    // setFirstNameError('')
-    // setLastNameError('')
-    // setEmailError('')
-    // setPhoneError('')
-    // setStateError('')
-    // setCityError('')
-    // setPasswordError('')
-    // setConfirmPasswordError('')
-
     //registration handler
 
     try {
@@ -215,7 +182,6 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       let userId = result?.data?.createUserWithOtp?.userId
       if (userId) {
         localStorage.setItem('userId', userId)
-
         openOtp()
       }
     } catch (err) {
@@ -347,17 +313,6 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
               </div>
 
               <div className='w-full md:w-[45%]'>
-                {/* <DropdownField
-                  label='state'
-                  required
-                  name='state'
-                  errorText={stateError}
-                  value={state}
-                  options={states}
-                  inputColor='white'
-                  onChange={handleStateChange}
-                /> */}
-
                 <CustomAutocomplete
                   label='state'
                   loading={isLoadingStates}
@@ -374,16 +329,6 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
               </div>
 
               <div className='w-full md:w-[45%]'>
-                {/* <DropdownField
-                  label='city'
-                  required
-                  name='city'
-                  errorText={cityError}
-                  value={city}
-                  options={cities}
-                  inputColor='white'
-                  onChange={handleCityChange}
-                /> */}
                 <CustomAutocomplete
                   label='city'
                   loading={isLoadingCities}
