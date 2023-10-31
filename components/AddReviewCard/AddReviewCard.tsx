@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 import InputField from '../InputField'
 import useCreateReview from '../../hooks/Reviews/useCreateReview'
 import { usePathname, useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 
 const AddReviewCard = ({ open, onClose, refetchReviews }: any) => {
   const [rating, setRating] = useState(0)
@@ -33,7 +33,6 @@ const AddReviewCard = ({ open, onClose, refetchReviews }: any) => {
     setTitle('')
     setDescription('')
     setRating(0)
-
     setTitleError('')
     setDescriptionError('')
     setRatingError('')
@@ -52,10 +51,8 @@ const AddReviewCard = ({ open, onClose, refetchReviews }: any) => {
       if (!description) {
         setDescriptionError('Description is required')
       }
-
       return
     }
-
     try {
       const input = {
         productId: urlParams,
@@ -71,18 +68,7 @@ const AddReviewCard = ({ open, onClose, refetchReviews }: any) => {
           input,
         },
       })
-      console.log('res is ', res)
-
-      toast.success('Review added successfully', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      })
+      toast.success('Review added successfully')
       resetFields()
       refetchReviews()
       onClose()
@@ -91,19 +77,8 @@ const AddReviewCard = ({ open, onClose, refetchReviews }: any) => {
     } catch (err) {
       console.log(err)
       //   handleErrorOpen();
-      toast.error('Failed to add review!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      })
+      toast.error('Failed to add review!')
     }
-    // setIsFavorite(!isFavorite)
-    console.log('favourite clicked')
   }
   return (
     <Modal

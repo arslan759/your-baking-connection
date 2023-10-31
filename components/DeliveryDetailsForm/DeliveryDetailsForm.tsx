@@ -1,25 +1,25 @@
 import {
   Checkbox,
+  CircularProgress,
   FormControl,
   FormHelperText,
   Radio,
   Typography,
-  CircularProgress,
 } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import InputField from '../InputField/InputField'
-import DropdownField from '../DropdownField/DropdownField'
 import { pickupDayOptions, pickupHoursOptions } from 'Constants/constants'
-import { PrimaryBtn } from '../Buttons'
-import usePlaceOrder from 'hooks/order/usePlaceOrder'
-import { getCitiesApi, getStatesApi } from 'helpers/apis'
-import { withApollo } from 'lib/apollo/withApollo'
-import CustomAutocomplete from '../CustomAutocomplete'
-import useViewer from 'hooks/viewer/useViewer'
 import useGetFlatRateFulfillmentByShopId from 'hooks/order/useGetFlatRateFulfillmentByShopId'
-import useCreateStripeSinglePrice from 'hooks/stripe/useCreateStripeSinglePrice'
+import usePlaceOrder from 'hooks/order/usePlaceOrder'
 import useCreateStripeCheckOutSession from 'hooks/stripe/useCreateStripeCheckOutSession'
+import useCreateStripeSinglePrice from 'hooks/stripe/useCreateStripeSinglePrice'
+import useViewer from 'hooks/viewer/useViewer'
+import { withApollo } from 'lib/apollo/withApollo'
 import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { PrimaryBtn } from '../Buttons'
+import CustomAutocomplete from '../CustomAutocomplete'
+import DropdownField from '../DropdownField/DropdownField'
+import InputField from '../InputField/InputField'
+import toast from 'react-hot-toast'
 
 interface DeliveryDetailsFormProps {
   amount: number
@@ -36,10 +36,10 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
 
   const [flatRateData, loadingFlatRate] = useGetFlatRateFulfillmentByShopId('')
 
-  console.log('cart functions in delivery form', cartFunctions)
+  // console.log('cart functions in delivery form', cartFunctions)
 
   useEffect(() => {
-    console.log('flat rate data is ', flatRateData)
+    // console.log('flat rate data is ', flatRateData)
   }, [flatRateData])
 
   const [placeOrderFunction, placeOrderLoading] = usePlaceOrder()
@@ -60,7 +60,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
   const [termsAndConditions, setTermsAndConditions] = useState(false)
 
   useEffect(() => {
-    console.log('viwer in details form', viewer)
+    // console.log('viwer in details form', viewer)
     setState(viewer?.state)
     setCity(viewer?.city)
     setAddress(viewer?.currentAddress)
@@ -164,11 +164,13 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
         },
       })
 
-      console.log('price is ', price)
+      // console.log('price is ', price)
       const priceId = price.data.createStripeSinglePrice.stripeData.id
       await createStripeCheckoutSessionHandler(priceId)
-    } catch (err) {
-      console.log('err', err)
+    } catch (err: any) {
+      toast.error(`Error is ', ${error?.message}`)
+
+      // console.log('err', err)
     }
   }
 
@@ -182,13 +184,14 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
           mode: 'payment',
         },
       })
-      console.log('session', session)
+      // console.log('session', session)
       const url = session.data.createStripeCheckOutSession.stripeData
-      console.log('stripe url is ', url)
+      // console.log('stripe url is ', url)
       await placeOrderHandler()
       window.location.href = url
-    } catch (err) {
-      console.log(err)
+    } catch (err: any) {
+      toast.error(`Error is ', ${error?.message}`)
+      // console.log(err)
     }
   }
 
@@ -201,7 +204,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
       return { quantity, price, productConfiguration }
     })
 
-    console.log('items are ', items)
+    // console.log('items are ', items)
 
     const input = {
       order: {
@@ -261,7 +264,8 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
         },
       })
     } catch (error: any) {
-      console.log('error in placeOrderHandler is', error?.message)
+      toast.error(`Error is ', ${error?.message}`)
+      // console.log('error in placeOrderHandler is', error?.message)
     }
   }
 

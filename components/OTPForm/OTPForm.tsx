@@ -48,7 +48,7 @@ const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
         return err
       }
     } else if (type === 'forgotPassword') {
-      console.log('firing otp function', email)
+      // console.log('firing otp function', email)
 
       const res = await verifyOtp({
         variables: {

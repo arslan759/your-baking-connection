@@ -19,7 +19,7 @@ const Checkout = ({ slug, ...restProps }: AddToCartProps) => {
   }
 
   useEffect(() => {
-    console.log('restProps in checkout is', restProps)
+    // console.log('restProps in checkout is', restProps)
     // restProps?.uiStore?.closeCart()
   }, [totalAmount])
 

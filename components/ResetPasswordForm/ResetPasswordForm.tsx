@@ -8,6 +8,7 @@ import useResetPasswordOtpVerify from '../../hooks/Authentication/ResetPassword/
 import { withApollo } from 'lib/apollo/withApollo'
 import { useRouter } from 'next/navigation'
 import hashPassword from 'lib/utils/hashPassword'
+import toast from 'react-hot-toast'
 
 interface ResetPasswordProps {
   otp: string // Change `any` to the appropriate type for `otp`
@@ -18,11 +19,9 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [resetPassword, loadingResetPassword] = useResetPasswordOtpVerify()
-
   // Error states
   const [passwordError, setPasswordError] = useState('')
   const [confirmPasswordError, setConfirmPasswordError] = useState('')
-
   // handleChange function for input fields
   const handleChange = (name: string, value: string) => {
     if (name === 'password') {
@@ -33,34 +32,27 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
       setConfirmPasswordError(value ? '' : 'Confirm password is required')
     }
   }
-
   // handle submit function for form
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
     // Checks if password and confirm password match
     const isPasswordMatched = checkPassword(password, confirmPassword)
-
     // Checks if email is empty
     if (!password || !confirmPassword) {
       if (!password) {
         setPasswordError('Password is required')
       }
-
       if (!confirmPassword) {
         setConfirmPasswordError('Confirm password is required')
       }
-
       // Stops the execution of the function
       return
     }
-
     // Checks if password and confirm password match
     if (!isPasswordMatched) {
       setConfirmPasswordError('Passwords do not match')
       return
     }
-
     try {
       const res = await resetPassword({
         variables: {
@@ -74,20 +66,15 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
       if (res?.data?.resetPasswordOtpVerify) {
         router.push('/signin')
       }
-
-      console.log('reset pass response is ', res)
-    } catch (err) {
-      console.log('err', err)
+      // console.log('reset pass response is ', res)
+      toast.success('Password changed successfully')
+    } catch (err: any) {
+      toast.error(`Error is ', ${err?.message}`)
+      // console.log('err', err)
     }
-
-    // Logs form data
-    console.log('password is ', password)
-    console.log('confirm password is ', confirmPassword)
-
     // Reset form fields
     setPassword('')
     setConfirmPassword('')
-
     // Reset error states
     setPasswordError('')
     setConfirmPasswordError('')

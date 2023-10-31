@@ -11,7 +11,7 @@ import reviews from './reviews.gql'
  */
 
 export default function useReviews(input) {
-  console.log('input in reviews hook ', input)
+  // console.log('input in reviews hook ', input)
   const { loading, data, refetch } = useQuery(reviews, {
     variables: input,
   })

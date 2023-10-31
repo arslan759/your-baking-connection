@@ -7,7 +7,8 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import DropdownFieldAttributes from '../DropdownFieldAttributes'
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 
 interface ProductDetailFormProps {
   attributes: any[]
@@ -51,17 +52,17 @@ const ProductDetailForm = ({
   const [flavorError, setFlavorError] = useState('')
 
   const handleDropdownChange = (attribute: string, optionLabel: string, price: string) => {
-    console.log('attribute is ', attribute)
-    console.log('name is ', optionLabel)
-    console.log('value is ', price)
+    // console.log('attribute is ', attribute)
+    // console.log('name is ', optionLabel)
+    // console.log('value is ', price)
 
     const updatedAttributes = [...productAttributes]
 
-    console.log('updatedAttributes', updatedAttributes)
+    // console.log('updatedAttributes', updatedAttributes)
 
     const attributeToUpdate = updatedAttributes.filter((item) => item.attribute === attribute)[0]
 
-    console.log('attributeToUpdate is ', attributeToUpdate)
+    // console.log('attributeToUpdate is ', attributeToUpdate)
 
     attributeToUpdate!.option = {
       optionLabel,
@@ -74,13 +75,13 @@ const ProductDetailForm = ({
       totalPrice.push(Number(item.option.price))
     })
 
-    console.log('totalPrice is ', totalPrice)
+    // console.log('totalPrice is ', totalPrice)
 
     const reducer = (accumulator: number, currentValue: number) => accumulator + currentValue
 
     const newTotalPrice = totalPrice.reduce(reducer)
 
-    console.log('newTotalPrice is ', newTotalPrice)
+    // console.log('newTotalPrice is ', newTotalPrice)
 
     updatePrice(newPrice + newTotalPrice)
 
@@ -89,13 +90,13 @@ const ProductDetailForm = ({
     setProductAttributes(updatedAttributes)
   }
 
-  console.log('props are ', restProps)
+  // console.log('props are ', restProps)
 
   const { addItemsToCart, onChangeCartItemsQuantity, onRemoveCartItems } = restProps
 
-  console.log('cartMutation addItemsToCart is ', addItemsToCart)
-  console.log('cartMutation onChangeCartItemsQuantity is ', onChangeCartItemsQuantity)
-  console.log('cartMutation onRemoveCartItems is ', onRemoveCartItems)
+  // console.log('cartMutation addItemsToCart is ', addItemsToCart)
+  // console.log('cartMutation onChangeCartItemsQuantity is ', onChangeCartItemsQuantity)
+  // console.log('cartMutation onRemoveCartItems is ', onRemoveCartItems)
 
   //   onClick function for serves
   const handleServesChange = (serves: string) => {
@@ -104,24 +105,24 @@ const ProductDetailForm = ({
 
   // function for add and subtract quantity
   const handleAddQuantity = () => {
-    console.log('add quantity clicked')
+    // console.log('add quantity clicked')
 
     if (quantity === stock) return
 
     setQuantity((prev) => prev + 1)
 
-    console.log('quantity is now', quantity)
+    // console.log('quantity is now', quantity)
   }
 
   const handleSubtractQuantity = () => {
-    console.log('subtract quantity clicked for', name)
+    // console.log('subtract quantity clicked for', name)
 
-    console.log('quantity is', quantity)
+    // console.log('quantity is', quantity)
 
     if (quantity === 1) return
     setQuantity((prev) => prev - 1)
 
-    console.log('quantity is now', quantity)
+    // console.log('quantity is now', quantity)
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -129,7 +130,7 @@ const ProductDetailForm = ({
 
     // const shopId = localStorage.getItem('shopId')
 
-    console.log('shopId is in details form is ', shopId)
+    // console.log('shopId is in details form is ', shopId)
 
     // return
 
@@ -150,7 +151,7 @@ const ProductDetailForm = ({
       },
     }
 
-    console.log('cartItem is ', cartItem)
+    // console.log('cartItem is ', cartItem)
 
     try {
       // throw new Error('test error')
@@ -169,53 +170,55 @@ const ProductDetailForm = ({
           quantity: quantity,
         },
       ])
-      console.log('addItemsToCartResponse is ', addItemsToCartResponse)
+      // console.log('addItemsToCartResponse is ', addItemsToCartResponse)
       if (
         addItemsToCartResponse?.data?.addCartItems?.cart?._id ||
         addItemsToCartResponse?.data?.createCart?.cart?._id
       ) {
-        toast.success('Item added to cart', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-        })
+        // toast.success('Item added to cart', {
+        //   position: 'top-right',
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'light',
+        // })
+        toast.success('Item added to cart')
       }
     } catch (error: any) {
-      console.log('error is ', error?.message)
-      toast.error('Failed to add item!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      })
+      // console.log('error is ', error?.message)
+      // toast.error('Failed to add item!', {
+      //   position: 'top-right',
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: 'light',
+      // })
+      toast.error(`Error is ', ${error?.message}`)
     }
 
     // form logs
-    console.log('serves is ', serves)
-    console.log('quantity is ', quantity)
-    console.log('isFavorite is ', isFavorite)
-    console.log('productAttributes is ', productAttributes)
+    // console.log('serves is ', serves)
+    // console.log('quantity is ', quantity)
+    // console.log('isFavorite is ', isFavorite)
+    // console.log('productAttributes is ', productAttributes)
 
     // reset form
     const updatedAttributes = filterDetails(attributes)
 
-    console.log('updatedDetails', updatedAttributes)
+    // console.log('updatedDetails', updatedAttributes)
 
     setProductAttributes(updatedAttributes)
     setServes('1')
     setQuantity(1)
     setIsFavorite(false)
 
-    console.log('form submitted')
+    // console.log('form submitted')
   }
 
   const filterDetails = (attribute: any) => {
@@ -239,7 +242,7 @@ const ProductDetailForm = ({
     setIsFavorite(false)
     const updatedAttributes = filterDetails(attributes)
 
-    console.log('updatedDetails', updatedAttributes)
+    // console.log('updatedDetails', updatedAttributes)
 
     setProductAttributes(updatedAttributes)
   }
@@ -247,13 +250,13 @@ const ProductDetailForm = ({
   useEffect(() => {
     const updatedAttributes = filterDetails(attributes)
 
-    console.log('updatedDetails', updatedAttributes)
+    // console.log('updatedDetails', updatedAttributes)
 
     setProductAttributes(updatedAttributes)
   }, [attributes])
 
   useEffect(() => {
-    console.log('productAttributes', productAttributes)
+    // console.log('productAttributes', productAttributes)
   }, [productAttributes])
 
   return (
@@ -306,9 +309,9 @@ const ProductDetailForm = ({
 
       <div className='w-full flex flex-wrap mt-[18px] gap-[18px]'>
         {attributes?.map((item, index) => {
-          console.log('attribute is', item)
+          // console.log('attribute is', item)
 
-          console.log('attribute option value is ', productAttributes[index]?.option)
+          // console.log('attribute option value is ', productAttributes[index]?.option)
           return (
             <div key={index} className='max-[400px]:w-[100%] w-[60%] md:w-[25%]'>
               <DropdownFieldAttributes
