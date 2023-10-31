@@ -168,7 +168,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
       const priceId = price.data.createStripeSinglePrice.stripeData.id
       await createStripeCheckoutSessionHandler(priceId)
     } catch (err: any) {
-      toast.error(`Error is ', ${error?.message}`)
+      toast.error(`Error is ', ${err?.message}`)
 
       // console.log('err', err)
     }
