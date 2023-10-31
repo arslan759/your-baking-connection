@@ -1,12 +1,12 @@
 import { Alert, AlertTitle, Collapse, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import InputField from '../InputField/InputField'
 import { validateEmail } from 'helpers/validations'
-import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import useCustomOrder from 'hooks/order/useCustomOrder'
 import { withApollo } from 'lib/apollo/withApollo'
+import React, { useState } from 'react'
+import { ProductMediaURLsInterface } from 'types'
 import AddCustomOrderImages from '../AddCustomOrderImages/AddCustomOrderImages'
-import { ProductMediaInterface, ProductMediaURLsInterface } from 'types'
+import { PrimaryBtn } from '../Buttons'
+import InputField from '../InputField/InputField'
 
 interface CustomOrdersFormProps {
   shopId: string
@@ -42,7 +42,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
   //update Custom Order images
 
   const handleUpdateProductMedia = (image: string) => {
-    console.log('image in parent is ', image)
+    // console.log('image in parent is ', image)
 
     // setProductImagesError('')
 
@@ -192,7 +192,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
         resetForm()
       }
     } catch (error: any) {
-      console.log('error in creating custom order is ', error?.message)
+      // console.log('error in creating custom order is ', error?.message)
       setErrorMsg(error?.message)
       setOpen(true)
       setTimeout(() => {

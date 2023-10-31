@@ -3,10 +3,10 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt'
 import { ReviewCardsData } from 'Constants/constants'
 import Image from 'next/image'
 import formatDateAgo from 'utils/formatDateAgo'
-const rating = 3
+// const rating = 3
 
 const Review = ({ reviewData }: any) => {
-  console.log('review Data is ', reviewData)
+  // console.log('review Data is ', reviewData)
   return (
     <div className='flex flex-col text-[16px] font-medium text-black leading-6 pb-[12px] pt-[24px] border-solid border-[0px] border-b-[1px] border-b-[#FFD9E4]'>
       {/* Desktop */}

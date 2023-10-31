@@ -9,8 +9,9 @@ import { ThemeProvider, CssBaseline } from '@mui/material'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
 import NextAuthProvider from './nextAuthProvider'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+// import { ToastContainer, toast } from 'react-toastify'
+import toast, { Toaster } from 'react-hot-toast'
+// import 'react-toastify/dist/ReactToastify.css'
 
 export default function RootLayout({ children }: PropsWithChildren<{}>) {
   return (
@@ -30,7 +31,7 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
               {children}
               {<Footer />}
             </body>
-            <ToastContainer
+            {/* <ToastContainer
               position='top-right'
               autoClose={5000}
               hideProgressBar={false}
@@ -41,6 +42,23 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
               draggable
               pauseOnHover
               theme='light'
+            /> */}
+            <Toaster
+              position='bottom-center'
+              reverseOrder={false}
+              gutter={8}
+              containerClassName=''
+              containerStyle={{}}
+              toastOptions={{
+                // Define default options
+                className: '',
+                duration: 5000,
+                style: {
+                  fontFamily: 'Open Sans',
+                  background: '#fff',
+                  color: '#363636',
+                },
+              }}
             />
           </NextAuthProvider>
         </ContextProvider>

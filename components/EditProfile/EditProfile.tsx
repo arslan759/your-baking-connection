@@ -9,6 +9,7 @@ import useViewer from 'hooks/viewer/useViewer'
 import useUploadFile from 'hooks/FileUpload/useUploadFile'
 import CustomAutocomplete from '../CustomAutocomplete'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
+import toast from 'react-hot-toast'
 
 const EditProfile = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -61,7 +62,7 @@ const EditProfile = () => {
 
   // handleEditUserProfile function for edit button
   const handleEditUserProfile = () => {
-    console.log('edit button clicked')
+    // console.log('edit button clicked')
     setIsEdited(!isEdited)
   }
 
@@ -115,8 +116,8 @@ const EditProfile = () => {
 
       const file = e.target.files[0]
 
-      console.log('files are ', e.target.files)
-      console.log('picture is ', file?.name)
+      // console.log('files are ', e.target.files)
+      // console.log('picture is ', file?.name)
 
       if (file.size > 1024 * 1024 * 1) {
         setPictureError('Picture size should be less than 1MB')
@@ -131,7 +132,7 @@ const EditProfile = () => {
       //@ts-ignore
       const uploadRes = await uploadFile(file, '/profile-images')
 
-      console.log('uploadRes is ', uploadRes)
+      // console.log('uploadRes is ', uploadRes)
 
       if (uploadRes.result.status) {
         setPicture(uploadRes.result.data[0].availableSizes.thumbnail)
@@ -139,8 +140,9 @@ const EditProfile = () => {
 
       setPictureError('')
       setLoadingImage(false)
-    } catch (err) {
-      console.log(err)
+    } catch (err:any) {
+      // console.log(err)
+      toast.error(`Error is ', ${err?.message}`)
       setLoadingImage(false)
     }
   }
@@ -176,7 +178,7 @@ const EditProfile = () => {
 
     if (email) {
       const isEmailValid = validateEmail(email)
-      console.log('if email check')
+      // console.log('if email check')
       if (!isEmailValid) {
         setEmailError('Email is not valid')
         return
@@ -193,25 +195,22 @@ const EditProfile = () => {
         currentAddress: address,
       },
     })
-
-    console.log('updated account is ', account)
-
     if (account?.data?.updateAccount?.account?._id) {
-      console.log('updated successfully')
+      // console.log('updated successfully')
       setIsEdited(false)
       resetStates()
     }
 
     // Logs the form data
-    console.log('form submitted')
-    console.log('firstname is ', firstName)
-    console.log('lastname is ', lastName)
-    console.log('email is ', email)
-    console.log('phone is ', phone)
-    console.log('state is ', state)
-    console.log('city is ', city)
-    console.log('address is ', address)
-    console.log('picture')
+    // console.log('form submitted')
+    // console.log('firstname is ', firstName)
+    // console.log('lastname is ', lastName)
+    // console.log('email is ', email)
+    // console.log('phone is ', phone)
+    // console.log('state is ', state)
+    // console.log('city is ', city)
+    // console.log('address is ', address)
+    // console.log('picture')
   }
 
   useEffect(() => {

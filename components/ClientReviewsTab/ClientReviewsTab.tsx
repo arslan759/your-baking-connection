@@ -1,11 +1,10 @@
 // @ts-ignore
-import { ReviewCardsData } from 'Constants/constants'
-import Review from '../Review'
 import useReviews from 'hooks/Reviews/useReviews'
-import Statistics from '../Statistics'
+import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import Review from '../Review'
 import Spinner from '../Spinner'
-import { usePathname, useRouter } from 'next/navigation'
+import Statistics from '../Statistics'
 const ClientReviewsTab = () => {
   //items per page to display
   const [itemsPerPage, setItemsPerPage] = useState<number>(6)
@@ -43,12 +42,12 @@ const ClientReviewsTab = () => {
   })
 
   useEffect(() => {
-    console.log('reviews are ', reviews)
+    // console.log('reviews are ', reviews)
   }, [reviews])
 
   useEffect(() => {
     let page = Math.ceil(totalCount / itemsPerPage)
-    console.log('reviews', reviews)
+    // console.log('reviews', reviews)
     setPageCount(page)
   }, [totalCount])
 

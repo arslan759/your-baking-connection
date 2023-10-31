@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 import { usePathname, useRouter } from 'next/navigation'
 import useMarkProductAsFavorite from '../../hooks/Favorite/useMarkProductAsFavorite'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
 const ProductCard = ({
   isFavoriteFlag,
@@ -58,14 +59,19 @@ const ProductCard = ({
           shopId: shopId,
         },
       })
-      console.log('Success')
+      console.log('Success!')
+      favorite
+        ? toast.success('Successfully added to favorites')
+        : toast.success('Successfully removed from favorites')
       //   handleSuccessOpen();
-    } catch (err) {
+    } catch (err: any) {
       console.log(err)
+      toast.error(`Error is ', ${err?.message}`)
+      // console.log('Success! Added to favorites')
       //   handleErrorOpen();
     }
     setIsFavorite(!isFavorite)
-    console.log('favourite clicked')
+    // console.log('favourite clicked')
   }
 
   // handle more details click
