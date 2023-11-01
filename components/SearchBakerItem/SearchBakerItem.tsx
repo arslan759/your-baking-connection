@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { SearchBakerItemProps } from 'types'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import MoreDetails from '../MoreDetails'
 
 const SearchBakerItem = ({
   image,
@@ -51,6 +52,7 @@ const SearchBakerItem = ({
         </Typography>
 
         <Typography
+          component='div'
           sx={{
             marginTop: '8px',
             fontSize: '16px !important',
@@ -64,7 +66,16 @@ const SearchBakerItem = ({
             },
           }}
         >
-          {description}
+          <MoreDetails
+            lineHeight='normal'
+            color='#6C6C6C'
+            fontFamily='Open Sans'
+            fontWeight={400}
+            fontSize={16}
+            text={description}
+            words={400}
+          />
+          {/* {description} */}
         </Typography>
 
         <div className='flex flex-col md:flex-row justify-between mt-[8px] gap-y-[8px]'>
