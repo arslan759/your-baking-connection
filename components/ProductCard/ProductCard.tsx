@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import useMarkProductAsFavorite from '../../hooks/Favorite/useMarkProductAsFavorite'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
+import MoreDetails from '../MoreDetails'
 
 const ProductCard = ({
   isFavoriteFlag,
@@ -216,6 +217,7 @@ const ProductCard = ({
           {title}
         </Typography>
         <Typography
+          component='div'
           sx={{
             color: '#090909',
             marginTop: '12px',
@@ -228,7 +230,18 @@ const ProductCard = ({
             },
           }}
         >
-          {description}
+          <Link href={`${pathname}/product/${slug}`}>
+            <MoreDetails
+              lineHeight='normal'
+              color='#090909'
+              fontFamily='Open Sans'
+              fontWeight={400}
+              fontSize={12}
+              text={description}
+              words={100}
+            />
+          </Link>
+          {/* {description} */}
         </Typography>
         <div className='flex gap-x-[14px] items-center'>
           {oldPrice ? (
