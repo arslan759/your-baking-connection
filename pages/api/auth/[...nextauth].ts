@@ -19,6 +19,8 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         const { username, password } = credentials as any
 
+        console.log('credentials', credentials)
+
         //  graphql endpoint
         const endpointUrl = 'https://app.staging.yourbakingconnection.com/graphql'
 
