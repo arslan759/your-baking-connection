@@ -23,7 +23,7 @@ const Navbar = ({
   const { data: session, status } = useSession()
   const token = localStorage.getItem('accounts:accessToken')
 
-  if (status === 'authenticated' && !token) {
+  if (status === 'authenticated' && token !== session?.user?.accessToken) {
     localStorage.setItem('accounts:accessToken', session?.user?.accessToken)
     localStorage.setItem('accounts:refreshToken', session?.user?.refreshToken)
   }
