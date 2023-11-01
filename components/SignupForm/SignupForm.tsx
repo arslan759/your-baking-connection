@@ -249,13 +249,13 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
               Sign up
             </Typography>
           </div>
-          <Image
+          {/* <Image
             src='/Images/x-square.svg'
             alt='x-square'
             width={24}
             height={24}
             className='absolute top-[20px] right-[20px] cursor-pointer'
-          />
+          /> */}
         </div>
         <div className='mt-[24px] md:mt-[42px]'>
           <form onSubmit={handleSubmit}>
