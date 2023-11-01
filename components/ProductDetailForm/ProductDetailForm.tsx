@@ -170,7 +170,7 @@ const ProductDetailForm = ({
     setProductAttributes(updatedAttributes)
     setServes('1')
     setQuantity(1)
-    setIsFavorite(false)
+    // setIsFavorite(false)
   }
 
   const filterDetails = (attribute: any) => {
@@ -191,7 +191,7 @@ const ProductDetailForm = ({
     setServes('1')
     updatePrice(newPrice)
     setQuantity(1)
-    setIsFavorite(false)
+    // setIsFavorite(false)
     const updatedAttributes = filterDetails(attributes)
 
     // console.log('updatedDetails', updatedAttributes)
