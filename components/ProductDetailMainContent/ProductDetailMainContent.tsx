@@ -5,6 +5,7 @@ import CartCardDetailsItem from '../CartCardDetailsItem/CartCardDetailsItem'
 import { ProductDetailMainContentProps } from 'types'
 
 const ProductDetailMainContent = ({
+  isFavorite,
   title,
   stock,
   oldPrice,
