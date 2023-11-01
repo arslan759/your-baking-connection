@@ -148,6 +148,7 @@ const ProductDetailMainContent = ({
 
       <div className=' mt-[16px] md:mt-[18px]'>
         <ProductDetailForm
+          isFavorite={isFavorite}
           attributes={productAttributes}
           newPrice={newPrice}
           updatePrice={setPriceToDisplay}
