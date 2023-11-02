@@ -104,8 +104,9 @@ const PreferencesForm = () => {
         },
       })
       console.log('password client response is ', res)
-      if (res?.status === 200 && res?.ok) {
+      if (res?.data?.changePassword) {
         setIsLoggingIn(false)
+        toast.success('Password changed successfully')
       }
 
       if (res?.status === 401 && !res?.ok) {
@@ -113,12 +114,8 @@ const PreferencesForm = () => {
         setGenError('Invalid email or password')
         return
       }
-
-      if (res == null) {
-        toast.success('Password changed successfully')
-      }
     } catch (err: any) {
-      toast.error(`Error is ', ${err?.message}`)
+      toast.error(`Error is '${err?.message}`)
       setIsLoggingIn(false)
       setGenError(err?.message)
     }

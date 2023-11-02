@@ -142,7 +142,7 @@ const EditProfile = () => {
       setLoadingImage(false)
     } catch (err:any) {
       // console.log(err)
-      toast.error(`Error is ', ${err?.message}`)
+      toast.error(`Error is '${err?.message}`)
       setLoadingImage(false)
     }
   }

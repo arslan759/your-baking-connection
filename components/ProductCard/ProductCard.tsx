@@ -67,7 +67,7 @@ const ProductCard = ({
       //   handleSuccessOpen();
     } catch (err: any) {
       console.log(err)
-      toast.error(`Error is ', ${err?.message}`)
+      toast.error(`Error is '${err?.message}`)
       // console.log('Success! Added to favorites')
       //   handleErrorOpen();
     }
