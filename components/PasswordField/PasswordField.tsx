@@ -21,8 +21,8 @@ const PasswordField = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
 
-    onChange(name, value)
-
+    onChange ? onChange(name, value) : null
+// console.log("enter")
     if (value === '') setErrorState(true)
     else setErrorState(false)
   }
@@ -102,7 +102,7 @@ const PasswordField = ({
             </InputAdornment>
           ),
         }}
-        name='password'
+        name={name}
         placeholder={placeholder ? placeholder : ''}
         type={showPassword ? 'text' : 'password'}
         error={errorState}
