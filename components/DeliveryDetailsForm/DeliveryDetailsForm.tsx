@@ -34,7 +34,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
   const [createStripePrice, loadingStripePrice] = useCreateStripeSinglePrice()
   const [createStripeCheckoutSession, loadingStripeCheckout] = useCreateStripeCheckOutSession()
 
-  const [flatRateData, loadingFlatRate] = useGetFlatRateFulfillmentByShopId('')
+  const [flatRateData, loadingFlatRate] = useGetFlatRateFulfillmentByShopId(slug)
 
   // console.log('cart functions in delivery form', cartFunctions)
 
@@ -235,7 +235,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
         },
       },
       payments: {
-        amount: parseFloat(amount.toString()),
+        amount: amount + 1,
         billingAddress: {
           address1: address,
           city: city,
@@ -252,9 +252,12 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
             },
           ],
         },
-        method: 'iou_example',
+        method: 'stripe_payment_intent',
       },
     }
+
+    console.log('input', input)
+    return
 
     try {
       //@ts-ignore
@@ -263,6 +266,8 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
           input,
         },
       })
+
+      console.log('response of place order is ', response)
     } catch (error: any) {
       toast.error(`Error is ', ${error?.message}`)
       // console.log('error in placeOrderHandler is', error?.message)
@@ -305,7 +310,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
 
     // If all fields are filled, then place the order
     // await placeOrderHandler()
-    await createStripePriceHandler()
+    await placeOrderHandler()
 
     // Resets the form fields
     // resetForm()

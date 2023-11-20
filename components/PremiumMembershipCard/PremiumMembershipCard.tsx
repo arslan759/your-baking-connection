@@ -1,7 +1,38 @@
-import { Button, Typography } from '@mui/material'
+import { Button, Typography, CircularProgress } from '@mui/material'
 import React from 'react'
 
+import useCreateStripeCheckOutSession from 'hooks/stripe/useCreateStripeCheckOutSession'
+
+import { withApollo } from 'lib/apollo/withApollo'
+import { useRouter } from 'next/navigation'
+
 const PremiumMembershipCard = () => {
+  //@ts-ignore
+  const [createStripeCheckoutSession, loadingCheckoutSession] = useCreateStripeCheckOutSession()
+
+  const handlePremiumMembership = async () => {
+    try {
+      //@ts-ignore
+      const membership = await createStripeCheckoutSession({
+        variables: {
+          priceId: 'price_1O7u8OASC6k8fqlTZ9LK5UW4',
+          quantity: 1,
+          mode: 'subscription',
+          subscriptionType: 'Premium',
+        },
+      })
+
+      console.log('membership is ', membership)
+
+      if (membership?.data?.createStripeCheckOutSession?.status) {
+        console.log('coming to success console')
+        const url = membership?.data?.createStripeCheckOutSession?.stripeData
+        window.location.href = url
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
   return (
     <div
       className='w-full relative h-full'
@@ -216,6 +247,8 @@ const PremiumMembershipCard = () => {
             <Button
               disableElevation
               type='button'
+              //@ts-ignore
+              disabled={loadingCheckoutSession}
               sx={{
                 display: 'flex',
                 alignItems: 'center',
@@ -234,9 +267,19 @@ const PremiumMembershipCard = () => {
                   color: '#fff',
                 },
               }}
-              // onClick={handleClick}
+              onClick={handlePremiumMembership}
             >
-              {<Typography className='text-black group-hover:text-white'>{'join now'}</Typography>}
+              {loadingCheckoutSession ? (
+                <CircularProgress
+                  sx={{
+                    color: 'grey',
+                    width: '20px !important',
+                    height: '20px !important',
+                  }}
+                />
+              ) : (
+                <Typography className='text-black group-hover:text-white'>{'join now'}</Typography>
+              )}
             </Button>
           </div>
         </div>
@@ -245,4 +288,4 @@ const PremiumMembershipCard = () => {
   )
 }
 
-export default PremiumMembershipCard
+export default withApollo()(PremiumMembershipCard)

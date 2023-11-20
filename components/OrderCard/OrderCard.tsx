@@ -20,23 +20,33 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
   const router = useRouter()
   const [salesTax, setSalesTax] = useState(0)
   let totalTaxIfApplicableonItems
-  useEffect(() => {
-    console.log('Refreshed')
-    setSalesTax(taxRate)
-  }, [cartFunctions?.cart?.shop?._id])
+  // useEffect(() => {
+  //   console.log('Refreshed')
+  //   setSalesTax(taxRate)
+  // }, [cartFunctions?.cart?.shop?._id])
+
   const totalAmount = cartFunctions?.cart?.checkout?.summary?.itemTotal?.amount
+
   useEffect(() => {
-    totalTaxIfApplicableonItems = items?.reduce((total, item) => {
-      if (item?.isTaxable) return total + item.subtotal.amount * (salesTax / 100)
-      else return total
-    }, 0)
+    setTotalAmountWithTax(totalAmount)
+  }, [totalAmount])
 
-    console.log('totalTaxIfApplicableonItems is', totalTaxIfApplicableonItems)
+  // useEffect(() => {
+  //   console.log('tax rate is ', taxRate)
+  // }, [taxRate])
 
-    const totalAmountWithTax = totalAmount + totalTaxIfApplicableonItems
+  // useEffect(() => {
+  //   totalTaxIfApplicableonItems = items?.reduce((total, item) => {
+  //     if (item?.isTaxable) return total + item.subtotal.amount * (5 / 100)
+  //     else return total
+  //   }, 0)
 
-    setTotalAmountWithTax(totalAmountWithTax)
-  }, [salesTax])
+  //   console.log('totalTaxIfApplicableonItems is', totalTaxIfApplicableonItems)
+
+  //   const totalAmountWithTax = totalAmount + totalTaxIfApplicableonItems
+
+  //   setTotalAmountWithTax(totalAmountWithTax)
+  // }, [salesTax])
 
   if (
     cartFunctions?.isLoadingCart ||
@@ -278,7 +288,8 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
               textTransform: 'capitalize',
             }}
           >
-            ${(totalAmount + totalTaxIfApplicableonItems).toFixed(2)}{' '}
+            {/* ${(totalAmount + totalTaxIfApplicableonItems).toFixed(2)}{' '} */}$
+            {totalAmount.toFixed(2)}{' '}
           </Typography>
         </div>
 

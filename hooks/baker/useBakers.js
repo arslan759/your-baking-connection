@@ -1,5 +1,5 @@
-import { useLazyQuery } from '@apollo/client';
-import bakersQuery from './bakers.gql';
+import { useLazyQuery } from '@apollo/client'
+import bakersQuery from './bakers.gql'
 
 /**
  * Gets the bakers list based on search parameters
@@ -10,7 +10,7 @@ import bakersQuery from './bakers.gql';
  *   - data: The query result data
  */
 export default function useBakers() {
-  const [getBakersData, { loading, data }] = useLazyQuery(bakersQuery);
+  const [getBakersData, { loading, data }] = useLazyQuery(bakersQuery)
 
-  return [getBakersData, loading, data];
+  return [getBakersData, loading, data]
 }

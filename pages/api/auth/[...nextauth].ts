@@ -1,4 +1,5 @@
 import useLoginUser from 'hooks/Authentication/Login/useLoginUser'
+import hashPassword from 'lib/utils/hashPassword'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -42,7 +43,7 @@ export const authOptions: NextAuthOptions = {
         const variables = {
           user: {
             email: username,
-            password,
+            password: hashPassword(password),
           },
         }
 
