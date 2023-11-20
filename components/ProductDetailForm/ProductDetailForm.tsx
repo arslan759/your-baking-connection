@@ -95,7 +95,7 @@ const ProductDetailForm = ({
         : toast.success('Successfully removed from favorites')
     } catch (err: any) {
       console.log(err)
-      toast.error(`Error is ', ${err?.message}`)
+      toast.error(`Error is '${err?.message}`)
     }
     setIsFavoriteFlag(!isFavoriteFlag)
   }
