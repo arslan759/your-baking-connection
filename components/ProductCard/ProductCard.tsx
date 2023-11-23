@@ -255,7 +255,7 @@ const ProductCard = ({
                 textDecoration: 'line-through',
               }}
             >
-              ${parseInt(oldPrice)}
+              ${parseFloat(oldPrice)}
             </Typography>
           ) : null}
           <Typography
@@ -267,7 +267,7 @@ const ProductCard = ({
               fontFamily: 'Open Sans',
             }}
           >
-            ${parseInt(newPrice)}
+            ${parseFloat(newPrice)}
           </Typography>
         </div>
       </CardContent>

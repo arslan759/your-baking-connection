@@ -31,6 +31,8 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
   const router = useRouter()
   const [viewer, loadingViewer, refetchViewer] = useViewer()
 
+  console.log('slug in delivery form', slug)
+
   const [createStripePrice, loadingStripePrice] = useCreateStripeSinglePrice()
   const [createStripeCheckoutSession, loadingStripeCheckout] = useCreateStripeCheckOutSession()
 
@@ -156,10 +158,12 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
   const [stripePriceId, setStripePriceId] = useState()
   const createStripePriceHandler = async () => {
     try {
+      const totalAmount = parseFloat((amount * 100).toString()).toFixed(2)
+      console.log('total amount is ', totalAmount)
       //@ts-ignore
       const price = await createStripePrice({
         variables: {
-          unitAmount: amount * 100,
+          unitAmount: parseFloat(totalAmount),
           currency: 'usd',
         },
       })
@@ -204,7 +208,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
       return { quantity, price, productConfiguration }
     })
 
-    // console.log('items are ', items)
+    console.log('items are ', items)
 
     const input = {
       order: {
@@ -215,7 +219,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
         fulfillmentGroups: {
           type: 'shipping',
           shopId: slug,
-          selectedFulfillmentMethodId: flatRateData?._id,
+          selectedFulfillmentMethodId: flatRateData?._id ? flatRateData?._id : 0,
           data: {
             shippingAddress: {
               postal: postCode,
@@ -235,7 +239,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
         },
       },
       payments: {
-        amount: amount + 1,
+        amount: amount,
         billingAddress: {
           address1: address,
           city: city,
@@ -252,12 +256,13 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
             },
           ],
         },
-        method: 'stripe_payment_intent',
+        // method: 'stripe_payment_intent',
+        method: 'iou_example',
       },
     }
 
     console.log('input', input)
-    return
+    // return
 
     try {
       //@ts-ignore
@@ -268,6 +273,7 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
       })
 
       console.log('response of place order is ', response)
+      createStripePriceHandler()
     } catch (error: any) {
       toast.error(`Error is ', ${error?.message}`)
       // console.log('error in placeOrderHandler is', error?.message)
@@ -304,12 +310,14 @@ const DeliveryDetailsForm = ({ slug, amount, cartFunctions }: DeliveryDetailsFor
         setTermsAndConditionsError('Please accept the terms and conditions')
       }
 
+      console.log('all fields are not filled')
       // Stops the execution of the function
       return
     }
 
     // If all fields are filled, then place the order
     // await placeOrderHandler()
+    console.log('before place order handler')
     await placeOrderHandler()
 
     // Resets the form fields

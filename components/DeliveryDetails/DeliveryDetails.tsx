@@ -10,7 +10,7 @@ interface DeliveryDetailsProps {
 }
 
 const DeliveryDetails = ({ slug, totalAmountWithTax, cartFunctions }: DeliveryDetailsProps) => {
-  const [salesTax, setSalesTax] = useState(13)
+  // const [salesTax, setSalesTax] = useState(13)
 
   return (
     <div className={styles.card}>
