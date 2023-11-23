@@ -16,20 +16,28 @@ interface OrderCardProps {
 
 const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardProps) => {
   console.log('cartFunctions in OrderCard is', cartFunctions, items)
-  const [taxRate, loadingTaxRate, refetchTaxRate] = useTaxRates(cartFunctions?.cart?.shop?._id)
-  const router = useRouter()
   const [salesTax, setSalesTax] = useState(0)
-  let totalTaxIfApplicableonItems
-  // useEffect(() => {
-  //   console.log('Refreshed')
-  //   setSalesTax(taxRate)
-  // }, [cartFunctions?.cart?.shop?._id])
+  // const [taxRate, loadingTaxRate, refetchTaxRate] = useTaxRates(cartFunctions?.cart?.shop?._id)
+  const router = useRouter()
+  // const [salesTax, setSalesTax] = useState(cartFunctions?.cart?.shop?.taxRate)
+  // let totalTaxIfApplicableonItems
+  useEffect(() => {
+    console.log('Refreshed')
+    setSalesTax(cartFunctions?.cart?.shop?.taxRate)
+  }, [cartFunctions?.cart?.shop?.taxRate])
 
   const totalAmount = cartFunctions?.cart?.checkout?.summary?.itemTotal?.amount
 
+  const totalSalesTax = cartFunctions?.cart?.items?.reduce((total: any, item: any) => {
+    if (item?.isTaxable) return total + item.subtotal.amount * (salesTax / 100)
+    else return total
+  }, 0)
+
+  console.log('totalSalesTax is', totalSalesTax)
+
   useEffect(() => {
-    setTotalAmountWithTax(totalAmount)
-  }, [totalAmount])
+    setTotalAmountWithTax(totalAmount + totalSalesTax)
+  }, [totalAmount, totalSalesTax])
 
   // useEffect(() => {
   //   console.log('tax rate is ', taxRate)
@@ -218,7 +226,7 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
               textTransform: 'capitalize',
             }}
           >
-            {salesTax}%
+            ${totalSalesTax?.toFixed(2)}
           </Typography>
         </div>
 
@@ -289,7 +297,7 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
             }}
           >
             {/* ${(totalAmount + totalTaxIfApplicableonItems).toFixed(2)}{' '} */}$
-            {totalAmount.toFixed(2)}{' '}
+            {(totalAmount + totalSalesTax).toFixed(2)}{' '}
           </Typography>
         </div>
 

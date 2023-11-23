@@ -13,6 +13,7 @@ fragment CartCommon on Cart {
     currency {
       code
     }
+    taxRate
   }
   email
   updatedAt
