@@ -5,18 +5,19 @@ import useCreateStripeCheckOutSession from 'hooks/stripe/useCreateStripeCheckOut
 import { withApollo } from 'lib/apollo/withApollo'
 import { useRouter } from 'next/navigation'
 
-const BasicMembershipCard = () => {
+const BasicMembershipCard = ({ monthlyPlan, yearlyPlan }: any) => {
   const [createStripeCheckoutSession, loadingCheckoutSession] = useCreateStripeCheckOutSession()
   const router = useRouter()
-  const handleBasicMembership = async () => {
+  const handleBasicMembership = async (planId: string) => {
+    console.log('useStripeMembershipPlans  planId is ', planId)
     try {
       //@ts-ignore
       const membership = await createStripeCheckoutSession({
         variables: {
-          priceId: 'price_1O7u8OASC6k8fqlTZ9LK5UW4',
+          priceId: planId,
           quantity: 1,
           mode: 'subscription',
-          subscriptionType : "Basic"
+          subscriptionType: 'Basic',
         },
       })
 
@@ -31,6 +32,9 @@ const BasicMembershipCard = () => {
       console.error(err)
     }
   }
+
+  console.log('useStripeMembershipPlans basicMonthlyPlan', monthlyPlan)
+  console.log('useStripeMembershipPlans basicYearlyPlan', yearlyPlan)
 
   return (
     <div
@@ -128,7 +132,7 @@ const BasicMembershipCard = () => {
               },
             }}
           >
-            $12{' '}
+            ${monthlyPlan?.length > 0 ? monthlyPlan[0]?.unit_amount : '11'}{' '}
             <span
               style={{
                 fontSize: '22px',
@@ -156,6 +160,80 @@ const BasicMembershipCard = () => {
             The Basic Membership may be best for you!
           </Typography>
 
+          <div className='mt-[33px] md:mt-[52px] flex justify-between'>
+            <div className='w-[48%]'>
+              <Button
+                disableElevation
+                type='button'
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  width: '100%',
+                  height: '50px',
+                  textTransform: 'capitalize',
+                  backgroundColor: '#7DDEC1',
+                  borderRadius: '38px',
+                  padding: '10px',
+                  color: '#000',
+                  '&:hover': {
+                    backgroundColor: '#7DDEC1',
+                    opacity: '0.8',
+                    color: '#000',
+                  },
+                }}
+                // onClick={handleClick}
+              >
+                {
+                  <Typography className='text-black group-hover:text-white'>{`Learn more`}</Typography>
+                }
+              </Button>
+            </div>
+
+            <div className='w-[48%]'>
+              <Button
+                disableElevation
+                //@ts-ignore
+                disabled={loadingCheckoutSession}
+                type='button'
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  width: '100%',
+                  height: '50px',
+                  textTransform: 'capitalize',
+                  backgroundColor: '#fff',
+                  borderRadius: '38px',
+                  border: '1px solid #7DDEC1',
+                  padding: '10px',
+                  color: '#000',
+                  '&:hover': {
+                    backgroundColor: '#F8B4CB',
+                    color: '#fff',
+                  },
+                }}
+                onClick={() => handleBasicMembership(monthlyPlan[0]?.planId)}
+              >
+                {loadingCheckoutSession ? (
+                  <CircularProgress
+                    sx={{
+                      color: 'grey',
+                      width: '20px !important',
+                      height: '20px !important',
+                    }}
+                  />
+                ) : (
+                  <Typography className='text-black group-hover:text-white'>
+                    {'join now'}
+                  </Typography>
+                )}
+              </Button>
+            </div>
+          </div>
+
           <div className='mt-[12px] md:mt-[28px] bg-[#6C6C6C] h-[1px] opacity-[0.5]' />
 
           <Typography
@@ -174,7 +252,7 @@ const BasicMembershipCard = () => {
               },
             }}
           >
-            $120{' '}
+            ${yearlyPlan?.length > 0 ? yearlyPlan[0].unit_amount : ''}{' '}
             <span
               style={{
                 fontSize: '22px',
@@ -266,7 +344,7 @@ const BasicMembershipCard = () => {
                   color: '#fff',
                 },
               }}
-              onClick={handleBasicMembership}
+              onClick={() => handleBasicMembership(yearlyPlan[0]?.planId)}
             >
               {loadingCheckoutSession ? (
                 <CircularProgress

@@ -2,11 +2,10 @@ import React from 'react'
 import { Typography } from '@mui/material'
 
 import Navbar from '../NavBar/NavBar'
-import BasicMembershipCard from '../BasicMembershipCard/BasicMembershipCard'
-import PremiumMembershipCard from '../PremiumMembershipCard/PremiumMembershipCard'
 import MembershipVideoPlayer from '../MembershipVideoPlayer/MembershipVideoPlayer'
 import FullfillmentSection from '../FullfillmentSection/FullfillmentSection'
 import StayInTouchForm from '../StayInTouch'
+import MembershipCards from '../MembershipCards/MembershipCards'
 
 const Membership = () => {
   return (
@@ -240,15 +239,7 @@ const Membership = () => {
             </Typography>
           </div>
 
-          <div className='mt-[128px] w-full flex flex-col md:flex-row md:justify-between md:flex-wrap gap-y-[170px]'>
-            <div className='w-full md:w-[49%]'>
-              <BasicMembershipCard />
-            </div>
-
-            <div className='w-full md:w-[49%]'>
-              <PremiumMembershipCard />
-            </div>
-          </div>
+          <MembershipCards />
         </div>
 
         <div className='w-[80%] mt-[48px] md:mt-[100px]'>
