@@ -11,6 +11,7 @@ import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUse
 import { SignUpFormProps } from 'types'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
 import CustomAutocomplete from '../CustomAutocomplete'
+import hashPassword from 'lib/utils/hashPassword'
 
 const SignupForm = ({ openOtp }: SignUpFormProps) => {
   //sign up mutation hook
@@ -175,7 +176,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       const userRand = Date.now()
       const result = await signUp({
         variables: {
-          user: { username: `u${userRand.toString()}`, email, password, type: 'email' },
+          user: { username: `u${userRand.toString()}`, email, password: hashPassword(password), type: 'email' },
           profile: { firstName, lastName, state, city, phone },
         },
       })
@@ -249,13 +250,13 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
               Sign up
             </Typography>
           </div>
-          <Image
+          {/* <Image
             src='/Images/x-square.svg'
             alt='x-square'
             width={24}
             height={24}
             className='absolute top-[20px] right-[20px] cursor-pointer'
-          />
+          /> */}
         </div>
         <div className='mt-[24px] md:mt-[42px]'>
           <form onSubmit={handleSubmit}>

@@ -121,7 +121,7 @@ const CartCard = ({ cartFunctions }: CartCardProps) => {
               </div>
 
               <div className='w-fit self-end'>
-                <Link href='/checkout'>
+                <Link href={`/checkout/${cartFunctions?.cart?.shop?._id}`}>
                   <PrimaryBtn
                     text='Proceed to checkout'
                     // handleClick={() => {

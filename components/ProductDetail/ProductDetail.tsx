@@ -48,7 +48,7 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
   console.log('slug', slug)
   console.log('catalogItemProduct', catalogItemProduct)
 
-  const { title, description, media, variants, productAttributes, productId } = catalogItemProduct
+  const { title, description, media, variants, productAttributes, productId,isFavorite } = catalogItemProduct
   const { pricing, inventoryInStock, variantId } = variants[0]
   const { URLs } = media[0]
 
@@ -99,6 +99,7 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
             </div>
             <div className='relative w-[100%] mt-[40px] lg:mt-[0px] lg:w-[100%] lg:pl-[40px]'>
               <ProductDetailMainContent
+              isFavorite={isFavorite}
                 title={title}
                 description={description}
                 oldPrice={pricing[0].compareAtPrice?.amount}

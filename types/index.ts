@@ -268,6 +268,7 @@ export interface PaginatorProps {
 }
 
 export interface ProductDetailMainContentProps {
+  isFavorite: boolean
   title: string
   stock: number
   oldPrice: number

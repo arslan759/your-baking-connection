@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import useMarkProductAsFavorite from '../../hooks/Favorite/useMarkProductAsFavorite'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
+import MoreDetails from '../MoreDetails'
 
 const ProductCard = ({
   isFavoriteFlag,
@@ -66,7 +67,7 @@ const ProductCard = ({
       //   handleSuccessOpen();
     } catch (err: any) {
       console.log(err)
-      toast.error(`Error is ', ${err?.message}`)
+      toast.error(`Error is '${err?.message}`)
       // console.log('Success! Added to favorites')
       //   handleErrorOpen();
     }
@@ -216,6 +217,7 @@ const ProductCard = ({
           {title}
         </Typography>
         <Typography
+          component='div'
           sx={{
             color: '#090909',
             marginTop: '12px',
@@ -228,7 +230,18 @@ const ProductCard = ({
             },
           }}
         >
-          {description}
+          <Link href={`${pathname}/product/${slug}`}>
+            <MoreDetails
+              lineHeight='normal'
+              color='#090909'
+              fontFamily='Open Sans'
+              fontWeight={400}
+              fontSize={12}
+              text={description}
+              words={100}
+            />
+          </Link>
+          {/* {description} */}
         </Typography>
         <div className='flex gap-x-[14px] items-center'>
           {oldPrice ? (
@@ -242,7 +255,7 @@ const ProductCard = ({
                 textDecoration: 'line-through',
               }}
             >
-              ${parseInt(oldPrice)}
+              ${parseFloat(oldPrice)}
             </Typography>
           ) : null}
           <Typography
@@ -254,7 +267,7 @@ const ProductCard = ({
               fontFamily: 'Open Sans',
             }}
           >
-            ${parseInt(newPrice)}
+            ${parseFloat(newPrice)}
           </Typography>
         </div>
       </CardContent>

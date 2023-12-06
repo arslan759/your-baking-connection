@@ -69,7 +69,7 @@ const ResetPasswordForm: React.FC<ResetPasswordProps> = ({ otp }) => {
       // console.log('reset pass response is ', res)
       toast.success('Password changed successfully')
     } catch (err: any) {
-      toast.error(`Error is ', ${err?.message}`)
+      toast.error(`Error is '${err?.message}`)
       // console.log('err', err)
     }
     // Reset form fields

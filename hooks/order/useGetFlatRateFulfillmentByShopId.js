@@ -6,7 +6,7 @@ import getFlatRateFulfillmentByShopIdQuery from './getFlatRateFulfillmentByShopI
 export default function useGetFlatRateFulfillmentByShopId(shopId) {
   const { data, loading, refetch } = useQuery(getFlatRateFulfillmentByShopIdQuery, {
     variables: {
-      shopId: 'cmVhY3Rpb24vc2hvcDpYenZBUnhjanNmQVo5d3hzNQ==',
+      shopId,
     },
   })
   const fulfillmentMethod =

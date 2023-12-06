@@ -2,94 +2,106 @@ import { Typography } from '@mui/material'
 import React from 'react'
 import './styles.css'
 import { ProductDetailDescriptionTypes } from 'types'
+import ShowMore from '../ShowMore'
 const ProductDetailDescription = ({ productDescription }: ProductDetailDescriptionTypes) => {
-  const servingSize = [
-    'One-person cake: 4-6 ounces (113-170 grams)',
-    'Two to three people: 8-12 ounces (225-350 grams)',
-    'Five people: 16-24 ounces (450-700 grams)',
-  ]
+  // const servingSize = [
+  //   'One-person cake: 4-6 ounces (113-170 grams)',
+  //   'Two to three people: 8-12 ounces (225-350 grams)',
+  //   'Five people: 16-24 ounces (450-700 grams)',
+  // ]
 
-  const ingredients = [
-    '1 cup (2 sticks) unsalted butter, room temperature',
-    '1 cup granulated sugar',
-    '1/2 cup light brown sugar, packed',
-    '2 large eggs, room temperature',
-    '2 teaspoons vanilla extract',
-    '2 1/2 cups all-purpose flour',
-    '1 teaspoon baking soda',
-    '1 teaspoon kosher salt',
-    '1 cup semisweet chocolate chips',
-    '1 cup dark chocolate chips',
-  ]
+  // const ingredients = [
+  //   '1 cup (2 sticks) unsalted butter, room temperature',
+  //   '1 cup granulated sugar',
+  //   '1/2 cup light brown sugar, packed',
+  //   '2 large eggs, room temperature',
+  //   '2 teaspoons vanilla extract',
+  //   '2 1/2 cups all-purpose flour',
+  //   '1 teaspoon baking soda',
+  //   '1 teaspoon kosher salt',
+  //   '1 cup semisweet chocolate chips',
+  //   '1 cup dark chocolate chips',
+  // ]
 
-  const nutritionalFacts = [
-    {
-      id: 1,
-      nutrition: 'calories',
-      quantity: 219,
-    },
-    {
-      id: 2,
-      nutrition: 'calories from fat',
-      quantity: 110,
-    },
-    {
-      id: 3,
-      nutrition: 'total fat',
-      quantity: 12,
-    },
-    {
-      id: 4,
-      nutrition: 'saturated fat',
-      quantity: 7,
-    },
-    {
-      id: 5,
-      nutrition: 'sugars',
-      quantity: 19,
-    },
-    {
-      id: 6,
-      nutrition: 'protein',
-      quantity: 2,
-    },
-    {
-      id: 7,
-      nutrition: 'sodium',
-      quantity: 150,
-    },
-  ]
+  // const nutritionalFacts = [
+  //   {
+  //     id: 1,
+  //     nutrition: 'calories',
+  //     quantity: 219,
+  //   },
+  //   {
+  //     id: 2,
+  //     nutrition: 'calories from fat',
+  //     quantity: 110,
+  //   },
+  //   {
+  //     id: 3,
+  //     nutrition: 'total fat',
+  //     quantity: 12,
+  //   },
+  //   {
+  //     id: 4,
+  //     nutrition: 'saturated fat',
+  //     quantity: 7,
+  //   },
+  //   {
+  //     id: 5,
+  //     nutrition: 'sugars',
+  //     quantity: 19,
+  //   },
+  //   {
+  //     id: 6,
+  //     nutrition: 'protein',
+  //     quantity: 2,
+  //   },
+  //   {
+  //     id: 7,
+  //     nutrition: 'sodium',
+  //     quantity: 150,
+  //   },
+  // ]
 
-  const allergens = [
-    {
-      id: 1,
-      allergen: 'contains peanuts',
-      img: '/Images/allergen-peanut.svg',
-    },
-    {
-      id: 2,
-      allergen: 'contains dairy',
-      img: '/Images/allergen-dairy.svg',
-    },
-    {
-      id: 3,
-      allergen: 'contains eggs',
-      img: '/Images/allergen-gluten.svg',
-    },
-    {
-      id: 4,
-      allergen: 'contains soy',
-      img: '/Images/allergen-gluten.svg',
-    },
-    {
-      id: 5,
-      allergen: 'contains gluten',
-      img: '/Images/allergen-gluten.svg',
-    },
-  ]
+  // const allergens = [
+  //   {
+  //     id: 1,
+  //     allergen: 'contains peanuts',
+  //     img: '/Images/allergen-peanut.svg',
+  //   },
+  //   {
+  //     id: 2,
+  //     allergen: 'contains dairy',
+  //     img: '/Images/allergen-dairy.svg',
+  //   },
+  //   {
+  //     id: 3,
+  //     allergen: 'contains eggs',
+  //     img: '/Images/allergen-gluten.svg',
+  //   },
+  //   {
+  //     id: 4,
+  //     allergen: 'contains soy',
+  //     img: '/Images/allergen-gluten.svg',
+  //   },
+  //   {
+  //     id: 5,
+  //     allergen: 'contains gluten',
+  //     img: '/Images/allergen-gluten.svg',
+  //   },
+  // ]
 
   return (
-    <p>{productDescription}</p>
+    <div>
+      <ShowMore
+        lineHeight='normal'
+        color='#000000DE'
+        fontFamily='Open Sans'
+        fontWeight={500}
+        fontSize={18}
+        text={productDescription || ''}
+        words={500}
+      />
+      {/* {productDescription} */}
+    </div>
     // <>
     //   <div className='flex flex-col lg:flex-row gap-y-[48px] gap-x-[12px] w-full'>
     //     {/* Product Ingredients */}

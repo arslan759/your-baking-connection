@@ -1,4 +1,4 @@
-import { Modal, Typography } from '@mui/material'
+import { CircularProgress, Modal, Typography } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
@@ -142,7 +142,7 @@ const EditProfile = () => {
       setLoadingImage(false)
     } catch (err:any) {
       // console.log(err)
-      toast.error(`Error is ', ${err?.message}`)
+      toast.error(`Error is '${err?.message}`)
       setLoadingImage(false)
     }
   }
@@ -269,7 +269,17 @@ const EditProfile = () => {
 
           <div className='w-full flex justify-center mt-[0px] md:mt-[-100px] rounded-full overflow-hidden relative'>
             {loadingImage ? (
-              <p>Loading...</p>
+              <div
+                className={`w-[129px] h-[129px] rounded-full bg-[#fff] flex items-center justify-center`}
+              >
+                <CircularProgress
+                  sx={{
+                    color: '#7DDEC1',
+                    height: '20px !important',
+                    width: '20px !important',
+                  }}
+                />
+              </div>
             ) : (
               <img
                 src={picture ? picture : '/Images/DefaultAvatar.jpg'}
