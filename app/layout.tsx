@@ -8,7 +8,7 @@ import ContextProvider from './context-provider'
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
-import NextAuthProvider from './nextAuthProvider'
+// import NextAuthProvider from './nextAuthProvider'
 // import { ToastContainer, toast } from 'react-toastify'
 import toast, { Toaster } from 'react-hot-toast'
 // import 'react-toastify/dist/ReactToastify.css'
@@ -23,15 +23,15 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
       </head>
       <ThemeProvider theme={lightTheme}>
         <ContextProvider>
-          <NextAuthProvider>
-            <body>
-              <CssBaseline />
-              {/* {showHeader && <Header />} */}
-              {<Header />}
-              {children}
-              {<Footer />}
-            </body>
-            {/* <ToastContainer
+          {/* <NextAuthProvider> */}
+          <body>
+            <CssBaseline />
+            {/* {showHeader && <Header />} */}
+            {<Header />}
+            {children}
+            {<Footer />}
+          </body>
+          {/* <ToastContainer
               position='top-right'
               autoClose={5000}
               hideProgressBar={false}
@@ -43,24 +43,24 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
               pauseOnHover
               theme='light'
             /> */}
-            <Toaster
-              position='bottom-center'
-              reverseOrder={false}
-              gutter={8}
-              containerClassName=''
-              containerStyle={{}}
-              toastOptions={{
-                // Define default options
-                className: '',
-                duration: 5000,
-                style: {
-                  fontFamily: 'Open Sans',
-                  background: '#fff',
-                  color: '#363636',
-                },
-              }}
-            />
-          </NextAuthProvider>
+          <Toaster
+            position='bottom-center'
+            reverseOrder={false}
+            gutter={8}
+            containerClassName=''
+            containerStyle={{}}
+            toastOptions={{
+              // Define default options
+              className: '',
+              duration: 5000,
+              style: {
+                fontFamily: 'Open Sans',
+                background: '#fff',
+                color: '#363636',
+              },
+            }}
+          />
+          {/* </NextAuthProvider> */}
         </ContextProvider>
       </ThemeProvider>
     </html>

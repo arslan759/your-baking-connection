@@ -10,19 +10,21 @@ import { withApollo } from 'lib/apollo/withApollo'
 import { useRouter } from 'next/navigation'
 // import useViewer from 'hooks/viewer/useViewer'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
-import { signIn, useSession } from 'next-auth/react'
+import useLoginUser from 'hooks/Authentication/Login/useLoginUser'
+import hashPassword from 'lib/utils/hashPassword'
+// import { signIn, useSession } from 'next-auth/react'
 
 const SigninForm = () => {
   //login mutation
-  // const [loginUser, loadingLoginUser] = useLoginUser()
+  const [loginUser, loadingLoginUser] = useLoginUser()
   // const [viewer, loading, refetch] = useViewer()
 
   const [isLoggingIn, setIsLoggingIn] = useState(false)
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
 
-  // useEffect(() => {
-  //   console.log('loading login user', loadingLoginUser)
-  // }, [loadingLoginUser])
+  useEffect(() => {
+    console.log('loading login user', loadingLoginUser)
+  }, [loadingLoginUser])
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -88,51 +90,44 @@ const SigninForm = () => {
     }
 
     try {
-      setIsLoggingIn(true)
-      const res = await signIn('credentials', {
-        username: email.toLocaleLowerCase(),
-        password,
-        redirect: false,
-        // callbackUrl: '/',
-      })
+      // setIsLoggingIn(true)
+      // const res = await signIn('credentials', {
+      //   username: email.toLocaleLowerCase(),
+      //   password,
+      //   redirect: false,
+      //   // callbackUrl: '/',
+      // })
 
-      if (res?.status === 200 && res?.ok) {
-        setIsLoggingIn(false)
-        console.log('session in signin form is ', session)
+      // if (res?.status === 200 && res?.ok) {
+      //   setIsLoggingIn(false)
+      //   console.log('session in signin form is ', session)
+      //   router.push('/')
+      // }
+
+      // if (res?.status === 401 && !res?.ok) {
+      //   setIsLoggingIn(false)
+      //   setGenError('Invalid email or password')
+      //   return
+      // }
+
+      const res = await loginUser({
+        variables: {
+          user: {
+            email,
+            password: hashPassword(password),
+          },
+        },
+      })
+      const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
+      const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
+
+      console.log('access token is', accessToken)
+
+      if (accessToken) {
+        localStorage.setItem('accounts:accessToken', accessToken)
+        localStorage.setItem('accounts:refreshToken', refreshToken)
         router.push('/')
       }
-
-      if (res?.status === 401 && !res?.ok) {
-        setIsLoggingIn(false)
-        setGenError('Invalid email or password')
-        return
-      }
-
-      // router.push('/')
-      // const res = await loginUser({
-      //   variables: {
-      //     user: {
-      //       email,
-      //       password,
-      //     },
-      //   },
-      // })
-      // const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
-      // const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
-
-      // console.log('access token is', accessToken)
-
-      // if (accessToken) {
-      //   localStorage.setItem('accounts:accessToken', accessToken)
-      //   localStorage.setItem('accounts:refreshToken', refreshToken)
-      //   await signIn('credentials', {
-      //     username: email,
-      //     password,
-      //     redirect: true,
-      //     callbackUrl: '/',
-      //   })
-      //   // router.push('/')
-      // }
     } catch (err: any) {
       // console.log(err)
       setIsLoggingIn(false)
@@ -307,7 +302,7 @@ const SigninForm = () => {
                 text='Sign In'
                 type='submit'
                 // disabled={loadingLoginUser}
-                loading={isLoggingIn}
+                loading={loadingLoginUser}
               />
             </div>
 

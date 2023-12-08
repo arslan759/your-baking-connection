@@ -12,7 +12,7 @@ import Logout from '@mui/icons-material/Logout'
 import { useRouter } from 'next/navigation'
 import { AccountDropdownProps } from 'types'
 import { Typography } from '@mui/material'
-import { signOut } from 'next-auth/react'
+// import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 
 const AccountDropdown = () => {
@@ -29,8 +29,8 @@ const AccountDropdown = () => {
 
   const handleLogOut = async () => {
     localStorage.clear()
-    await signOut()
-    // router.push('/signin')
+    // await signOut()
+    router.push('/signin')
   }
 
   // console.log('account in dropdown is ', account)

@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import RatingsAndReviewsCard from '../RatingsAndReviewsCard/RatingsAndReviewsCard'
 import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
 
 const RatingsAndReviews = () => {
   return (
@@ -15,4 +16,5 @@ const RatingsAndReviews = () => {
   )
 }
 
-export default withApollo()(RatingsAndReviews)
+// export default withApollo()(RatingsAndReviews)
+export default withApollo()(withAuth(RatingsAndReviews))

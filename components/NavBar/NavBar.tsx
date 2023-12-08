@@ -1,7 +1,7 @@
 import { AppBar, Box, Grid, Toolbar, Typography, styled } from '@mui/material'
 import withCart from 'containers/cart/withCart'
 import inject from 'hocs/inject'
-// import useViewer from 'hooks/viewer/useViewer'
+import useViewer from 'hooks/viewer/useViewer'
 import { withApollo } from 'lib/apollo/withApollo'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -13,20 +13,26 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import NotificationModal from '../NotificationModal/NotificationModal'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import styles from './styles.module.css'
-import { useSession } from 'next-auth/react'
+// import { useSession } from 'next-auth/react'
 
 const Navbar = ({
   itemsColor = 'black',
   activeItemColor = '#7DDEC1',
   ...restProps
 }: NavBarProps) => {
-  const { data: session, status } = useSession()
-  const token = localStorage.getItem('accounts:accessToken')
+  // const { data: session, status } = useSession()
+  // const token = localStorage.getItem('accounts:accessToken')
 
-  if (status === 'authenticated' && token !== session?.user?.accessToken) {
-    localStorage.setItem('accounts:accessToken', session?.user?.accessToken)
-    localStorage.setItem('accounts:refreshToken', session?.user?.refreshToken)
-  }
+  // if (status === 'authenticated' && token !== session?.user?.accessToken) {
+  //   localStorage.setItem('accounts:accessToken', session?.user?.accessToken)
+  //   localStorage.setItem('accounts:refreshToken', session?.user?.refreshToken)
+  // }
+
+  const [viewer, loading, refetch] = useViewer()
+
+  console.log('viewer', viewer)
+
+  useEffect(() => {}, [viewer, loading])
 
   const pathName = usePathname()
   const StyledToolbar = styled(Toolbar)({
@@ -107,7 +113,7 @@ const Navbar = ({
             //   <p style={{ color: 'black' }}>loading...</p>
             // ) : (
             <Grid>
-              {status === 'unauthenticated' ? (
+              {!viewer?._id ? (
                 <Box
                   sx={{
                     display: 'flex',

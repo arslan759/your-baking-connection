@@ -5,8 +5,10 @@ import styles from './styles.module.css'
 import { useState } from 'react'
 
 import OTPForm from '../OTPForm/OTPForm'
+import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
 
-export default function ForgetPassword() {
+const Signup = () => {
   const [isOtp, setIsOtp] = useState(false)
 
   const handleOtpOpen = () => {
@@ -29,3 +31,5 @@ export default function ForgetPassword() {
     </div>
   )
 }
+
+export default withApollo()(withAuth(Signup))

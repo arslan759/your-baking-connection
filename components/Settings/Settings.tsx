@@ -1,5 +1,7 @@
+import { withApollo } from 'lib/apollo/withApollo'
 import NavBar from '../NavBar/NavBar'
 import PersonalizationCard from '../PersonalizationCard'
+import withAuth from 'hocs/withAuth'
 
 const Settings = () => {
   return (
@@ -13,4 +15,5 @@ const Settings = () => {
   )
 }
 
-export default Settings
+// export default Settings
+export default withApollo()(withAuth(Settings))

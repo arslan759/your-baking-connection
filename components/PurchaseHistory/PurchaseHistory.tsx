@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import PurchaseHistoryCard from '../PurchaseHistoryCard/PurchaseHistoryCard'
 import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
 
 const PurchaseHistory = () => {
   return (
@@ -15,4 +16,5 @@ const PurchaseHistory = () => {
   )
 }
 
-export default withApollo()(PurchaseHistory)
+// export default withApollo()(PurchaseHistory)
+export default withApollo()(withAuth(PurchaseHistory))

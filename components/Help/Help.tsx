@@ -1,6 +1,7 @@
 import React from 'react'
 import NavBar from '../NavBar/NavBar'
 import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
 
 const Help = () => {
   return (
@@ -12,4 +13,5 @@ const Help = () => {
   )
 }
 
-export default withApollo()(Help)
+// export default withApollo()(Help)
+export default withApollo()(withAuth(Help))
