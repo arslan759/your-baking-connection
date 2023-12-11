@@ -16,9 +16,10 @@ const FAQs = () => {
       <div className={`${styles.maskedDiv} flex items-center justify-start `}>
         <div className='w-[42%] h-full'>
           <img
-            src='https://www.snackandbakery.com/ext/resources/images/bakeryproducts.jpg?1432238179'
+            src='/Images/faqs.jpg'
             alt='image'
             className='w-full h-full object-cover'
+            loading='lazy'
           />
         </div>
 

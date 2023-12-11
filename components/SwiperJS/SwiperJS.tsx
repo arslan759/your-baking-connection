@@ -29,9 +29,12 @@ const SwiperJS = () => {
           <SwiperSlide key={index}>
             <div
               style={{
-                background: `url(${background?.url})`,
+                background: `linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.01) 100%),
+                url(${background?.url}) center / cover no-repeat,
+                lightgray -245.438px -0.282px / 518.318% 100.038% no-repeat`,
                 backgroundSize: 'cover',
                 backgroundPositionX: 'center',
+                backgroundPositionY: 'center',
                 backgroundRepeat: 'no-repeat',
               }}
               className={`w-full h-[630px] md:h-[730px] flex justify-center md:justify-start pb-[83px] md:pb-[112px]`}
@@ -43,7 +46,7 @@ const SwiperJS = () => {
                     fontFamily: 'Josefin Sans',
                     textTransform: 'uppercase',
                     fontWeight: '800',
-                    color: '#000',
+                    color: '#fff',
                     textAlign: 'left',
                     '@media (max-width: 768px)': {
                       fontSize: '48px',
@@ -62,7 +65,7 @@ const SwiperJS = () => {
                       fontSize: '24px',
                       fontFamily: 'Open Sans',
                       fontWeight: '400',
-                      color: '#000',
+                      color: '#fff',
                       textAlign: 'left',
                       '@media (max-width: 768px)': {
                         textAlign: 'center !important',
