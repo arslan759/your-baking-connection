@@ -113,6 +113,7 @@ export default function CustomAutocomplete({
                   height: '35px',
                   padding: '5px',
                   borderRadius: '5px',
+                  caretColor: 'white',
                   fontSize: '12px !important',
                   '@media (max-width: 767px)': {
                     fontSize: '12px !important',
@@ -120,13 +121,13 @@ export default function CustomAutocomplete({
                   marginTop: label ? '5px' : '0px',
 
                   '& fieldset': {
-                    borderColor: options?.length === 0 || !options ? '' : inputColor,
+                    borderColor: inputColor,
                   },
                   '&:hover fieldset': {
-                    borderColor: options?.length === 0 || !options ? '' : inputColor,
+                    borderColor: 'white',
                   },
                   '&.Mui-focused fieldset': {
-                    borderColor: options?.length === 0 || !options ? '' : inputColor,
+                    borderColor: 'white',
                   },
                 },
               }}

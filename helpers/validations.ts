@@ -4,8 +4,19 @@ export function validateEmail(email: string): boolean {
 
   // Match the email pattern against the input email
   const match = email.match(pattern)
-
+  // console.log("inside validation",match)
   // Return true if the email is valid, false otherwise
+  return !!match
+}
+
+export function validatePhone(phone: string): boolean {
+  // Regular expression pattern for phone validation
+  const pattern = /^\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})$/
+
+  // Match the phone pattern against the input email
+  const match = phone.match(pattern)
+console.log("inside validation",match)
+  // Return true if the phone is valid, false otherwise
   return !!match
 }
 

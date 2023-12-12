@@ -151,9 +151,10 @@ const HowItWorksPcView = () => {
 
       <div className='w-[45%] h-full'>
         <img
-          src='https://www.snackandbakery.com/ext/resources/images/bakeryproducts.jpg?1432238179'
+          src='/Images/how-it-works.jpg'
           alt='image'
           className='w-full h-full object-cover'
+          loading='lazy'
         />
       </div>
     </div>

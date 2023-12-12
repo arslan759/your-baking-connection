@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
-import { checkPassword, validateEmail } from 'helpers/validations'
+import { checkPassword, validateEmail, validatePhone } from 'helpers/validations'
 import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
 // import { useRouter } from 'next/navigation'
 import { SignUpFormProps } from 'types'
@@ -93,7 +93,8 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
 
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
-
+    const isPhoneValid = validatePhone(phone)
+    console.log("validation",isPhoneValid)
     // Checks if password and confirm password match
     const isPasswordMatched = checkPassword(password, confirmPassword)
 
@@ -127,6 +128,10 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
 
       if (!phone) {
         setPhoneError('Phone is required')
+      } else {
+        if (!isPhoneValid) {
+          setPhoneError('Phone number is not valid')
+        }
       }
 
       if (!state) {
@@ -169,6 +174,10 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       setEmailError('Email is not valid')
       return
     }
+    if (!isPhoneValid) {
+      setPhoneError('Phone number is not valid')
+      return
+    }
 
     //registration handler
 
@@ -176,7 +185,12 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       const userRand = Date.now()
       const result = await signUp({
         variables: {
-          user: { username: `u${userRand.toString()}`, email, password: hashPassword(password), type: 'email' },
+          user: {
+            username: `u${userRand.toString()}`,
+            email,
+            password: hashPassword(password),
+            type: 'email',
+          },
           profile: { firstName, lastName, state, city, phone },
         },
       })
@@ -319,7 +333,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   loading={isLoadingStates}
                   required
                   name='state'
-                  inputColor='white'
+                  inputColor={stateError ? 'red' : 'white'}
                   options={states}
                   value={state}
                   errorText={stateError}
@@ -335,7 +349,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   loading={isLoadingCities}
                   required
                   name='city'
-                  inputColor='white'
+                  inputColor={cityError ? 'red' : 'white'}
                   options={cities}
                   value={city}
                   errorText={cityError}
