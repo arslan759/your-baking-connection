@@ -176,7 +176,12 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       const userRand = Date.now()
       const result = await signUp({
         variables: {
-          user: { username: `u${userRand.toString()}`, email, password: hashPassword(password), type: 'email' },
+          user: {
+            username: `u${userRand.toString()}`,
+            email,
+            password: hashPassword(password),
+            type: 'email',
+          },
           profile: { firstName, lastName, state, city, phone },
         },
       })
@@ -319,7 +324,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   loading={isLoadingStates}
                   required
                   name='state'
-                  inputColor='white'
+                  inputColor={stateError ? 'red' : 'white'}
                   options={states}
                   value={state}
                   errorText={stateError}
@@ -335,7 +340,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   loading={isLoadingCities}
                   required
                   name='city'
-                  inputColor='white'
+                  inputColor={cityError ? 'red' : 'white'}
                   options={cities}
                   value={city}
                   errorText={cityError}
