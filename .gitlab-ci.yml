@@ -1,14 +1,11 @@
 stages: # List of stages for jobs, and their order of execution
   - build
   - deploy
-
-
 # THIS IS THE PIPELINE FOR STAGING BRANCH
 build-staging:
   stage: build
   only:
     - staging
-    
   before_script:
     - apt update
     - touch .env
@@ -20,7 +17,7 @@ build-staging:
     - echo "$ENV_FILE_STAGING" > .env
   script:
     - pwd
-#    - ls
+    #    - ls
     - cat .env
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-staging"
@@ -32,7 +29,6 @@ build-staging:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && sed -i 's/next start/PORT=4002 next start/g' package.json"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm install --legacy-peer-deps"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && npm run build"
-
 deploy-staging:
   only:
     - staging
@@ -45,14 +41,12 @@ deploy-staging:
     - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - chmod 700 /root/.ssh
     - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
-#    - echo "$ENV_FILE_STAGING" > .env
+  #    - echo "$ENV_FILE_STAGING" > .env
   script:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && git checkout staging"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 delete app-staging"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-staging/user-panel && pm2 start 'npm start' --name app-staging"
-
-
 # THIS IS THE PIPELINE FOR MASTER BRANCH
 build-main: # This job runs in the build stage, which runs first.
   stage: build
@@ -69,7 +63,7 @@ build-main: # This job runs in the build stage, which runs first.
     - echo "$ENV_FILE_MAIN" > .env
   script:
     - pwd
-#    - ls
+    #    - ls
     - cat .env
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-main"
@@ -81,7 +75,6 @@ build-main: # This job runs in the build stage, which runs first.
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && sed -i 's/next start/PORT=5000 next start/g' package.json"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && npm install --legacy-peer-deps"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && npm run build"
-
 deploy-main:
   only:
     - master
@@ -94,14 +87,12 @@ deploy-main:
     - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - chmod 700 /root/.ssh
     - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
-#    - echo "$ENV_FILE_STAGING" > .env
+  #    - echo "$ENV_FILE_STAGING" > .env
   script:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && git checkout master"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && pm2 delete app-main"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-main/user-panel && pm2 start 'npm start' --name app-main"
-
-
 # THIS IS THE PIPELINE FOR STAGING BRANCH
 build-test: # This job runs in the build stage, which runs first.
   stage: build
@@ -118,7 +109,7 @@ build-test: # This job runs in the build stage, which runs first.
     - echo "$ENV_FILE_TEST" > .env
   script:
     - pwd
-#    - ls
+    #    - ls
     - cat .env
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu && rm -rf pipeline-test"
@@ -130,8 +121,6 @@ build-test: # This job runs in the build stage, which runs first.
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && sed -i 's/next start/PORT=4000 next start/g' package.json"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && npm install --legacy-peer-deps"
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && npm run build"
-
-
 deploy-test:
   only:
     - test
@@ -144,7 +133,7 @@ deploy-test:
     - echo "$PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - chmod 700 /root/.ssh
     - ssh-keyscan -H "$PUBLIC_KEY" >> ~/.ssh/known_hosts
-#    - echo "$ENV_FILE_STAGING" > .env
+  #    - echo "$ENV_FILE_STAGING" > .env
   script:
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY
     - ssh -o StrictHostKeyChecking=no $HOSTNAME@$PUBLIC_KEY "cd /home/ubuntu/pipeline-test/user-panel && git checkout test"

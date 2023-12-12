@@ -333,7 +333,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   loading={isLoadingStates}
                   required
                   name='state'
-                  inputColor='white'
+                  inputColor={stateError ? 'red' : 'white'}
                   options={states}
                   value={state}
                   errorText={stateError}
@@ -349,7 +349,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
                   loading={isLoadingCities}
                   required
                   name='city'
-                  inputColor='white'
+                  inputColor={cityError ? 'red' : 'white'}
                   options={cities}
                   value={city}
                   errorText={cityError}

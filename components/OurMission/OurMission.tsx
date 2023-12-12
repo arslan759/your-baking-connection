@@ -60,8 +60,8 @@ const OurMission = () => {
               <div>
                 <Typography variant='body1'>
                   {' '}
-                  Creating a thriving marketplace enabling bakers to be successful while doing what
-                  they love.
+                  Encouraging aspiring bakers to follow their dreams and to show success is
+                  attainable.
                 </Typography>
               </div>
             </div>
@@ -79,8 +79,8 @@ const OurMission = () => {
               <div>
                 <Typography variant='body1'>
                   {' '}
-                  Creating a thriving marketplace enabling bakers to be successful while doing what
-                  they love.
+                  Connecting consumers with talented bakers in their communities to purchase top
+                  quality and custom goods.
                 </Typography>
               </div>
             </div>
@@ -98,8 +98,7 @@ const OurMission = () => {
               <div>
                 <Typography variant='body1'>
                   {' '}
-                  Creating a thriving marketplace enabling bakers to be successful while doing what
-                  they love.
+                  Supporting bakers in recognition of their talent, gifts and passion.
                 </Typography>
               </div>
             </div>
