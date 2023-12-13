@@ -61,7 +61,8 @@ const ProductCard = ({
         },
       })
       console.log('Success!')
-      favorite
+      // console.log(!isFavorite, 'whyy')
+      !isFavorite
         ? toast.success('Successfully added to favorites')
         : toast.success('Successfully removed from favorites')
       //   handleSuccessOpen();
