@@ -12,6 +12,7 @@ import { SignUpFormProps } from 'types'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
 import CustomAutocomplete from '../CustomAutocomplete'
 import hashPassword from 'lib/utils/hashPassword'
+import toast from 'react-hot-toast'
 
 const SignupForm = ({ openOtp }: SignUpFormProps) => {
   //sign up mutation hook
@@ -190,7 +191,10 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
         localStorage.setItem('userId', userId)
         openOtp()
       }
-    } catch (err) {
+    } catch (err: any) {
+      // if (err['errors'].['message']) {
+      toast.error(err?.message)
+      // }
       console.log(err)
     }
   }
