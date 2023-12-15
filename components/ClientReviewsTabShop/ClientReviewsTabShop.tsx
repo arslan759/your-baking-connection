@@ -34,7 +34,6 @@ const ClientReviewsTabShop = () => {
     setCurrentPage(pageNum)
   }
 
-  
   const [reviews, loadingReviews, refetchReviews, totalCount] = useReviews({
     shopId: slug,
     // productId: urlParams,
@@ -61,6 +60,7 @@ const ClientReviewsTabShop = () => {
       ) : (
         <div className='w-full flex flex-col lg:flex-col items-center'>
           <StatisticsShop refetchReviews={refetchReviews} />
+          {console.log(reviews)}
           {reviews?.map((review: any, index: any) => {
             const { name, content, image } = review
             return (
