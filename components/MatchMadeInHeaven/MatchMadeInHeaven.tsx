@@ -5,9 +5,9 @@ import { Typography } from '@mui/material'
 import useCatalogItems from 'hooks/Products/useCatalogItems'
 import Spinner from '../Spinner'
 
-const MatchMadeInHeaven = () => {
+const MatchMadeInHeaven = ({ slug, shopId }: any) => {
   const [catalogItems, loadingItems, refetchItems, totalCount] = useCatalogItems({
-    shopIds: ['cmVhY3Rpb24vc2hvcDpkU3VYTGIzRHg3TXNvV29nSg=='],
+    shopIds: shopId,
     first: 3,
   })
 
