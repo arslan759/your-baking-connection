@@ -122,6 +122,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
     const selectedDate = new Date(date)
     const currentDate = new Date()
     console.log('dates are', selectedDate, currentDate, selectedDate < currentDate)
+    console.log(!name || !email || !phone || !date || !details || !occasion || !quantity)
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
     const isPhoneValid = validatePhone(phone)
@@ -148,10 +149,9 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
         }
       }
 
-      if (!date || selectedDate < currentDate) {
+      if (!date) {
         console.log('error')
         setDateErr('Please select a valid date in the future')
-        return
       }
 
       if (!quantity) {
@@ -173,6 +173,10 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
     // Checks if email is valid
     if (!isEmailValid) {
       setEmailErr('Email is not valid')
+      return
+    }
+    if (selectedDate < currentDate) {
+      setDateErr('Please select a valid date')
       return
     }
     if (!isPhoneValid) {
