@@ -175,10 +175,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
       setEmailErr('Email is not valid')
       return
     }
-<<<<<<<<< Temporary merge branch 1
-    if (!isPhoneValid) {
-      setPhoneErr('Phone number is not valid')
-=========
+
     if (selectedDate < currentDate) {
       setDateErr('Please select a valid date')
       return
