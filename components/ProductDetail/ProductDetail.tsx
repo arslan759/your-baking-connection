@@ -17,6 +17,7 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
+  console.log(slug, shopId)
   const [catalogItemProduct, loadingProduct, refetchProduct] = useCatalogItemProduct({
     slugOrId: slug,
   })
@@ -48,7 +49,8 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
   console.log('slug', slug)
   console.log('catalogItemProduct', catalogItemProduct)
 
-  const { title, description, media, variants, productAttributes, productId,isFavorite } = catalogItemProduct
+  const { title, description, media, variants, productAttributes, productId, isFavorite } =
+    catalogItemProduct
   const { pricing, inventoryInStock, variantId } = variants[0]
   const { URLs } = media[0]
 
@@ -99,7 +101,7 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
             </div>
             <div className='relative w-[100%] mt-[40px] lg:mt-[0px] lg:w-[100%] lg:pl-[40px]'>
               <ProductDetailMainContent
-              isFavorite={isFavorite}
+                isFavorite={isFavorite}
                 title={title}
                 description={description}
                 oldPrice={pricing[0].compareAtPrice?.amount}
@@ -123,7 +125,7 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
 
       <div className='w-full flex flex-col items-center mt-[48px] md:mt-[64px]'>
         <div className='w-[90%] md:w-[95%]'>
-          <MatchMadeInHeaven />
+          <MatchMadeInHeaven shopId={shopId} />
         </div>
       </div>
     </div>
