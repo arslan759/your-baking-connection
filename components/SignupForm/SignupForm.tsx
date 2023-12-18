@@ -5,13 +5,14 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
-import { checkPassword, validateEmail } from 'helpers/validations'
+import { checkPassword, validateEmail, validatePhone } from 'helpers/validations'
 import useCreateUserWithOtp from '../../hooks/Authentication/SignUp/useCreateUserOtp'
 // import { useRouter } from 'next/navigation'
 import { SignUpFormProps } from 'types'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
 import CustomAutocomplete from '../CustomAutocomplete'
 import hashPassword from 'lib/utils/hashPassword'
+import toast from 'react-hot-toast'
 
 const SignupForm = ({ openOtp }: SignUpFormProps) => {
   //sign up mutation hook
@@ -93,7 +94,8 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
 
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
-
+    const isPhoneValid = validatePhone(phone)
+    console.log("validation",isPhoneValid)
     // Checks if password and confirm password match
     const isPasswordMatched = checkPassword(password, confirmPassword)
 
@@ -127,6 +129,10 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
 
       if (!phone) {
         setPhoneError('Phone is required')
+      } else {
+        if (!isPhoneValid) {
+          setPhoneError('Phone number is not valid')
+        }
       }
 
       if (!state) {
@@ -169,6 +175,10 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       setEmailError('Email is not valid')
       return
     }
+    if (!isPhoneValid) {
+      setPhoneError('Phone number is not valid')
+      return
+    }
 
     //registration handler
 
@@ -190,7 +200,10 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
         localStorage.setItem('userId', userId)
         openOtp()
       }
-    } catch (err) {
+    } catch (err: any) {
+      // if (err['errors'].['message']) {
+      toast.error(err?.message)
+      // }
       console.log(err)
     }
   }

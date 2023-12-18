@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import withCart from 'containers/cart/withCart'
-import { Typography } from '@mui/material'
-import ServeItem from './ServeItem'
-import inject from 'hocs/inject'
-import { PrimaryBtn, SecondaryBtn } from '../Buttons'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import DropdownFieldAttributes from '../DropdownFieldAttributes'
-import toast from 'react-hot-toast'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import withCart from 'containers/cart/withCart'
+import inject from 'hocs/inject'
 import useMarkProductAsFavorite from 'hooks/Favorite/useMarkProductAsFavorite'
+import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import { PrimaryBtn, SecondaryBtn } from '../Buttons'
+import DropdownFieldAttributes from '../DropdownFieldAttributes'
 
 interface ProductDetailFormProps {
   isFavorite: boolean

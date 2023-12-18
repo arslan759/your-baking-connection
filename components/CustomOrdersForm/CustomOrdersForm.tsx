@@ -1,5 +1,5 @@
 import { Alert, AlertTitle, Collapse, Typography } from '@mui/material'
-import { validateEmail } from 'helpers/validations'
+import { validateEmail, validatePhone } from 'helpers/validations'
 import useCustomOrder from 'hooks/order/useCustomOrder'
 import { withApollo } from 'lib/apollo/withApollo'
 import React, { useState } from 'react'
@@ -125,6 +125,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
     console.log(!name || !email || !phone || !date || !details || !occasion || !quantity)
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
+    const isPhoneValid = validatePhone(phone)
 
     // Checks if all fields are filled
     if (!name || !email || !phone || !date || !details || !occasion || !quantity) {
@@ -142,6 +143,10 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
 
       if (!phone) {
         setPhoneErr('Phone is required')
+      } else {
+        if (!isPhoneValid) {
+          setPhoneErr('Phone number is not valid')
+        }
       }
 
       if (!date) {
@@ -168,6 +173,10 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
     // Checks if email is valid
     if (!isEmailValid) {
       setEmailErr('Email is not valid')
+      return
+    }
+    if (!isPhoneValid) {
+      setPhoneErr('Phone number is not valid')
       return
     }
     if (selectedDate < currentDate) {

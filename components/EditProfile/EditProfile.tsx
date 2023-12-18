@@ -2,7 +2,7 @@ import { CircularProgress, Modal, Typography } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
-import { validateEmail } from 'helpers/validations'
+import { validateEmail, validatePhone } from 'helpers/validations'
 import { withApollo } from 'lib/apollo/withApollo'
 import useUpdateAccount from 'hooks/Profile/useUpdateAccount'
 import useViewer from 'hooks/viewer/useViewer'
@@ -79,6 +79,7 @@ const EditProfile = () => {
       setEmailError('')
     } else if (name === 'phone') {
       setPhone(value)
+      setPhoneError('')
       // setPhoneError(value ? '' : 'Phone is required')
     } else if (name === 'address') {
       setAddress(value)
@@ -140,7 +141,7 @@ const EditProfile = () => {
 
       setPictureError('')
       setLoadingImage(false)
-    } catch (err:any) {
+    } catch (err: any) {
       // console.log(err)
       toast.error(`Error is '${err?.message}`)
       setLoadingImage(false)
@@ -181,6 +182,14 @@ const EditProfile = () => {
       // console.log('if email check')
       if (!isEmailValid) {
         setEmailError('Email is not valid')
+        return
+      }
+    }
+    if (phone) {
+      const isPhoneValid = validatePhone(phone)
+      console.log('if phoneisvalid', isPhoneValid)
+      if (!isPhoneValid) {
+        setPhoneError('Phone number is not valid')
         return
       }
     }

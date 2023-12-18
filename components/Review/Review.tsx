@@ -6,7 +6,7 @@ import formatDateAgo from 'utils/formatDateAgo'
 // const rating = 3
 
 const Review = ({ reviewData }: any) => {
-  // console.log('review Data is ', reviewData)
+  console.log('review Data is ', reviewData)
   return (
     <div className='flex flex-col text-[16px] font-medium text-black leading-6 pb-[12px] pt-[24px] border-solid border-[0px] border-b-[1px] border-b-[#FFD9E4]'>
       {/* Desktop */}
@@ -15,7 +15,7 @@ const Review = ({ reviewData }: any) => {
           <div>
             <Image
               className='rounded-full'
-              src={reviewData?.reviewByInfo?.picture}
+              src={reviewData?.reviewByInfo?.picture ||'/Images/profile-icon.svg'}
               alt='profile picture'
               width={140}
               height={140}
@@ -87,7 +87,7 @@ const Review = ({ reviewData }: any) => {
           <div>
             <Image
               className='rounded-full'
-              src={reviewData?.reviewByInfo?.picture}
+              src={reviewData?.reviewByInfo?.picture||'/Images/profile-icon.svg'}
               alt='profile picture'
               width={60}
               height={60}
