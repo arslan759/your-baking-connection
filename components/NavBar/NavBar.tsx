@@ -29,7 +29,6 @@ const Navbar = ({
   // }
 
   const [viewer, loading, refetch] = useViewer()
-
   console.log('viewer', viewer)
 
   useEffect(() => {}, [viewer, loading])
@@ -101,6 +100,30 @@ const Navbar = ({
               </Link>
             </Typography>
           ))}
+
+          {viewer?.adminUIShops && (
+            <Typography
+              // key={}
+              sx={{
+                cursor: 'pointer',
+                color: `${itemsColor}`,
+                textDecoration: 'none',
+              }}
+              variant='body2'
+              className='hover:scale-110 ease-in-out transition-all duration-300'
+              // onClick={() => {
+              //   console.log('this is it', viewer?.adminUIShops)
+              //   window.location.href = `${process.env.NEXT_PUBLIC_BAKER_URL}baker/${viewer?._id}`
+              // }}
+            >
+              <Link
+                style={{ color: `${itemsColor}`, textDecoration: 'none' }}
+                href={`${process.env.NEXT_PUBLIC_BAKER_URL}baker/${viewer?._id}`}
+              >
+                BAKER
+              </Link>
+            </Typography>
+          )}
         </Box>
 
         <div className={styles.navbarMenu}>
