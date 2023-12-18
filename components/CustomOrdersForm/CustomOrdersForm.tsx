@@ -174,10 +174,6 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
       setDateErr('Please select a valid date')
       return
     }
-    if (!isPhoneValid) {
-      setPhoneErr('Phone number is not valid')
-      return
-    }
 
     try {
       const input = {
