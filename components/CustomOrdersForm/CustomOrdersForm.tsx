@@ -7,6 +7,7 @@ import { ProductMediaURLsInterface } from 'types'
 import AddCustomOrderImages from '../AddCustomOrderImages/AddCustomOrderImages'
 import { PrimaryBtn } from '../Buttons'
 import InputField from '../InputField/InputField'
+import toast from 'react-hot-toast'
 
 interface CustomOrdersFormProps {
   shopId: string
@@ -118,7 +119,10 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
     // console.log('product media in custom order form is ', productMedia)
 
     // return
-
+    const selectedDate = new Date(date)
+    const currentDate = new Date()
+    console.log('dates are', selectedDate, currentDate, selectedDate < currentDate)
+    console.log(!name || !email || !phone || !date || !details || !occasion || !quantity)
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
     const isPhoneValid = validatePhone(phone)
@@ -146,7 +150,8 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
       }
 
       if (!date) {
-        setDateErr('Date is required')
+        console.log('error')
+        setDateErr('Please select a valid date in the future')
       }
 
       if (!quantity) {
@@ -174,6 +179,10 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
       setPhoneErr('Phone number is not valid')
       return
     }
+    if (selectedDate < currentDate) {
+      setDateErr('Please select a valid date')
+      return
+    }
 
     try {
       const input = {
@@ -196,6 +205,7 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
       })
 
       if (result?.data?.createCustomOrder?.referenceId) {
+        toast.success('Custom Order created successfully')
         setErrorMsg('')
         setOpen(false)
         resetForm()
