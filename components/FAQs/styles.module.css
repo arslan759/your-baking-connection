@@ -26,7 +26,7 @@
 
 .maskedDiv {
   width: 100vw;
-  height: 950px;
+  height: 1250px;
   /* height: 100%; */
   /* padding: 180px 50px; */
   background: #7ddec1;
@@ -40,7 +40,7 @@
 @media screen and (max-width: 768px) {
   .maskedDiv {
     /* padding: 80px 25px; */
-    height: 400px;
+    height: 500px;
     /* height: 100%; */
   }
 }
