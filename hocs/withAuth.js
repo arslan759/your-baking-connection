@@ -80,8 +80,10 @@ const withAuth = (WrappedComponent) => {
     useLayoutEffect(() => {
       console.log('loading viewer is ', loading)
 
-      validateViewer()
+      // validateViewer()
     }, [loading, viewer?._id, pathName])
+
+    return <WrappedComponent {...props} />
 
     // if (
     //   (!viewer?._id && pathName === '/signin' && !loading) ||

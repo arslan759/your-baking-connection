@@ -1,21 +1,24 @@
 import { Typography } from '@mui/material'
 import React from 'react'
-// import MoreDetails from '../MoreDetails'
+import EditBakerModal from '../EditBakerModal/EditBakerModal'
+import AddBakerProductModal from '../AddBakerProductModal/AddBakerProductModal'
 import ShowMore from '../ShowMore'
 
 interface BakerMainContent {
   bakerName?: string | undefined
   description?: string | undefined
   slug: string
+  bakerLogo?: string | undefined
 }
 
-const BakerMainContent = ({ bakerName, description, slug }: BakerMainContent) => {
+const BakerMainContent = ({ bakerName, description, slug, bakerLogo }: BakerMainContent) => {
   return (
     <div className='mt-[48px] lg:mt-[100px] pb-[12px] lg:pb-[0px] bg-[#fff]'>
       <div className='w-full flex'>
         <div className='w-[90%]  flex max-[276px]:flex-col flex-row md:flex-col gap-y-[20px]'>
           <div className='flex flex-col lg:flex-row gap-[12px] lg:gap-[24px]'>
-            <img src='/Images/star.svg' alt='logo' className='h-[44px] w-[35px]' />
+            {/* <img src={bakerLogo} alt='logo' className='h-[44px] w-[35px]' /> */}
+            <img src={bakerLogo} alt='logo' className='h-[74px] w-[55px]' />
 
             <Typography
               variant='h3'
@@ -56,10 +59,12 @@ const BakerMainContent = ({ bakerName, description, slug }: BakerMainContent) =>
           </div>
         </div>
 
-        {/* <EditBakerModal /> */}
+        <EditBakerModal />
       </div>
 
-      <div className='mt-[12px] w-full'>{/* <AddBakerProductModal slug={slug} /> */}</div>
+      <div className='mt-[12px] w-full'>
+        <AddBakerProductModal slug={slug} />
+      </div>
 
       <div className='hidden lg:block mt-[24px] bg-[#6C6C6C] h-[0.5px] w-full' />
 
@@ -107,7 +112,6 @@ const BakerMainContent = ({ bakerName, description, slug }: BakerMainContent) =>
             text={description || ''}
             words={500}
           />
-          {/* {description} */}
         </Typography>
       </div>
 

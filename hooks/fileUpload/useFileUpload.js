@@ -12,19 +12,19 @@ const useFileUpload = () => {
 
     const requestOptions = {
       method: 'POST',
-      body: formData, 
+      body: formData,
       redirect: 'follow',
     }
 
     try {
       const response = await fetch(`${process.env.CANONICAL_URL}/upload`, requestOptions)
       const result = await response.json()
-      console.log('result in hook is ', result)
+
       setLoading(false)
 
       return { result }
     } catch (error) {
-      return { result }
+      console.log(error)
     }
   }
 

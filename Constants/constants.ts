@@ -641,6 +641,51 @@ export const YourProfileCardItemData = [
   },
 ]
 
+export const BakerProfileCardItemData = [
+  {
+    id: 1,
+    title: 'Ledger',
+    description: 'Recording and tracking transactions and monitoring cash flow',
+    image: '/Images/profile-ledger.svg',
+  },
+  {
+    id: 2,
+    title: 'Shop Management',
+    description: 'Customer management, financial and inventory management',
+    image: '/Images/profile-shop-management.svg',
+  },
+  // {
+  //   id: 3,
+  //   title: 'Notifications',
+  //   description: 'Order confirmation, payment reminder, account balance update',
+  //   image: '/Images/profile-notifications.svg',
+  // },
+  {
+    id: 4,
+    title: 'Order Management',
+    description: 'Track, return, cancel an order, download invoice or buy again ',
+    image: '/Images/profile-order-management.svg',
+  },
+  {
+    id: 5,
+    title: 'Custom Orders',
+    description: 'Track, return, cancel an order, download invoice or buy again ',
+    image: '/Images/profile-order-management.svg',
+  },
+  {
+    id: 6,
+    title: 'Subscription',
+    description: 'Regular automatic billing, exclusive content access',
+    image: '/Images/profile-subscription.svg',
+  },
+  {
+    id: 7,
+    title: 'Settings',
+    description: 'Order confirmation, payment reminder, account balance update',
+    image: '/Images/profile-settings.svg',
+  },
+]
+
 export const DurationOptions = [
   'past 24 hours',
   'past 1 week',

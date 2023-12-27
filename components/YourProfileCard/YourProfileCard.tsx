@@ -398,6 +398,7 @@ const YourProfileCard = () => {
                     title={title}
                     image={image}
                     description={description}
+                    isClickable={true}
                   />
                 )
               })}

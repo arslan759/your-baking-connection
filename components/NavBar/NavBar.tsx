@@ -101,7 +101,7 @@ const Navbar = ({
             </Typography>
           ))}
 
-          {viewer?.adminUIShops && (
+          {viewer?._id && (
             <Typography
               // key={}
               sx={{
@@ -118,7 +118,7 @@ const Navbar = ({
             >
               <Link
                 style={{ color: `${itemsColor}`, textDecoration: 'none' }}
-                href={`${process.env.NEXT_PUBLIC_BAKER_URL}baker/${viewer?._id}`}
+                href={viewer?.isBaker ? `/baker/${viewer?._id}` : `/baker/create-shop`}
               >
                 BAKER
               </Link>

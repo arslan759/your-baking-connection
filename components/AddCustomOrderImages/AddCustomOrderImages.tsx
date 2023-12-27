@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, useRef } from 'react'
 import { CircularProgress, Typography } from '@mui/material'
-import useFileUpload from 'hooks/FileUpload/useUploadFile'
+import useFileUpload from 'hooks/fileUpload/useFileUpload'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { AddCustomOrderImagesProps } from 'types'
 

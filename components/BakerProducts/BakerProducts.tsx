@@ -63,9 +63,9 @@ const BakerProducts = ({ slug }: BakerProductsProps) => {
         <BakerTabsPanel activeTab={activeTab} slug={slug} fetchTotalProducts={fetchTotalProducts} />
       </div>
 
-      <div className='w-[90vw] mt-[48px] md:mt-[100px]'>
+      {/* <div className='w-[90vw] mt-[48px] md:mt-[100px]'>
         <CustomOrders shopId={slug} />
-      </div>
+      </div> */}
     </div>
   )
 }
