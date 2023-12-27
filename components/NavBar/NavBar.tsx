@@ -13,6 +13,7 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import NotificationModal from '../NotificationModal/NotificationModal'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import styles from './styles.module.css'
+import BakerAccountDropdown from '../BakerAccountDropdown'
 // import { useSession } from 'next-auth/react'
 
 const Navbar = ({
@@ -22,6 +23,8 @@ const Navbar = ({
 }: NavBarProps) => {
   // const { data: session, status } = useSession()
   // const token = localStorage.getItem('accounts:accessToken')
+
+  const shopId = localStorage.getItem('shopId')
 
   // if (status === 'authenticated' && token !== session?.user?.accessToken) {
   //   localStorage.setItem('accounts:accessToken', session?.user?.accessToken)
@@ -118,7 +121,7 @@ const Navbar = ({
             >
               <Link
                 style={{ color: `${itemsColor}`, textDecoration: 'none' }}
-                href={viewer?.isBaker ? `/baker/${viewer?._id}` : `/baker/create-shop`}
+                href={viewer?.isActiveBaker ? `/baker/${shopId}` : `/baker/create-shop`}
               >
                 BAKER
               </Link>
@@ -169,7 +172,7 @@ const Navbar = ({
                     },
                   }}
                 >
-                  <AccountDropdown />
+                  {viewer?.isActiveBaker ? <BakerAccountDropdown /> : <AccountDropdown />}
                   {/* <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} /> */}
                   <AddToCartModal
                     color={itemsColor}

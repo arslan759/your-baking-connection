@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import styles from './styles.module.css'
 import { Typography } from '@mui/material'
-import { PrimaryBtn, SecondaryBtn } from '../Buttons'
-import YourProfileCardItem from '../YourProfileCardItem/YourProfileCardItem'
+import { SecondaryBtn } from '../Buttons'
 import { BakerProfileCardItemData } from 'Constants/constants'
 import EditProfile from '../EditProfile/EditProfile'
 import ShowMore from '../ShowMore/ShowMore'
 import useViewer from 'hooks/viewer/useViewer'
 import useCreateConnectedAccount from 'hooks/shop/useCreateConnectedAccount'
+import BakerProfileCardItem from '../BakerProfileCardItem'
 
 const BakerProfileCard = () => {
   const [isEdited, setIsEdited] = useState(false)
@@ -251,7 +251,7 @@ const BakerProfileCard = () => {
           {BakerProfileCardItemData.map((item, index) => {
             const { image, title, description } = item
             return (
-              <YourProfileCardItem
+              <BakerProfileCardItem
                 key={title}
                 title={title}
                 image={image}

@@ -170,16 +170,23 @@ export interface ForgetPasswordFormProps {
 
 export interface SignUpFormProps {
   openOtp: () => void
+  setTokens: (accessToken: string, refreshToken: string) => void
 }
 
 export interface SignUpFormProps {
   openOtp: () => void
 }
 
+interface Tokens {
+  accessToken: string
+  refreshToken: string
+}
+
 export interface OTPFormProps {
-  closeOtp: () => void
+  closeOtp?: () => void
   type: string
-  email: string
+  email?: string
+  tokens: Tokens
 }
 
 export interface SectionheadingProps {

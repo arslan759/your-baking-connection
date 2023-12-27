@@ -14,7 +14,7 @@ import CustomAutocomplete from '../CustomAutocomplete'
 import hashPassword from 'lib/utils/hashPassword'
 import toast from 'react-hot-toast'
 
-const SignupForm = ({ openOtp }: SignUpFormProps) => {
+const SignupForm = ({ openOtp, setTokens }: SignUpFormProps) => {
   //sign up mutation hook
   const [signUp, loadingSignUp] = useCreateUserWithOtp()
 
@@ -95,7 +95,7 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
     // Checks if email is valid
     const isEmailValid = validateEmail(email)
     const isPhoneValid = validatePhone(phone)
-    console.log("validation",isPhoneValid)
+    console.log('validation', isPhoneValid)
     // Checks if password and confirm password match
     const isPasswordMatched = checkPassword(password, confirmPassword)
 
@@ -129,11 +129,12 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
 
       if (!phone) {
         setPhoneError('Phone is required')
-      } else {
-        if (!isPhoneValid) {
-          setPhoneError('Phone number is not valid')
-        }
       }
+      // else {
+      //   if (!isPhoneValid) {
+      //     setPhoneError('Phone number is not valid')
+      //   }
+      // }
 
       if (!state) {
         setStateError('State is required')
@@ -175,14 +176,28 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
       setEmailError('Email is not valid')
       return
     }
-    if (!isPhoneValid) {
-      setPhoneError('Phone number is not valid')
-      return
-    }
+    // if (!isPhoneValid) {
+    //   setPhoneError('Phone number is not valid')
+    //   return
+    // }
 
     //registration handler
 
     try {
+      // const userRand = Date.now()
+      // const result = await signUp({
+      //   variables: {
+      //     user: {
+      //       username: `u${userRand.toString()}`,
+      //       email,
+      //       password: hashPassword(password),
+      //       type: 'email',
+      //     },
+      //     profile: { firstName, lastName, state, city, phone },
+      //   },
+      // })
+      // let userId = result?.data?.createUserWithOtp?.userId
+
       const userRand = Date.now()
       const result = await signUp({
         variables: {
@@ -195,10 +210,16 @@ const SignupForm = ({ openOtp }: SignUpFormProps) => {
           profile: { firstName, lastName, state, city, phone },
         },
       })
-      let userId = result?.data?.createUserWithOtp?.userId
-      if (userId) {
+
+      let userId = result?.data?.bakerRegistration?.userId
+      const accessToken = result?.data?.bakerRegistration?.loginResult?.tokens?.accessToken
+      const refreshToken = result?.data?.bakerRegistration?.loginResult?.tokens?.refreshToken
+
+      if (userId && accessToken) {
         localStorage.setItem('userId', userId)
+
         openOtp()
+        setTokens(accessToken, refreshToken)
       }
     } catch (err: any) {
       // if (err['errors'].['message']) {

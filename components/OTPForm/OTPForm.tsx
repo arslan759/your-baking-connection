@@ -10,7 +10,7 @@ import { withApollo } from 'lib/apollo/withApollo'
 import { useRouter } from 'next/navigation'
 import useForgotPasswordUser from '../../hooks/Authentication/ForgotPassword/useForgotPasswordUser'
 
-const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
+const OTPForm = ({ closeOtp, type, email, tokens }: OTPFormProps) => {
   const [otp, setOtp] = useState('')
 
   const [verifyOtp, loadingVerifyOtp] = useOtpUser()
@@ -20,9 +20,61 @@ const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
   const [otpError, setOtpError] = useState('')
 
   // handle submit function for form
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   const userId = localStorage.getItem('userId')
+  //   e.preventDefault()
+
+  //   // Checks if email is empty or Less than 4 characters
+  //   if (!otp || otp.length !== 4) {
+  //     setOtpError('Otp is required')
+
+  //     // Stops the execution of the function
+  //     return
+  //   }
+  //   if (type === 'registration') {
+  //     try {
+  //       const res = await verifyOtp({
+  //         variables: {
+  //           user: {
+  //             userId,
+  //             otp: parseInt(otp),
+  //           },
+  //         },
+  //       })
+  //       if (res?.data?.verifyOTPSignUp) {
+  //         router.replace('/signin')
+  //       }
+  //     } catch (err) {
+  //       return err
+  //     }
+  //   } else if (type === 'forgotPassword') {
+  //     // console.log('firing otp function', email)
+
+  //     const res = await verifyOtp({
+  //       variables: {
+  //         user: {
+  //           userId,
+  //           otp: parseInt(otp),
+  //         },
+  //       },
+  //     })
+  //     if (res?.data?.verifyOTPSignUp) {
+  //       router.push(`reset-password/${parseInt(otp)}`)
+  //     }
+
+  //     // Reset form fields
+  //     setOtp('')
+
+  //     // Reset error states
+  //     setOtpError('')
+  //   }
+  // }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     const userId = localStorage.getItem('userId')
     e.preventDefault()
+
+    // console.log('testtesttest')
 
     // Checks if email is empty or Less than 4 characters
     if (!otp || otp.length !== 4) {
@@ -42,7 +94,15 @@ const OTPForm = ({ closeOtp, type, email }: OTPFormProps) => {
           },
         })
         if (res?.data?.verifyOTPSignUp) {
-          router.replace('/signin')
+          const { accessToken, refreshToken } = tokens
+          console.log('true step')
+
+          console.log('tokens are', tokens)
+          localStorage.setItem('accounts:accessToken', accessToken)
+          localStorage.setItem('accounts:refreshToken', refreshToken)
+          // setStep ? setStep(2) : router.push('/create-shop')
+
+          router.push('/')
         }
       } catch (err) {
         return err
