@@ -9,6 +9,7 @@ import OrderManagementTable from '../OrderManagementTable/OrderManagementTable'
 import ProfileBreadCrumbs from '../ProfileBreadCrumbs/ProfileBreadCrumbs'
 import useOrders from 'hooks/order/useOrders'
 import CustomPagination from '../CustomPagination'
+import BakerProfileBreadCrumbs from '../BakerProfileBreadCrumbs'
 
 const OrderManagementCard = () => {
   //items per page to display
@@ -130,7 +131,7 @@ const OrderManagementCard = () => {
 
   return (
     <div className={styles.card}>
-      <ProfileBreadCrumbs />
+      <BakerProfileBreadCrumbs />
 
       <div className='flex flex-col md:flex-row items-start md:items-center justify-between mt-[48px] gap-y-[24px]'>
         <Typography

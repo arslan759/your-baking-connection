@@ -453,7 +453,7 @@ const SignupForm = ({ openOtp, setTokens }: SignUpFormProps) => {
             </div>
 
             <div className='mt-[24px] md:mt-[23px]'>
-              <PrimaryBtn text='Register' type='submit' />
+              <PrimaryBtn text='Register' type='submit' loading={loadingSignUp} />
             </div>
 
             <div className='w-full flex justify-center mt-[8px] md:mt-[12px]'>

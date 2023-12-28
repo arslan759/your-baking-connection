@@ -5,10 +5,10 @@ import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import DropdownField from '../DropdownField/DropdownField'
 import { BakeryNameOptions, DurationOptions, RatingOptions } from 'Constants/constants'
-import ProfileBreadCrumbs from '../ProfileBreadCrumbs/ProfileBreadCrumbs'
 import useCustomOrdersByShop from 'hooks/order/useCustomOrdersByShop'
 import CustomOrdersTable from '../CustomOrdersTable/CustomOrdersTable'
 import CustomPagination from '../CustomPagination'
+import BakerProfileBreadCrumbs from '../BakerProfileBreadCrumbs'
 
 const CustomOrderManagementCard = () => {
   //items per page to display
@@ -114,7 +114,7 @@ const CustomOrderManagementCard = () => {
 
   return (
     <div className={styles.card}>
-      <ProfileBreadCrumbs />
+      <BakerProfileBreadCrumbs />
 
       <div className='flex flex-col md:flex-row items-start md:items-center justify-between mt-[48px] gap-y-[24px]'>
         <Typography

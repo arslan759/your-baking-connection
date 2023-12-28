@@ -5,8 +5,8 @@ import InputField from '../InputField/InputField'
 import { PrimaryBtn } from '../Buttons'
 import DropdownField from '../DropdownField/DropdownField'
 import { BakeryNameOptions, DurationOptions, RatingOptions } from 'Constants/constants'
-import ProfileBreadCrumbs from '../ProfileBreadCrumbs/ProfileBreadCrumbs'
 import LedgerTable from '../LedgerTable/LedgerTable'
+import BakerProfileBreadCrumbs from '../BakerProfileBreadCrumbs'
 
 const LedgerCard = () => {
   const [search, setSearch] = useState('')
@@ -62,7 +62,7 @@ const LedgerCard = () => {
 
   return (
     <div className={styles.card}>
-      <ProfileBreadCrumbs />
+      <BakerProfileBreadCrumbs />
 
       <div className='flex flex-col md:flex-row items-start md:items-center justify-between mt-[48px] gap-y-[24px]'>
         <Typography

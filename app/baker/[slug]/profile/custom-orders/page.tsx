@@ -1,11 +1,11 @@
 'use client'
 
-import CustomOrders from '@/components/CustomOrders/CustomOrders'
+import BakerCustomOrders from '@/components/BakerCustomOrders'
 
 export default function CustomOrdersPage() {
   return (
     <>
-      <CustomOrders />
+      <BakerCustomOrders />
     </>
   )
 }

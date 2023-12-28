@@ -2,8 +2,10 @@ query lazyViewer {
   viewer {
     _id
     # validStripeConnect
-    # adminUIShops {
-    #   _id
-    # }
+    isActiveBaker
+    isBaker
+    adminUIShops {
+      _id
+    }
   }
 }

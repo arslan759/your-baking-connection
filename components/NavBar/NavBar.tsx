@@ -121,7 +121,11 @@ const Navbar = ({
             >
               <Link
                 style={{ color: `${itemsColor}`, textDecoration: 'none' }}
-                href={viewer?.isActiveBaker ? `/baker/${shopId}` : `/baker/create-shop`}
+                href={
+                  viewer?.isActiveBaker && viewer?.adminUIShops && viewer?.adminUIShops?.length > 0
+                    ? `/baker/${shopId}`
+                    : `/create-shop`
+                }
               >
                 BAKER
               </Link>

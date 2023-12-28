@@ -12,21 +12,24 @@ interface OrderDetailCardProps {
 }
 
 const OrderDetailCard = ({ orderId }: OrderDetailCardProps) => {
+  const shopId = localStorage.getItem('shopId')
+
+  const basePath = `/baker/${shopId}/profile`
   return (
     <div className={styles.card}>
       <CustomBreadCrumbs
         breadCrumbs={[
           {
             name: 'your profile',
-            route: '/profile',
+            route: `${basePath}`,
           },
           {
             name: 'order management',
-            route: '/profile/order-management',
+            route: `${basePath}/order-management`,
           },
           {
             name: 'order details',
-            route: `/profile/order-management/${orderId}`,
+            route: `${basePath}/order-management/${orderId}`,
           },
         ]}
       />
