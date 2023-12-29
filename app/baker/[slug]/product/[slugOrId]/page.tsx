@@ -1,6 +1,6 @@
 'use client'
 
-import ProductDetail from '@/components/ProductDetail/ProductDetail'
+import ActiveBakerProductDetail from '@/components/ActiveBakerProductDetail/ActiveBakerProductDetail'
 
 export default function ProductDetailPage({
   params,
@@ -17,7 +17,7 @@ export default function ProductDetailPage({
   return (
     <>
       <div className=''>
-        <ProductDetail slug={slugOrId} shopId={Bakerslug} />
+        <ActiveBakerProductDetail slug={slugOrId} shopId={Bakerslug} />
       </div>
     </>
   )

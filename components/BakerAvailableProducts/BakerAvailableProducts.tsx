@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { GalleryProductsData } from 'Constants/constants'
 import CustomPagination from '../CustomPagination/CustomPagination'
 import ProductCard from '../ProductCard/ProductCard'
 import useCatalogItems from 'hooks/Products/useCatalogItems'

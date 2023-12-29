@@ -9,7 +9,7 @@ interface BakerProductsProps {
   slug: string
 }
 
-const BakerProducts = ({ slug }: BakerProductsProps) => {
+const ActiveBakerProducts = ({ slug }: BakerProductsProps) => {
   const [activeTab, setActiveTab] = useState(0)
 
   const [totalProducts, setTotalProducts] = useState(0)
@@ -63,11 +63,11 @@ const BakerProducts = ({ slug }: BakerProductsProps) => {
         <BakerTabsPanel activeTab={activeTab} slug={slug} fetchTotalProducts={fetchTotalProducts} />
       </div>
 
-      <div className='w-[90vw] mt-[48px] md:mt-[100px]'>
+      {/* <div className='w-[90vw] mt-[48px] md:mt-[100px]'>
         <CustomOrders shopId={slug} />
-      </div>
+      </div> */}
     </div>
   )
 }
 
-export default BakerProducts
+export default ActiveBakerProducts

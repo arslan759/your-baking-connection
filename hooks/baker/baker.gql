@@ -7,7 +7,10 @@ query baker($shopId: ID!) {
     shopLogoUrls {
       primaryShopLogoUrl
     }
-    categories
+    categories {
+      _id
+      name
+    }
     featuredShopImages {
       URLs {
         large

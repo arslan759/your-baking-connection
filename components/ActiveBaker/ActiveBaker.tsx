@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../NavBar/NavBar'
-import BakerProducts from '../BakerProducts/BakerProducts'
 import BakerWeOffer from '../BakerWeOffer/BakerWeOffer'
 import BakerLocation from '../BakerLocation/BakerLocation'
-import BakerMainContent from '../BakerMainContent/BakerMainContent'
 import BakerSwiper from '../BakerSwiper/BakerSwiper'
 import Loader from '@/components/Loader/Loader'
 
@@ -11,12 +9,14 @@ import useBaker from 'hooks/baker/useBaker'
 
 import { withApollo } from 'lib/apollo/withApollo'
 import withAuth from 'hocs/withAuth'
+import ActiveBakerMainContent from '../ActiveBakerMainContent'
+import ActiveBakerProducts from '../ActiveBakerProducts'
 
 interface BakerProps {
   slug: string
 }
 
-const Baker = ({ slug }: BakerProps) => {
+const ActiveBaker = ({ slug }: BakerProps) => {
   const [baker, loadingBaker] = useBaker(slug)
 
   const [bakerName, setBakerName] = useState<string>()
@@ -53,7 +53,7 @@ const Baker = ({ slug }: BakerProps) => {
               </div>
             </div>
             <div className='relative w-[100%] lg:w-[50%] px-[20px] lg:px-[40px]'>
-              <BakerMainContent
+              <ActiveBakerMainContent
                 bakerLogo={bakerLogo}
                 bakerName={bakerName}
                 description={bakerDescription}
@@ -61,27 +61,23 @@ const Baker = ({ slug }: BakerProps) => {
               />
 
               {/* We Offer section for Desktop View */}
-              {categories && categories?.length > 0 && (
-                <div className='mt-[60px] hidden lg:block'>
-                  <BakerWeOffer categories={categories} />
-                </div>
-              )}
+              <div className='mt-[60px] hidden lg:block'>
+                <BakerWeOffer categories={categories} />
+              </div>
             </div>
             {/* Gallery Location Info for Mobile View */}
             <div className='block lg:hidden overflow-hidden'>
               <BakerLocation />
 
               {/* We Offer Section for Mobile View */}
-              {categories && categories?.length > 0 && (
-                <div className='-mt-[80px]'>
-                  <BakerWeOffer categories={categories} />
-                </div>
-              )}
+              <div className='-mt-[80px]'>
+                <BakerWeOffer categories={categories} />
+              </div>
             </div>
           </div>
 
           <div className='mt-[48px]'>
-            <BakerProducts slug={slug} />
+            <ActiveBakerProducts slug={slug} />
           </div>
         </div>
       )}
@@ -89,4 +85,4 @@ const Baker = ({ slug }: BakerProps) => {
   )
 }
 
-export default withApollo()(withAuth(Baker))
+export default withApollo()(withAuth(ActiveBaker))

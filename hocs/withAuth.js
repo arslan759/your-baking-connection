@@ -57,6 +57,13 @@ const withAuth = (WrappedComponent) => {
         return
       }
 
+      // If the user is logged in and has active Subscription and page is isProtectedRoute, navigate to baker profile page
+      if (viewer?._id && viewer?.isActiveBaker && isProtectedRoute) {
+        router.push('/baker')
+        console.log('before return viewer active baker redirect to baker page', viewer)
+        return
+      }
+
       // If the user is logged in and has not created a shop and has active Subscription and page is bakers, redirect to create-shop page
       if (
         viewer?._id &&

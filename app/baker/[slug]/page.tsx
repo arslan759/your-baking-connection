@@ -1,5 +1,6 @@
 'use client'
-import Baker from '@/components/Baker'
+
+import ActiveBaker from '@/components/ActiveBaker'
 
 export default function BakerPage({ params }: { params: { slug: string } }) {
   let { slug } = params
@@ -9,7 +10,7 @@ export default function BakerPage({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className=''>
-        <Baker slug={slug} />
+        <ActiveBaker slug={slug} />
       </div>
     </>
   )
