@@ -178,11 +178,13 @@ const Navbar = ({
                 >
                   {viewer?.isActiveBaker ? <BakerAccountDropdown /> : <AccountDropdown />}
                   {/* <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} /> */}
-                  <AddToCartModal
-                    color={itemsColor}
-                    cartItems={restProps?.cart?.items}
-                    cartFunctions={restProps}
-                  />
+                  {!viewer?.isActiveBaker && (
+                    <AddToCartModal
+                      color={itemsColor}
+                      cartItems={restProps?.cart?.items}
+                      cartFunctions={restProps}
+                    />
+                  )}
                 </Box>
               )}
             </Grid>
