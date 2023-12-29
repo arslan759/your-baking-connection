@@ -25,6 +25,7 @@ query viewer {
     firstName
     lastName
     state
+    validStripeConnect
     adminUIShops {
       _id
     }

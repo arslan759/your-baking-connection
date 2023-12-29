@@ -69,7 +69,7 @@ const BakerProfileCard = () => {
 
   return (
     <div className={styles.card}>
-      {!viewer?.validStripeConnect && (
+      {!loadingViewer && !viewer?.validStripeConnect ? (
         <div
           className='flex flex-wrap items-center justify-between p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300'
           role='alert'
@@ -88,7 +88,7 @@ const BakerProfileCard = () => {
             />
           </span>
         </div>
-      )}
+      ) : null}
 
       <Typography
         sx={{

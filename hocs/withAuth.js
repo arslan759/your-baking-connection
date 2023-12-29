@@ -23,10 +23,10 @@ const withAuth = (WrappedComponent) => {
     const isProtectedRoute = protectedRoutes.some((route) => pathName.includes(route))
     const isProtectedRouteBaker = protectedRoutesBaker.some((route) => pathName.includes(route))
 
-    console.log(
-      'before return viewer no create-shop redirect to create-shop page',
-      isProtectedRouteBaker,
-    )
+    // console.log(
+    //   'before return viewer no create-shop redirect to create-shop page',
+    //   isProtectedRouteBaker,
+    // )
 
     const validateViewer = async () => {
       if (loading) {
@@ -69,13 +69,28 @@ const withAuth = (WrappedComponent) => {
         return
       }
 
+      //if the user has created a shop and is directing to create-shop page, redirect to home page
+      if (
+        viewer?._id &&
+        viewer?.adminUIShops?.length > 0 &&
+        viewer?.isActiveBaker &&
+        pathName.includes('/create-shop')
+      ) {
+        console.log('viewer has an active shop created and is on create bakery page', viewer)
+        router.push('/')
+        return
+      }
+
       // If the user is logged in and has created a shop and has active Subscription and page is bakers, do nothing
+
       if (
         viewer?._id &&
         viewer?.adminUIShops?.length > 0 &&
         viewer?.isActiveBaker &&
         isProtectedRouteBaker
       ) {
+        console.log('coming to this condition')
+
         console.log('before return viewer has create-shop and active baker', viewer)
         return
       }
@@ -152,10 +167,10 @@ const withAuth = (WrappedComponent) => {
         viewer?.adminUIShops?.length === 0 &&
         viewer?.isActiveBaker &&
         isProtectedRouteBaker) ||
-      (viewer?._id &&
-        viewer?.adminUIShops?.length > 0 &&
-        viewer?.isActiveBaker &&
-        isProtectedRouteBaker) ||
+      // (viewer?._id &&
+      //   viewer?.adminUIShops?.length > 0 &&
+      //   viewer?.isActiveBaker &&
+      //   isProtectedRouteBaker) ||
       (viewer?._id &&
         !viewer?.isActiveBaker &&
         (isProtectedRouteBaker || pathName.includes('/create-shop')))
