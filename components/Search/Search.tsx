@@ -33,10 +33,16 @@ const Search = () => {
   const [searchErr, setSearchErr] = useState('')
   const [productTypeErr, setProductTypeErr] = useState('')
 
+  const populateCity = (state: string, city: string) => {
+    getCitiesApi(state, setCities, setIsLoadingCities, city, setCity)
+  }
+
   useEffect(() => {
     console.log('viewer in search is ', viewer)
     setCity(viewer?.city)
     setState(viewer?.state)
+
+    populateCity(viewer?.state, viewer?.city)
   }, [viewer])
 
   // onChange handler

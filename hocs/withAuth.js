@@ -64,6 +64,17 @@ const withAuth = (WrappedComponent) => {
         return
       }
 
+      // If the user is logged in and has active Subscription and page is add-to-cart or checkout, redirect to home page
+      if (
+        viewer?._id &&
+        viewer?.isActiveBaker &&
+        (pathName.includes('/add-to-cart') || pathName.includes('/checkout'))
+      ) {
+        router.push('/')
+        console.log('before return viewer active baker redirect to home page', viewer)
+        return
+      }
+
       // If the user is logged in and has not created a shop and has active Subscription and page is bakers, redirect to create-shop page
       if (
         viewer?._id &&
@@ -174,6 +185,10 @@ const withAuth = (WrappedComponent) => {
         viewer?.adminUIShops?.length === 0 &&
         viewer?.isActiveBaker &&
         isProtectedRouteBaker) ||
+      (viewer?._id &&
+        viewer?.isActiveBaker &&
+        (pathName.includes('/add-to-cart') || pathName.includes('/checkout'))) ||
+      (viewer?._id && viewer?.isActiveBaker && isProtectedRoute) ||
       // (viewer?._id &&
       //   viewer?.adminUIShops?.length > 0 &&
       //   viewer?.isActiveBaker &&
