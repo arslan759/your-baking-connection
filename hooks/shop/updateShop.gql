@@ -4,7 +4,10 @@ mutation updateShop($input: UpdateShopInput!) {
       _id
       name
       description
-      categories
+      categories {
+        _id
+        name
+      }
       addressBook {
         address1
         city

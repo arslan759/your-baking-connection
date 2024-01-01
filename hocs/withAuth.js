@@ -57,9 +57,9 @@ const withAuth = (WrappedComponent) => {
         return
       }
 
-      // If the user is logged in and has active Subscription and page is isProtectedRoute, navigate to baker profile page
-      if (viewer?._id && viewer?.isActiveBaker && isProtectedRoute) {
-        router.push('/baker')
+      // If the user is logged in and has active Subscription and page is isProtectedRoute, navigate to homepage
+      if (viewer?._id && viewer?.isActiveBaker && isProtectedRoute && !isProtectedRouteBaker) {
+        router.push('/')
         console.log('before return viewer active baker redirect to baker page', viewer)
         return
       }
@@ -188,7 +188,7 @@ const withAuth = (WrappedComponent) => {
       (viewer?._id &&
         viewer?.isActiveBaker &&
         (pathName.includes('/add-to-cart') || pathName.includes('/checkout'))) ||
-      (viewer?._id && viewer?.isActiveBaker && isProtectedRoute) ||
+      (viewer?._id && viewer?.isActiveBaker && isProtectedRoute && !isProtectedRouteBaker) ||
       // (viewer?._id &&
       //   viewer?.adminUIShops?.length > 0 &&
       //   viewer?.isActiveBaker &&

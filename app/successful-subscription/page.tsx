@@ -73,7 +73,7 @@ const OrderPlacedPage = () => {
                   </div>
 
                   <div className='w-80%'>
-                    <Link href={`${process.env.NEXT_PUBLIC_BAKER_URL}/signup`}>
+                    <Link href={'/create-shop'}>
                       <PrimaryBtn text='Register as a Baker' />
                     </Link>
                   </div>
