@@ -175,12 +175,13 @@ const CustomOrdersForm = ({ shopId }: CustomOrdersFormProps) => {
       setEmailErr('Email is not valid')
       return
     }
-    if (!isPhoneValid) {
-      setPhoneErr('Phone number is not valid')
-      return
-    }
+
     if (selectedDate < currentDate) {
       setDateErr('Please select a valid date')
+      return
+    }
+    if (!isPhoneValid) {
+      setPhoneErr('Phone number is not valid')
       return
     }
 
