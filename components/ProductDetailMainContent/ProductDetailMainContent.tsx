@@ -3,6 +3,7 @@ import React, { use, useEffect, useState } from 'react'
 import ProductDetailForm from '../ProductDetailForm/ProductDetailForm'
 import CartCardDetailsItem from '../CartCardDetailsItem/CartCardDetailsItem'
 import { ProductDetailMainContentProps } from 'types'
+import ActiveBakerProductDetailForm from '../ActiveBakerProductDetailForm'
 
 const ProductDetailMainContent = ({
   isFavorite,
@@ -14,6 +15,7 @@ const ProductDetailMainContent = ({
   rating,
   shopId,
   description,
+  isBaker,
   productId,
   productVariantId,
   productAttributes,
@@ -23,6 +25,8 @@ const ProductDetailMainContent = ({
   useEffect(() => {
     console.log('newPrice is ', priceToDisplay)
   }, [priceToDisplay])
+
+  console.log('isBaker in product detail main content is ', isBaker)
 
   return (
     <div className='pb-[12px] lg:pb-[0px] bg-[#fff]'>
@@ -148,16 +152,29 @@ const ProductDetailMainContent = ({
       </div> */}
 
       <div className=' mt-[16px] md:mt-[18px]'>
-        <ProductDetailForm
-          isFavorite={isFavorite}
-          attributes={productAttributes}
-          newPrice={newPrice}
-          updatePrice={setPriceToDisplay}
-          stock={stock}
-          productId={productId}
-          shopId={shopId}
-          productVariantId={productVariantId}
-        />
+        {isBaker ? (
+          <ActiveBakerProductDetailForm
+            isFavorite={isFavorite}
+            attributes={productAttributes}
+            newPrice={newPrice}
+            updatePrice={setPriceToDisplay}
+            stock={stock}
+            productId={productId}
+            shopId={shopId}
+            productVariantId={productVariantId}
+          />
+        ) : (
+          <ProductDetailForm
+            isFavorite={isFavorite}
+            attributes={productAttributes}
+            newPrice={newPrice}
+            updatePrice={setPriceToDisplay}
+            stock={stock}
+            productId={productId}
+            shopId={shopId}
+            productVariantId={productVariantId}
+          />
+        )}
       </div>
 
       <div className='mt-[24px] md:mt-[20px] bg-[#000] h-[1px] w-full' />

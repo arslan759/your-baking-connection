@@ -319,6 +319,7 @@ export interface ProductDetailMainContentProps {
   productAttributes: any[]
   productId: string
   productVariantId: string
+  isBaker?: boolean
 }
 
 export interface ProductSwiperProps {

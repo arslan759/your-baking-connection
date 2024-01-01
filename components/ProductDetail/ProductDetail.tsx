@@ -10,6 +10,7 @@ import Spinner from '../Spinner'
 import { withApollo } from 'lib/apollo/withApollo'
 import MatchMadeInHeaven from '../MatchMadeInHeaven'
 import ProductPics from '../ProductPics'
+import useViewer from 'hooks/viewer/useViewer'
 
 interface ProductDetailProps {
   slug: string
@@ -22,9 +23,11 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
     slugOrId: slug,
   })
 
+  const [viewer, loadingViewer] = useViewer()
+
   console.log('shop id in product details is ', shopId)
 
-  if (loadingProduct)
+  if (loadingProduct || loadingViewer)
     return (
       <div>
         <NavBar />
@@ -47,6 +50,7 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
     )
 
   console.log('slug', slug)
+  console.log('viewer in product details is ', viewer)
   console.log('catalogItemProduct', catalogItemProduct)
 
   const { title, description, media, variants, productAttributes, productId, isFavorite } =
@@ -113,6 +117,7 @@ const ProductDetail = ({ slug, shopId }: ProductDetailProps) => {
                 productId={productId}
                 productVariantId={variantId}
                 shopId={shopId}
+                isBaker={viewer?.isActiveBaker}
               />
             </div>
           </div>
