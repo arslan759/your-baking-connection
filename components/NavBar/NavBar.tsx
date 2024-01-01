@@ -13,6 +13,7 @@ import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import NotificationModal from '../NotificationModal/NotificationModal'
 import ToggleNavBar from '../ToggleNavBar/ToggleNavBar'
 import styles from './styles.module.css'
+import BakerAccountDropdown from '../BakerAccountDropdown'
 // import { useSession } from 'next-auth/react'
 
 const Navbar = ({
@@ -22,6 +23,8 @@ const Navbar = ({
 }: NavBarProps) => {
   // const { data: session, status } = useSession()
   // const token = localStorage.getItem('accounts:accessToken')
+
+  const shopId = localStorage.getItem('shopId')
 
   // if (status === 'authenticated' && token !== session?.user?.accessToken) {
   //   localStorage.setItem('accounts:accessToken', session?.user?.accessToken)
@@ -101,7 +104,7 @@ const Navbar = ({
             </Typography>
           ))}
 
-          {viewer?.adminUIShops && (
+          {viewer?._id && (
             <Typography
               // key={}
               sx={{
@@ -118,7 +121,11 @@ const Navbar = ({
             >
               <Link
                 style={{ color: `${itemsColor}`, textDecoration: 'none' }}
-                href={`${process.env.NEXT_PUBLIC_BAKER_URL}baker/${viewer?._id}`}
+                href={
+                  viewer?.isActiveBaker && viewer?.adminUIShops && viewer?.adminUIShops?.length > 0
+                    ? `/baker/${shopId}`
+                    : `/create-shop`
+                }
               >
                 BAKER
               </Link>
@@ -169,13 +176,15 @@ const Navbar = ({
                     },
                   }}
                 >
-                  <AccountDropdown />
+                  {viewer?.isActiveBaker ? <BakerAccountDropdown /> : <AccountDropdown />}
                   {/* <NotificationModal cartFunctions={{}} color={itemsColor} cartItems={[]} /> */}
-                  <AddToCartModal
-                    color={itemsColor}
-                    cartItems={restProps?.cart?.items}
-                    cartFunctions={restProps}
-                  />
+                  {!viewer?.isActiveBaker && (
+                    <AddToCartModal
+                      color={itemsColor}
+                      cartItems={restProps?.cart?.items}
+                      cartFunctions={restProps}
+                    />
+                  )}
                 </Box>
               )}
             </Grid>

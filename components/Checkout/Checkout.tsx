@@ -5,6 +5,7 @@ import DeliveryDetails from '../DeliveryDetails/DeliveryDetails'
 import withInjectedStores from 'hocs/inject'
 import withCart from 'containers/cart/withCart'
 import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
 
 interface AddToCartProps {
   [key: string]: any
@@ -53,4 +54,4 @@ const Checkout = ({ slug, ...restProps }: AddToCartProps) => {
 }
 
 // export default Checkout
-export default withApollo()(withCart(withInjectedStores('uiStore')(Checkout)))
+export default withApollo()(withAuth(withCart(withInjectedStores('uiStore')(Checkout))))

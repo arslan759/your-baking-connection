@@ -3,7 +3,7 @@ import React from 'react'
 import CustomOrdersForm from '../CustomOrdersForm/CustomOrdersForm'
 
 interface CustomOrdersProps {
-  shopId: string
+  shopId?: string
 }
 
 const CustomOrders = ({ shopId }: CustomOrdersProps) => {

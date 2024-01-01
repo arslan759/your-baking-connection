@@ -7,6 +7,7 @@ import { orderItemsData } from 'Constants/constants'
 import withInjectedStores from 'hocs/inject'
 import withCart from 'containers/cart/withCart'
 import { withApollo } from 'lib/apollo/withApollo'
+import withAuth from 'hocs/withAuth'
 
 interface AddToCartProps {
   [key: string]: any
@@ -82,4 +83,4 @@ const AddToCart = ({ ...restProps }: AddToCartProps) => {
 }
 
 // export default AddToCart
-export default withApollo()(withCart(withInjectedStores('uiStore')(AddToCart)))
+export default withApollo()(withAuth(withCart(withInjectedStores('uiStore')(AddToCart))))

@@ -18,6 +18,12 @@ export interface FooterLinksProps {
   link3?: string
 }
 
+export interface AddBakerProductImagesProps {
+  productMedia: ProductMediaInterface[]
+  setProductMedia: any
+  handleUpdateProductMedia: any
+}
+
 export interface ProductMediaURLsInterface {
   large: string
   original: string
@@ -37,12 +43,24 @@ export interface AddCustomOrderImagesProps {
   handleUpdateProductMedia: (image: string) => void
 }
 
+// export interface PrimaryBtnProps {
+//   text: string
+//   type?: 'button' | 'submit' | 'reset'
+//   disabled?: boolean
+//   loading?: boolean
+//   handleClick?: MouseEventHandler<HTMLButtonElement>
+// }
+
 export interface PrimaryBtnProps {
   text: string
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
   loading?: boolean
   handleClick?: MouseEventHandler<HTMLButtonElement>
+  backgroundColor?: string
+  onHoverBackgroundColor?: string
+  textColor?: string
+  onHoverTextColor?: string
 }
 
 export interface NavBarProps {
@@ -87,8 +105,8 @@ export interface UploadInputFieldProps {
   label?: string
   required: boolean
   placeholder?: string
-  value: string
-  onChange: (name: string, value: string) => void
+  value?: File | null
+  children?: React.ReactNode
 }
 
 export interface PasswordFieldProps {
@@ -129,6 +147,19 @@ export interface DropdownAttributeProps {
   onChange: (attribute: string, optionLabel: string, price: string) => void
 }
 
+export interface MultiSelectDropdownFieldProps {
+  name: string
+  label?: string
+  placeholder?: string
+  required: boolean
+  error?: boolean
+  options: any
+  errorText?: string
+  inputColor?: string
+  value: any
+  setValue: (arg0: any) => void
+}
+
 export interface ForgetPasswordFormProps {
   openOtp: () => void
   email: string
@@ -139,16 +170,23 @@ export interface ForgetPasswordFormProps {
 
 export interface SignUpFormProps {
   openOtp: () => void
+  setTokens: (accessToken: string, refreshToken: string) => void
 }
 
 export interface SignUpFormProps {
   openOtp: () => void
 }
 
+interface Tokens {
+  accessToken: string
+  refreshToken: string
+}
+
 export interface OTPFormProps {
-  closeOtp: () => void
+  closeOtp?: () => void
   type: string
-  email: string
+  email?: string
+  tokens: Tokens
 }
 
 export interface SectionheadingProps {
@@ -220,6 +258,7 @@ export interface YourProfileCardItemProps {
   image: string
   title: string
   description: string
+  isClickable: boolean
 }
 
 export interface CustomSwitchProps {

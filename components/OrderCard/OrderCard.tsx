@@ -76,7 +76,7 @@ const OrderCard = ({ items, cartFunctions, setTotalAmountWithTax }: OrderCardPro
       </div>
     )
 
-  if (items?.length === 0)
+  if (items?.length === 0 || !cartFunctions?.cart)
     return (
       <div className={styles.card}>
         <div className='w-full flex justify-center'>

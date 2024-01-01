@@ -25,7 +25,7 @@ const SearchBakerItem = ({
 
   return (
     <Link
-      href={`/bakery/${slug}`}
+      href={`/shop/${slug}`}
       className='w-full h-full flex items-start justify-center gap-x-[16px] cursor-pointer'
       // onClick={(e) => handleBakerDetailsClick(e)}
     >

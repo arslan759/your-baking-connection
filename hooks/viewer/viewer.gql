@@ -1,7 +1,8 @@
 query viewer {
   viewer {
     _id
-
+    isBaker
+    isActiveBaker
     addressBook {
       edges {
         node {
@@ -24,6 +25,7 @@ query viewer {
     firstName
     lastName
     state
+    validStripeConnect
     adminUIShops {
       _id
     }

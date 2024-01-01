@@ -15,11 +15,41 @@ export function validatePhone(phone: string): boolean {
 
   // Match the phone pattern against the input email
   const match = phone.match(pattern)
-console.log("inside validation",match)
+  console.log('inside validation', match)
   // Return true if the phone is valid, false otherwise
-  return !!match
+  // return !!match
+  return true
 }
 
 export function checkPassword(password: string, confirmPassword: string): boolean {
   return password === confirmPassword
+}
+
+export const validateDates = (
+  startDate: string,
+  endDate: string,
+  setError: (arg0: string) => void,
+) => {
+  const today = new Date()
+  const selectedStartDate = new Date(startDate)
+  const selectedEndDate = new Date(endDate)
+
+  today.setHours(0, 0, 0, 0)
+  selectedStartDate.setHours(0, 0, 0, 0)
+  selectedEndDate.setHours(0, 0, 0, 0)
+
+  console.log('today', today)
+  console.log('selectedStartDate', selectedStartDate)
+  console.log('selectedEndDate', selectedEndDate)
+
+  if (selectedStartDate < today) {
+    setError('Start date cannot be older than today.')
+    return false
+  } else if (selectedEndDate < today) {
+    setError('End date cannot be less than the start date.')
+    return false
+  } else {
+    setError('')
+    return true
+  }
 }

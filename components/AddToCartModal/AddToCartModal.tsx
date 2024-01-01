@@ -91,7 +91,7 @@ const AddToCartModal = ({ color, cartItems, cartFunctions }: AddToCartModalProps
           !cartFunctions?.uiStore?.isUpdatingQuantity &&
           !cartFunctions?.removeCartItemsLoading ? (
             <>
-              {cartItems?.length === 0 ? (
+              {cartItems?.length === 0 || !cartFunctions?.cart ? (
                 <div className='w-full flex justify-center  mt-[50px] md:mt-[80px]'>
                   <EmptyCart handleModal={() => handleModal()} />
                 </div>

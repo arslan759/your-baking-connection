@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './styles.module.css'
 import { Typography } from '@mui/material'
-import ProfileBreadCrumbs from '../ProfileBreadCrumbs/ProfileBreadCrumbs'
 import PreferencesForm from '../PreferencesForm/PreferencesForm'
+import BakerProfileBreadCrumbs from '../BakerProfileBreadCrumbs'
 
 const PersonalizationCard = () => {
   return (
     <div className={styles.card}>
-      <ProfileBreadCrumbs />
+      <BakerProfileBreadCrumbs />
 
       <div className='mt-[56px] md:mt-[72px] flex flex-col items-center'>
         <Typography

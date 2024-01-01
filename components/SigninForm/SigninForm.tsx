@@ -120,12 +120,14 @@ const SigninForm = () => {
       })
       const accessToken = res?.data?.loginUser?.loginResult?.tokens?.accessToken
       const refreshToken = res?.data?.loginUser?.loginResult?.tokens?.refreshToken
+      const shopId = res?.data?.loginUser?.shopId
 
       console.log('access token is', accessToken)
 
       if (accessToken) {
         localStorage.setItem('accounts:accessToken', accessToken)
         localStorage.setItem('accounts:refreshToken', refreshToken)
+        localStorage.setItem('shopId', shopId)
         router.push('/')
       }
     } catch (err: any) {
