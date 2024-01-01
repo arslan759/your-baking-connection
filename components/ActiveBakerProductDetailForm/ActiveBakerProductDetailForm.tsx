@@ -326,9 +326,11 @@ const ActiveBakerProductDetailForm = ({
         })}
       </div>
 
-      <div className='w-fit mt-[18px]'>
-        <SecondaryBtn color='#000' text='Reset' handleClick={formReset} />
-      </div>
+      {productAttributes?.length > 0 && (
+        <div className='w-fit mt-[18px]'>
+          <SecondaryBtn color='#000' text='Reset' handleClick={formReset} />
+        </div>
+      )}
 
       {/* <div className='w-full mt-[18px] flex flex-wrap gap-[16px]'>
         <div className=' bg-[#000] w-fit flex items-center text-white rounded-[4px] px-[10px] py-[8px] gap-[8px] overflow-hidden'>
