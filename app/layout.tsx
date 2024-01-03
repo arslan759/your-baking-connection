@@ -1,19 +1,35 @@
 'use client'
 import './globals.css'
 
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react'
 import { lightTheme } from './theme/themes'
 import ContextProvider from './context-provider'
 
 import { ThemeProvider, CssBaseline } from '@mui/material'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer/Footer'
+
 // import NextAuthProvider from './nextAuthProvider'
 // import { ToastContainer, toast } from 'react-toastify'
 import toast, { Toaster } from 'react-hot-toast'
+import { usePathname } from 'next/navigation'
 // import 'react-toastify/dist/ReactToastify.css'
 
 export default function RootLayout({ children }: PropsWithChildren<{}>) {
+  const [shopId, setShopId] = useState('')
+  const pathname = usePathname()
+
+  console.log('pathName in layout is', pathname)
+
+  useEffect(() => {
+    if (pathname?.includes('shop')) {
+      const path = pathname.split(`/`)
+      const slug = path[2]
+      const urlParams = path[4]
+      setShopId(slug)
+    }
+  })
+
   return (
     <html lang='en'>
       <head>
@@ -22,7 +38,7 @@ export default function RootLayout({ children }: PropsWithChildren<{}>) {
         <link rel='icon' href='/favicon.ico' />
       </head>
       <ThemeProvider theme={lightTheme}>
-        <ContextProvider>
+        <ContextProvider shopId={shopId}>
           {/* <NextAuthProvider> */}
           <body>
             <CssBaseline />

@@ -157,6 +157,7 @@ export interface MultiSelectDropdownFieldProps {
   errorText?: string
   inputColor?: string
   value: any
+  setWhatWeOfferToDisplay?: any
   setValue: (arg0: any) => void
 }
 

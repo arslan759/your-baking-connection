@@ -44,6 +44,13 @@ const withAuth = (WrappedComponent) => {
         return
       }
 
+      // If there is no viewer and page is create-shop, redirect to login page
+      if (!viewer?._id && pathName.includes('/create-shop')) {
+        router.push('/signin')
+        console.log('before return no viewer redirect to login page', viewer)
+        return
+      }
+
       // If there is no viewer and page is signin or signup, return
       if (!viewer?._id && (pathName === '/signin' || pathName === '/signup')) {
         console.log('before return no viewer signin or signup', viewer)
@@ -173,6 +180,7 @@ const withAuth = (WrappedComponent) => {
     if (
       loading ||
       (!viewer?._id && isProtectedRoute) ||
+      (!viewer?._id && pathName.includes('/create-shop')) ||
       // (!viewer?._id && (pathName === '/signin' || pathName === '/signup')) ||
 
       (viewer?._id && (pathName === '/signin' || pathName === '/signup')) ||
