@@ -10,6 +10,7 @@ query baker($shopId: ID!) {
     categories {
       _id
       name
+      image
     }
     featuredShopImages {
       URLs {

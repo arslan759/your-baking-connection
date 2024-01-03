@@ -27,6 +27,7 @@ const MultiSelectDropdownField = ({
   errorText,
   inputColor,
   value,
+  setWhatWeOfferToDisplay,
   setValue,
 }: MultiSelectDropdownFieldProps) => {
   const [errorState, setErrorState] = useState(errorText ? true : false)
@@ -38,11 +39,20 @@ const MultiSelectDropdownField = ({
 
     console.log('value is', value)
     setValue(value)
+
+    // if setWhatWeOfferToDisplay is passed as a prop, find all the options that are selected and store them as an array of objects
+    if (setWhatWeOfferToDisplay) {
+      const selectedOptions = options?.filter((option: any) => value.includes(option._id))
+      console.log('selected options are', selectedOptions)
+      setWhatWeOfferToDisplay(selectedOptions)
+    }
   }
 
   useEffect(() => {
     setErrorState(errorText ? true : false)
   }, [errorText, errorState])
+
+  console.log('value in multiselect is', value)
 
   return (
     <div className='flex flex-col capitalize'>
@@ -129,9 +139,9 @@ const MultiSelectDropdownField = ({
             </MenuItem>
           ) : null}
 
-          {options.map((option: any, index: number) => (
-            <MenuItem key={index} value={option}>
-              {option.title}
+          {options?.map((option: any, index: number) => (
+            <MenuItem key={option?._id} value={option?._id}>
+              {option?.name}
             </MenuItem>
           ))}
         </Select>

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { PrimaryBtn, SecondaryBtn } from '../Buttons'
 import DropdownFieldAttributes from '../DropdownFieldAttributes'
+// import useShop from 'hooks/shop/useShop'
 
 interface ProductDetailFormProps {
   isFavorite: boolean
@@ -41,7 +42,10 @@ const ProductDetailForm = ({
   shopId,
   ...restProps
 }: ProductDetailFormProps) => {
-  console.log('rest props', restProps)
+  // console.log('rest props', restProps)
+
+  // const shop = useShop()
+
   const [productAttributes, setProductAttributes] = useState<Attribute[]>([])
   const [quantity, setQuantity] = useState(1)
   const [serves, setServes] = useState<string | null>('1')
@@ -120,6 +124,7 @@ const ProductDetailForm = ({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     const cartItem = {
       cartId: '123',
       items: {
