@@ -4,8 +4,8 @@ import { PrimaryBtn } from '../Buttons'
 import toast from 'react-hot-toast'
 import InputField from '../InputField/InputField'
 import UploadInputField from '../UploadInputField/UploadInputField'
-import DropdownField from '../DropdownField/DropdownField'
-import { cities, states, weOfferData } from 'Constants/constants'
+// import DropdownField from '../DropdownField/DropdownField'
+import useProductCategories from 'hooks/product/useProductCategories'
 import MultiSelectDropdownField from '../MultiSelectDropdownField/MultiSelectDropdownField'
 import CancelBtn from '../Buttons/CancelBtn'
 import { getCitiesApi, getStatesApi } from 'helpers/apis'
@@ -47,10 +47,13 @@ const EditBakerModal = () => {
   const [PickupService, setPickupService] = useState(true)
 
   const [whatWeOffer, setWhatWeOffer] = useState<any[]>([])
+  const [whatWeOfferToDisplay, setWhatWeOfferToDisplay] = useState<any[]>([])
 
   const populateCity = async (state: string, city: string) => {
     await getCitiesApi(state, setCities, setIsLoadingCities, city, setCity)
   }
+
+  const [productCategories, loadingProductCategories] = useProductCategories()
 
   useEffect(() => {
     if (loadingBaker) return
@@ -62,7 +65,9 @@ const EditBakerModal = () => {
     setLogoUrl(baker?.shopLogoUrls?.primaryShopLogoUrl)
     setCity(baker?.addressBook[0]?.city)
     setState(baker?.addressBook[0]?.region)
-    setWhatWeOffer(baker?.categories)
+    setWhatWeOffer(baker?.categories.map((item: any) => item._id))
+    setWhatWeOfferToDisplay(baker?.categories)
+    // console.log('baker?.categories is ', baker?.categories)
     setLogoUrl(baker?.shopLogoUrls?.primaryShopLogoUrl)
     if (baker?.featuredShopImages && baker?.featuredShopImages?.length !== 0) {
       setFeaturedImageUrl(baker?.featuredShopImages[0]?.URLs)
@@ -145,6 +150,8 @@ const EditBakerModal = () => {
   const handleDeleteChip = (chipToDelete: string) => {
     console.log('chip to delete is', chipToDelete)
     console.log('what we offer is', whatWeOffer)
+
+    setWhatWeOfferToDisplay((chips) => chips.filter((chip) => chip._id !== chipToDelete))
     setWhatWeOffer((chips) => chips.filter((chip) => chip !== chipToDelete))
   }
 
@@ -591,20 +598,21 @@ const EditBakerModal = () => {
                   <MultiSelectDropdownField
                     label='what we offer'
                     name='whatWeOffer'
-                    value={['cake', 'muffins']}
+                    value={whatWeOffer}
+                    setWhatWeOfferToDisplay={setWhatWeOfferToDisplay}
                     errorText={whatWeOfferError}
                     required={false}
-                    options={['cake', 'muffins']}
+                    options={productCategories}
                     inputColor='#212529'
                     setValue={setWhatWeOffer}
                   />
 
-                  {whatWeOffer?.length > 0 && (
+                  {whatWeOfferToDisplay?.length > 0 && (
                     <div className='flex flex-wrap gap-x-[24px] gap-y-[10px] mt-[15px]'>
-                      {whatWeOffer?.map((chip: any, index) => (
+                      {whatWeOfferToDisplay?.map((chip: any, index) => (
                         <Chip
-                          key={index}
-                          label={chipLabel(chip, '')}
+                          key={chip._id}
+                          label={chipLabel(chip?.name, chip?.image)}
                           deleteIcon={
                             // <div className='h-full flex items-center'>
                             <img
@@ -636,7 +644,7 @@ const EditBakerModal = () => {
                               width: '80px',
                             },
                           }}
-                          onDelete={() => handleDeleteChip(chip)}
+                          onDelete={() => handleDeleteChip(chip._id)}
                         />
                       ))}
                     </div>

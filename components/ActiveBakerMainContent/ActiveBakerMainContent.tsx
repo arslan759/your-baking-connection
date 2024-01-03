@@ -18,7 +18,8 @@ const ActiveBakerMainContent = ({ bakerName, description, slug, bakerLogo }: Bak
         <div className='w-[90%]  flex max-[276px]:flex-col flex-row md:flex-col gap-y-[20px]'>
           <div className='flex flex-col lg:flex-row gap-[12px] lg:gap-[24px]'>
             {/* <img src={bakerLogo} alt='logo' className='h-[44px] w-[35px]' /> */}
-            <img src={bakerLogo} alt='logo' className='h-[74px] w-[55px]' />
+            {bakerLogo && <img src={bakerLogo} alt='logo' className='h-[74px] w-[55px]' />}
+            {/* <img src={bakerLogo} alt='logo' className='h-[74px] w-[55px]' /> */}
 
             <Typography
               variant='h3'

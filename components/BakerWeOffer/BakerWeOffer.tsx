@@ -35,7 +35,7 @@ const BakerWeOffer = ({ categories }: BakerWeOfferProps) => {
         <div className='w-[95%] lg:w-full flex flex-wrap justify-center lg:justify-start gap-[11px] mt-[24px] lg:[36px]'>
           {categories?.map((item: any, index: any) => {
             const image = ''
-            return <BakerWeOfferItem key={index} image={image} title={item?.name} />
+            return <BakerWeOfferItem key={index} image={item?.image} title={item?.name} />
           })}
         </div>
       </div>

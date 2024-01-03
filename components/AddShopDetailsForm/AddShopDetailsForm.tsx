@@ -17,7 +17,7 @@ import useCreateTaxRate from 'hooks/shop/useCreateTaxRate'
 import useCreateFlatRateFulfillmentMethod from 'hooks/shop/useCreateFlatRateFulfillmentMethod'
 import useCreateConnectedAccount from 'hooks/shop/useCreateConnectedAccount'
 import useViewer from 'hooks/viewer/useViewer'
-import { weOfferData } from 'Constants/constants'
+import useProductCategories from 'hooks/product/useProductCategories'
 
 const AddShopDetailsForm = () => {
   // auth store
@@ -47,6 +47,7 @@ const AddShopDetailsForm = () => {
   const [pickupService, setPickupService] = useState(true)
 
   const [whatWeOffer, setWhatWeOffer] = useState<any[]>([])
+  const [whatWeOfferToDisplay, setWhatWeOfferToDisplay] = useState<any[]>([])
 
   // Error states
   const [shopNameError, setShopNameError] = useState('')
@@ -116,6 +117,10 @@ const AddShopDetailsForm = () => {
   }
 
   const handleDeleteChip = (chipToDelete: string) => {
+    console.log('chip to delete is', chipToDelete)
+    console.log('what we offer is', whatWeOffer)
+
+    setWhatWeOfferToDisplay((chips) => chips.filter((chip) => chip._id !== chipToDelete))
     setWhatWeOffer((chips) => chips.filter((chip) => chip !== chipToDelete))
   }
 
@@ -134,6 +139,7 @@ const AddShopDetailsForm = () => {
   const [error, setError] = useState<string>()
 
   const [viewer, loadingViewer, refetchViewer] = useViewer()
+  const [productCategories, loadingProductCategories] = useProductCategories()
 
   const [createShop, loadingCreateShop] = useCreateShop()
   const [updateShop, loadingUpdateShop] = useUpdateShop()
@@ -210,6 +216,11 @@ const AddShopDetailsForm = () => {
 
   const handleUpdateShop = async (shopId: string) => {
     try {
+      // const categories = whatWeOffer.map((item) => item._id)
+
+      //  console.log('categories are ', categories)
+
+      //  throw new Error('test')
       const shopUpdated = await updateShop({
         variables: {
           input: {
@@ -228,7 +239,7 @@ const AddShopDetailsForm = () => {
               priority: 1,
             },
             isPickup: pickupService,
-            categories: whatWeOffer?.map((item) => item.title),
+            categories: whatWeOffer,
             addressBook: {
               fullName: account?.firstName ? account?.firstName : 'N/A',
               phone: phone ? phone : 'N/A',
@@ -763,17 +774,18 @@ const AddShopDetailsForm = () => {
                   value={whatWeOffer}
                   errorText={whatWeOfferError}
                   required={false}
-                  options={weOfferData}
+                  options={productCategories}
                   inputColor='white'
+                  setWhatWeOfferToDisplay={setWhatWeOfferToDisplay}
                   setValue={setWhatWeOffer}
                 />
 
-                {whatWeOffer?.length > 0 && (
+                {whatWeOfferToDisplay?.length > 0 && (
                   <div className='flex flex-wrap gap-x-[24px] gap-y-[10px] mt-[15px]'>
-                    {whatWeOffer?.map((chip, index) => (
+                    {whatWeOfferToDisplay?.map((chip, index) => (
                       <Chip
                         key={index}
-                        label={chip.title}
+                        label={chip.name}
                         deleteIcon={
                           // <div className='h-full flex items-center'>
                           <img src='/Images/x.svg' alt='x' className='h-[12px] w-[12px]' />
@@ -791,7 +803,7 @@ const AddShopDetailsForm = () => {
                           color: '#090909',
                           textTransform: 'capitalize',
                         }}
-                        onDelete={() => handleDeleteChip(chip)}
+                        onDelete={() => handleDeleteChip(chip._id)}
                       />
                     ))}
                   </div>
@@ -834,7 +846,14 @@ const AddShopDetailsForm = () => {
               <PrimaryBtn
                 text='Save and Continue'
                 type='submit'
-                loading={loadingCreateShop || loadingUpdateShop}
+                loading={
+                  loadingCreateShop ||
+                  loadingUpdateShop ||
+                  loadingCreateTaxRate ||
+                  loadingCreateFlatRate ||
+                  loadingEnablePayment ||
+                  loadingCreateConnectAccount
+                }
               />
             </div>
           </form>
