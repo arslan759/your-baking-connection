@@ -104,7 +104,7 @@ const OurMission = () => {
             </div>
           </div>
           <div className='h-[45px] md:h-[50px] w-[160px] rounded-full overflow-hidden mt-[36px]'>
-            <Link href={`${process.env.NEXT_PUBLIC_BLOG_URL}/about-your-baking-connection/`}>
+            <Link href={`${process.env.NEXT_PUBLIC_INFO_URL}/about-your-baking-connection/`}>
               <PrimaryBtn text='read More' />
             </Link>
           </div>
