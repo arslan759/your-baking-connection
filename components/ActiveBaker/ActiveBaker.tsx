@@ -61,18 +61,22 @@ const ActiveBaker = ({ slug }: BakerProps) => {
               />
 
               {/* We Offer section for Desktop View */}
-              <div className='mt-[60px] hidden lg:block'>
-                <BakerWeOffer categories={categories} />
-              </div>
+              {categories && categories?.length > 0 && (
+                <div className='mt-[60px] hidden lg:block'>
+                  <BakerWeOffer categories={categories} />
+                </div>
+              )}
             </div>
             {/* Gallery Location Info for Mobile View */}
             <div className='block lg:hidden overflow-hidden'>
               <BakerLocation />
 
               {/* We Offer Section for Mobile View */}
-              <div className='-mt-[80px]'>
-                <BakerWeOffer categories={categories} />
-              </div>
+              {categories && categories?.length > 0 && (
+                <div className='-mt-[80px]'>
+                  <BakerWeOffer categories={categories} />
+                </div>
+              )}
             </div>
           </div>
 
